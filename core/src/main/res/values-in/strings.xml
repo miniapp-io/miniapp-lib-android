@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">वैसे भी बंद करें</string>
+    <string name="action_cancel">रद्द करें</string>
+    <string name="action_allow">अनुमति दें</string>
+    <string name="action_not_allow">अनुमति नहीं दें</string>
+    <string name="action_share_contact">संपर्क साझा करें</string>
+    <string name="action_not_now">अब नहीं</string>
+    <string name="action_block_all">सभी को ब्लॉक करें</string>
+
+    <string name="dialog_close_save_message">आपके द्वारा किए गए परिवर्तन सहेजे नहीं जा सकते।</string>
+    <string name="dialog_share_phone_title">क्या आप अपना फोन नंबर साझा करना चाहते हैं?</string>
+    <string name="dialog_share_phone_message">बॉट को आपके फोन नंबर का पता चलेगा। यह उपयोगी हो सकता है...</string>
+    <string name="dialog_write_access_title">मैसेजिंग की अनुमति दें</string>
+    <string name="dialog_write_access_message">क्या आप इस बॉट को आपको संदेश भेजने की अनुमति देंगे?</string>
+    <string name="dialog_allow_biometry_title">जीवविज्ञान की अनुमति दें</string>
+    <string name="dialog_allow_biometry_message">क्या आप %s को जीवविज्ञान का उपयोग करने की अनुमति देना चाहते हैं?</string>
+
+    <string name="button_ok">ठीक है</string>
+
+    <string name="photo_holder">ऐप आइकन</string>
+
+    <string name="webview_permissions_resource_title">डेवलपर को निम्नलिखित संसाधनों की आवश्यकता है:</string>
+    <string name="webview_request_geolocation_permission">क्या %1$s को आपकी स्थिति तक पहुँचने की अनुमति दें?\n\n%1$s का डेवलपर इस वेब ऐप के खुले रहने पर आपकी स्थिति तक पहुँच सकता है।</string>
+    <string name="webview_request_microphone_permission">क्या %1$s को आपके माइक्रोफ़ोन तक पहुँचने की अनुमति दें?\n\n%1$s का डेवलपर इस वेब ऐप के खुले रहने पर आपके माइक्रोफ़ोन तक पहुँच सकता है।</string>
+    <string name="webview_request_camera_permission">क्या %1$s को आपके कैमरे तक पहुँचने की अनुमति दें?\n\n%1$s का डेवलपर इस वेब ऐप के खुले रहने पर आपके कैमरे तक पहुँच सकता है।</string>
+    <string name="webview_request_camera_mic_permission">क्या %1$s को आपके कैमरे और माइक्रोफ़ोन तक पहुँचने की अनुमति दें?\n\n%1$s का डेवलपर इस वेब ऐप के खुले रहने पर आपके कैमरे और माइक्रोफ़ोन तक पहुँच सकता है।</string>
+</resources>

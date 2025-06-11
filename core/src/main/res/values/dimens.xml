@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="ow3_text_size_caption">12sp</dimen>
+    <dimen name="ow3_dialog_body_padding_top">6dp</dimen>
+</resources>

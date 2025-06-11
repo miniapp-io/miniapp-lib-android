@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">Zamknij i tak</string>
+    <string name="action_cancel">Anuluj</string>
+    <string name="action_allow">Zezwól</string>
+    <string name="action_not_allow">Nie zezwól</string>
+    <string name="action_share_contact">Podziel się kontaktem</string>
+    <string name="action_not_now">Nie teraz</string>
+    <string name="action_block_all">Zablokuj wszystko</string>
+
+    <string name="dialog_close_save_message">Zmiany, które wprowadziłeś, mogą nie zostać zapisane.</string>
+    <string name="dialog_share_phone_title">Czy chcesz podzielić się swoim numerem telefonu?</string>
+    <string name="dialog_share_phone_message">Bot będzie wiedział o Twoim numerze telefonu. Może to być przydatne...</string>
+    <string name="dialog_write_access_title">Zezwól na wiadomości</string>
+    <string name="dialog_write_access_message">Czy chcesz zezwolić temu botowi na wysyłanie Ci wiadomości?</string>
+    <string name="dialog_allow_biometry_title">Zezwól na biometrię</string>
+    <string name="dialog_allow_biometry_message">Czy chcesz zezwolić %s na korzystanie z biometrii?</string>
+
+    <string name="button_ok">OK</string>
+
+    <string name="photo_holder">Ikona aplikacji</string>
+
+    <string name="webview_permissions_resource_title">Deweloper wymaga następujących zasobów:</string>
+    <string name="webview_request_geolocation_permission">Zezwól %1$s na dostęp do Twojej lokalizacji?\n\nDeweloper %1$s będzie mógł uzyskać dostęp do Twojej lokalizacji, gdy ta aplikacja internetowa będzie otwarta.</string>
+    <string name="webview_request_microphone_permission">Zezwól %1$s na dostęp do Twojego mikrofonu?\n\nDeweloper %1$s będzie mógł uzyskać dostęp do Twojego mikrofonu, gdy ta aplikacja internetowa będzie otwarta.</string>
+    <string name="webview_request_camera_permission">Zezwól %1$s na dostęp do Twojej kamery?\n\nDeweloper %1$s będzie mógł uzyskać dostęp do Twojej kamery, gdy ta aplikacja internetowa będzie otwarta.</string>
+    <string name="webview_request_camera_mic_permission">Zezwól %1$s na dostęp do Twojej kamery i mikrofonu?\n\nDeweloper %1$s będzie mógł uzyskać dostęp do Twojej kamery i mikrofonu, gdy ta aplikacja internetowa będzie otwarta.</string>
+</resources>

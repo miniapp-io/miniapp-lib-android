@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">Sulje silti</string>
+    <string name="action_cancel">Peruuta</string>
+    <string name="action_allow">Salli</string>
+    <string name="action_not_allow">Älä salli</string>
+    <string name="action_share_contact">Jaa yhteystieto</string>
+    <string name="action_not_now">Ei nyt</string>
+    <string name="action_block_all">Estä kaikki</string>
+
+    <string name="dialog_close_save_message">Tekemäsi muutokset eivät ehkä tallennu.</string>
+    <string name="dialog_share_phone_title">Haluatko jakaa puhelinnumerosi?</string>
+    <string name="dialog_share_phone_message">Botti tietää puhelinnumerosi. Tämä voi olla hyödyllistä...</string>
+    <string name="dialog_write_access_title">Salli viestintä</string>
+    <string name="dialog_write_access_message">Sallitko tämän botin lähettää sinulle viestejä?</string>
+    <string name="dialog_allow_biometry_title">Salli biometria</string>
+    <string name="dialog_allow_biometry_message">Haluatko sallia, että %s käyttää biometriaa?</string>
+
+    <string name="button_ok">OK</string>
+
+    <string name="photo_holder">Sovelluksen kuvake</string>
+
+    <string name="webview_permissions_resource_title">Kehittäjä tarvitsee seuraavat resurssit:</string>
+    <string name="webview_request_geolocation_permission">Sallitko %1$s pääsyn sijaintiisi?\n\nKehittäjä %1$s voi päästä sijaintiisi, kun tämä verkkosovellus on avoinna.</string>
+    <string name="webview_request_microphone_permission">Sallitko %1$s pääsyn mikrofonisi?\n\nKehittäjä %1$s voi päästä mikrofonisi, kun tämä verkkosovellus on avoinna.</string>
+    <string name="webview_request_camera_permission">Sallitko %1$s pääsyn kameraasi?\n\nKehittäjä %1$s voi päästä kameraasi, kun tämä verkkosovellus on avoinna.</string>
+    <string name="webview_request_camera_mic_permission">Sallitko %1$s pääsyn kameraasi ja mikrofonisi?\n\nKehittäjä %1$s voi päästä kameraasi ja mikrofonisi, kun tämä verkkosovellus on avoinna.</string>
+</resources>

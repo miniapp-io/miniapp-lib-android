@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">Zatvori ionako</string>
+    <string name="action_cancel">Otkaži</string>
+    <string name="action_allow">Dozvoli</string>
+    <string name="action_not_allow">Ne dozvoli</string>
+    <string name="action_share_contact">Podeli kontakt</string>
+    <string name="action_not_now">Ne sada</string>
+    <string name="action_block_all">Blokiraj sve</string>
+
+    <string name="dialog_close_save_message">Promene koje ste napravili možda neće biti sačuvane.</string>
+    <string name="dialog_share_phone_title">Da li da podelite svoj broj telefona?</string>
+    <string name="dialog_share_phone_message">Bot će znati vaš broj telefona. Ovo može biti korisno...</string>
+    <string name="dialog_write_access_title">Dozvoli slanje poruka</string>
+    <string name="dialog_write_access_message">Da li želite da dozvolite ovom botu da vam šalje poruke?</string>
+    <string name="dialog_allow_biometry_title">Dozvoli biometriju</string>
+    <string name="dialog_allow_biometry_message">Da li želite da dozvolite %s da koristi biometriju?</string>
+
+    <string name="button_ok">U redu</string>
+
+    <string name="photo_holder">Ikona aplikacije</string>
+
+    <string name="webview_permissions_resource_title">Razvijač zahteva sledeće resurse:</string>
+    <string name="webview_request_geolocation_permission">Dozvolite %1$s da pristupi vašoj lokaciji?\n\nRazvijač %1$s će moći da pristupi vašoj lokaciji kada je ova veb aplikacija otvorena.</string>
+    <string name="webview_request_microphone_permission">Dozvolite %1$s da pristupi vašem mikrofonu?\n\nRazvijač %1$s će moći da pristupi vašem mikrofonu kada je ova veb aplikacija otvorena.</string>
+    <string name="webview_request_camera_permission">Dozvolite %1$s da pristupi vašoj kameri?\n\nRazvijač %1$s će moći da pristupi vašoj kameri kada je ova veb aplikacija otvorena.</string>
+    <string name="webview_request_camera_mic_permission">Dozvolite %1$s da pristupi vašoj kameri i mikrofonu?\n\nRazvijač %1$s će moći da pristupi vašoj kameri i mikrofonu kada je ova veb aplikacija otvorena.</string>
+</resources>

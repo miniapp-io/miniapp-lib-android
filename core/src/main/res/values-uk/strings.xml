@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">Закрити все одно</string>
+    <string name="action_cancel">Скасувати</string>
+    <string name="action_allow">Дозволити</string>
+    <string name="action_not_allow">Не дозволяти</string>
+    <string name="action_share_contact">Поділитися контактом</string>
+    <string name="action_not_now">Не зараз</string>
+    <string name="action_block_all">Блокувати все</string>
+
+    <string name="dialog_close_save_message">Зміни, які ви внесли, можуть бути не збережені.</string>
+    <string name="dialog_share_phone_title">Поділитися своїм номером телефону?</string>
+    <string name="dialog_share_phone_message">Бот знатиме ваш номер телефону. Це може бути корисно...</string>
+    <string name="dialog_write_access_title">Дозволити надсилати повідомлення</string>
+    <string name="dialog_write_access_message">Дозволити цьому боту надсилати вам повідомлення?</string>
+    <string name="dialog_allow_biometry_title">Дозволити біометрію</string>
+    <string name="dialog_allow_biometry_message">Ви хочете дозволити %s використовувати біометрію?</string>
+
+    <string name="button_ok">ОК</string>
+
+    <string name="photo_holder">Іконка програми</string>
+
+    <string name="webview_permissions_resource_title">Розробник вимагає наступні ресурси:</string>
+    <string name="webview_request_geolocation_permission">Дозволити %1$s доступ до вашого місцезнаходження?\n\nРозробник %1$s зможе отримати доступ до вашого місцезнаходження, коли цей веб-додаток відкритий.</string>
+    <string name="webview_request_microphone_permission">Дозволити %1$s доступ до вашого мікрофона?\n\nРозробник %1$s зможе отримати доступ до вашого мікрофона, коли цей веб-додаток відкритий.</string>
+    <string name="webview_request_camera_permission">Дозволити %1$s доступ до вашої камери?\n\nРозробник %1$s зможе отримати доступ до вашої камери, коли цей веб-додаток відкритий.</string>
+    <string name="webview_request_camera_mic_permission">Дозволити %1$s доступ до вашої камери та мікрофона?\n\nРозробник %1$s зможе отримати доступ до вашої камери та мікрофона, коли цей веб-додаток відкритий.</string>
+</resources>

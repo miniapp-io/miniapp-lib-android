@@ -1,0 +1,104 @@
+<resources
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--THEMES-->
+
+    <style name="Theme.TMessages.Dark" parent="Theme.MaterialComponents.NoActionBar">
+    </style>
+
+    <style name="Theme.TMessages.Light" parent="Theme.MaterialComponents.Light">
+    </style>
+
+    <!--ACTION BAR-->
+
+    <style name="ActionBar.Transparent.TMessages.Start" parent="android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">#ff527da3</item>
+        <item name="android:logo">@drawable/transparent</item>
+        <item name="android:title">""</item>
+    </style>
+
+    <!--ACTION BAR ITEMS-->
+
+    <style name="ActionBar.Transparent.TMessages.Item" parent="android:TextAppearance.Widget.IconMenu.Item">
+        <item name="android:textColor">#000000</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <!--LIST VIEW-->
+
+    <style name="Theme.TMessages.ListView" parent="@android:style/Widget.ListView">
+        <item name="android:listSelector">@drawable/list_selector_ex</item>
+        <item name="android:fadingEdge">none</item>
+        <item name="android:dividerHeight">1dp</item>
+    </style>
+
+    <!--ALERT DIALOG-->
+
+    <style name="DialogNoAnimation">
+        <item name="android:windowEnterAnimation">@anim/no_animation</item>
+        <item name="android:windowExitAnimation">@anim/no_animation</item>
+    </style>
+
+    <style name="TransparentDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:background">@null</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowFullscreen">false</item>
+
+        <item name="android:itemTextAppearance">@style/ActionBar.Transparent.TMessages.Item</item>
+        <item name="android:listViewStyle">@style/Theme.TMessages.ListView</item>
+        <item name="android:listChoiceBackgroundIndicator">@drawable/list_selector_ex</item>
+        <item name="android:actionBarItemBackground">@drawable/bar_selector_style</item>
+    </style>
+
+    <style name="TransparentDialogNoAnimation" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@null</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <!--APP WIDGET-->
+    <style name="FloatWindowAnimStyle" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/float_window_ios_in</item>
+        <item name="android:windowExitAnimation">@anim/float_window_ios_out</item>
+    </style>
+
+    <declare-styleable name="OW3ViewContainer">
+        <attr name="cornerRadius" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="OW3ActionButton">
+        <attr name="tint" format="color" />
+        <attr name="titleTextColor" format="color" />
+        <attr name="actionTitle" format="string" />
+        <attr name="actionDescription" format="string" />
+        <attr name="leftIcon" format="reference" />
+        <attr name="rightIcon" format="reference" />
+        <attr name="hideBottomLine" format="boolean" />
+        <attr name="betaAction" format="boolean" />
+        <attr name="forceStartPadding" format="boolean" />
+    </declare-styleable>
+
+    <style name="Ow3.TextView" parent="Widget.MaterialComponents.TextView" />
+
+    <style name="TextAppearance.Vector.Caption" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="android:textSize">@dimen/ow3_text_size_caption</item>
+        <item name="android:letterSpacing">0</item>
+        <item name="android:textColor">?ow3_content_secondary</item>
+    </style>
+
+    <style name="Ow3.TextView.Caption">
+        <item name="android:textAppearance">@style/TextAppearance.Vector.Caption</item>
+        <item name="lineHeight">16sp</item>
+    </style>
+
+</resources>

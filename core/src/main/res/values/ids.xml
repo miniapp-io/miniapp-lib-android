@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="actionShare" type="id" />
+    <item name="actionMiniButton" type="id" />
+    <item name="actionCloseButton" type="id" />
+
+    <item name="actionReload" type="id" />
+    <item name="actionTerm" type="id" />
+    <item name="actionPrivacy" type="id" />
+    <item name="actionSetting" type="id" />
+</resources>

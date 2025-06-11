@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">هەردەوام بندکرن</string>
+    <string name="action_cancel">بەتاڵکردن</string>
+    <string name="action_allow">بەدەستهێنانی</string>
+    <string name="action_not_allow">بەدەستهێنانی نەكردن</string>
+    <string name="action_share_contact">پەیوەندیمەندە بەشەریکردن</string>
+    <string name="action_not_now">ئێستا نەكە</string>
+    <string name="action_block_all">هەموو پەیوەندیدانی بەرزکردن</string>
+
+    <string name="dialog_close_save_message">گۆڕینەکانت بە شێوەیەکی خراپەوە نەناردنەوە.</string>
+    <string name="dialog_share_phone_title">تۆمەنی پەیوەندیدانت بەشەریکە؟</string>
+    <string name="dialog_share_phone_message">بۆت ئەگەر تۆمەنی پەیوەندیدانت زانیاری بکرێت. ئەمە بەرزە.</string>
+    <string name="dialog_write_access_title">بەدەستهێنانی پەیوەندیدانی ناردن</string>
+    <string name="dialog_write_access_message">ئایا تۆ دەسەڵات بە بۆت بۆ ناردنی پەیوەندیدان بدەیت؟</string>
+    <string name="dialog_allow_biometry_title">بەدەستهێنانی بیوەری</string>
+    <string name="dialog_allow_biometry_message">ئایا تۆ دەسەڵات بدەیت %s بۆ بەدەستهێنانی بیوەری؟</string>
+
+    <string name="button_ok">بەڵێ</string>
+
+    <string name="photo_holder">شعارەی ئەپ</string>
+
+    <string name="webview_permissions_resource_title">پەرەسەندەکار پێویستە ئەم سەرچاوەیە بگرێت:</string>
+    <string name="webview_request_geolocation_permission">ئایا تۆ دەسەڵات بدەیت %1$s بۆ سەرچاوەی مەکانی تۆ؟\n\nپەرەسەندەکار %1$s دەتوانێت بەرز بکات لە کاتێک ئەم وێب ئەپە بکرێت.</string>
+    <string name="webview_request_microphone_permission">ئایا تۆ دەسەڵات بدەیت %1$s بۆ میکروفونی تۆ؟\n\nپەرەسەندەکار %1$s دەتوانێت بەرز بکات لە کاتێک ئەم وێب ئەپە بکرێت.</string>
+    <string name="webview_request_camera_permission">ئایا تۆ دەسەڵات بدەیت %1$s بۆ کامێرای تۆ؟\n\nپەرەسەندەکار %1$s دەتوانێت بەرز بکات لە کاتێک ئەم وێب ئەپە بکرێت.</string>
+    <string name="webview_request_camera_mic_permission">ئایا تۆ دەسەڵات بدەیت %1$s بۆ کامێرای و میکروفونی تۆ؟\n\nپەرەسەندەکار %1$s دەتوانێت بەرز بکات لە کاتێک ئەم وێب ئەپە بکرێت.</string>
+</resources>

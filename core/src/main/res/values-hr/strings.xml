@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">Zatvori svejedno</string>
+    <string name="action_cancel">Odustani</string>
+    <string name="action_allow">Dozvoli</string>
+    <string name="action_not_allow">Ne dozvoli</string>
+    <string name="action_share_contact">Dijeli kontakt</string>
+    <string name="action_not_now">Ne sada</string>
+    <string name="action_block_all">Blokiraj sve</string>
+
+    <string name="dialog_close_save_message">Promjene koje ste napravili možda neće biti spremljene.</string>
+    <string name="dialog_share_phone_title">Želite li podijeliti svoj broj telefona?</string>
+    <string name="dialog_share_phone_message">Bot će znati vaš broj telefona. Ovo može biti korisno...</string>
+    <string name="dialog_write_access_title">Dozvoli slanje poruka</string>
+    <string name="dialog_write_access_message">Želite li da ovaj bot može slati poruke?</string>
+    <string name="dialog_allow_biometry_title">Dozvoli biometriju</string>
+    <string name="dialog_allow_biometry_message">Želite li dozvoliti da %s koristi biometriju?</string>
+
+    <string name="button_ok">U redu</string>
+
+    <string name="photo_holder">Ikona aplikacije</string>
+
+    <string name="webview_permissions_resource_title">Razvijatelj zahtijeva sljedeće resurse:</string>
+    <string name="webview_request_geolocation_permission">Dozvolite %1$s pristup vašoj lokaciji?\n\nRazvijatelj %1$s će moći pristupiti vašoj lokaciji kada je ova web aplikacija otvorena.</string>
+    <string name="webview_request_microphone_permission">Dozvolite %1$s pristup vašem mikrofonu?\n\nRazvijatelj %1$s će moći pristupiti vašem mikrofonu kada je ova web aplikacija otvorena.</string>
+    <string name="webview_request_camera_permission">Dozvolite %1$s pristup vašoj kameri?\n\nRazvijatelj %1$s će moći pristupiti vašoj kameri kada je ova web aplikacija otvorena.</string>
+    <string name="webview_request_camera_mic_permission">Dozvolite %1$s pristup vašoj kameri i mikrofonu?\n\nRazvijatelj %1$s će moći pristupiti vašoj kameri i mikrofonu kada je ova web aplikacija otvorena.</string>
+</resources>

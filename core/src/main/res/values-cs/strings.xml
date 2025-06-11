@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">Zavřít stejně</string>
+    <string name="action_cancel">Zrušit</string>
+    <string name="action_allow">Povolit</string>
+    <string name="action_not_allow">Nepovolit</string>
+    <string name="action_share_contact">Sdílet kontakt</string>
+    <string name="action_not_now">Nyní ne</string>
+    <string name="action_block_all">Blokovat vše</string>
+
+    <string name="dialog_close_save_message">Změny, které jste provedli, nemusí být uloženy.</string>
+    <string name="dialog_share_phone_title">Chcete sdílet své telefonní číslo?</string>
+    <string name="dialog_share_phone_message">Bot bude znát vaše telefonní číslo. To může být užitečné...</string>
+    <string name="dialog_write_access_title">Povolit odesílání zpráv</string>
+    <string name="dialog_write_access_message">Chcete povolit tomuto botu, aby vám posílal zprávy?</string>
+    <string name="dialog_allow_biometry_title">Povolit biometrie</string>
+    <string name="dialog_allow_biometry_message">Chcete povolit %s používat biometrie?</string>
+
+    <string name="button_ok">OK</string>
+
+    <string name="photo_holder">Ikona aplikace</string>
+
+    <string name="webview_permissions_resource_title">Vývojář potřebuje následující zdroje:</string>
+    <string name="webview_request_geolocation_permission">Povolit %1$s přístup k vaší poloze?\n\nVývojář %1$s bude mít přístup k vaší poloze, když bude tato webová aplikace otevřená.</string>
+    <string name="webview_request_microphone_permission">Povolit %1$s přístup k vašemu mikrofonu?\n\nVývojář %1$s bude mít přístup k vašemu mikrofonu, když bude tato webová aplikace otevřená.</string>
+    <string name="webview_request_camera_permission">Povolit %1$s přístup k vaší kameře?\n\nVývojář %1$s bude mít přístup k vaší kameře, když bude tato webová aplikace otevřená.</string>
+    <string name="webview_request_camera_mic_permission">Povolit %1$s přístup k vaší kameře a mikrofonu?\n\nVývojář %1$s bude mít přístup k vaší kameře a mikrofonu, když bude tato webová aplikace otevřená.</string>
+</resources>

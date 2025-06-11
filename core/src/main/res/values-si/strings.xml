@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">හැසිරීම</string>
+    <string name="action_cancel">අහාරයට</string>
+    <string name="action_allow">අනුමත කරන්න</string>
+    <string name="action_not_allow">අනුමත නොකරන්න</string>
+    <string name="action_share_contact">සම්බන්ධතාවය බෙදා ගන්න</string>
+    <string name="action_not_now">දැන් නැහැ</string>
+    <string name="action_block_all">සියල්ල බ්ලොක් කරන්න</string>
+
+    <string name="dialog_close_save_message">ඔබ කළ වෙනස්කම් සුරක්ෂිත නොවන බවක් ඇති වේ.</string>
+    <string name="dialog_share_phone_title">ඔබේ දුරකථන අංකය බෙදාගන්නද?</string>
+    <string name="dialog_share_phone_message">බොට් එක ඔබේ දුරකථන අංකය දන්නවා. මෙය ප්‍රයෝජනවත් විය හැක...</string>
+    <string name="dialog_write_access_title">පණිවිඩය යැවීම සඳහා අනුමැතිය ලබාදෙන්න</string>
+    <string name="dialog_write_access_message">මෙම බොට්ට ඔබට පණිවිඩය යැවීමට අවසරදෙන්නද?</string>
+    <string name="dialog_allow_biometry_title">ජීව මූලික අනුමත කරන්න</string>
+    <string name="dialog_allow_biometry_message">ඔබට %s ජීව මූලික භාවිතා කිරීමට අවසර දෙනවාද?</string>
+
+    <string name="button_ok">හරි</string>
+
+    <string name="photo_holder">ඇප් අයිකනය</string>
+
+    <string name="webview_permissions_resource_title">වැඩිදුර දියුණුකරුගේ පහසුකම් අවශ්‍යයි:</string>
+    <string name="webview_request_geolocation_permission">ඇතුළත් කිරීමේ අනුමැතිය %1$s ඔබේ ස්ථානයට ප්‍රවේශය ලබා දීමට අවසරදෙන්න?\n\nමෙම වෙබ් ඇප් විවෘත කරන විට %1$s ඔබේ ස්ථානයට ප්‍රවේශය ලබා ගත හැක.</string>
+    <string name="webview_request_microphone_permission">ඇතුළත් කිරීමේ අනුමැතිය %1$s ඔබේ මයික්‍රෝෆෝනයට ප්‍රවේශය ලබා දීමට අවසරදෙන්න?\n\nමෙම වෙබ් ඇප් විවෘත කරන විට %1$s ඔබේ මයික්‍රෝෆෝනයට ප්‍රවේශය ලබා ගත හැක.</string>
+    <string name="webview_request_camera_permission">ඇතුළත් කිරීමේ අනුමැතිය %1$s ඔබේ කැමරාවට ප්‍රවේශය ලබා දීමට අවසරදෙන්න?\n\nමෙම වෙබ් ඇප් විවෘත කරන විට %1$s ඔබේ කැමරාවට ප්‍රවේශය ලබා ගත හැක.</string>
+    <string name="webview_request_camera_mic_permission">ඇතුළත් කිරීමේ අනුමැතිය %1$s ඔබේ කැමරාව සහ මයික්‍රෝෆෝනයට ප්‍රවේශය ලබා දීමට අවසරදෙන්න?\n\nමෙම වෙබ් ඇප් විවෘත කරන විට %1$s ඔබේ කැමරාව සහ මයික්‍රෝෆෝනයට ප්‍රවේශය ලබා ගත හැක.</string>
+</resources>

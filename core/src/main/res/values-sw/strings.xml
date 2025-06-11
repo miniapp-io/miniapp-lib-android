@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">Funga tu</string>
+    <string name="action_cancel">Ghairi</string>
+    <string name="action_allow">Ruhusu</string>
+    <string name="action_not_allow">Usiruhusu</string>
+    <string name="action_share_contact">Shiriki mawasiliano</string>
+    <string name="action_not_now">Sasa si wakati</string>
+    <string name="action_block_all">Zuia yote</string>
+
+    <string name="dialog_close_save_message">Mabadiliko uliyofanya yanaweza kutoshelezwa.</string>
+    <string name="dialog_share_phone_title">Shiriki nambari yako ya simu?</string>
+    <string name="dialog_share_phone_message">Botitakuwa na habari za nambari yako ya simu. Hii inaweza kuwa muhimu...</string>
+    <string name="dialog_write_access_title">Ruhusu ujumbe</string>
+    <string name="dialog_write_access_message">Je! Unataka ruhusu bot hii kutuma ujumbe kwako?</string>
+    <string name="dialog_allow_biometry_title">Ruhusu biometri</string>
+    <string name="dialog_allow_biometry_message">Je! Unataka ruhusu %s kutumia biometri?</string>
+
+    <string name="button_ok">Sawa</string>
+
+    <string name="photo_holder">Ikoni ya Programu</string>
+
+    <string name="webview_permissions_resource_title">Mwandishi anahitaji rasilimali zifuatazo:</string>
+    <string name="webview_request_geolocation_permission">Ruhusu %1$s kupata eneo lako?\n\nMwandishi wa %1$s atakuwa na uwezo wa kupata eneo lako wakati programu hii ya wavuti iko wazi.</string>
+    <string name="webview_request_microphone_permission">Ruhusu %1$s kupata kipaza sauti chako?\n\nMwandishi wa %1$s atakuwa na uwezo wa kupata kipaza sauti chako wakati programu hii ya wavuti iko wazi.</string>
+    <string name="webview_request_camera_permission">Ruhusu %1$s kupata kamera yako?\n\nMwandishi wa %1$s atakuwa na uwezo wa kupata kamera yako wakati programu hii ya wavuti iko wazi.</string>
+    <string name="webview_request_camera_mic_permission">Ruhusu %1$s kupata kamera na kipaza sauti chako?\n\nMwandishi wa %1$s atakuwa na uwezo wa kupata kamera na kipaza sauti chako wakati programu hii ya wavuti iko wazi.</string>
+</resources>

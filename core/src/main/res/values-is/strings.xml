@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">Loka samt sem áður</string>
+    <string name="action_cancel">Hætta við</string>
+    <string name="action_allow">Leyfa</string>
+    <string name="action_not_allow">Ekki leyfa</string>
+    <string name="action_share_contact">Deila tengilið</string>
+    <string name="action_not_now">Ekki núna</string>
+    <string name="action_block_all">Loka öllum</string>
+
+    <string name="dialog_close_save_message">Breytingarnar sem þú hefur gert gætu ekki verið vistaðar.</string>
+    <string name="dialog_share_phone_title">Viltu deila símanúmerinu þínu?</string>
+    <string name="dialog_share_phone_message">Botninn mun vita um símanúmerið þitt. Þetta getur verið gagnlegt...</string>
+    <string name="dialog_write_access_title">Leyfa skeyti</string>
+    <string name="dialog_write_access_message">Viltu leyfa þessum botni að senda þér skeyti?</string>
+    <string name="dialog_allow_biometry_title">Leyfa líffræðilegar auðkenningar</string>
+    <string name="dialog_allow_biometry_message">Viltu leyfa %s að nota líffræðilegar auðkenningar?</string>
+
+    <string name="button_ok">Í lagi</string>
+
+    <string name="photo_holder">App tákn</string>
+
+    <string name="webview_permissions_resource_title">Þróunaraðilinn þarfnast eftirfarandi auðlinda:</string>
+    <string name="webview_request_geolocation_permission">Leyfa %1$s að aðgang að staðsetningu þinni?\n\nÞróunaraðilinn %1$s mun geta aðgang að staðsetningu þinni meðan á þessari vefsíðu stendur.</string>
+    <string name="webview_request_microphone_permission">Leyfa %1$s að aðgang að hljóðnema þínum?\n\nÞróunaraðilinn %1$s mun geta aðgang að hljóðnema þínum meðan á þessari vefsíðu stendur.</string>
+    <string name="webview_request_camera_permission">Leyfa %1$s að aðgang að myndavél þinni?\n\nÞróunaraðilinn %1$s mun geta aðgang að myndavél þinni meðan á þessari vefsíðu stendur.</string>
+    <string name="webview_request_camera_mic_permission">Leyfa %1$s að aðgang að myndavél og hljóðnema þínum?\n\nÞróunaraðilinn %1$s mun geta aðgang að myndavél og hljóðnema þínum meðan á þessari vefsíðu stendur.</string>
+</resources>

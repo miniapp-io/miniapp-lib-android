@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">Ябарлыгына жап</string>
+    <string name="action_cancel">Токтот</string>
+    <string name="action_allow">Рұқсат беру</string>
+    <string name="action_not_allow">Рұқсат бермеу</string>
+    <string name="action_share_contact">Байланысты бөлісу</string>
+    <string name="action_not_now">Қазір емес</string>
+    <string name="action_block_all">Барлығын бұғаттау</string>
+
+    <string name="dialog_close_save_message">Сіз жасаған өзгертулер сақталмауы мүмкін.</string>
+    <string name="dialog_share_phone_title">Телефон нөміріңізді бөлісесіз бе?</string>
+    <string name="dialog_share_phone_message">Бот сіздің телефон нөміріңізді білетін болады. Бұл пайдалы болуы мүмкін...</string>
+    <string name="dialog_write_access_title">Хабарлама жіберуге рұқсат беру</string>
+    <string name="dialog_write_access_message">Бұл ботқа сізге хабарлама жіберуге рұқсат бересіз бе?</string>
+    <string name="dialog_allow_biometry_title">Биометрияға рұқсат беру</string>
+    <string name="dialog_allow_biometry_message">%s биометрияны пайдалануға рұқсат бересіз бе?</string>
+
+    <string name="button_ok">Жарайды</string>
+
+    <string name="photo_holder">Қосымша белгішесі</string>
+
+    <string name="webview_permissions_resource_title">Әзірлеуші келесі ресурстарды талап етеді:</string>
+    <string name="webview_request_geolocation_permission">%1$s-ға орналасқан жеріңізге қол жеткізуге рұқсат бересіз бе?\n\n%1$s әзірлеушісі осы веб-қосымша ашық болғанда, орналасқан жеріңізге қол жеткізе алады.</string>
+    <string name="webview_request_microphone_permission">%1$s-ға микрофоныңызға қол жеткізуге рұқсат бересіз бе?\n\n%1$s әзірлеушісі осы веб-қосымша ашық болғанда, микрофоныңызға қол жеткізе алады.</string>
+    <string name="webview_request_camera_permission">%1$s-ға камераңызға қол жеткізуге рұқсат бересіз бе?\n\n%1$s әзірлеушісі осы веб-қосымша ашық болғанда, камераңызға қол жеткізе алады.</string>
+    <string name="webview_request_camera_mic_permission">%1$s-ға камераңыз бен микрофоныңызға қол жеткізуге рұқсат бересіз бе?\n\n%1$s әзірлеушісі осы веб-қосымша ашық болғанда, камераңыз бен микрофоныңызға қол жеткізе алады.</string>
+</resources>

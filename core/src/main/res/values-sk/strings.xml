@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">Zavrieť aj tak</string>
+    <string name="action_cancel">Zrušiť</string>
+    <string name="action_allow">Povoliť</string>
+    <string name="action_not_allow">Nepovoliť</string>
+    <string name="action_share_contact">Zdieľať kontakt</string>
+    <string name="action_not_now">Nie teraz</string>
+    <string name="action_block_all">Zablokovať všetko</string>
+
+    <string name="dialog_close_save_message">Zmeny, ktoré ste vykonali, nemusia byť uložené.</string>
+    <string name="dialog_share_phone_title">Zdieľať svoje telefónne číslo?</string>
+    <string name="dialog_share_phone_message">Bot bude poznať vaše telefónne číslo. To môže byť užitočné...</string>
+    <string name="dialog_write_access_title">Povoliť písanie správ</string>
+    <string name="dialog_write_access_message">Povoliť tomuto botovi posielať vám správy?</string>
+    <string name="dialog_allow_biometry_title">Povoliť biometrické údaje</string>
+    <string name="dialog_allow_biometry_message">Chcete povoliť %s používať biometrické údaje?</string>
+
+    <string name="button_ok">OK</string>
+
+    <string name="photo_holder">Ikona aplikácie</string>
+
+    <string name="webview_permissions_resource_title">Vývojár požaduje nasledujúce prostriedky:</string>
+    <string name="webview_request_geolocation_permission">Povoliť %1$s prístup k vašej polohe?\n\nVývojár %1$s bude mať prístup k vašej polohe, keď je táto webová aplikácia otvorená.</string>
+    <string name="webview_request_microphone_permission">Povoliť %1$s prístup k vášmu mikrofónu?\n\nVývojár %1$s bude mať prístup k vášmu mikrofónu, keď je táto webová aplikácia otvorená.</string>
+    <string name="webview_request_camera_permission">Povoliť %1$s prístup k vašej kamere?\n\nVývojár %1$s bude mať prístup k vašej kamere, keď je táto webová aplikácia otvorená.</string>
+    <string name="webview_request_camera_mic_permission">Povoliť %1$s prístup k vašej kamere a mikrofónu?\n\nVývojár %1$s bude mať prístup k vašej kamere a mikrofónu, keď je táto webová aplikácia otvorená.</string>
+</resources>

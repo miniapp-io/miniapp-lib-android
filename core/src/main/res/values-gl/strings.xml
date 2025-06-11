@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">Pechar de todos modos</string>
+    <string name="action_cancel">Cancelar</string>
+    <string name="action_allow">Permitir</string>
+    <string name="action_not_allow">Non permitir</string>
+    <string name="action_share_contact">Compartir contacto</string>
+    <string name="action_not_now">Non agora</string>
+    <string name="action_block_all">Bloquear todo</string>
+
+    <string name="dialog_close_save_message">Os cambios que fixeches poden non ser gardados.</string>
+    <string name="dialog_share_phone_title">Queres compartir o teu número de teléfono?</string>
+    <string name="dialog_share_phone_message">O bot saberá o teu número de teléfono. Isto pode ser útil...</string>
+    <string name="dialog_write_access_title">Permitir mensaxes</string>
+    <string name="dialog_write_access_message">Permitir que este bot che envíe mensaxes?</string>
+    <string name="dialog_allow_biometry_title">Permitir biometría</string>
+    <string name="dialog_allow_biometry_message">Queres permitir que %s use a biometría?</string>
+
+    <string name="button_ok">OK</string>
+
+    <string name="photo_holder">Icona da aplicación</string>
+
+    <string name="webview_permissions_resource_title">O desenvolvedor require os seguintes recursos:</string>
+    <string name="webview_request_geolocation_permission">Permitir que %1$s acceda á túa localización?\n\nO desenvolvedor de %1$s poderá acceder á túa localización cando esta aplicación web estea aberta.</string>
+    <string name="webview_request_microphone_permission">Permitir que %1$s acceda ao teu micrófono?\n\nO desenvolvedor de %1$s poderá acceder ao teu micrófono cando esta aplicación web estea aberta.</string>
+    <string name="webview_request_camera_permission">Permitir que %1$s acceda á túa cámara?\n\nO desenvolvedor de %1$s poderá acceder á túa cámara cando esta aplicación web estea aberta.</string>
+    <string name="webview_request_camera_mic_permission">Permitir que %1$s acceda á túa cámara e micrófono?\n\nO desenvolvedor de %1$s poderá acceder á túa cámara e micrófono cando esta aplicación web estea aberta.</string>
+</resources>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">Stäng ändå</string>
+    <string name="action_cancel">Avbryt</string>
+    <string name="action_allow">Tillåt</string>
+    <string name="action_not_allow">Inte tillåt</string>
+    <string name="action_share_contact">Dela kontakt</string>
+    <string name="action_not_now">Inte nu</string>
+    <string name="action_block_all">Blockera alla</string>
+
+    <string name="dialog_close_save_message">Ändringar du gjort kanske inte sparas.</string>
+    <string name="dialog_share_phone_title">Dela ditt telefonnummer?</string>
+    <string name="dialog_share_phone_message">Botten kommer att veta ditt telefonnummer. Detta kan vara användbart...</string>
+    <string name="dialog_write_access_title">Tillåt meddelanden</string>
+    <string name="dialog_write_access_message">Vill du tillåta denna bot att skicka meddelanden till dig?</string>
+    <string name="dialog_allow_biometry_title">Tillåt biometri</string>
+    <string name="dialog_allow_biometry_message">Vill du tillåta %s att använda biometri?</string>
+
+    <string name="button_ok">OK</string>
+
+    <string name="photo_holder">App-ikon</string>
+
+    <string name="webview_permissions_resource_title">Utvecklaren kräver följande resurser:</string>
+    <string name="webview_request_geolocation_permission">Tillåt %1$s att få åtkomst till din plats?\n\nUtvecklaren av %1$s kommer att kunna få åtkomst till din plats när denna webbapp är öppen.</string>
+    <string name="webview_request_microphone_permission">Tillåt %1$s att få åtkomst till din mikrofon?\n\nUtvecklaren av %1$s kommer att kunna få åtkomst till din mikrofon när denna webbapp är öppen.</string>
+    <string name="webview_request_camera_permission">Tillåt %1$s att få åtkomst till din kamera?\n\nUtvecklaren av %1$s kommer att kunna få åtkomst till din kamera när denna webbapp är öppen.</string>
+    <string name="webview_request_camera_mic_permission">Tillåt %1$s att få åtkomst till din kamera och mikrofon?\n\nUtvecklaren av %1$s kommer att kunna få åtkomst till din kamera och mikrofon när denna webbapp är öppen.</string>
+</resources>

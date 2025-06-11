@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">Bezárás mindenképpen</string>
+    <string name="action_cancel">Mégse</string>
+    <string name="action_allow">Engedélyezés</string>
+    <string name="action_not_allow">Ne engedélyezze</string>
+    <string name="action_share_contact">Kapcsolat megosztása</string>
+    <string name="action_not_now">Most nem</string>
+    <string name="action_block_all">Mind blokkolása</string>
+
+    <string name="dialog_close_save_message">A változtatások, amelyeket végrehajtott, lehet, hogy nem kerülnek mentésre.</string>
+    <string name="dialog_share_phone_title">Meg szeretné osztani a telefonszámát?</string>
+    <string name="dialog_share_phone_message">A bot tudni fogja a telefonszámát. Ez hasznos lehet...</string>
+    <string name="dialog_write_access_title">Üzenetküldés engedélyezése</string>
+    <string name="dialog_write_access_message">Engedélyezni akarja, hogy ez a bot üzeneteket küldjön Önnek?</string>
+    <string name="dialog_allow_biometry_title">Biometria engedélyezése</string>
+    <string name="dialog_allow_biometry_message">Engedélyezni szeretné, hogy %s használja a biometriát?</string>
+
+    <string name="button_ok">Rendben</string>
+
+    <string name="photo_holder">Alkalmazás ikonja</string>
+
+    <string name="webview_permissions_resource_title">A fejlesztő az alábbi erőforrásokat kéri:</string>
+    <string name="webview_request_geolocation_permission">Engedélyezi %1$s számára a helymeghatározást?\n\nA %1$s fejlesztője hozzáférhet a helyéhez, amikor ez a webalkalmazás nyitva van.</string>
+    <string name="webview_request_microphone_permission">Engedélyezi %1$s számára a mikrofon használatát?\n\nA %1$s fejlesztője hozzáférhet a mikrofonhoz, amikor ez a webalkalmazás nyitva van.</string>
+    <string name="webview_request_camera_permission">Engedélyezi %1$s számára a kamera használatát?\n\nA %1$s fejlesztője hozzáférhet a kamerához, amikor ez a webalkalmazás nyitva van.</string>
+    <string name="webview_request_camera_mic_permission">Engedélyezi %1$s számára a kamera és a mikrofon használatát?\n\nA %1$s fejlesztője hozzáférhet a kamerához és a mikrofonhoz, amikor ez a webalkalmazás nyitva van.</string>
+</resources>

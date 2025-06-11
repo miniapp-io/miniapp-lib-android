@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">اغلق على أية حال</string>
+    <string name="action_cancel">إلغاء</string>
+    <string name="action_allow">السماح</string>
+    <string name="action_not_allow">عدم السماح</string>
+    <string name="action_share_contact">مشاركة جهة الاتصال</string>
+    <string name="action_not_now">ليس الآن</string>
+    <string name="action_block_all">حظر الكل</string>
+
+    <string name="dialog_close_save_message">قد لا يتم حفظ التغييرات التي أجريتها.</string>
+    <string name="dialog_share_phone_title">هل تريد مشاركة رقم هاتفك؟</string>
+    <string name="dialog_share_phone_message">سيعرف الروبوت رقم هاتفك. قد يكون ذلك مفيدًا...</string>
+    <string name="dialog_write_access_title">السماح بالرسائل</string>
+    <string name="dialog_write_access_message">هل تريد السماح لهذا الروبوت بإرسال رسائل إليك؟</string>
+    <string name="dialog_allow_biometry_title">السماح باستخدام البيانات البيومترية</string>
+    <string name="dialog_allow_biometry_message">هل تريد السماح لـ %s باستخدام البيانات البيومترية؟</string>
+
+    <string name="button_ok">موافق</string>
+
+    <string name="photo_holder">أيقونة التطبيق</string>
+
+    <string name="webview_permissions_resource_title">يتطلب المطور الموارد التالية:</string>
+    <string name="webview_request_geolocation_permission">هل تريد السماح لـ %1$s بالوصول إلى موقعك؟\n\n سيتمكن مطور %1$s من الوصول إلى موقعك عند فتح هذا التطبيق على الويب.</string>
+    <string name="webview_request_microphone_permission">هل تريد السماح لـ %1$s بالوصول إلى ميكروفونك؟\n\n سيتمكن مطور %1$s من الوصول إلى ميكروفونك عند فتح هذا التطبيق على الويب.</string>
+    <string name="webview_request_camera_permission">هل تريد السماح لـ %1$s بالوصول إلى كاميرتك؟\n\n سيتمكن مطور %1$s من الوصول إلى كاميرتك عند فتح هذا التطبيق على الويب.</string>
+    <string name="webview_request_camera_mic_permission">هل تريد السماح لـ %1$s بالوصول إلى كاميرتك وميكروفونك؟\n\n سيتمكن مطور %1$s من الوصول إلى كاميرتك وميكروفونك عند فتح هذا التطبيق على الويب.</string>
+</resources>

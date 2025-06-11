@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">إغلاق على أي حال</string>
+    <string name="action_cancel">إلغاء</string>
+    <string name="action_allow">السماح</string>
+    <string name="action_not_allow">عدم السماح</string>
+    <string name="action_share_contact">مشاركة جهة الاتصال</string>
+    <string name="action_not_now">ليس الآن</string>
+    <string name="action_block_all">حظر الجميع</string>
+
+    <string name="dialog_close_save_message">قد لا يتم حفظ التغييرات التي أجريتها.</string>
+    <string name="dialog_share_phone_title">هل ترغب في مشاركة رقم هاتفك؟</string>
+    <string name="dialog_share_phone_message">سيعرف الروبوت رقم هاتفك. يمكن أن يكون هذا مفيدًا...</string>
+    <string name="dialog_write_access_title">السماح بالمراسلة</string>
+    <string name="dialog_write_access_message">هل ترغب في السماح لهذا الروبوت بإرسال رسائل إليك؟</string>
+    <string name="dialog_allow_biometry_title">السماح باستخدام المقاييس الحيوية</string>
+    <string name="dialog_allow_biometry_message">هل ترغب في السماح لـ %s باستخدام المقاييس الحيوية؟</string>
+
+    <string name="button_ok">حسنًا</string>
+
+    <string name="photo_holder">أيقونة التطبيق</string>
+
+    <string name="webview_permissions_resource_title">المطور يتطلب الموارد التالية:</string>
+    <string name="webview_request_geolocation_permission">هل ترغب في السماح لـ %1$s بالوصول إلى موقعك؟\n\nسيتمكن مطور %1$s من الوصول إلى موقعك عند فتح هذا التطبيق.</string>
+    <string name="webview_request_microphone_permission">هل ترغب في السماح لـ %1$s بالوصول إلى الميكروفون الخاص بك؟\n\nسيتمكن مطور %1$s من الوصول إلى الميكروفون الخاص بك عند فتح هذا التطبيق.</string>
+    <string name="webview_request_camera_permission">هل ترغب في السماح لـ %1$s بالوصول إلى الكاميرا الخاصة بك؟\n\nسيتمكن مطور %1$s من الوصول إلى الكاميرا الخاصة بك عند فتح هذا التطبيق.</string>
+    <string name="webview_request_camera_mic_permission">هل ترغب في السماح لـ %1$s بالوصول إلى الكاميرا والميكروفون الخاصين بك؟\n\nسيتمكن مطور %1$s من الوصول إلى الكاميرا والميكروفون الخاصين بك عند فتح هذا التطبيق.</string>
+</resources>

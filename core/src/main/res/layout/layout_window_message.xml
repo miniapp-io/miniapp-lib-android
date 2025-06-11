@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="15dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <io.miniapp.core.openplatform.miniapp.ui.views.RoundCornerConstraintLayout
+        android:id="@+id/floatContainer"
+        android:layout_width="86dp"
+        android:layout_height="128dp">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#D9D9D9"/>
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter"
+            android:background="@drawable/photo_placeholder_in"
+            android:contentDescription="@string/photo_holder" />
+
+        <FrameLayout
+            android:id="@+id/webContainer"
+            android:scaleX="0.25"
+            android:scaleY="0.25"
+            android:layout_width="354dp"
+            android:layout_height="512dp"/>
+
+        <View
+            android:id="@+id/clickMarkView"
+            android:clickable="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="true" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@drawable/mark_gradient"/>
+
+        <ImageButton
+            android:id="@+id/closeButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:padding="6dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:src="@drawable/ic_float_close"
+            android:background="@null"
+            android:contentDescription="@string/photo_holder" />
+
+    </io.miniapp.core.openplatform.miniapp.ui.views.RoundCornerConstraintLayout>
+
+</FrameLayout>
+

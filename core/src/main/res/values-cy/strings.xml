@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">Cau’r diod yma</string>
+    <string name="action_cancel">Canslo</string>
+    <string name="action_allow">Caniatáu</string>
+    <string name="action_not_allow">Peidio â chaniatáu</string>
+    <string name="action_share_contact">Rhannu cyswllt</string>
+    <string name="action_not_now">Nawr ddim</string>
+    <string name="action_block_all">Blocio popeth</string>
+
+    <string name="dialog_close_save_message">Efallai na chaiff y newidiadau a wnaethoch eu cadw.</string>
+    <string name="dialog_share_phone_title">Ydych chi am rannu eich rhif ffôn?</string>
+    <string name="dialog_share_phone_message">Bydd y bot yn gwybod eich rhif ffôn. Gall hyn fod yn ddefnyddiol...</string>
+    <string name="dialog_write_access_title">Caniatáu negeseuon</string>
+    <string name="dialog_write_access_message">Ydych chi am ganiatáu i’r bot hwn anfon negeseuon atoch?</string>
+    <string name="dialog_allow_biometry_title">Caniatáu biometreg</string>
+    <string name="dialog_allow_biometry_message">Ydych chi am ganiatáu i %s ddefnyddio biometreg?</string>
+
+    <string name="button_ok">OK</string>
+
+    <string name="photo_holder">Eicon yr Ap</string>
+
+    <string name="webview_permissions_resource_title">Mae angen y canlynol ar y datblygwr:</string>
+    <string name="webview_request_geolocation_permission">Caniatáu i %1$s gael mynediad i’ch lleoliad?\n\nBydd datblygwr %1$s yn gallu cael mynediad i’ch lleoliad pan fydd y wefan hon ar agor.</string>
+    <string name="webview_request_microphone_permission">Caniatáu i %1$s gael mynediad i’ch meicroffon?\n\nBydd datblygwr %1$s yn gallu cael mynediad i’ch meicroffon pan fydd y wefan hon ar agor.</string>
+    <string name="webview_request_camera_permission">Caniatáu i %1$s gael mynediad i’ch camera?\n\nBydd datblygwr %1$s yn gallu cael mynediad i’ch camera pan fydd y wefan hon ar agor.</string>
+    <string name="webview_request_camera_mic_permission">Caniatáu i %1$s gael mynediad i’ch camera a’ch meicroffon?\n\nBydd datblygwr %1$s yn gallu cael mynediad i’ch camera a’ch meicroffon pan fydd y wefan hon ar agor.</string>
+</resources>

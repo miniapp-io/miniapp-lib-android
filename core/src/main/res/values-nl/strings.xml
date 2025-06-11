@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">Toch sluiten</string>
+    <string name="action_cancel">Annuleren</string>
+    <string name="action_allow">Toestaan</string>
+    <string name="action_not_allow">Niet toestaan</string>
+    <string name="action_share_contact">Deel contact</string>
+    <string name="action_not_now">Niet nu</string>
+    <string name="action_block_all">Blokkeer alles</string>
+
+    <string name="dialog_close_save_message">De wijzigingen die je hebt aangebracht, worden mogelijk niet opgeslagen.</string>
+    <string name="dialog_share_phone_title">Wil je je telefoonnummer delen?</string>
+    <string name="dialog_share_phone_message">De bot zal je telefoonnummer weten. Dit kan nuttig zijn...</string>
+    <string name="dialog_write_access_title">Berichten toestaan</string>
+    <string name="dialog_write_access_message">Wil je deze bot toestemming geven om je berichten te sturen?</string>
+    <string name="dialog_allow_biometry_title">Biometrie toestaan</string>
+    <string name="dialog_allow_biometry_message">Wil je %s toestaan om biometrie te gebruiken?</string>
+
+    <string name="button_ok">OK</string>
+
+    <string name="photo_holder">App-pictogram</string>
+
+    <string name="webview_permissions_resource_title">De ontwikkelaar heeft de volgende middelen nodig:</string>
+    <string name="webview_request_geolocation_permission">Toestaan dat %1$s toegang krijgt tot je locatie?\n\nDe ontwikkelaar van %1$s kan je locatie openen wanneer deze webapp is geopend.</string>
+    <string name="webview_request_microphone_permission">Toestaan dat %1$s toegang krijgt tot je microfoon?\n\nDe ontwikkelaar van %1$s kan je microfoon openen wanneer deze webapp is geopend.</string>
+    <string name="webview_request_camera_permission">Toestaan dat %1$s toegang krijgt tot je camera?\n\nDe ontwikkelaar van %1$s kan je camera openen wanneer deze webapp is geopend.</string>
+    <string name="webview_request_camera_mic_permission">Toestaan dat %1$s toegang krijgt tot je camera en microfoon?\n\nDe ontwikkelaar van %1$s kan je camera en microfoon openen wanneer deze webapp is geopend.</string>
+</resources>

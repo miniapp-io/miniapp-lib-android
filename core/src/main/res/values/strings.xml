@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">Close anyway</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_allow">Allow</string>
+    <string name="action_not_allow">Don\'t Allow</string>
+    <string name="action_share_contact">Share contact</string>
+    <string name="action_not_now">Not now</string>
+    <string name="action_block_all">Block All</string>
+
+    <string name="action_share">Share</string>
+    <string name="action_feedback">Feedback &amp; Report</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_relaod">Reload Page</string>
+    <string name="action_terms">User Agreement</string>
+    <string name="action_privacy">Privacy Agreement</string>
+    <string name="action_shortcut">Add to Home Screen</string>
+
+    <string name="dialog_close_save_message">Changes that you made may not be saved.</string>
+    <string name="dialog_share_phone_title">Share your phone number?</string>
+    <string name="dialog_share_phone_message">The bot will know your phone number.</string>
+    <string name="dialog_write_access_title">Allow messaging</string>
+    <string name="dialog_write_access_message">Allow this bot to send you messages?</string>
+    <string name="dialog_allow_biometry_title">Allow biometry</string>
+    <string name="dialog_allow_biometry_message">Do you want to allow %s to use biometry?</string>
+
+    <string name="button_ok">OK</string>
+
+    <string name="photo_holder">App Icon</string>
+
+    <string name="webview_permissions_resource_title">The developer requires the following resources:</string>
+    <string name="webview_request_geolocation_permission">Allow %1$s to access to your location?\n\nThe developer of %1$s will be able to access your location when this web app is open.</string>
+    <string name="webview_request_microphone_permission">Allow %1$s to access to your microphone?\n\nThe developer of %1$s will be able to access your microphone when this web app is open.</string>
+    <string name="webview_request_camera_permission">Allow %1$s to access to your camera?\n\nThe developer of %1$s will be able to access your camera when this web app is open.</string>
+    <string name="webview_request_camera_mic_permission">Allow %1$s to access to your camera and microphone?\n\nThe developer of %1$s will be able to access your camera and microphone when this web app is open.</string>
+
+</resources>

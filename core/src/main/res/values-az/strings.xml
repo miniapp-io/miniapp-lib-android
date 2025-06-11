@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">Yenə bağla</string>
+    <string name="action_cancel">Ləğv et</string>
+    <string name="action_allow">İcazə ver</string>
+    <string name="action_not_allow">İcazə vermə</string>
+    <string name="action_share_contact">Əlaqəni paylaş</string>
+    <string name="action_not_now">İndi yox</string>
+    <string name="action_block_all">Hamını blokla</string>
+
+    <string name="dialog_close_save_message">Dəyişiklikləriniz yadda saxlanılmaya bilər.</string>
+    <string name="dialog_share_phone_title">Telefon nömrənizi paylaşmaq istəyirsiniz?</string>
+    <string name="dialog_share_phone_message">Bot sizin telefon nömrənizi biləcək. Bu faydalı ola bilər...</string>
+    <string name="dialog_write_access_title">Mesajlaşmağa icazə ver</string>
+    <string name="dialog_write_access_message">Bu bota sizə mesaj göndərməyə icazə vermək istəyirsiniz?</string>
+    <string name="dialog_allow_biometry_title">Biometriyaya icazə ver</string>
+    <string name="dialog_allow_biometry_message">%s biometriyadan istifadə etməyə icazə vermək istəyirsiniz?</string>
+
+    <string name="button_ok">OK</string>
+
+    <string name="photo_holder">Tətbiq İkonu</string>
+
+    <string name="webview_permissions_resource_title">Tərtibatçı aşağıdakı resursları tələb edir:</string>
+    <string name="webview_request_geolocation_permission">%1$s məkanınıza daxil olmağa icazə verilsin?\n\n%1$s tərtibatçısı bu veb tətbiqi açıq olduqda məkanınıza daxil ola biləcək.</string>
+    <string name="webview_request_microphone_permission">%1$s mikrofonunuza daxil olmağa icazə verilsin?\n\n%1$s tərtibatçısı bu veb tətbiqi açıq olduqda mikrofonunuza daxil ola biləcək.</string>
+    <string name="webview_request_camera_permission">%1$s kamaranıza daxil olmağa icazə verilsin?\n\n%1$s tərtibatçısı bu veb tətbiqi açıq olduqda kamaranıza daxil ola biləcək.</string>
+    <string name="webview_request_camera_mic_permission">%1$s kamara və mikrofonunuza daxil olmağa icazə verilsin?\n\n%1$s tərtibatçısı bu veb tətbiqi açıq olduqda kamara və mikrofonunuza daxil ola biləcək.</string>
+</resources>

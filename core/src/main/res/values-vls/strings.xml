@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">Sluit toch af</string>
+    <string name="action_cancel">Annuleren</string>
+    <string name="action_allow">Toestaan</string>
+    <string name="action_not_allow">Niet toestaan</string>
+    <string name="action_share_contact">Deel contact</string>
+    <string name="action_not_now">Niet nu</string>
+    <string name="action_block_all">Blokkeer alles</string>
+
+    <string name="dialog_close_save_message">De wijzigingen die je hebt aangebracht, worden mogelijk niet opgeslagen.</string>
+    <string name="dialog_share_phone_title">Je telefoonnummer delen?</string>
+    <string name="dialog_share_phone_message">De bot zal je telefoonnummer kennen. Dit kan nuttig zijn...</string>
+    <string name="dialog_write_access_title">Berichten toestaan</string>
+    <string name="dialog_write_access_message">Deel je deze bot berichten te sturen?</string>
+    <string name="dialog_allow_biometry_title">Biometrie toestaan</string>
+    <string name="dialog_allow_biometry_message">Wil je %s toestaan om biometrie te gebruiken?</string>
+
+    <string name="button_ok">OK</string>
+
+    <string name="photo_holder">App-pictogram</string>
+
+    <string name="webview_permissions_resource_title">De ontwikkelaar heeft de volgende middelen nodig:</string>
+    <string name="webview_request_geolocation_permission">Wil je %1$s toegang geven tot je locatie?\n\nDe ontwikkelaar van %1$s kan toegang krijgen tot je locatie wanneer deze webapp is geopend.</string>
+    <string name="webview_request_microphone_permission">Wil je %1$s toegang geven tot je microfoon?\n\nDe ontwikkelaar van %1$s kan toegang krijgen tot je microfoon wanneer deze webapp is geopend.</string>
+    <string name="webview_request_camera_permission">Wil je %1$s toegang geven tot je camera?\n\nDe ontwikkelaar van %1$s kan toegang krijgen tot je camera wanneer deze webapp is geopend.</string>
+    <string name="webview_request_camera_mic_permission">Wil je %1$s toegang geven tot je camera en microfoon?\n\nDe ontwikkelaar van %1$s kan toegang krijgen tot je camera en microfoon wanneer deze webapp is geopend.</string>
+</resources>

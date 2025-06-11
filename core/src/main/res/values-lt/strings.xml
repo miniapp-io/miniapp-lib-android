@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">Uždaryti bet kokiu atveju</string>
+    <string name="action_cancel">Atšaukti</string>
+    <string name="action_allow">Leisti</string>
+    <string name="action_not_allow">Nepraleisti</string>
+    <string name="action_share_contact">Pasidalinti kontaktu</string>
+    <string name="action_not_now">Ne dabar</string>
+    <string name="action_block_all">Blokuoti viską</string>
+
+    <string name="dialog_close_save_message">Padaryti pakeitimai gali būti neįrašyti.</string>
+    <string name="dialog_share_phone_title">Pasidalinti savo telefono numeriu?</string>
+    <string name="dialog_share_phone_message">Botas žinos jūsų telefono numerį. Tai gali būti naudinga...</string>
+    <string name="dialog_write_access_title">Leisti siųsti žinutes</string>
+    <string name="dialog_write_access_message">Leisti šiam botui siųsti jums žinutes?</string>
+    <string name="dialog_allow_biometry_title">Leisti biometrinius duomenis</string>
+    <string name="dialog_allow_biometry_message">Ar norite leisti %s naudoti biometrinius duomenis?</string>
+
+    <string name="button_ok">Gerai</string>
+
+    <string name="photo_holder">Programos piktograma</string>
+
+    <string name="webview_permissions_resource_title">Kūrėjas reikalauja šių išteklių:</string>
+    <string name="webview_request_geolocation_permission">Leisti %1$s pasiekti jūsų buvimo vietą?\n\n%1$s kūrėjas galės pasiekti jūsų buvimo vietą, kai ši interneto programa bus atidaryta.</string>
+    <string name="webview_request_microphone_permission">Leisti %1$s pasiekti jūsų mikrofoną?\n\n%1$s kūrėjas galės pasiekti jūsų mikrofoną, kai ši interneto programa bus atidaryta.</string>
+    <string name="webview_request_camera_permission">Leisti %1$s pasiekti jūsų kamerą?\n\n%1$s kūrėjas galės pasiekti jūsų kamerą, kai ši interneto programa bus atidaryta.</string>
+    <string name="webview_request_camera_mic_permission">Leisti %1$s pasiekti jūsų kamerą ir mikrofoną?\n\n%1$s kūrėjas galės pasiekti jūsų kamerą ir mikrofoną, kai ši interneto programa bus atidaryta.</string>
+</resources>

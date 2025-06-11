@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">とにかく閉じる</string>
+    <string name="action_cancel">キャンセル</string>
+    <string name="action_allow">許可する</string>
+    <string name="action_not_allow">許可しない</string>
+    <string name="action_share_contact">連絡先を共有</string>
+    <string name="action_not_now">今はしない</string>
+    <string name="action_block_all">すべてをブロック</string>
+
+    <string name="dialog_close_save_message">変更した内容は保存されない可能性があります。</string>
+    <string name="dialog_share_phone_title">電話番号を共有しますか？</string>
+    <string name="dialog_share_phone_message">ボットはあなたの電話番号を知ることになります。これは役立つ場合があります...</string>
+    <string name="dialog_write_access_title">メッセージの許可</string>
+    <string name="dialog_write_access_message">このボットがあなたにメッセージを送ることを許可しますか？</string>
+    <string name="dialog_allow_biometry_title">生体認証を許可</string>
+    <string name="dialog_allow_biometry_message">%s に生体認証の使用を許可しますか？</string>
+
+    <string name="button_ok">OK</string>
+
+    <string name="photo_holder">アプリのアイコン</string>
+
+    <string name="webview_permissions_resource_title">開発者は以下のリソースを要求しています：</string>
+    <string name="webview_request_geolocation_permission">%1$s にあなたの位置情報へのアクセスを許可しますか？\n\n%1$s の開発者はこのウェブアプリが開いているときにあなたの位置情報にアクセスできます。</string>
+    <string name="webview_request_microphone_permission">%1$s にあなたのマイクへのアクセスを許可しますか？\n\n%1$s の開発者はこのウェブアプリが開いているときにあなたのマイクにアクセスできます。</string>
+    <string name="webview_request_camera_permission">%1$s にあなたのカメラへのアクセスを許可しますか？\n\n%1$s の開発者はこのウェブアプリが開いているときにあなたのカメラにアクセスできます。</string>
+    <string name="webview_request_camera_mic_permission">%1$s にあなたのカメラとマイクへのアクセスを許可しますか？\n\n%1$s の開発者はこのウェブアプリが開いているときにあなたのカメラとマイクにアクセスできます。</string>
+</resources>

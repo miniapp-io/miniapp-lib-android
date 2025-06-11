@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">بہرحال بند کریں</string>
+    <string name="action_cancel">کینسل کریں</string>
+    <string name="action_allow">اجازت دیں</string>
+    <string name="action_not_allow">اجازت نہ دیں</string>
+    <string name="action_share_contact">رابطہ شیئر کریں</string>
+    <string name="action_not_now">اب نہیں</string>
+    <string name="action_block_all">سب بلاک کریں</string>
+
+    <string name="dialog_close_save_message">جو تبدیلیاں آپ نے کی ہیں وہ محفوظ نہیں ہوسکتی ہیں۔</string>
+    <string name="dialog_share_phone_title">کیا آپ اپنا فون نمبر شیئر کرنا چاہتے ہیں؟</string>
+    <string name="dialog_share_phone_message">بوٹ آپ کا فون نمبر جان لے گا۔ یہ مفید ہوسکتا ہے...</string>
+    <string name="dialog_write_access_title">پیغام بھیجنے کی اجازت دیں</string>
+    <string name="dialog_write_access_message">کیا آپ اس بوٹ کو آپ کو پیغام بھیجنے کی اجازت دینا چاہتے ہیں؟</string>
+    <string name="dialog_allow_biometry_title">بایومیٹری کی اجازت دیں</string>
+    <string name="dialog_allow_biometry_message">کیا آپ چاہتے ہیں کہ %s بایومیٹری کا استعمال کرے؟</string>
+
+    <string name="button_ok">ٹھیک ہے</string>
+
+    <string name="photo_holder">ایپ آئکن</string>
+
+    <string name="webview_permissions_resource_title">ڈویلپر کو مندرجہ ذیل وسائل کی ضرورت ہے:</string>
+    <string name="webview_request_geolocation_permission">%1$s کو آپ کے مقام تک رسائی کی اجازت دیں؟\n\n%1$s کے ڈویلپر اس ویب ایپ کے کھلے ہونے پر آپ کے مقام تک رسائی حاصل کر سکیں گے۔</string>
+    <string name="webview_request_microphone_permission">%1$s کو آپ کے مائیکروفون تک رسائی کی اجازت دیں؟\n\n%1$s کے ڈویلپر اس ویب ایپ کے کھلے ہونے پر آپ کے مائیکروفون تک رسائی حاصل کر سکیں گے۔</string>
+    <string name="webview_request_camera_permission">%1$s کو آپ کے کیمرے تک رسائی کی اجازت دیں؟\n\n%1$s کے ڈویلپر اس ویب ایپ کے کھلے ہونے پر آپ کے کیمرے تک رسائی حاصل کر سکیں گے۔</string>
+    <string name="webview_request_camera_mic_permission">%1$s کو آپ کے کیمرے اور مائیکروفون تک رسائی کی اجازت دیں؟\n\n%1$s کے ڈویلپر اس ویب ایپ کے کھلے ہونے پر آپ کے کیمرے اور مائیکروفون تک رسائی حاصل کر سکیں گے۔</string>
+</resources>

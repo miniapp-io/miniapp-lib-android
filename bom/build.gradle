@@ -1,0 +1,43 @@
+plugins {
+    alias(libs.plugins.bom.generator)
+    id 'signing'
+}
+
+group = "io.miniapp"
+version = rootProject.ext.versionName
+
+bomGenerator {
+    excludeProject("app")
+}
+
+publishing {
+    publications {
+        Bom(MavenPublication) {
+            artifactId = 'bom'
+            pom {
+                name = 'MiniAppX BOM'
+                description = 'Bill of Materials (BOM) for Miniapp Android libraries'
+                url = 'https://github.com/miniapp-io/miniapp-lib-android'
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                scm {
+                    connection = "scm:git:git://github.com/miniapp-io/miniapp-lib-android.git"
+                    developerConnection = "scm:git:ssh://github.com/miniapp-io/miniapp-lib-android.git"
+                    url = "https://github.com/miniapp-io/miniapp-lib-android"
+                }
+            }
+        }
+    }
+}
+
+signing {
+    if (project.hasProperty("signing.gnupg.keyName")) {
+        println("Signing lib...")
+        useGpgCmd()
+        sign(publishing.publications)
+    }
+}
