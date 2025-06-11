@@ -10,17 +10,17 @@ plugins {
 nexusPublishing {
     repositories {
         sonatype {
-            nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
-            snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
-            username.set(findProperty("sonatype.username") as String? ?: System.getenv("OSSRH_USERNAME"))
-            password.set(findProperty("sonatype.password") as String? ?: System.getenv("OSSRH_PASSWORD"))
-            stagingProfileId.set(findProperty("sonatype.stagingProfileId") as String? ?: System.getenv("OSSRH_STAGING_PROFILE_ID"))
+            nexusUrl.set(uri("https://ossrh-staging-api.central.sonatype.com/service/local/"))
+            snapshotRepositoryUrl.set(uri("https://central.sonatype.com/repository/maven-snapshots/"))
+            username.set(findProperty("sonatypeUsername") as String? ?: System.getenv("OSSRH_USERNAME"))
+            password.set(findProperty("sonatypePassword") as String? ?: System.getenv("OSSRH_PASSWORD"))
+            stagingProfileId.set(findProperty("signing.keyId") as String? ?: System.getenv("OSSRH_STAGING_PROFILE_ID"))
         }
     }
 }
 
-ext["versionCode"] = 1
-ext["versionName"] = "1.0.0"
+ext["versionCode"] = 2
+ext["versionName"] = "1.0.1"
 ext["compileSdk"] = 35
 ext["targetSdk"] = 35
 ext["minSdk"] = 24

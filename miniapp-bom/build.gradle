@@ -3,7 +3,7 @@ plugins {
     id 'signing'
 }
 
-group = "io.miniapp"
+group = "io.openweb3"
 version = rootProject.ext.versionName
 
 bomGenerator {
@@ -13,7 +13,8 @@ bomGenerator {
 publishing {
     publications {
         Bom(MavenPublication) {
-            artifactId = 'bom'
+            groupId = 'io.openweb3'
+            artifactId = 'miniapp-bom'
             pom {
                 name = 'MiniAppX BOM'
                 description = 'Bill of Materials (BOM) for Miniapp Android libraries'
@@ -22,6 +23,13 @@ publishing {
                     license {
                         name = 'The Apache License, Version 2.0'
                         url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id.set("w3bili")
+                        name.set("w3bili")
+                        email.set("w3bili@proton.me")
                     }
                 }
                 scm {
@@ -35,9 +43,5 @@ publishing {
 }
 
 signing {
-    if (project.hasProperty("signing.gnupg.keyName")) {
-        println("Signing lib...")
-        useGpgCmd()
-        sign(publishing.publications)
-    }
+    sign publishing.publications
 }

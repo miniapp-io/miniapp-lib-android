@@ -1,5 +1,6 @@
 [versions]
 
+jreleaser = "1.18.0"
 devtoolsKsp = "1.9.24-1.0.20"
 nexusSonatype = "2.0.0"
 bomGeneratorPlugin = "1.0.0.Final"

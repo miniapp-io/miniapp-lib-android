@@ -39,22 +39,32 @@ dependencies {
     implementation libs.material
 }
 
-group = "io.miniapp"
+group = "io.openweb3"
 version = rootProject.ext.versionName
 
 publishing {
     publications {
         maven(MavenPublication) {
-            groupId = 'io.miniapp'
-            artifactId = 'bridge'
+            groupId = 'io.openweb3'
+            artifactId = 'miniapp-bridge'
             version = rootProject.ext.versionName
 
             pom {
+                name.set("MiniAppX Bridge")
+                description.set("Bridge library for MiniAppX")
+                url.set("https://github.com/miniapp-io/miniapp-lib-android")
                 description = 'MiniappX Android Library Bridge'
                 licenses {
                     license {
                         name = 'The Apache License, Version 2.0'
                         url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id.set("w3bili")
+                        name.set("w3bili")
+                        email.set("w3bili@proton.me")
                     }
                 }
                 scm {
@@ -68,9 +78,5 @@ publishing {
 }
 
 signing {
-    if (project.hasProperty("signing.gnupg.keyName")) {
-        println("Signing lib...")
-        useGpgCmd()
-        sign(publishing.publications)
-    }
+    sign publishing.publications
 }

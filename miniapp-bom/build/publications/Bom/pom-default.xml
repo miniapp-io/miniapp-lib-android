@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>io.openweb3</groupId>
+  <artifactId>miniapp-bom</artifactId>
+  <version>1.0.1</version>
+  <packaging>pom</packaging>
+  <name>MiniAppX BOM</name>
+  <description>Bill of Materials (BOM) for Miniapp Android libraries</description>
+  <url>https://github.com/miniapp-io/miniapp-lib-android</url>
+  <licenses>
+    <license>
+      <name>The Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <id>w3bili</id>
+      <name>w3bili</name>
+      <email>w3bili@proton.me</email>
+    </developer>
+  </developers>
+  <scm>
+    <connection>scm:git:git://github.com/miniapp-io/miniapp-lib-android.git</connection>
+    <developerConnection>scm:git:ssh://github.com/miniapp-io/miniapp-lib-android.git</developerConnection>
+    <url>https://github.com/miniapp-io/miniapp-lib-android</url>
+  </scm>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>io.openweb3</groupId>
+        <artifactId>miniapp-bridge</artifactId>
+        <version>1.0.1</version>
+      </dependency>
+      <dependency>
+        <groupId>io.openweb3</groupId>
+        <artifactId>miniapp-core</artifactId>
+        <version>1.0.1</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+</project>

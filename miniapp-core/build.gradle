@@ -65,7 +65,7 @@ android {
 }
 
 dependencies {
-    implementation project(":bridge")
+    implementation project(':miniapp-bridge')
     implementation libs.androidx.core.ktx
     implementation libs.androidx.appcompat
     implementation libs.material
@@ -88,22 +88,32 @@ dependencies {
     ksp libs.moshi.kotlin.codegen
 }
 
-group = "io.miniapp"
+group = "io.openweb3"
 version = rootProject.ext.versionName
 
 publishing {
     publications {
         maven(MavenPublication) {
-            groupId = 'io.miniapp'
-            artifactId = 'core'
+            groupId = 'io.openweb3'
+            artifactId = 'miniapp-core'
             version = rootProject.ext.versionName
 
             pom {
+                name.set("MiniAppX Core")
+                description.set("Core library for MiniAppX")
+                url.set("https://github.com/miniapp-io/miniapp-lib-android")
                 description = 'MiniappX Android Library Core'
                 licenses {
                     license {
                         name = 'The Apache License, Version 2.0'
                         url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id.set("w3bili")
+                        name.set("w3bili")
+                        email.set("w3bili@proton.me")
                     }
                 }
                 scm {
@@ -112,18 +122,10 @@ publishing {
                     url = "https://github.com/miniapp-io/miniapp-lib-android"
                 }
             }
-
-            afterEvaluate {
-                from components.release
-            }
         }
     }
 }
 
 signing {
-    if (project.hasProperty("signing.gnupg.keyName")) {
-        println("Signing lib...")
-        useGpgCmd()
-        sign(publishing.publications)
-    }
+    sign publishing.publications
 }

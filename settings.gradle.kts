@@ -22,6 +22,6 @@ dependencyResolutionManagement {
 rootProject.name = "MiniAppX"
 
 include(":app")
-include(":bom")
-include(":core")
-include(":bridge")
+include(":miniapp-bom")
+include(":miniapp-core")
+include(":miniapp-bridge")
