@@ -97,7 +97,6 @@ publishing {
             groupId = 'io.openweb3'
             artifactId = 'miniapp-core'
             version = rootProject.ext.versionName
-
             pom {
                 name.set("MiniAppX Core")
                 description.set("Core library for MiniAppX")
@@ -121,6 +120,9 @@ publishing {
                     developerConnection = "scm:git:ssh://github.com/miniapp-io/miniapp-lib-android.git"
                     url = "https://github.com/miniapp-io/miniapp-lib-android"
                 }
+            }
+            afterEvaluate {
+                from components.release
             }
         }
     }

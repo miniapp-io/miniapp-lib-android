@@ -73,6 +73,9 @@ publishing {
                     url = "https://github.com/miniapp-io/miniapp-lib-android"
                 }
             }
+            afterEvaluate {
+                from components.release
+            }
         }
     }
 }
