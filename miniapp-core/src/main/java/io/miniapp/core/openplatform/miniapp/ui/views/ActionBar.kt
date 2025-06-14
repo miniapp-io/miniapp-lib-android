@@ -305,6 +305,7 @@ internal open class ActionBar(context: Context, val builder: (ViewGroup) -> View
             return
         }
         titleTextView[i] = SimpleTextView(context).also {
+            it.setMinusWidth(AndroidUtils.dp(120))
             it.setGravity(Gravity.LEFT or Gravity.CENTER_VERTICAL)
             if (titleColorToSet != 0) {
                 it.setContentColor(titleColorToSet)
@@ -789,7 +790,7 @@ internal open class ActionBar(context: Context, val builder: (ViewGroup) -> View
                 titleTextView[i]?.layout(
                     textLeft,
                     additionalTop + textTop - titleTextView[i]!!.paddingTop,
-                    textLeft + titleTextView[i]!!.measuredWidth,
+                    textLeft + titleTextView[i]!!.measuredWidth.coerceAtMost(AndroidUtils.getScreenWidth(context)- textLeft - AndroidUtils.dp(130)),
                     additionalTop + textTop + titleTextView[i]!!.height- titleTextView[i]!!.paddingTop + titleTextView[i]!!.paddingBottom
                 )
             }
