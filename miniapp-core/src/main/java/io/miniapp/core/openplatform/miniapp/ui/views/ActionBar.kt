@@ -28,11 +28,12 @@ import android.view.animation.Interpolator
 import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import io.miniapp.core.openplatform.miniapp.IResourcesProvider
 import io.miniapp.core.openplatform.miniapp.utils.AndroidUtils
 import io.miniapp.core.openplatform.miniapp.utils.LayoutHelper
 import io.miniapp.core.openplatform.miniapp.utils.ThemeUtils
 
-internal open class ActionBar(context: Context, val builder: (ViewGroup) -> View) : FrameLayout(context) {
+internal open class ActionBar(context: Context, private val resourcesProvider: IResourcesProvider, val builder: (ViewGroup) -> View) : FrameLayout(context) {
 
     interface ActionBarMenuOnItemClick {
         fun onItemClick(id: Int)
@@ -84,7 +85,7 @@ internal open class ActionBar(context: Context, val builder: (ViewGroup) -> View
     var itemsActionModeColor = 0
         private set
     private var parentFragment: Fragment? = null
-    private var titleColorToSet = Color.parseColor("#333333")
+    private var titleColorToSet = 0
     private var overlayTitleAnimation = false
     private var titleAnimationRunning = false
     private var fromBottom = false
@@ -232,8 +233,9 @@ internal open class ActionBar(context: Context, val builder: (ViewGroup) -> View
         }
         subtitleTextView = SimpleTextView(context).apply {
             setGravity(Gravity.LEFT)
+            setMinusWidth(AndroidUtils.dp(120))
             visibility = GONE
-            setContentColor(getThemedColor(0))
+            setContentColor(resourcesProvider.getColor("subtitle_text_color"))
         }
 
         addView(
@@ -254,7 +256,7 @@ internal open class ActionBar(context: Context, val builder: (ViewGroup) -> View
         additionalSubtitleTextView = SimpleTextView(context).apply {
             setGravity(Gravity.LEFT)
             visibility = GONE
-            setContentColor(getThemedColor(1))
+            setContentColor(resourcesProvider.getColor("destructive_text_color"))
         }
 
         addView(
@@ -300,6 +302,15 @@ internal open class ActionBar(context: Context, val builder: (ViewGroup) -> View
         }
     }
 
+   fun updateItemTextColor() {
+        setTitleColor(resourcesProvider.getColor("text_color"))
+        if (subtitleTextView != null) {
+            subtitleTextView!!.setContentColor(resourcesProvider.getColor("subtitle_text_color"))
+        }
+        setItemsColor(resourcesProvider.getColor("text_color"), false)
+        setItemsBackgroundColor(resourcesProvider.getColor("section_bg_color"), false)
+    }
+
     private fun createTitleTextView(i: Int) {
         if (titleTextView[i] != null) {
             return
@@ -310,7 +321,7 @@ internal open class ActionBar(context: Context, val builder: (ViewGroup) -> View
             if (titleColorToSet != 0) {
                 it.setContentColor(titleColorToSet)
             } else {
-                it.setContentColor(getThemedColor(2))
+                it.setContentColor(resourcesProvider.getColor("text_color"))
             }
             it.setDrawablePadding(AndroidUtils.dp(4))
             it.setRightDrawableTopPadding(-AndroidUtils.dp(1))
@@ -361,7 +372,7 @@ internal open class ActionBar(context: Context, val builder: (ViewGroup) -> View
         rightDrawableOnClickListener = onClickListener
     }
 
-    fun setTitleColor(color: Int) {
+    private fun setTitleColor(color: Int) {
         if (titleTextView[0] == null) {
             createTitleTextView(0)
         }
@@ -795,6 +806,19 @@ internal open class ActionBar(context: Context, val builder: (ViewGroup) -> View
                 )
             }
         }
+
+        if (subtitleTextView != null && subtitleTextView?.visibility !== GONE) {
+            val textTop: Int =
+                getCurrentActionBarHeight(context) / 2 + (getCurrentActionBarHeight(context) / 2 - subtitleTextView!!.textHeight) / 2 - AndroidUtils.dp(
+                    if (!AndroidUtils.isTablet(context) && resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) 1 else 1
+                )
+            subtitleTextView!!.layout(
+                textLeft,
+                additionalTop + textTop,
+                textLeft + subtitleTextView!!.measuredWidth.coerceAtMost(AndroidUtils.getScreenWidth(context)- textLeft - AndroidUtils.dp(130)),
+                additionalTop + textTop + subtitleTextView!!.textHeight
+            )
+        }
     }
 
     fun onResume() {
@@ -1059,10 +1083,6 @@ internal open class ActionBar(context: Context, val builder: (ViewGroup) -> View
                 ellipsizeSpanAnimator.onDetachedFromWindow()
             }
         }
-    }
-
-    private fun getThemedColor(key: Int): Int {
-        return 0x333333
     }
 
     fun setDrawBlurBackground(contentView: SizeNotifierFrameLayout) {

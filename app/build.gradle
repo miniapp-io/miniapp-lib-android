@@ -53,8 +53,8 @@ android {
 
 dependencies {
 
-    implementation implementation(project(':miniapp-core',))
-    implementation implementation(project(':miniapp-bridge',))
+    implementation(project(':miniapp-core'))
+    implementation(project(':miniapp-bridge'))
 
     // debugImplementation(libs.leakcanary.android)
 

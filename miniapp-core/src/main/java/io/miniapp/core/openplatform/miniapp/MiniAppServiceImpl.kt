@@ -41,6 +41,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
 import org.json.JSONArray
 import org.json.JSONObject
@@ -48,7 +49,6 @@ import retrofit2.HttpException
 import java.lang.ref.WeakReference
 import kotlin.Exception
 import kotlin.coroutines.resume
-import kotlin.coroutines.suspendCoroutine
 
 
 internal class MiniAppServiceImpl : MiniAppService {
@@ -144,7 +144,7 @@ internal class MiniAppServiceImpl : MiniAppService {
         }
     }
 
-    override suspend fun launch(config: WebAppLaunchParameters) : IMiniApp?  = suspendCoroutine { continuation ->
+    override suspend fun launch(config: WebAppLaunchParameters) : IMiniApp?  = suspendCancellableCoroutine { continuation ->
 
         // 创建一个列表来存储所有的请求
         val dismissRequests = preloadApps.firstOrNull { cacheApp->
@@ -249,19 +249,16 @@ internal class MiniAppServiceImpl : MiniAppService {
         }
     }
 
-    private suspend fun getMiniAppById(appId: String): DataResult<MiniAppDto?> =  suspendCoroutine { continuation ->
-        var isResume = false
+    private suspend fun getMiniAppById(appId: String): DataResult<MiniAppDto?> =  suspendCancellableCoroutine { continuation ->
         MainScope().launch {
             repository.requestMiniApp(appId)
                 .catch {
                     it.printStackTrace()
-                    if (!isResume) {
-                        isResume = true
+                    if (continuation.isActive) {
                         continuation.resume(DataResult.Failure(it))
                     }
                 }.collect {
-                    if (!isResume) {
-                        isResume = true
+                    if (continuation.isActive) {
                         continuation.resume(DataResult.Success(it))
                     }
                 }
@@ -279,19 +276,16 @@ internal class MiniAppServiceImpl : MiniAppService {
         }
     }
 
-    private suspend fun getDAppInfoById(dAppId: String): DataResult<DAppDto?> =  suspendCoroutine { continuation ->
-        var isResume = false
+    private suspend fun getDAppInfoById(dAppId: String): DataResult<DAppDto?> =  suspendCancellableCoroutine { continuation ->
         MainScope().launch {
             repository.requestDApp(dAppId)
                 .catch {
                     it.printStackTrace()
-                    if (!isResume) {
-                        isResume = true
+                    if (continuation.isActive) {
                         continuation.resume(DataResult.Failure(it))
                     }
                 }.collect {
-                    if (!isResume) {
-                        isResume = true
+                    if (continuation.isActive) {
                         continuation.resume(DataResult.Success(it))
                     }
                 }
@@ -306,7 +300,7 @@ internal class MiniAppServiceImpl : MiniAppService {
         return DataResult.Failure((result as DataResult.Failure).throwable)
     }
 
-    override suspend fun getCloudStoreValue(key: String, appId: String): DataResult<String?> =  suspendCoroutine { continuation ->
+    override suspend fun getCloudStoreValue(key: String, appId: String): DataResult<String?> =  suspendCancellableCoroutine { continuation ->
         MainScope().launch {
             val data = JSONObject().put("keys", JSONArray().put(key))
 
@@ -324,7 +318,7 @@ internal class MiniAppServiceImpl : MiniAppService {
         }
     }
 
-    override suspend fun setCloudStoreValue(key: String, value: String, appId: String): DataResult<Unit> =  suspendCoroutine { continuation ->
+    override suspend fun setCloudStoreValue(key: String, value: String, appId: String): DataResult<Unit> =  suspendCancellableCoroutine { continuation ->
         run {
             MainScope().launch {
                 val data = JSONObject().put("key", value)
@@ -349,27 +343,35 @@ internal class MiniAppServiceImpl : MiniAppService {
         WebAppLruCache.removeAll()
     }
 
-    private suspend fun getMiniApp(botIdOrName: String, appName: String): MiniAppDto?  =  suspendCoroutine { continuation ->
+    private suspend fun getMiniApp(botIdOrName: String, appName: String): MiniAppDto?  =  suspendCancellableCoroutine { continuation ->
         MainScope().launch {
             repository.requestMiniApp(appName, botIdOrName)
                 .catch { throwable ->
                     throwable.printStackTrace()
                     parasError(throwable)
-                    continuation.resume(null)
+                    if (continuation.isActive) {
+                        continuation.resume(null)
+                    }
                 }.collect {
-                    continuation.resume(it)
+                    if (continuation.isActive) {
+                        continuation.resume(it)
+                    }
                 }
         }
     }
 
-    override suspend fun batchGetMiniApps(appIds: List<String>): DataResult<List<MiniAppInfo>?> =  suspendCoroutine { continuation ->
+    override suspend fun batchGetMiniApps(appIds: List<String>): DataResult<List<MiniAppInfo>?> =  suspendCancellableCoroutine { continuation ->
         MainScope().launch {
             repository.batchRequestMiniApp(appIds)
                 .catch {
                     it.printStackTrace()
-                    continuation.resume(DataResult.Failure(it))
+                    if (continuation.isActive) {
+                        continuation.resume(DataResult.Failure(it))
+                    }
                 }.collect {
-                    continuation.resume(DataResult.Success(it.items?.map { dto -> dto.toInfo() }))
+                    if (continuation.isActive) {
+                        continuation.resume(DataResult.Success(it.items?.map { dto -> dto.toInfo() }))
+                    }
                 }
         }
     }
@@ -448,7 +450,7 @@ internal class MiniAppServiceImpl : MiniAppService {
                                            peer: Peer?,
                                            onErrorCallback: ((Int,String?) -> Unit)?,
                                            bridgetProvider: BridgeProvider?,
-                                           actionBarBuilder: ((()->Unit, ()->Unit) -> Pair<FrameLayout.LayoutParams, View>)?): WebAppParameters?  =  suspendCoroutine { continuation ->
+                                           actionBarBuilder: ((()->Unit, ()->Unit) -> Pair<FrameLayout.LayoutParams, View>)?): WebAppParameters?  =  suspendCancellableCoroutine { continuation ->
 
         try {
             val uri = Uri.parse(url)
@@ -519,7 +521,7 @@ internal class MiniAppServiceImpl : MiniAppService {
                     .onErrorCallback(onErrorCallback)
                     .build().also {
                         continuation.resume(it)
-                        return@suspendCoroutine
+                        return@suspendCancellableCoroutine
                     }
             } else {
                 continuation.resume(null)

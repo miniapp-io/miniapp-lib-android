@@ -85,9 +85,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.resume
-import kotlin.coroutines.suspendCoroutine
 import kotlin.math.min
 
 
@@ -187,7 +187,11 @@ internal class DefaultWebViewFragment(
     }
 
     private fun updateActionBarTitle() {
-        actionBar.setTitle( miniAppDto?.title ?: launchConfig?.miniAppName ?: "", null)
+        val title = miniAppDto?.title ?: launchConfig?.miniAppName ?: launchConfig?.dAppDto?.title ?: webViewContainer.getWebView()?.pageTitle ?: ""
+        actionBar.setTitle( title, null)
+        if (true == launchConfig?.isDApp) {
+            actionBar.setSubtitle(webViewContainer.getWebView()?.url)
+        }
     }
 
     private fun runTestWebApp() {
@@ -560,6 +564,12 @@ internal class DefaultWebViewFragment(
                 super.setPageFinished(url)
                 invalidateViewPortHeight(true)
                 hideLoadingView()
+                updateActionBarTitle()
+                if (isDApp()) {
+                    getWebView()?.getPageData {
+                        updateActionBarTitle()
+                    }
+                }
             }
 
             override fun onRequestPermission(request: PermissionRequest, isLocation: Boolean) {
@@ -1054,7 +1064,7 @@ internal class DefaultWebViewFragment(
 
     private fun buildActionBar() : ActionBar {
 
-        val bar = object : ActionBar(context, { parent-> buildToolBarComponent(parent) } ) {
+        val bar = object : ActionBar(context, resourcesProvider, { parent-> buildToolBarComponent(parent) } ) {
             override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
                 var widthMeasureSpecTemp = widthMeasureSpec
                 if (AndroidUtils.isTablet(context) && !AndroidUtils.isInMultiWindow && !AndroidUtils.isSmallTablet()) {
@@ -1210,9 +1220,7 @@ internal class DefaultWebViewFragment(
 
     private fun updateActionBarColors() {
         if (!overrideBackgroundColor) {
-            actionBar.setTitleColor(resourcesProvider.getColor("text_color"))
-            actionBar.setItemsColor(resourcesProvider.getColor("text_color"), false)
-            actionBar.setItemsBackgroundColor(resourcesProvider.getColor("section_bg_color"), false)
+            actionBar.updateItemTextColor()
         }
     }
 
@@ -1766,7 +1774,7 @@ internal class DefaultWebViewFragment(
         }
     }
 
-    override suspend fun invokeCustomMethod(method: String, params: String?): String?   =  suspendCoroutine { continuation ->
+    override suspend fun invokeCustomMethod(method: String, params: String?): String?   =  suspendCancellableCoroutine { continuation ->
         val process : (String) -> Unit =  { appId->
             owner.lifecycleScope.launch(Dispatchers.Main + allJobs) {
                 miniAppRepository.invokeCustomMethod(
@@ -2013,7 +2021,7 @@ internal class DefaultWebViewFragment(
         return false
     }
 
-    override suspend fun getShareUrl(): String?  =  suspendCoroutine { continuation ->
+    override suspend fun getShareUrl(): String?  =  suspendCancellableCoroutine { continuation ->
         owner.lifecycleScope.launch {
             val shareDto = getShareInfo()
             continuation.resume(shareDto?.url)
@@ -2062,7 +2070,7 @@ internal class DefaultWebViewFragment(
             params = webViewContainer.getWebView()?.pageParams)
     }
 
-    override suspend fun getShareInfo(): ShareDto?  =  suspendCoroutine { continuation ->
+    override suspend fun getShareInfo(): ShareDto?  =  suspendCancellableCoroutine { continuation ->
 
         webViewContainer.getWebView()?.getPageData {
             if (true==launchConfig?.isDApp) {

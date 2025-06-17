@@ -8,6 +8,7 @@ import io.miniapp.core.openplatform.miniapp.utils.toInfo
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
@@ -73,7 +74,7 @@ internal class BotServiceImpl : BotService {
         OpenWeb3Repository.getInstance()
     }
 
-    override suspend fun getBotInfo(botId: String): DataResult<BotInfo?> =  suspendCoroutine { continuation -> run {
+    override suspend fun getBotInfo(botId: String): DataResult<BotInfo?> =  suspendCancellableCoroutine { continuation -> run {
         MainScope().launch {
             repository.getBotInfo(botId)
                 .catch {
@@ -85,7 +86,7 @@ internal class BotServiceImpl : BotService {
         } }
     }
 
-    override suspend fun inlineButtonCallback(params: CallbackParams): DataResult<Unit> =  suspendCoroutine { continuation -> run {
+    override suspend fun inlineButtonCallback(params: CallbackParams): DataResult<Unit> =  suspendCancellableCoroutine { continuation -> run {
             MainScope().launch {
                 repository.inlineCallback(InlineButtonCallbackParams(botId = params.botId, chatId = params.chatId, messageId = params.messageId, callbackData = params.callbackData))
                     .catch {
