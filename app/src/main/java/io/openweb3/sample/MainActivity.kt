@@ -382,7 +382,7 @@ fun MarketPlaceButton(context:Context,lifecycleOwner: LifecycleOwner) {
             .owner(lifecycleOwner)
             .context(context)
             //.miniAppId("10")
-            .url("https://openweb3.io/test_bot01_667/marketplace")
+            .url("https://openweb3.io/apps/2s8A4zgsdwfLgUsFoMdg8kaW73b")
             //.id("48033")
             .onDismissListener {
             }

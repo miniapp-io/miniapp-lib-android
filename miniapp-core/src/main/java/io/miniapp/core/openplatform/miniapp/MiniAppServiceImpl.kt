@@ -781,7 +781,7 @@ internal class MiniAppServiceImpl : MiniAppService {
         val cacheMiniApp = config.cacheKey()?.let {
                 WebAppLruCache.get(it)
             }?.let {
-                if (it.miniApp != null && it.isTopLevel()) {
+                if (it.miniApp != null && it.isTopLevel() && FloatingWindowManager.isAppOnMinimization(it.webAppId) ) {
                     it
                 } else {
                     it.miniApp?.requestDismiss(force = true, immediately = true, isSilent = true)

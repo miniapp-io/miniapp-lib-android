@@ -66,16 +66,14 @@ class ChatActivity : AppCompatActivity() {
     }
 
     private fun preloadApps(owner: LifecycleOwner, context: Context) {
-        listOf("10","2s8A4zgsdwfLgUsFoMdg8kaW73b").forEach {
+        listOf("2s8A4zgsdwfLgUsFoMdg8kaW73b").forEach {
             val config = WebAppPreloadParameters.Builder()
                 .owner(owner)
                 .context(context)
-                .startParam(uriMarketPlace.query)
                 .miniAppId(it)
                 .build()
 
             MainScope().launch {
-                openPlatformPlugin.signOut(context)
                 miniAppService.preload( config = config)
             }
         }

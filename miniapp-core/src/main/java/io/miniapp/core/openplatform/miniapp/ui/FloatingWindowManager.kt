@@ -11,12 +11,14 @@ import com.hjq.window1.draggable.SpringBackDraggable
 import io.miniapp.core.R
 import io.miniapp.core.openplatform.miniapp.IMiniApp
 import io.miniapp.core.openplatform.miniapp.ui.views.RoundCornerConstraintLayout
+import io.miniapp.core.openplatform.miniapp.ui.webview.DefaultAppWebView
 import io.miniapp.core.openplatform.miniapp.utils.AndroidUtils
 import java.lang.ref.WeakReference
 
 internal object FloatingWindowManager {
 
     private var miniApp: IMiniApp? = null
+    private var webAppId: Int = -1
     private var webViewRef: WeakReference<WebView> = WeakReference(null)
 
     // 隐藏并销毁浮动窗口
@@ -38,6 +40,7 @@ internal object FloatingWindowManager {
             removeWebView()
         }
         miniApp = null
+        webAppId = -1
         webViewRef = WeakReference(null)
         hideFloatingWindow()
     }
@@ -48,7 +51,12 @@ internal object FloatingWindowManager {
        }
     }
 
-    fun showFloatingWindow(activity: Activity, miniApp: IMiniApp, webView: WebView?, iconUrl: String?, width: Int?, height: Int?) {
+    fun showFloatingWindow(activity: Activity,
+                           miniApp: IMiniApp,
+                           webView: DefaultAppWebView?,
+                           iconUrl: String?,
+                           width: Int?,
+                           height: Int?) {
 
         if (miniApp== FloatingWindowManager.miniApp) {
             return
@@ -57,6 +65,7 @@ internal object FloatingWindowManager {
         closeFloatingWindow(force = true, immediately = true)
 
         FloatingWindowManager.miniApp = miniApp
+        webAppId = webView?.webAppId ?: -1
         webViewRef = WeakReference(webView)
 
         val springBackDraggable = SpringBackDraggable(SpringBackDraggable.ORIENTATION_HORIZONTAL).apply {
@@ -111,6 +120,10 @@ internal object FloatingWindowManager {
             .show()
     }
 
+    fun isAppOnMinimization(appId: Int): Boolean {
+        return webAppId != -1 &&  appId == webAppId
+    }
+
     fun isAppOnMinimization(app: IMiniApp?): Boolean {
         return app != null &&  app == miniApp
     }
@@ -123,6 +136,7 @@ internal object FloatingWindowManager {
             }
             miniApp?.maximize()
             miniApp = null
+            webAppId = -1
             webViewRef = WeakReference(null)
             hideFloatingWindow()
             true

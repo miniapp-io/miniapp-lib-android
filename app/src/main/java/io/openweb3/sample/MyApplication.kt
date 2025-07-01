@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
 import io.miniapp.core.PLUGIN_OPEN_PLATFORM
@@ -16,6 +17,7 @@ import io.miniapp.core.openplatform.OpenPlatformPlugin
 import io.miniapp.core.openplatform.miniapp.AppConfig
 import io.miniapp.core.openplatform.miniapp.IAppDelegate
 import io.miniapp.core.openplatform.miniapp.IMiniApp
+import io.miniapp.core.openplatform.miniapp.WebAppPreloadParameters
 import io.openweb3.sample.trust.TrustWalletProvider
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
@@ -53,7 +55,12 @@ class MyApplication : Application(), IAppDelegate {
 
         registerActivityLifecycleCallbacks(object : ActivityLifecycleCallbacks {
             override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
-                currentActivity = activity
+                if (currentActivity == null) {
+                    currentActivity = activity
+                    sigIn()
+                } else {
+                    currentActivity = activity
+                }
             }
 
             override fun onActivityStarted(activity: Activity) {
@@ -78,8 +85,6 @@ class MyApplication : Application(), IAppDelegate {
             override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {
             }
         })
-
-        sigIn()
 
         val openPlatformPlugin = PluginsManager.getPlugin<OpenPlatformPlugin>(PLUGIN_OPEN_PLATFORM)!!
         val miniAppService = openPlatformPlugin.getMiniAppService()
@@ -112,11 +117,29 @@ class MyApplication : Application(), IAppDelegate {
             apiHost = null,
             idTokenProvider = { idTokenProvider() },
             onVerifierSuccess = {
-
+                currentActivity?.also { activity->
+                    if (activity is AppCompatActivity) {
+                        preloadApps(activity, activity)
+                    }
+                }
             },
             onVerifierFailure = { code, message ->
                 Log.e("Sample", "Verifier Err, code= $code, message: $message")
             })
+    }
+
+    private fun preloadApps(owner: LifecycleOwner, context: Context) {
+        listOf("2lv8dp7JjF2AU0iEk2rMYUaySjU","2s8A4zgsdwfLgUsFoMdg8kaW73b").forEach {
+            val config = WebAppPreloadParameters.Builder()
+                .owner(owner)
+                .context(context)
+                .miniAppId(it)
+                .build()
+
+            MainScope().launch {
+                miniAppService.preload( config = config)
+            }
+        }
     }
 
     private suspend fun idTokenProvider(): String = suspendCoroutine { continuation -> run {

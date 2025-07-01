@@ -26,6 +26,11 @@ android {
 
     buildTypes {
         debug {
+            minifyEnabled false
+            buildConfigField "boolean", "BUILD_HOST_IS_WINDOWS", isWindows
+        }
+
+        debugOptimized {
             minifyEnabled true
             buildConfigField "boolean", "BUILD_HOST_IS_WINDOWS", isWindows
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
