@@ -5,17 +5,17 @@ import android.content.Context;
 import android.content.res.Configuration;
 
 /**
- *    author : Android 轮子哥
+ *    author : Android Wheel Brother
  *    github : https://github.com/getActivity/EasyWindow
  *    time   : 2022/10/03
- *    desc   : 屏幕方向旋转监听
+ *    desc   : Screen orientation rotation monitoring
  */
 final class ScreenOrientationMonitor implements ComponentCallbacks {
 
-   /** 当前屏幕的方向 */
+   /** Current screen orientation */
    private int mScreenOrientation;
 
-   /** 屏幕旋转回调 */
+   /** Screen rotation callback */
    private OnScreenOrientationCallback mCallback;
 
    public ScreenOrientationMonitor(Configuration configuration) {
@@ -23,7 +23,7 @@ final class ScreenOrientationMonitor implements ComponentCallbacks {
    }
 
    /**
-    * 注册监听
+    * Register listener
     */
    void registerCallback(Context context, OnScreenOrientationCallback callback) {
       context.getApplicationContext().registerComponentCallbacks(this);
@@ -31,7 +31,7 @@ final class ScreenOrientationMonitor implements ComponentCallbacks {
    }
 
    /**
-    * 取消监听
+    * Unregister listener
     */
    void unregisterCallback(Context context) {
       context.getApplicationContext().unregisterComponentCallbacks(this);
@@ -57,14 +57,14 @@ final class ScreenOrientationMonitor implements ComponentCallbacks {
    }
 
    /**
-    * 屏幕方向监听器
+    * Screen orientation listener
     */
    interface OnScreenOrientationCallback {
 
       /**
-       * 监听屏幕旋转了
+       * Monitor screen rotation
        *
-       * @param newOrientation         最新的屏幕方向
+       * @param newOrientation         Latest screen orientation
        */
       default void onScreenOrientationChange(int newOrientation) {}
    }

@@ -26,20 +26,20 @@ class ExampleInstrumentedTest {
 
 
     fun decodeUrlFormat(encodedUrl: String): String {
-        // 替换自定义编码分隔符
+        // Replace custom encoding delimiters
         var decoded = encodedUrl
             .replace("__", "=")
             .replace("--", "%")
 
-        // URL解码
+        // URL decode
         return URLDecoder.decode(decoded, "UTF-8")
     }
 
     fun encodeToCustomFormat(standardUrl: String): String {
-        // URL编码
+        // URL encode
         val encoded = URLEncoder.encode(standardUrl, "UTF-8")
 
-        // 替换标准分隔符为自定义分隔符
+        // Replace standard delimiters with custom delimiters
         return encoded
             .replace("=", "__")
             .replace("%", "--")

@@ -6,10 +6,10 @@ import android.os.Build;
 import android.os.Bundle;
 
 /**
- *    author : Android 轮子哥
+ *    author : Android Wheel Brother
  *    github : https://github.com/getActivity/EasyWindow
  *    time   : 2019/01/04
- *    desc   : 悬浮窗生命周期管理，防止内存泄露
+ *    desc   : Floating window lifecycle management, preventing memory leaks
  */
 final class ActivityWindowLifecycle implements Application.ActivityLifecycleCallbacks {
 
@@ -22,7 +22,7 @@ final class ActivityWindowLifecycle implements Application.ActivityLifecycleCall
     }
 
     /**
-     * 注册监听
+     * Register listener
      */
     void register() {
         if (mActivity == null) {
@@ -37,7 +37,7 @@ final class ActivityWindowLifecycle implements Application.ActivityLifecycleCall
     }
 
     /**
-     * 取消监听
+     * Unregister listener
      */
     void unregister() {
         if (mActivity == null) {
@@ -62,7 +62,7 @@ final class ActivityWindowLifecycle implements Application.ActivityLifecycleCall
 
     @Override
     public void onActivityPaused(Activity activity) {
-        // 一定要在 onPaused 方法中销毁掉，如果放在 onDestroyed 方法中还是有一定几率会导致内存泄露
+        // Be sure to destroy in the onPaused method. If you do it in onDestroyed, there is still a chance of memory leak.
         if (mActivity != activity || !mActivity.isFinishing() || mEasyWindow == null || !mEasyWindow.isShowing()) {
             return;
         }
@@ -80,7 +80,7 @@ final class ActivityWindowLifecycle implements Application.ActivityLifecycleCall
         if (mActivity != activity) {
             return;
         }
-        // 释放 Activity 的引用
+        // Release the reference to Activity
         mActivity = null;
 
         if (mEasyWindow == null) {

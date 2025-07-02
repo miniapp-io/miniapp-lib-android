@@ -3,10 +3,10 @@ package com.hjq.window1;
 import android.view.View;
 
 /**
- *    author : Android 轮子哥
+ *    author : Android Wheel Brother
  *    github : https://github.com/getActivity/EasyWindow
  *    time   : 2021/09/03
- *    desc   : {@link View.OnLongClickListener} 包装类
+ *    desc   : {@link View.OnLongClickListener} wrapper class
  */
 @SuppressWarnings("rawtypes")
 final class ViewLongClickWrapper implements View.OnLongClickListener {

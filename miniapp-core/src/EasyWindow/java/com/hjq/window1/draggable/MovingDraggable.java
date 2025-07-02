@@ -5,18 +5,18 @@ import android.view.MotionEvent;
 import android.view.View;
 
 /**
- *    author : Android 轮子哥
+ *    author : Android Wheel Brother
  *    github : https://github.com/getActivity/EasyWindow
  *    time   : 2019/01/04
- *    desc   : 移动拖拽处理实现类
+ *    desc   : Implementation class for moving drag handling
  */
 public class MovingDraggable extends BaseDraggable {
 
-    /** 手指按下的坐标 */
+    /** Coordinates when finger is pressed down */
     private float mViewDownX;
     private float mViewDownY;
 
-    /** 触摸移动标记 */
+    /** Touch move flag */
     private boolean mTouchMoving;
 
     @SuppressLint("ClickableViewAccessibility")
@@ -24,26 +24,26 @@ public class MovingDraggable extends BaseDraggable {
     public boolean onTouch(View v, MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                // 记录按下的位置（相对 View 的坐标）
+                // Record the position when pressed (relative to the View's coordinates)
                 mViewDownX = event.getX();
                 mViewDownY = event.getY();
                 mTouchMoving = false;
                 break;
             case MotionEvent.ACTION_MOVE:
-                // 记录移动的位置（相对屏幕的坐标）
+                // Record the position when moving (relative to the screen's coordinates)
                 float rawMoveX = event.getRawX() - getWindowInvisibleWidth();
                 float rawMoveY = event.getRawY() - getWindowInvisibleHeight();
 
                 float newX = Math.max(rawMoveX - mViewDownX, 0);
                 float newY = Math.max(rawMoveY - mViewDownY, 0);
 
-                // 更新移动的位置
+                // Update the position when moving
                 updateLocation(newX, newY);
 
                 if (mTouchMoving) {
                     dispatchExecuteDraggingCallback();
                 } else if (isFingerMove(mViewDownX, event.getX(), mViewDownY, event.getY())) {
-                    // 如果用户移动了手指，那么就拦截本次触摸事件，从而不让点击事件生效
+                    // If the user moved their finger, intercept this touch event so that the click event does not take effect
                     mTouchMoving = true;
                     dispatchStartDraggingCallback();
                 }
@@ -56,7 +56,7 @@ public class MovingDraggable extends BaseDraggable {
                 try {
                     return mTouchMoving;
                 } finally {
-                    // 重置触摸移动标记
+                    // Reset the touch move flag
                     mTouchMoving = false;
                 }
             default:
@@ -66,7 +66,7 @@ public class MovingDraggable extends BaseDraggable {
     }
 
     /**
-     * 当前是否处于触摸移动状态
+     * Whether currently in touch move state
      */
     public boolean isTouchMoving() {
         return mTouchMoving;

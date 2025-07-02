@@ -6,12 +6,12 @@ import android.util.LruCache
 
 internal object LRUSharedPreferencesCache {
     private const val GLOBAL = "__open_platform_local_"
-    private const val MAX_SIZE = 100 // 最大存储数量
+    private const val MAX_SIZE = 100 // Maximum storage count
 
     private lateinit var sharedPreferences: SharedPreferences
-    private val cache = LruCache<String, Unit>(MAX_SIZE) // 只存储键，不保存数据
+    private val cache = LruCache<String, Unit>(MAX_SIZE) // Only store keys, not data
 
-    // 初始化方法
+    // Initialization method
     fun init(context: Context) {
         sharedPreferences = context.getSharedPreferences(GLOBAL, Context.MODE_PRIVATE)
     }
@@ -21,19 +21,19 @@ internal object LRUSharedPreferencesCache {
     }
 
     fun saveValue(key: String, value: String?) {
-        // 检查缓存是否已满
+        // Check if cache is full
         if (cache.size() >= MAX_SIZE) {
-            // 获取即将被删除的键
+            // Get the key that will be deleted
             val oldestKey = cache.snapshot().keys.firstOrNull()
             if (oldestKey != null) {
-                removeValue(oldestKey) // 删除最旧的键
+                removeValue(oldestKey) // Remove the oldest key
             }
         }
 
-        // 将新键放入缓存
+        // Put new key into cache
         cache.put(key, Unit)
 
-        // 保存新的值到 SharedPreferences
+        // Save new value to SharedPreferences
         with(sharedPreferences.edit()) {
             putString(key, value)
             apply()
@@ -41,7 +41,7 @@ internal object LRUSharedPreferencesCache {
     }
 
     private fun removeValue(key: String) {
-        cache.remove(key) // 从缓存中移除键
+        cache.remove(key) // Remove key from cache
         with(sharedPreferences.edit()) {
             remove(key)
             apply()

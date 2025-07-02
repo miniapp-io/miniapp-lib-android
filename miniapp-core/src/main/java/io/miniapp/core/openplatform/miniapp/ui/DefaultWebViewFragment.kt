@@ -2268,12 +2268,12 @@ internal class DefaultWebViewFragment(
         private val ACTION_BAR_TRANSITION_PROGRESS_VALUE =
             object : FloatPropertyCompat<DefaultWebViewFragment>("actionBarTransitionProgress") {
                 override fun getValue(`object`: DefaultWebViewFragment): Float {
-                    // 返回属性值的逻辑
+                    // Logic for returning property value
                     return `object`.actionBarTransitionProgress * 100f
                 }
 
                 override fun setValue(`object`: DefaultWebViewFragment, value: Float) {
-                    // 设置属性值的逻辑
+                    // Logic for setting property value
                     `object`.actionBarTransitionProgress = value / 100f
                     `object`.invalidate()
                     `object`.invalidateActionBar()

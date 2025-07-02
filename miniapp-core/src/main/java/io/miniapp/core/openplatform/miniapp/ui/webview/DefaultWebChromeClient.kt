@@ -100,7 +100,7 @@ internal class DefaultWebChromeClient(
     ): Boolean {
 
         newWebView = WebView(parentActivity).apply {
-            // 设置新的 WebView 配置
+            // Set new WebView configuration
             settings.javaScriptEnabled = true
             settings.domStorageEnabled = true
             settings.javaScriptCanOpenWindowsAutomatically = true

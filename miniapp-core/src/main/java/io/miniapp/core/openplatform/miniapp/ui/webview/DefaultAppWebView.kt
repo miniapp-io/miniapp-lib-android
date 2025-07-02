@@ -193,23 +193,23 @@ internal class DefaultAppWebView(context: Context) : WebView(context), IWebAppEv
                         val view = super.getView(position, convertView, parent)
                         val item = items[position]
 
-                        // 设置文本和样式
+                        // Set text and style
                         val textView = view.findViewById<TextView>(R.id.text_option)
                         textView.text = item.text
 
-                        // 处理缩进
+                        // Handle indentation
                         val params = textView.layoutParams as MarginLayoutParams
                         params.marginStart = if (item.indent) AndroidUtils.dp(16) else 0
                         textView.layoutParams = params
 
-                        // 设置组标题样式
+                        // Set group title style
                         if (item.isGroup) {
                             textView.setTypeface(null, Typeface.BOLD)
                         } else {
                             textView.setTypeface(null, Typeface.NORMAL)
                         }
 
-                        // 设置选中项的勾选图标
+                        // Set checkmark icon for selected item
                         val checkmark = view.findViewById<ImageView>(R.id.checkmark)
                         checkmark.visibility = if (position == selectedPosition && !item.isGroup) {
                             View.VISIBLE

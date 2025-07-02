@@ -67,7 +67,7 @@ internal class MenusBottomSheet : BaseBottomSheetDialogFragment<FragmentMenusBot
                 dismiss()
             }
 
-            // 设置布局参数
+            // Set layout parameters
             val params = LinearLayout.LayoutParams(
                 0,
                 LinearLayout.LayoutParams.WRAP_CONTENT

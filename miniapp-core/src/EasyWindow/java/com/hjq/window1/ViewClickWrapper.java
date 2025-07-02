@@ -3,10 +3,10 @@ package com.hjq.window1;
 import android.view.View;
 
 /**
- *    author : Android 轮子哥
+ *    author : Android Wheel Brother
  *    github : https://github.com/getActivity/EasyWindow
  *    time   : 2019/01/04
- *    desc   : {@link View.OnClickListener} 包装类
+ *    desc   : {@link View.OnClickListener} wrapper class
  */
 @SuppressWarnings("rawtypes")
 final class ViewClickWrapper implements View.OnClickListener {

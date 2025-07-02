@@ -96,12 +96,12 @@ internal class WebAppImpl(
 
     private fun dispatchMessage(eventType: String, eventData: JSONObject?) {
 
-        // 已经有订阅者消费了事件
+        // The event has already been consumed by a subscriber
         if(eventPublisher.notifySubscribers(eventType, eventData)){
             return
         }
 
-        // 默认事件处理
+        // Default event handling
         if(true==eventHandler?.handleMessage(eventType, eventData)){
             return
         }
@@ -183,7 +183,7 @@ internal class WebAppImpl(
         }
     }
 
-    // 实现发布者类
+    // Implementation of publisher class
     internal class WebAppEventWebEventPublisher : WebEventPublisher<String, JSONObject> {
         private val subscribers: MutableMap<String, WebEventSubscriber<JSONObject?>> = mutableMapOf()
         override fun subscribe(event:String, webEventSubscriber: WebEventSubscriber<JSONObject?>) {

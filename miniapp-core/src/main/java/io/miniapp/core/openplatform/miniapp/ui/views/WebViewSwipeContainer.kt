@@ -60,12 +60,12 @@ internal open class WebViewSwipeContainer(context: Context) : FrameLayout(contex
     companion object {
         val SWIPE_OFFSET_Y = object : FloatPropertyCompat<WebViewSwipeContainer>("swipeOffsetY") {
             override fun getValue(`object`: WebViewSwipeContainer): Float {
-                // 返回属性值的逻辑
+                // Logic for returning property value
                 return `object`.getSwipeOffsetY()
             }
 
             override fun setValue(`object`: WebViewSwipeContainer, value: Float) {
-                // 设置属性值的逻辑
+                // Logic for setting property value
                 `object`.setSwipeOffsetY(value)
             }
         }

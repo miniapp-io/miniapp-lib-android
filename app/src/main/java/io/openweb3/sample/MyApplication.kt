@@ -36,7 +36,7 @@ class MyApplication : Application(), IAppDelegate {
     }
 
     override fun attachBaseContext(base: Context) {
-        super.attachBaseContext(updateResources(base, currentLan)) // 设置为阿拉伯语
+        super.attachBaseContext(updateResources(base, currentLan)) // Set to Arabic
     }
 
     private fun updateResources(context: Context, language: String): Context {

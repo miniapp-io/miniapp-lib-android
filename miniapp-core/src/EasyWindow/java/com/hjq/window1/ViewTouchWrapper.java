@@ -5,10 +5,10 @@ import android.view.MotionEvent;
 import android.view.View;
 
 /**
- *    author : Android 轮子哥
+ *    author : Android Wheel Brother
  *    github : https://github.com/getActivity/EasyWindow
  *    time   : 2019/01/04
- *    desc   : {@link View.OnTouchListener} 包装类
+ *    desc   : {@link View.OnTouchListener} wrapper class
  */
 @SuppressWarnings("rawtypes")
 final class ViewTouchWrapper implements View.OnTouchListener {

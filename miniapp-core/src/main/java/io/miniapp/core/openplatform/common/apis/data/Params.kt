@@ -53,11 +53,11 @@ internal data class CompletionParams(
 @JsonClass(generateAdapter = true)
 internal data class InlineButtonCallbackParams(
     @Json(name = "chat_id")
-    val chatId: String,      // 群组ID或房间ID
+    val chatId: String,      // Group ID or room ID
     @Json(name = "bot_id")
-    val botId: String,       // 发送按钮消息的bot用户ID
+    val botId: String,       // Bot user ID that sent the button message
     @Json(name = "message_id")
-    val messageId: String,   // 按钮消息ID
+    val messageId: String,   // Button message ID
     @Json(name = "callback_data")
-    val callbackData: String  // 按钮的回调数据
+    val callbackData: String  // Button callback data
 )

@@ -146,7 +146,7 @@ internal class MiniAppServiceImpl : MiniAppService {
 
     override suspend fun launch(config: WebAppLaunchParameters) : IMiniApp?  = suspendCancellableCoroutine { continuation ->
 
-        // 创建一个列表来存储所有的请求
+        // Create a list to store all requests
         val dismissRequests = preloadApps.firstOrNull { cacheApp->
 
             val miniAppId: String? = (config as? WebAppLaunchWithDialogParameters)?.miniAppId
@@ -177,7 +177,7 @@ internal class MiniAppServiceImpl : MiniAppService {
         }?.let { app ->
             CompletableDeferred<Boolean>().also { deferred ->
                val dismissing =  app.get()?.requestDismiss(force = true, immediately = true, isSilent = true) {
-                    deferred.complete(true) // 完成时调用
+                    deferred.complete(true) // Called when completed
                 } ?: false
                 if (!dismissing) {
                     deferred.complete(true)
@@ -187,7 +187,7 @@ internal class MiniAppServiceImpl : MiniAppService {
 
         config.owner.lifecycleScope.launch {
             try {
-                // 等待所有的 requestDismiss 完成
+                // Wait for all requestDismiss to complete
                 dismissRequests?.await()
 
                 when(config) {
@@ -203,7 +203,7 @@ internal class MiniAppServiceImpl : MiniAppService {
                     else -> continuation.resume(null)
                 }
             } catch (e: Throwable) {
-                continuation.resume(null) // 或者可以传递错误信息
+                continuation.resume(null) // Or you can pass error information
             }
         }
     }
@@ -298,45 +298,6 @@ internal class MiniAppServiceImpl : MiniAppService {
             return DataResult.Success((result as DataResult.Success).data?.toInfo())
         }
         return DataResult.Failure((result as DataResult.Failure).throwable)
-    }
-
-    override suspend fun getCloudStoreValue(key: String, appId: String): DataResult<String?> =  suspendCancellableCoroutine { continuation ->
-        MainScope().launch {
-            val data = JSONObject().put("keys", JSONArray().put(key))
-
-            repository.invokeCustomMethod(
-                CustomMethodsParams(
-                    "getStorageValues",
-                    data.toString(),
-                    appId
-                )
-            ).catch {
-                it.printStackTrace()
-            }.collect {
-                continuation.resume(DataResult.Success(it))
-            }
-        }
-    }
-
-    override suspend fun setCloudStoreValue(key: String, value: String, appId: String): DataResult<Unit> =  suspendCancellableCoroutine { continuation ->
-        run {
-            MainScope().launch {
-                val data = JSONObject().put("key", value)
-
-                repository.invokeCustomMethod(
-                    CustomMethodsParams(
-                        "saveStorageValue",
-                        data.toString(),
-                        appId
-                    )
-                ).catch {
-                    it.printStackTrace()
-                    continuation.resume(DataResult.Failure(it))
-                }.collect {
-                    continuation.resume(DataResult.Success(Unit))
-                }
-            }
-        }
     }
 
     override fun clearCache() {
@@ -870,32 +831,32 @@ internal object ActivityStack {
         }
 
         override fun onActivityStarted(activity: Activity) {
-            // Activity 开始时的回调
+            // Callback when Activity starts
         }
 
         override fun onActivityResumed(activity: Activity) {
-            // Activity 恢复时的回调
+            // Callback when Activity resumes
             if (activity is ComponentActivity) {
                 currentActivity = WeakReference(activity)
             }
         }
 
         override fun onActivityPaused(activity: Activity) {
-            // Activity 暂停时的回调
+            // Callback when Activity pauses
         }
 
         override fun onActivityStopped(activity: Activity) {
-            // Activity 停止时的回调
+            // Callback when Activity stops
         }
 
         override fun onActivityDestroyed(activity: Activity) {
-            // Activity 销毁时的回调
+            // Callback when Activity is destroyed
             permissionResultLauncher.remove(activity.toKeyString())
             fileChooserResultLauncher.remove(activity.toKeyString())
         }
 
         override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {
-            // Activity 保存状态时的回调
+            // Callback when Activity saves state
         }
     }
 

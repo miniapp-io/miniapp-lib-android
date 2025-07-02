@@ -37,7 +37,7 @@ internal class ToolBarComponent @JvmOverloads constructor(
     private val bthMargin = AndroidUtils.dp(5)
 
     init {
-        // 设置圆角背景
+        // Set rounded corner background
         background = if (resourcesProvider.isDark()) {
             AppCompatResources.getDrawable(context, R.drawable.toolbar_component_background_night)
         } else {

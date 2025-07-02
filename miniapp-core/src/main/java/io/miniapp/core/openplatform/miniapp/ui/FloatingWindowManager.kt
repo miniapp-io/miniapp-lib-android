@@ -21,7 +21,7 @@ internal object FloatingWindowManager {
     private var webAppId: Int = -1
     private var webViewRef: WeakReference<WebView> = WeakReference(null)
 
-    // 隐藏并销毁浮动窗口
+    // Hide and destroy floating window
     private fun hideFloatingWindow() {
         EasyWindow.recycleAll()
     }
@@ -104,7 +104,7 @@ internal object FloatingWindowManager {
             .apply {
                 webView?.also {
                     (findViewById<FrameLayout>(R.id.webContainer) as FrameLayout).also {
-                        // 设置缩放的基准点为左上角
+                        // Set the pivot point for scaling to the top left corner
                         it.pivotX = 0f
                         it.pivotY = 0f
                         it.addView(webView)

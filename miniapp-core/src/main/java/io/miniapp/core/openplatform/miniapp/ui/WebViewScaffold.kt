@@ -191,7 +191,7 @@ internal fun DefaultAppWebView.getWebMetaData(complete: ()-> Unit) {
             }
         }
         
-        // 如果没有从 meta 标签中获取到 title 和 url，则使用默认的
+        // If title and url are not obtained from meta tags, use the default ones
         if (!metaData.title) {
             metaData.title = document.title;
         }
@@ -221,7 +221,7 @@ internal fun DefaultAppWebView.getWebMetaData(complete: ()-> Unit) {
 internal fun DefaultAppWebView.getWebFavicon() {
     evaluateJavascript("document.querySelector('link[rel=\"shortcut icon\"]')?.href") { result ->
         pageIcon = if (result != null && result != "null") {
-            // 获取成功的 favicon 链接
+            // Successfully obtained favicon link
             val iconUrl = result.removeSurrounding("\"")
             iconUrl
         } else {

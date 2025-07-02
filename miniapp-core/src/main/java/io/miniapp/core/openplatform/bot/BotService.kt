@@ -55,10 +55,10 @@ data class Scope(
 
 @Keep
 data class CallbackParams(
-    val chatId: String,      // 群组ID或房间ID
-    val botId: String,       // 发送按钮消息的bot用户ID
-    val messageId: String,   // 按钮消息ID
-    val callbackData: String  // 按钮的回调数据
+    val chatId: String,      // Group ID or room ID
+    val botId: String,       // Bot user ID that sent the button message
+    val messageId: String,   // Button message ID
+    val callbackData: String  // Button callback data
 )
 
 @Keep

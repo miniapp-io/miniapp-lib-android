@@ -17,20 +17,24 @@ import android.view.WindowManager;
 import com.hjq.window1.EasyWindow;
 
 /**
- *    author : Android 轮子哥
+ *    author : Android Wheel Brother
  *    github : https://github.com/getActivity/EasyWindow
  *    time   : 2019/01/04
- *    desc   : 拖拽抽象类
+ *    desc   : Abstract class for drag handling
  */
 public abstract class BaseDraggable implements View.OnTouchListener {
 
     private EasyWindow<?> mEasyWindow;
     private View mDecorView;
 
-    /** 是否允许移动到挖孔屏区域 */
+    /**
+     * Whether to allow moving to the cutout screen area
+     */
     private boolean mAllowMoveToScreenNotch = true;
 
-    /** 拖拽回调监听 */
+    /**
+     * Drag callback listener
+     */
     private DraggingCallback mDraggingCallback;
 
     private final Rect mTempRect = new Rect();
@@ -43,7 +47,7 @@ public abstract class BaseDraggable implements View.OnTouchListener {
     private int mCurrentWindowInvisibleHeight;
 
     /**
-     * Toast 显示后回调这个类
+     * Callback after Toast is shown
      */
     @SuppressLint("ClickableViewAccessibility")
     public void start(EasyWindow<?> easyWindow) {
@@ -73,63 +77,63 @@ public abstract class BaseDraggable implements View.OnTouchListener {
     }
 
     /**
-     * 获取当前 Window 的宽度
+     * Get the current Window width
      */
     public int getWindowWidth() {
         return mCurrentWindowWidth;
     }
 
     /**
-     * 获取当前 Window 的高度
+     * Get the current Window height
      */
     public int getWindowHeight() {
         return mCurrentWindowHeight;
     }
 
     /**
-     * 获取当前 View 的宽度
+     * Get the current View width
      */
     public int getViewWidth() {
         return mEasyWindow.getViewWidth();
     }
 
     /**
-     * 获取当前 View 的高度
+     * Get the current View height
      */
     public int getViewHeight() {
         return mEasyWindow.getViewHeight();
     }
 
     /**
-     * 获取窗口不可见的宽度，一般情况下为横屏状态下刘海的高度
+     * Get the invisible width of the window, usually the height of the notch in landscape mode
      */
     public int getWindowInvisibleWidth() {
         return mCurrentWindowInvisibleWidth;
     }
 
     /**
-     * 获取窗口不可见的高度，一般情况下为状态栏的高度
+     * Get the invisible height of the window, usually the height of the status bar
      */
     public int getWindowInvisibleHeight() {
         return mCurrentWindowInvisibleHeight;
     }
 
     /**
-     * 获取 View 在当前屏幕的 X 坐标
+     * Get the X coordinate of the View on the current screen
      */
     public int getViewOnScreenX() {
         return mCurrentViewOnScreenX;
     }
 
     /**
-     * 获取 View 在当前屏幕的 Y 坐标
+     * Get the Y coordinate of the View on the current screen
      */
     public int getViewOnScreenY() {
         return mCurrentViewOnScreenY;
     }
 
     /**
-     * 刷新当前 Window 信息
+     * Refresh current Window information
      */
     public void refreshWindowInfo() {
         View decorView = getDecorView();
@@ -137,11 +141,11 @@ public abstract class BaseDraggable implements View.OnTouchListener {
             return;
         }
 
-        // Log.i(getClass().getSimpleName(), "刷新当前 Window 信息");
+        // Log.i(getClass().getSimpleName(), "Refresh current Window information");
 
-        // 这里为什么要这么写，因为发现了鸿蒙手机在进行屏幕旋转的时候
-        // 回调 onConfigurationChanged 方法的时候获取到这些参数已经变化了
-        // 所以需要提前记录下来，避免后续进行坐标计算的时候出现问题
+        // Why write it this way, because it was found that on Harmony phones during screen rotation
+        // when the onConfigurationChanged method callback is triggered, these parameters have already changed
+        // so we need to record them in advance to avoid problems in subsequent coordinate calculations
         decorView.getWindowVisibleDisplayFrame(mTempRect);
         mCurrentWindowWidth = mTempRect.right - mTempRect.left;
         mCurrentWindowHeight = mTempRect.bottom - mTempRect.top;
@@ -159,7 +163,7 @@ public abstract class BaseDraggable implements View.OnTouchListener {
     }
 
     /**
-     * 刷新当前 View 在屏幕的坐标信息
+     * Refresh current View's coordinate information on screen
      */
     public void refreshLocationCoordinate() {
         View decorView = getDecorView();
@@ -174,10 +178,10 @@ public abstract class BaseDraggable implements View.OnTouchListener {
     }
 
     /**
-     * 屏幕方向发生了改变
+     * Screen orientation has changed
      */
     public void onScreenOrientationChange() {
-        // Log.i(getClass().getSimpleName(), "屏幕方向发生了改变");
+        // Log.i(getClass().getSimpleName(), "Screen orientation has changed");
 
         long refreshDelayMillis = 100;
 
@@ -192,15 +196,15 @@ public abstract class BaseDraggable implements View.OnTouchListener {
         int viewWidth = getDecorView().getWidth();
         int viewHeight = getDecorView().getHeight();
 
-        // Log.i(getClass().getSimpleName(), "当前 ViewWidth = " + viewWidth + "，ViewHeight = " + viewHeight);
+        // Log.i(getClass().getSimpleName(), "Current ViewWidth = " + viewWidth + ", ViewHeight = " + viewHeight);
 
         int startX = mCurrentViewOnScreenX - mCurrentWindowInvisibleWidth;
         int startY = mCurrentViewOnScreenY - mCurrentWindowInvisibleHeight;
 
         float percentX;
-        // 这里为什么用 getMinTouchDistance()，而不是 0？
-        // 因为其实用 getLocationOnScreen 测量出来的值不太准，有时候是 0，有时候是 1，有时候 2
-        // 但大多数情况是 0 和 1，这里为了兼容这种误差，使用了最小触摸距离来作为基准值
+        // Why use getMinTouchDistance() instead of 0?
+        // Because the values measured by getLocationOnScreen are not very accurate, sometimes 0, sometimes 1, sometimes 2
+        // but most cases are 0 and 1, so here we use the minimum touch distance as the baseline to accommodate this error
         float minTouchDistance = getMinTouchDistance();
 
         if (startX <= minTouchDistance) {
@@ -227,21 +231,21 @@ public abstract class BaseDraggable implements View.OnTouchListener {
             return;
         }
 
-        // Github issue 地址：https://github.com/getActivity/EasyWindow/issues/49
-        // 修复在竖屏状态下，先锁屏，再旋转到横屏，后进行解锁，出现的 View.getWindowVisibleDisplayFrame 计算有问题的 Bug
-        // 这是因为屏幕在旋转的时候，视图正处于改变状态，此时通过 View 获取窗口可视区域是有问题，会获取到旧的可视区域
-        // 解决方案是监听一下 View 布局变化监听，在收到回调的时候再去获取 View 获取窗口可视区域
+        // Github issue: https://github.com/getActivity/EasyWindow/issues/49
+        // Fix the bug where View.getWindowVisibleDisplayFrame calculation has problems when in portrait mode, first lock screen, then rotate to landscape, then unlock
+        // This is because during screen rotation, the view is in a changing state, and getting the window visible area through View at this time is problematic, it will get the old visible area
+        // The solution is to listen to the View layout change listener, and get the View window visible area when the callback is received
         decorView.addOnLayoutChangeListener(new OnLayoutChangeListener() {
             @Override
             public void onLayoutChange(View view, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
                 view.removeOnLayoutChangeListener(this);
                 view.postDelayed(() -> {
-                    // 先刷新当前窗口信息
+                    // First refresh current window information
                     refreshWindowInfo();
                     int x = Math.max((int) (mCurrentWindowWidth * percentX - viewWidth / 2f), 0);
                     int y = Math.max((int) (mCurrentWindowHeight * percentY - viewWidth / 2f), 0);
                     updateLocation(x, y);
-                    // 需要注意，这里需要延迟执行，否则会有问题
+                    // Note: this needs to be executed with delay, otherwise there will be problems
                     view.post(() -> onScreenRotateInfluenceCoordinateChangeFinish());
                 }, refreshDelayMillis);
             }
@@ -249,7 +253,7 @@ public abstract class BaseDraggable implements View.OnTouchListener {
     }
 
     /**
-     * 屏幕旋转导致悬浮窗坐标发生变化完成方法
+     * Method called when screen rotation causes floating window coordinate changes to complete
      */
     protected void onScreenRotateInfluenceCoordinateChangeFinish() {
         refreshWindowInfo();
@@ -257,7 +261,7 @@ public abstract class BaseDraggable implements View.OnTouchListener {
     }
 
     /**
-     * 悬浮窗是否跟随屏幕方向变化而发生变化
+     * Whether the floating window changes with screen orientation changes
      */
     public boolean isFollowScreenRotationChanges() {
         return true;
@@ -272,11 +276,11 @@ public abstract class BaseDraggable implements View.OnTouchListener {
     }
 
     /**
-     * 更新悬浮窗的位置
+     * Update floating window position
      *
-     * @param x                                 x 坐标（相对与屏幕左上位置）
-     * @param y                                 y 坐标（相对与屏幕左上位置）
-     * @param allowMoveToScreenNotch            是否允许移动到挖孔屏的区域
+     * @param x                                 x coordinate (relative to screen top-left position)
+     * @param y                                 y coordinate (relative to screen top-left position)
+     * @param allowMoveToScreenNotch            whether to allow moving to the cutout screen area
      */
     public void updateLocation(int x, int y, boolean allowMoveToScreenNotch) {
         if (allowMoveToScreenNotch) {
@@ -302,28 +306,28 @@ public abstract class BaseDraggable implements View.OnTouchListener {
         int windowWidth = getWindowWidth();
         int windowHeight = getWindowHeight();
 
-        // Log.i(getClass().getSimpleName(), "开始 x 坐标为：" + x);
-        // Log.i(getClass().getSimpleName(), "开始 y 坐标为：" + y);
+        // Log.i(getClass().getSimpleName(), "Start x coordinate: " + x);
+        // Log.i(getClass().getSimpleName(), "Start y coordinate: " + y);
 
         if (x < safeInsetRect.left - getWindowInvisibleWidth()) {
             x = safeInsetRect.left - getWindowInvisibleWidth();
-            // Log.i(getClass().getSimpleName(), "x 坐标已经触碰到屏幕左侧的安全区域");
+            // Log.i(getClass().getSimpleName(), "x coordinate has touched the left safe area of the screen");
         } else if (x > windowWidth - safeInsetRect.right - viewWidth) {
             x = windowWidth - safeInsetRect.right - viewWidth;
-            // Log.i(getClass().getSimpleName(), "x 坐标已经触碰到屏幕右侧的安全区域");
+            // Log.i(getClass().getSimpleName(), "x coordinate has touched the right safe area of the screen");
         }
 
-        // Log.i(getClass().getSimpleName(), "最终 x 坐标为：" + x);
+        // Log.i(getClass().getSimpleName(), "Final x coordinate: " + x);
 
         if (y < safeInsetRect.top - getWindowInvisibleHeight()) {
             y = safeInsetRect.top - getWindowInvisibleHeight();
-            // Log.i(getClass().getSimpleName(), "y 坐标已经触碰到屏幕顶侧的安全区域");
+            // Log.i(getClass().getSimpleName(), "y coordinate has touched the top safe area of the screen");
         } else if (y > windowHeight - safeInsetRect.bottom - viewHeight) {
             y = windowHeight - safeInsetRect.bottom - viewHeight;
-            // Log.i(getClass().getSimpleName(), "y 坐标已经触碰到屏幕底部的安全区域");
+            // Log.i(getClass().getSimpleName(), "y coordinate has touched the bottom safe area of the screen");
         }
 
-        // Log.i(getClass().getSimpleName(), "最终 y 坐标为：" + y);
+        // Log.i(getClass().getSimpleName(), "Final y coordinate: " + y);
 
         updateWindowCoordinate(x, y);
     }
@@ -334,10 +338,10 @@ public abstract class BaseDraggable implements View.OnTouchListener {
             return;
         }
 
-        // 屏幕默认的重心（一定要先设置重心位置为左上角）
+        // Screen default center (must first set center position to top-left corner)
         int screenGravity = Gravity.TOP | Gravity.START;
 
-        // 判断本次移动的位置是否跟当前的窗口位置是否一致
+        // Determine if the current move position is consistent with the current window position
         if (params.gravity == screenGravity && params.x == x && params.y == y) {
             return;
         }
@@ -366,7 +370,7 @@ public abstract class BaseDraggable implements View.OnTouchListener {
     }
 
     /**
-     * 获取屏幕安全区域位置（返回的对象可能为空）
+     * Get screen safe area position (returned object may be null)
      */
     public static Rect getSafeInsetRect(Window window) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) {
@@ -387,19 +391,19 @@ public abstract class BaseDraggable implements View.OnTouchListener {
         }
 
         if (displayCutout != null) {
-            // 安全区域距离屏幕左边的距离
+            // Safe area distance from screen left
             int safeInsetLeft = displayCutout.getSafeInsetLeft();
-            // 安全区域距离屏幕顶部的距离
+            // Safe area distance from screen top
             int safeInsetTop = displayCutout.getSafeInsetTop();
-            // 安全区域距离屏幕右部的距离
+            // Safe area distance from screen right
             int safeInsetRight = displayCutout.getSafeInsetRight();
-            // 安全区域距离屏幕底部的距离
+            // Safe area distance from screen bottom
             int safeInsetBottom = displayCutout.getSafeInsetBottom();
 
-            // Log.i(getClass().getSimpleName(), "安全区域距离屏幕左侧的距离 SafeInsetLeft：" + safeInsetLeft);
-            // Log.i(getClass().getSimpleName(), "安全区域距离屏幕右侧的距离 SafeInsetRight：" + safeInsetRight);
-            // Log.i(getClass().getSimpleName(), "安全区域距离屏幕顶部的距离 SafeInsetTop：" + safeInsetTop);
-            // Log.i(getClass().getSimpleName(), "安全区域距离屏幕底部的距离 SafeInsetBottom：" + safeInsetBottom);
+            // Log.i(getClass().getSimpleName(), "Safe area distance from screen left: " + safeInsetLeft);
+            // Log.i(getClass().getSimpleName(), "Safe area distance from screen right: " + safeInsetRight);
+            // Log.i(getClass().getSimpleName(), "Safe area distance from screen top: " + safeInsetTop);
+            // Log.i(getClass().getSimpleName(), "Safe area distance from screen bottom: " + safeInsetBottom);
 
             return new Rect(safeInsetLeft, safeInsetTop, safeInsetRight, safeInsetBottom);
         }
@@ -408,14 +412,14 @@ public abstract class BaseDraggable implements View.OnTouchListener {
     }
 
     /**
-     * 判断用户手指是否移动了，判断标准以下：
-     * 根据手指按下和抬起时的坐标进行判断，不能根据有没有 move 事件来判断
-     * 因为在有些机型上面，就算用户没有手指移动，只是简单点击也会产生 move 事件
+     * Determine if the user's finger has moved, judgment criteria as follows:
+     * Judge based on the coordinates when the finger is pressed down and lifted up, cannot judge based on whether there is a move event
+     * Because on some devices, even if the user doesn't move their finger, just a simple click will also generate a move event
      *
-     * @param downX         手指按下时的 x 坐标
-     * @param upX           手指抬起时的 x 坐标
-     * @param downY         手指按下时的 y 坐标
-     * @param upY           手指抬起时的 y 坐标
+     * @param downX         x coordinate when finger is pressed down
+     * @param upX           x coordinate when finger is lifted up
+     * @param downY         y coordinate when finger is pressed down
+     * @param upY           y coordinate when finger is lifted up
      */
     protected boolean isFingerMove(float downX, float upX, float downY, float upY) {
         float minTouchSlop = getMinTouchDistance();
@@ -423,37 +427,37 @@ public abstract class BaseDraggable implements View.OnTouchListener {
     }
 
     /**
-     * 获取最小触摸距离
+     * Get minimum touch distance
      */
     protected float getMinTouchDistance() {
-        // 疑问一：为什么要使用 1dp 来作为最小触摸距离？
-        //        这是因为用户点击的时候，手指 down 和 up 的坐标不相等，会存在一点误差
-        //        在有些手机上面，误差会比较小，还有一些手机上面，误差会比较大
-        //        经过拿不同的手机测试和验证，这个误差值可以锁定在 1dp 内
-        //        当然我的结论不一定正确，你要是有发现新的问题也可以找我反馈，我会持续优化这个问题
-        // 疑问二：为什么不使用 ViewConfiguration.get(context).getScaledTouchSlop() ？
-        //        这是因为这个 API 获取到的数值太大了，有一定概率会出现误判，同样的手机上面
-        //        用 getScaledTouchSlop 获取到的是 24，而系统 1dp 获取的到是 3，
-        //        两者相差太大，因为 getScaledTouchSlop API 默认获取的是 8dp * 3 = 24px
-        // 疑问三：为什么要用 Resources.getSystem 来获取，而不是 context.getResources？
-        //        这是因为如果用了 AutoSize 这个框架，上下文中的 1dp 就不是 3px 了
-        //        使用 Resources.getSystem 能够保证 Resources 对象 dp 计算规则不被第三方框架篡改
+        // Question 1: Why use 1dp as the minimum touch distance?
+        //         This is because when the user clicks, the coordinates of finger down and up are not equal, there will be some error
+        //         On some phones, the error will be smaller, and on some phones, the error will be larger
+        //         After testing and verifying with different phones, this error value can be locked within 1dp
+        //         Of course, my conclusion may not be correct, if you find new problems you can also give me feedback, I will continue to optimize this issue
+        // Question 2: Why not use ViewConfiguration.get(context).getScaledTouchSlop()?
+        //         This is because the value obtained by this API is too large, there is a certain probability of misjudgment, on the same phone
+        //         getScaledTouchSlop gets 24, while system 1dp gets 3,
+        //         The difference is too large, because getScaledTouchSlop API defaults to 8dp * 3 = 24px
+        // Question 3: Why use Resources.getSystem to get, instead of context.getResources?
+        //         This is because if you use the AutoSize framework, 1dp in the context is no longer 3px
+        //         Using Resources.getSystem ensures that the Resources object dp calculation rules are not tampered with by third-party frameworks
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1,
                 Resources.getSystem().getDisplayMetrics());
     }
 
     /**
-     * 设置拖拽回调
+     * Set drag callback
      */
     public void setDraggingCallback(DraggingCallback callback) {
         mDraggingCallback = callback;
     }
 
     /**
-     * 派发开始拖拽事件
+     * Dispatch start drag event
      */
     protected void dispatchStartDraggingCallback() {
-        // Log.i(getClass().getSimpleName(), "开始拖拽");
+        // Log.i(getClass().getSimpleName(), "Start dragging");
         if (mDraggingCallback == null) {
             return;
         }
@@ -461,10 +465,10 @@ public abstract class BaseDraggable implements View.OnTouchListener {
     }
 
     /**
-     * 派发拖拽中事件
+     * Dispatch drag in progress event
      */
     protected void dispatchExecuteDraggingCallback() {
-        // Log.i(getClass().getSimpleName(), "拖拽中");
+        // Log.i(getClass().getSimpleName(), "Dragging in progress");
         if (mDraggingCallback == null) {
             return;
         }
@@ -472,10 +476,10 @@ public abstract class BaseDraggable implements View.OnTouchListener {
     }
 
     /**
-     * 派发停止拖拽事件
+     * Dispatch stop drag event
      */
     protected void dispatchStopDraggingCallback() {
-        // Log.i(getClass().getSimpleName(), "停止拖拽");
+        // Log.i(getClass().getSimpleName(), "Stop dragging");
         if (mDraggingCallback == null) {
             return;
         }
@@ -485,17 +489,17 @@ public abstract class BaseDraggable implements View.OnTouchListener {
     public interface DraggingCallback {
 
         /**
-         * 开始拖拽
+         * Start dragging
          */
         default void onStartDragging(EasyWindow<?> easyWindow) {}
 
         /**
-         * 执行拖拽中
+         * Execute dragging in progress
          */
         default void onExecuteDragging(EasyWindow<?> easyWindow) {}
 
         /**
-         * 停止拖拽
+         * Stop dragging
          */
         default void onStopDragging(EasyWindow<?> easyWindow) {}
     }

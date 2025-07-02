@@ -65,12 +65,12 @@ internal open class WebProgressView(context: Context, private val resourcesProvi
     companion object {
         private val LOAD_PROGRESS_PROPERTY = object : FloatPropertyCompat<WebProgressView>("loadProgress") {
             override fun getValue(`object`: WebProgressView): Float {
-                // 返回属性值的逻辑
+                // Logic for returning property value
                 return `object`.loadProgress * 100f
             }
 
             override fun setValue(`object`: WebProgressView, value: Float) {
-                // 设置属性值的逻辑
+                // Logic for setting property value
                 `object`.setLoadProgress(value/100f)
             }
         }

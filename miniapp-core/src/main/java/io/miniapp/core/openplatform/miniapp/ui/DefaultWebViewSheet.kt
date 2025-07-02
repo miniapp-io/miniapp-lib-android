@@ -288,12 +288,12 @@ internal class DefaultWebViewSheet(context: Context,
     companion object {
         private val ACTION_BAR_TRANSITION_PROGRESS_VALUE = object : FloatPropertyCompat<DefaultWebViewSheet>("actionBarTransitionProgress") {
             override fun getValue(`object`: DefaultWebViewSheet): Float {
-                // 返回属性值的逻辑
+                // Logic for returning property value
                 return `object`.webViewFragment.getSpringPos() * 100f
             }
 
             override fun setValue(`object`: DefaultWebViewSheet, value: Float) {
-                // 设置属性值的逻辑
+                // Logic for setting property value
                 `object`.webViewFragment.updateSpringPos(value/100f)
             }
         }

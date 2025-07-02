@@ -591,10 +591,6 @@ interface MiniAppService {
 
     suspend fun getDAppInfo(dAppId: String): DataResult<DAppInfo?>
 
-    suspend fun setCloudStoreValue(key: String, value: String, appId: String): DataResult<Unit>
-
-    suspend fun getCloudStoreValue(key: String, appId: String): DataResult<String?>
-
     fun clearCache()
 }
 
@@ -639,16 +635,16 @@ interface IResourcesProvider {
 interface IAppDelegate {
 
     /**
-     * scheme消费
+     * Scheme consumption
      * @param app the invoked app
      * @param url String
-     * @return Boolean True: 已经消费，False： 没有消费
+     * @return Boolean True: already consumed, False: not consumed
      */
     suspend
     fun launchScheme(app: IMiniApp, url: String): Boolean
 
     /**
-     * 连接App动作，使用案例：钱包转账选择联系人，APP进入联系人选择页面，选中后并打开联系页面，通过payload参数请求支付跳转连接（通常也是一个WebApp连接）
+     * Connect app action, use case: wallet transfer select contact, APP enters contact selection page, selects and opens contact page, requests payment jump connection through payload parameter (usually also a WebApp connection)
      * @param app the invoked app
      * @param action String ["users"]
      * @param payload String
@@ -658,7 +654,7 @@ interface IAppDelegate {
     fun attachWithAction(app: IMiniApp, action: String, payload: String): Boolean
 
     /**
-     * 在APP内部打开一个新的会话
+     * Open a new session inside the APP
      * @param app the invoked app
      * @param query String
      * @param types List<String>
@@ -666,24 +662,24 @@ interface IAppDelegate {
     fun switchInlineQuery(app: IMiniApp, query: String, types: List<String>)
 
     /**
-     * 分享链接
+     * Share link
      * @param app the invoked app
      * @param linkOrText String
      */
     fun shareLinkOrText(app: IMiniApp, linkOrText: String)
 
     /**
-     * 执行自定义方法
+     * Execute custom method
      * @param app the invoked app
      * @param method String
      * @param params String?
-     * @return Boolean True: 应用层已经消费处理，False：应用层没有消费处理
+     * @return Boolean True: application layer has consumed and processed, False: application layer has not consumed and processed
      */
     suspend
     fun callCustomMethod(app: IMiniApp, method: String, params: String?, callback: (String?) -> Unit): Boolean
 
     /**
-     * 扫码并且返回二维码内容
+     * Scan QR code and return QR code content
      * @param app the invoked app
      * @param subTitle String?
      * @return String
@@ -692,7 +688,7 @@ interface IAppDelegate {
     fun scanQrCodeForResult(app: IMiniApp, subTitle: String?): String
 
     /**
-     * 检测当前会话是否支持并授权了发消息功能
+     * Check if current session supports and authorizes message sending function
      * @param app the invoked app
      * @return Boolean
      */
@@ -700,7 +696,7 @@ interface IAppDelegate {
     fun checkPeerMessageAccess(app: IMiniApp): Boolean
 
     /**
-     * 请求当前会话授权发送消息功能
+     * Request current session to authorize message sending function
      * @param app the invoked app
      * @return Boolean
      */
@@ -708,7 +704,7 @@ interface IAppDelegate {
     fun requestPeerMessageAccess(app: IMiniApp): Boolean
 
     /**
-     * 发送消息给当前会话
+     * Send message to current session
      * @param app the invoked app
      * @param content String?
      * @return Boolean
@@ -717,7 +713,7 @@ interface IAppDelegate {
     fun sendMessageToPeer(app: IMiniApp, content: String?): Boolean
 
     /**
-     * 请求发送手机号到当前会话
+     * Request to send phone number to current session
      * @param app the invoked app
      * @return Boolean
      */
@@ -725,7 +721,7 @@ interface IAppDelegate {
     fun requestPhoneNumberToPeer(app: IMiniApp) : Boolean
 
     /**
-     * 是否支持生物认证功能
+     * Whether biometry authentication function is supported
      * @param app the invoked app
      * @return Boolean
      */
@@ -733,45 +729,45 @@ interface IAppDelegate {
     fun canUseBiometryAuth(app: IMiniApp): Boolean
 
     /**
-     * 请求更新生物认证
+     * Request to update biometry authentication
      * @param app the invoked app
-     * @param token String?，旧token
+     * @param token String?, old token
      * @param reason String?
-     * @return String 返回签名Token
+     * @return String Return signed Token
      */
     suspend
     fun updateBiometryToken(app: IMiniApp, token: String?, reason: String?): String?
 
     /**
-     * 打开生物认证设置
+     * Open biometry settings
      * @param app the invoked app
      */
     fun openBiometrySettings(app: IMiniApp)
 
     /**
-     * 最小化按钮点击
+     * Minimize button click
      * @param app the invoked app
      */
     fun onMinimization(app: IMiniApp)
 
     /**
-     * 最大化按钮点击
+     * Maximize button click
      * @param app the invoked app
      */
     fun onMaximize(app: IMiniApp)
 
     /**
-     * 更多按钮点击
+     * More button click
      * @param app the invoked app
-     * @param menuTypes 需要展示的菜单类型
+     * @param menuTypes Menu types that need to be displayed
      * Types [SETTINGS、SHARE、FEEDBACK]
-     * @return True: 应用层已经处理事件，引擎不再弹设置菜单，False：应用层没有处理事件，引擎弹窗
+     * @return True: application layer has processed the event, engine no longer pops up settings menu, False: application layer has not processed the event, engine pops up dialog
      */
     fun onMoreButtonClick(app: IMiniApp, menuTypes: List<String>): Boolean
 
     /**
-     * 设置菜单按钮点击
-     * type：点击类型
+     * Settings menu button click
+     * type: click type
      * @param app the invoked app
      */
     fun onMenuButtonClick(app: IMiniApp, type: String)

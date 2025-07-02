@@ -133,7 +133,7 @@ class ChatFragment : Fragment() {
     }
 
     private fun hideSoftInput(editText: EditText) {
-        // 清除焦点并隐藏软键盘
+        // Clear focus and hide soft keyboard
         editText.clearFocus()
         try {
             val imm =

@@ -60,7 +60,7 @@ internal class OpenWeb3Repository private constructor(): IOpenWeb3DataSource {
                 }
             }
         } ?: remoteDataSource.requestMiniApp(appId).onEach {
-            // 保存请求返回的数据到缓存
+            // Save request response data to cache
             LRUSharedPreferencesCache.saveValue(it.spKey(), appId)
             LRUSharedPreferencesCache.saveValue(cacheKey, MoshiProvider.toJson(it))
         }

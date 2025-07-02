@@ -36,24 +36,24 @@ internal class AudioManagerUtil(context: Context) {
             { focusChange ->
                 when (focusChange) {
                     AudioManager.AUDIOFOCUS_GAIN -> {
-                        // 当音频焦点丢失时，通过 JavaScript 暂停 WebView 内的音视频
+                        // When audio focus is lost, pause audio/video in WebView via JavaScript
                         focusWebViewAudio(webView, host.isPause)
                     }
                     AudioManager.AUDIOFOCUS_LOSS -> {
-                        // 永久失去音频焦点
+                        // Permanently lose audio focus
                         focusWebViewAudio(webView, host.isPause)
                     }
                     AudioManager.AUDIOFOCUS_LOSS_TRANSIENT -> {
-                        // 临时失去音频焦点，可能稍后会恢复
+                        // Temporarily lose audio focus, may recover later
                     }
                     AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK -> {
-                        // 临时失去音频焦点，但允许降低音量
-                        // 例如：降低播放音量
+                        // Temporarily lose audio focus, but allow volume reduction
+                        // For example: reduce playback volume
                     }
                 }
             },
-            AudioManager.STREAM_MUSIC, // 音频流类型，例如媒体流
-            AudioManager.AUDIOFOCUS_GAIN // 请求音频焦点的类型
+            AudioManager.STREAM_MUSIC, // Audio stream type, e.g. media stream
+            AudioManager.AUDIOFOCUS_GAIN // Type of audio focus request
         )
     }
 
@@ -71,8 +71,8 @@ internal class AudioManagerUtil(context: Context) {
                     AudioManager.AUDIOFOCUS_LOSS -> {
                         focusWebViewAudio(webView, host.isPause)
                     }
-                    AudioManager.AUDIOFOCUS_LOSS_TRANSIENT -> { /* 临时失去焦点时的逻辑 */ }
-                    AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK -> { /* 临时失去焦点且可降低音量 */ }
+                    AudioManager.AUDIOFOCUS_LOSS_TRANSIENT -> { /* Logic when temporarily losing focus */ }
+                    AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK -> { /* Temporarily lose focus and can reduce volume */ }
                 }
             }
             .setAudioAttributes(

@@ -50,7 +50,7 @@ internal class DefaultWebViewClient(eventListener: WebViewEventListener?) : WebV
 //        error: WebResourceError?
 //    ) {
 //        super.onReceivedError(view, request, error)
-//        // 处理错误，展示自定义的错误页面或者提示信息
+//        // Handle error, show custom error page or prompt message
 //        if (error != null) {
 //            Log.e("WebViewError", "Error code: ${error.errorCode}, description: ${error.description}")
 //        }

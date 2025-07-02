@@ -43,34 +43,34 @@ internal data class DAppDto(
 @JsonClass(generateAdapter = true)
 internal data class AppSettings(
     /**
-     * 页面样式 默认为default
-     * default：默认全屏模式
-     * modal：模态弹窗模式
+     * Page style, default is 'default'
+     * default: default fullscreen mode
+     * modal: modal dialog mode
      */
     @Json(name = "view_style")
     val viewStyle: String?,
 
     /**
-     * 工具栏样式（标题、返回按钮、背景色），默认为default
-     * default：默认系统工具栏，显示标题、返回按钮，带背景色
-     * custom：Web端自定义工具栏，隐藏工具栏，即不显示标题、返回按钮、背景
+     * Toolbar style (title, back button, background color), default is 'default'
+     * default: default system toolbar, shows title, back button, with background color
+     * custom: custom toolbar on web, hides toolbar, i.e. no title, back button, or background
      */
     @Json(name = "navigation_style")
     val navigationStyle: String?,
 
     /**
-     * 水平手势开关,默认为true
-     * true：允许水平手势
-     * false：屏蔽水平手势
+     * Horizontal gesture switch, default is true
+     * true: allow horizontal gestures
+     * false: disable horizontal gestures
      */
     @Json(name = "allow_horizontal_swipe")
     val allowHorizontalSwipe: Boolean?,
 
     /**
-     * 垂直手势开关,默认为false
-     * true：允许垂直手势
-     * false：屏蔽垂直手势
-     * Web SDK支持控制垂直手势，优先使用Web中设置
+     * Vertical gesture switch, default is false
+     * true: allow vertical gestures
+     * false: disable vertical gestures
+     * Web SDK supports controlling vertical gestures, prefer settings in Web
      */
     @Json(name = "allow_vertical_swipe")
     val allowVerticalSwipe: Boolean?

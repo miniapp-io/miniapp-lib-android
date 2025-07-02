@@ -34,7 +34,7 @@ internal class ToolBarComponent @JvmOverloads constructor(
 
     init {
         //setBackgroundColor(Color.parseColor("#4D000000"))
-        // 设置圆角背景
+        // Set rounded corner background
         background = AppCompatResources.getDrawable(context, R.drawable.toolbar_component_background)
 
         loadingIndicator = ImageButton(context).apply {

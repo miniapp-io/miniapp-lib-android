@@ -61,78 +61,11 @@ val uriMarketPlace = Uri.Builder()
     .build()
 
 class MainActivity : AppCompatActivity() {
-    companion object {
-        // 改为应用的deeplink
-        const val APP_DEEP_LINK = "sample://app"
-
-        const val SHORTCUT_LINK = "openweb3_link"
-        const val SHORTCUT_TYPE = "openweb3_type"
-        const val SHORTCUT_DATA = "openweb3_data"
-
-        const val SHORTCUT_MINIAPP = "MINIAPP"
-        const val SHORTCUT_DAPP = "WEBPAGE"
-
-    }
 
     private var miniApp: IMiniApp? = null
 
-    private fun handleIntent(intent: Intent?) {
-         intent?.dataString?.also {
-            if (it.startsWith(APP_DEEP_LINK)) {
-                val deepLink = Uri.parse(it)
-                val link = deepLink.getQueryParameter(SHORTCUT_LINK)
-                val type = deepLink.getQueryParameter(SHORTCUT_TYPE)
-                val data = deepLink.getQueryParameter(SHORTCUT_DATA)
-                launchWithUrlAndType(link, type, data)
-            }
-         } ?: run {
-             val link = intent?.getStringExtra(SHORTCUT_LINK)
-             val type = intent?.getStringExtra(SHORTCUT_TYPE)
-             val data = intent?.getStringExtra(SHORTCUT_DATA)
-             launchWithUrlAndType(link, type, data)
-         }
-    }
-
-    private fun launchWithUrlAndType(link: String?, type: String?, data: String?) {
-        link?.also {
-            if (type == SHORTCUT_MINIAPP) {
-                val config = WebAppLaunchWithDialogParameters.Builder()
-                    .owner(this)
-                    .context(this)
-                    .url(link)
-                    .startParam(data)
-                    .onDismissListener {
-                    }
-                    .build()
-
-                lifecycleScope.launch {
-                    miniAppService.launch(config)
-                }
-            } else {
-                val config = DAppLaunchWParameters.Builder()
-                    .owner(this)
-                    .context(this)
-                    .url(link)
-                    .onDismissListener {
-                    }
-                    .build()
-
-                lifecycleScope.launch {
-                    miniAppService.launch(config)
-                }
-            }
-        }
-    }
-
-    override fun onNewIntent(intent: Intent) {
-        super.onNewIntent(intent)
-        handleIntent(intent)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        handleIntent(intent)
 
         val callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
@@ -193,7 +126,7 @@ class MainActivity : AppCompatActivity() {
 @Composable
 fun DialogMiniAppButton(lifecycleOwner: LifecycleOwner, complete: (IMiniApp?) -> Unit){
 
-    // 对话框状态
+    // Dialog state
     val showDialog = remember { mutableStateOf(false) }
 
     Button(modifier = Modifier.width(250.dp), onClick = {
@@ -202,17 +135,10 @@ fun DialogMiniAppButton(lifecycleOwner: LifecycleOwner, complete: (IMiniApp?) ->
         Text(text = "Launch With Dialog")
     }
 
-    // 对话框内容
+    // Dialog content
     if (showDialog.value) {
 
         val context = LocalContext.current
-
-        val uri = Uri.Builder()
-            .appendQueryParameter("roomId", "2")
-            .appendQueryParameter("roomName", "Test Tribe")
-            .appendQueryParameter("roomAvatar", "https://thumb.ac-illust.com/78/782445b4704adca448601a89d4b80f7c_w.jpeg")
-            .appendQueryParameter("from", "space")
-            .build()
 
         val config = WebAppLaunchWithDialogParameters.Builder()
             .owner(lifecycleOwner)
@@ -250,7 +176,7 @@ fun ChatButton(context:Context) {
 @Composable
 fun LaunchTgButton(lifecycleOwner: LifecycleOwner, complete: (IMiniApp?) -> Unit){
 
-    // 对话框状态
+    // Dialog state
     val showDialog = remember { mutableStateOf(false) }
     val showDAppDialog = remember { mutableStateOf(false) }
 
@@ -317,7 +243,7 @@ fun LaunchTgButton(lifecycleOwner: LifecycleOwner, complete: (IMiniApp?) -> Unit
     }
 
 
-    // mini app 对话框内容
+    // mini app dialog content
     if (showDialog.value) {
 
         val context = LocalContext.current

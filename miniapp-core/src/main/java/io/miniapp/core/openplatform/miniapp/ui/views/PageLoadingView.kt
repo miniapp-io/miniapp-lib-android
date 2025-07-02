@@ -17,7 +17,7 @@ internal class PageLoadingView(
     private val resourcesProvider: IResourcesProvider
 ) : FrameLayout(context) {
 
-    // 定义成员变量
+    // Define member variables
     private lateinit var iconImageContainer: RoundCornerFrameLayout
     private lateinit var imageView: ImageView
     private var errorTextView: TextView? = null
@@ -27,10 +27,10 @@ internal class PageLoadingView(
     }
 
     private fun initView() {
-        // 加载视图布局
+        // Load view layout
         inflate(context, R.layout.layout_webpage_loading, this)
 
-        // 获取控件引用
+        // Get control references
         iconImageContainer = findViewById(R.id.iconImageContainer)
         imageView = findViewById(R.id.iconImageView)
 
