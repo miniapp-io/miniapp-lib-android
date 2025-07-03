@@ -33,7 +33,7 @@ jobs:
             ${{ runner.os }}-gradle-
             
       - name: Setup GPG
-        uses: olafurpg/setup-gpg@v4
+        uses: olafurpg/setup-gpg@v3
         
       - name: Decode GPG key
         run: |
