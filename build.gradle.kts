@@ -12,9 +12,9 @@ nexusPublishing {
         sonatype {
             nexusUrl.set(uri("https://ossrh-staging-api.central.sonatype.com/service/local/"))
             snapshotRepositoryUrl.set(uri("https://central.sonatype.com/repository/maven-snapshots/"))
-            username.set(System.getenv("OSSRH_USERNAME"))
-            password.set(System.getenv("OSSRH_PASSWORD"))
-            stagingProfileId.set(System.getenv("OSSRH_STAGING_PROFILE_ID"))
+            username.set(findProperty("sonatypeUsername") as String? ?: System.getenv("OSSRH_USERNAME"))
+            password.set(findProperty("sonatypePassword") as String? ?: System.getenv("OSSRH_PASSWORD"))
+            stagingProfileId.set(findProperty("signing.keyId") as String? ?: System.getenv("OSSRH_STAGING_PROFILE_ID"))
         }
     }
 }

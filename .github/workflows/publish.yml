@@ -36,7 +36,7 @@ jobs:
             ${{ runner.os }}-gradle-
 
       - name: Setup GPG
-        uses: olafurpg/setup-gpg@v3
+        uses: crazy-max/ghaction-import-gpg@v3
         with:
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
           passphrase: ${{ secrets.GPG_PASSPHRASE }}
