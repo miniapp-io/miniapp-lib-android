@@ -43,5 +43,9 @@ publishing {
 }
 
 signing {
-    sign publishing.publications
+    useInMemoryPgpKeys(
+            findProperty("gpgPrivateKey") ?: System.getenv("GPG_PRIVATE_KEY"),
+            findProperty("gpgPassphrase") ?: System.getenv("GPG_PASSPHRASE")
+    )
+    sign publishing.publications    
 }
