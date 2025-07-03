@@ -7,6 +7,10 @@ plugins {
     alias(libs.plugins.bom.generator).apply(false)
 }
 
+ext["signing.keyId"] = System.getenv("SIGNING_KEY_ID")
+ext["signing.password"] = System.getenv("SIGNING_PASSWORD")
+ext["signing.secretKeyRingFile"] = System.getenv("SIGNING_SECRET_KEY_RING_FILE")
+
 nexusPublishing {
     repositories {
         sonatype {
@@ -24,3 +28,11 @@ ext["versionName"] = "1.0.6.test"
 ext["compileSdk"] = 35
 ext["targetSdk"] = 35
 ext["minSdk"] = 24
+
+subprojects {
+    plugins.withId("signing") {
+        extensions.configure<org.gradle.plugins.signing.SigningExtension> {
+            sign(extensions.getByName("publishing").publications)
+        }
+    }
+}
