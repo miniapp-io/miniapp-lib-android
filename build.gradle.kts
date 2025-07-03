@@ -7,18 +7,14 @@ plugins {
     alias(libs.plugins.bom.generator).apply(false)
 }
 
-ext["signing.keyId"] = System.getenv("SIGNING_KEY_ID")
-ext["signing.password"] = System.getenv("SIGNING_PASSWORD")
-ext["signing.secretKeyRingFile"] = System.getenv("SIGNING_SECRET_KEY_RING_FILE")
-
 nexusPublishing {
     repositories {
         sonatype {
             nexusUrl.set(uri("https://ossrh-staging-api.central.sonatype.com/service/local/"))
             snapshotRepositoryUrl.set(uri("https://central.sonatype.com/repository/maven-snapshots/"))
-            username.set(findProperty("sonatypeUsername") as String? ?: System.getenv("OSSRH_USERNAME"))
-            password.set(findProperty("sonatypePassword") as String? ?: System.getenv("OSSRH_PASSWORD"))
-            stagingProfileId.set(findProperty("signing.keyId") as String? ?: System.getenv("OSSRH_STAGING_PROFILE_ID"))
+            username.set(System.getenv("OSSRH_USERNAME"))
+            password.set(System.getenv("OSSRH_PASSWORD"))
+            stagingProfileId.set(System.getenv("OSSRH_STAGING_PROFILE_ID"))
         }
     }
 }
@@ -28,11 +24,3 @@ ext["versionName"] = "1.0.6.test"
 ext["compileSdk"] = 35
 ext["targetSdk"] = 35
 ext["minSdk"] = 24
-
-subprojects {
-    plugins.withId("signing") {
-        extensions.configure<org.gradle.plugins.signing.SigningExtension> {
-            sign(extensions.getByName("publishing").publications)
-        }
-    }
-}
