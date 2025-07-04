@@ -14,7 +14,7 @@ lib-miniapp-android is an SDK for integrating Web3 MiniApp capabilities into And
 
 ### Add Dependencies
 ```gradle
-implementation(platform("io.openweb3:miniapp-bom:1.0.6"))
+implementation(platform("io.openweb3:miniapp-bom:1.0.7"))
 implementation("io.openweb3:miniapp-core")
 implementation("io.openweb3:miniapp-bridge")
 ```
