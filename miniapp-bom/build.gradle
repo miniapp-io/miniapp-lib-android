@@ -1,0 +1,51 @@
+plugins {
+    alias(libs.plugins.bom.generator)
+    id 'signing'
+}
+
+group = "io.openweb3"
+version = rootProject.ext.versionName
+
+bomGenerator {
+    excludeProject("app")
+}
+
+publishing {
+    publications {
+        Bom(MavenPublication) {
+            groupId = 'io.openweb3'
+            artifactId = 'miniapp-bom'
+            pom {
+                name = 'MiniAppX BOM'
+                description = 'Bill of Materials (BOM) for Miniapp Android libraries'
+                url = 'https://github.com/miniapp-io/miniapp-lib-android'
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id.set("w3bili")
+                        name.set("w3bili")
+                        email.set("w3bili@proton.me")
+                    }
+                }
+                scm {
+                    connection = "scm:git:git://github.com/miniapp-io/miniapp-lib-android.git"
+                    developerConnection = "scm:git:ssh://github.com/miniapp-io/miniapp-lib-android.git"
+                    url = "https://github.com/miniapp-io/miniapp-lib-android"
+                }
+            }
+        }
+    }
+}
+
+signing {
+    useInMemoryPgpKeys(
+            findProperty("gpgPrivateKey") ?: System.getenv("GPG_PRIVATE_KEY"),
+            findProperty("gpgPassphrase") ?: System.getenv("GPG_PASSPHRASE")
+    )
+    sign publishing.publications    
+}

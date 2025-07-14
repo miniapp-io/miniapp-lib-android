@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">ఏమి చేయాలి అనుకుంటే మూసివేయండి</string>
+    <string name="action_cancel">రద్దు చేయి</string>
+    <string name="action_allow">అనుమతించు</string>
+    <string name="action_not_allow">అనుమతించబోదు</string>
+    <string name="action_share_contact">సంపర్కాన్ని పంచుకో</string>
+    <string name="action_not_now">ఇప్పుడు కాదు</string>
+    <string name="action_block_all">అన్ని అడ్డుకో</string>
+
+    <string name="dialog_close_save_message">మీరు చేసిన మార్పులు సేవ్ అవ్వక పోవచ్చు.</string>
+    <string name="dialog_share_phone_title">మీ ఫోన్ నంబరును పంచుకోవాలా?</string>
+    <string name="dialog_share_phone_message">ఈ బాట్ మీ ఫోన్ నంబరును తెలుసుకోగలదు. ఇది ఉపయోగకరంగా ఉండవచ్చు...</string>
+    <string name="dialog_write_access_title">సందేశాలను అనుమతించు</string>
+    <string name="dialog_write_access_message">ఈ బాట్ మీకు సందేశాలు పంపించడానికి అనుమతి ఇవ్వాలా?</string>
+    <string name="dialog_allow_biometry_title">జీవశాస్త్రాన్ని అనుమతించు</string>
+    <string name="dialog_allow_biometry_message">మీరు %s జీవశాస్త్రాన్ని ఉపయోగించడానికి అనుమతించాలా?</string>
+
+    <string name="button_ok">అవును</string>
+
+    <string name="photo_holder">యాప్ ఐకాన్</string>
+
+    <string name="webview_permissions_resource_title">అభివృద్ధి చేసిన వారు క్రింద పేర్కొన్న వనరులను అవసరమవుతారు:</string>
+    <string name="webview_request_geolocation_permission">%1$s మీ స్థానం పొందడానికి అనుమతించండి?\n\nఈ వెబ్ యాప్ తెరిచి ఉన్నప్పుడు %1$s మీ స్థానం యాక్సెస్ చేయగలదు.</string>
+    <string name="webview_request_microphone_permission">%1$s మీ మైక్రోఫోన్‌ని యాక్సెస్ చేయడానికి అనుమతించండి?\n\nఈ వెబ్ యాప్ తెరిచి ఉన్నప్పుడు %1$s మీ మైక్రోఫోన్‌ను యాక్సెస్ చేయగలదు.</string>
+    <string name="webview_request_camera_permission">%1$s మీ కెమెరాను యాక్సెస్ చేయడానికి అనుమతించండి?\n\nఈ వెబ్ యాప్ తెరిచి ఉన్నప్పుడు %1$s మీ కెమెరాను యాక్సెస్ చేయగలదు.</string>
+    <string name="webview_request_camera_mic_permission">%1$s మీ కెమెరా మరియు మైక్రోఫోన్‌ని యాక్సెస్ చేయడానికి అనుమతించండి?\n\nఈ వెబ్ యాప్ తెరిచి ఉన్నప్పుడు %1$s మీ కెమెరా మరియు మైక్రోఫోన్‌ను యాక్సెస్ చేయగలదు.</string>
+</resources>

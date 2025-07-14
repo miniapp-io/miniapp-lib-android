@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">Sulge ikkagi</string>
+    <string name="action_cancel">Tühista</string>
+    <string name="action_allow">Luba</string>
+    <string name="action_not_allow">Ära luba</string>
+    <string name="action_share_contact">Jaga kontakti</string>
+    <string name="action_not_now">Ei praegu</string>
+    <string name="action_block_all">Blokeeri kõik</string>
+
+    <string name="dialog_close_save_message">Teie tehtud muudatusi ei pruugi salvestada.</string>
+    <string name="dialog_share_phone_title">Kas soovite jagada oma telefoninumbrit?</string>
+    <string name="dialog_share_phone_message">Robot teab teie telefoninumbrit. See võib olla kasulik...</string>
+    <string name="dialog_write_access_title">Luba sõnumite saatmine</string>
+    <string name="dialog_write_access_message">Kas lubada sellel robotil teile sõnumeid saata?</string>
+    <string name="dialog_allow_biometry_title">Luba biomeetria</string>
+    <string name="dialog_allow_biometry_message">Kas soovite lubada %s kasutada biomeetriat?</string>
+
+    <string name="button_ok">OK</string>
+
+    <string name="photo_holder">Rakenduse ikoon</string>
+
+    <string name="webview_permissions_resource_title">Arendaja nõuab järgmisi ressursse:</string>
+    <string name="webview_request_geolocation_permission">Kas lubada %1$s juurdepääs teie asukohale?\n\n%1$s arendaja saab teie asukohale juurdepääsu, kui see veebirakendus on avatud.</string>
+    <string name="webview_request_microphone_permission">Kas lubada %1$s juurdepääs teie mikrofoni?\n\n%1$s arendaja saab teie mikrofoni juurde pääseda, kui see veebirakendus on avatud.</string>
+    <string name="webview_request_camera_permission">Kas lubada %1$s juurdepääs teie kaamerale?\n\n%1$s arendaja saab teie kaamerale juurdepääsu, kui see veebirakendus on avatud.</string>
+    <string name="webview_request_camera_mic_permission">Kas lubada %1$s juurdepääs teie kaamerale ja mikrofoni?\n\n%1$s arendaja saab teie kaamerale ja mikrofonile juurdepääsu, kui see veebirakendus on avatud.</string>
+</resources>

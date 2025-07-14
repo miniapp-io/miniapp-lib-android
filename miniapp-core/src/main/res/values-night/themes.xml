@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.MiniAppX" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="ow3_dialog_background">@color/ow3_dialog_background</item>
+        <item name="ow3_menu_background">@color/ow3_menu_background</item>
+        <item name="ow3_line_color">@color/ow3_line_color</item>
+        <item name="ow3_content_primary">@color/ow3_content_primary</item>
+        <item name="ow3_content_secondary">@color/ow3_content_secondary</item>
+    </style>
+</resources>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">Yine de Kapat</string>
+    <string name="action_cancel">İptal</string>
+    <string name="action_allow">İzin Ver</string>
+    <string name="action_not_allow">İzin Verme</string>
+    <string name="action_share_contact">İletişim Paylaş</string>
+    <string name="action_not_now">Şimdi Değil</string>
+    <string name="action_block_all">Hepsini Engelle</string>
+
+    <string name="dialog_close_save_message">Yaptığınız değişiklikler kaydedilmeyebilir.</string>
+    <string name="dialog_share_phone_title">Telefon numaranızı paylaşmak ister misiniz?</string>
+    <string name="dialog_share_phone_message">Bot telefon numaranızı bilecek. Bu faydalı olabilir...</string>
+    <string name="dialog_write_access_title">Mesajlaşmaya izin ver</string>
+    <string name="dialog_write_access_message">Bu botun size mesaj göndermesine izin verir misiniz?</string>
+    <string name="dialog_allow_biometry_title">Biyometrik İzin Ver</string>
+    <string name="dialog_allow_biometry_message">%s\'nin biyometrik kullanmasına izin vermek ister misiniz?</string>
+
+    <string name="button_ok">Tamam</string>
+
+    <string name="photo_holder">Uygulama Simgesi</string>
+
+    <string name="webview_permissions_resource_title">Geliştirici aşağıdaki kaynaklara ihtiyaç duyar:</string>
+    <string name="webview_request_geolocation_permission">%1$s\'nin konumunuza erişmesine izin verir misiniz?\n\n%1$s\'nin bu web uygulaması açıkken konumunuza erişebilecektir.</string>
+    <string name="webview_request_microphone_permission">%1$s\'nin mikrofonunuza erişmesine izin verir misiniz?\n\n%1$s\'nin bu web uygulaması açıkken mikrofonunuza erişebilecektir.</string>
+    <string name="webview_request_camera_permission">%1$s\'nin kameranıza erişmesine izin verir misiniz?\n\n%1$s\'nin bu web uygulaması açıkken kameranıza erişebilecektir.</string>
+    <string name="webview_request_camera_mic_permission">%1$s\'nin kamera ve mikrofonunuza erişmesine izin verir misiniz?\n\n%1$s\'nin bu web uygulaması açıkken kamera ve mikrofonunuza erişebilecektir.</string>
+</resources>

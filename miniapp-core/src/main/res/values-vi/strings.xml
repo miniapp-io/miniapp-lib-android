@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">Đóng bất kể thế nào</string>
+    <string name="action_cancel">Hủy bỏ</string>
+    <string name="action_allow">Cho phép</string>
+    <string name="action_not_allow">Không cho phép</string>
+    <string name="action_share_contact">Chia sẻ liên hệ</string>
+    <string name="action_not_now">Không bây giờ</string>
+    <string name="action_block_all">Chặn tất cả</string>
+
+    <string name="dialog_close_save_message">Các thay đổi bạn đã thực hiện có thể không được lưu.</string>
+    <string name="dialog_share_phone_title">Có chia sẻ số điện thoại của bạn không?</string>
+    <string name="dialog_share_phone_message">Bot sẽ biết số điện thoại của bạn. Điều này có thể hữu ích...</string>
+    <string name="dialog_write_access_title">Cho phép nhắn tin</string>
+    <string name="dialog_write_access_message">Có cho phép bot này gửi bạn tin nhắn không?</string>
+    <string name="dialog_allow_biometry_title">Cho phép sinh trắc học</string>
+    <string name="dialog_allow_biometry_message">Bạn có muốn cho phép %s sử dụng sinh trắc học không?</string>
+
+    <string name="button_ok">OK</string>
+
+    <string name="photo_holder">Biểu tượng ứng dụng</string>
+
+    <string name="webview_permissions_resource_title">Nhà phát triển cần các tài nguyên sau:</string>
+    <string name="webview_request_geolocation_permission">Cho phép %1$s truy cập vị trí của bạn?\n\nNhà phát triển của %1$s sẽ có thể truy cập vị trí của bạn khi ứng dụng web này mở.</string>
+    <string name="webview_request_microphone_permission">Cho phép %1$s truy cập vào microphone của bạn?\n\nNhà phát triển của %1$s sẽ có thể truy cập microphone của bạn khi ứng dụng web này mở.</string>
+    <string name="webview_request_camera_permission">Cho phép %1$s truy cập vào camera của bạn?\n\nNhà phát triển của %1$s sẽ có thể truy cập camera của bạn khi ứng dụng web này mở.</string>
+    <string name="webview_request_camera_mic_permission">Cho phép %1$s truy cập vào camera và microphone của bạn?\n\nNhà phát triển của %1$s sẽ có thể truy cập camera và microphone của bạn khi ứng dụng web này mở.</string>
+</resources>

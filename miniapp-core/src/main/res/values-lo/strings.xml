@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">ປິດທັງບໍ່ແມ່ນປິດ</string>
+    <string name="action_cancel">ຍົກເລີກ</string>
+    <string name="action_allow">ອະນຸຍາດ</string>
+    <string name="action_not_allow">ບໍ່ອະນຸຍາດ</string>
+    <string name="action_share_contact">ແບ່ງປັນຂໍ້ມູນຕິດຕໍ່</string>
+    <string name="action_not_now">ບໍ່ໃນຕອນນີ້</string>
+    <string name="action_block_all">ປິດທັງສິ່ງ</string>
+
+    <string name="dialog_close_save_message">ການປ່ອນທີ່ເຮັດອາດຈະບໍ່ເກັບບັນທຶກ.</string>
+    <string name="dialog_share_phone_title">ແບ່ງປັນເບີໂທຕົວເອງບໍ?</string>
+    <string name="dialog_share_phone_message">ບອດຈະຮູ້ເບີໂທຂອງທ່ານ. ນີ້ສາມາດແກ່.</string>
+    <string name="dialog_write_access_title">ອະນຸຍາດໃນການສົ່ງເສຍ</string>
+    <string name="dialog_write_access_message">ອະນຸຍາດໃຫ້ບອດເຂົ້າໄປສົ່ງຂໍໍ່ຖ່າຍເສຍບໍ?</string>
+    <string name="dialog_allow_biometry_title">ອະນຸຍາດການສໍາພັນ</string>
+    <string name="dialog_allow_biometry_message">ອະນຸຍາດໃຫ້ %s ໃຊ້ການສໍາພັນ?</string>
+
+    <string name="button_ok">ຕົກລົງ</string>
+
+    <string name="photo_holder">ແອັບອິຄອນ</string>
+
+    <string name="webview_permissions_resource_title">ຜູ້ພັດທະນາຕໍ່ສິ່ງໃຈເຮັດອາຈ່ານດິນ:</string>
+    <string name="webview_request_geolocation_permission">ອະນຸຍາດໃຫ້ %1$s ເຂົ້າໄປສູ່ສະຖານທີ່ຂອງທ່ານ?\n\nຜູ້ພັດທະນາຂອງ %1$s ຈະສາມາດເຂົ້າໄປສູ່ສະຖານທີ່ຂອງທ່ານໃນເວລາທີ່ແອັບນີ້ເປີດ.</string>
+    <string name="webview_request_microphone_permission">ອະນຸຍາດໃຫ້ %1$s ເຂົ້າໄປສູ່ບັນທິດຊັບດິນແອັບ?\n\nຜູ້ພັດທະນາຂອງ %1$s ຈະສາມາດເຂົ້າໄປສູ່ບັນທິດຊັບດິນໃນເວລາທີ່ແອັບນີ້ເປີດ.</string>
+    <string name="webview_request_camera_permission">ອະນຸຍາດໃຫ້ %1$s ເຂົ້າໄປສູ່ຄາມເອີ່ຄອນ?\n\nຜູ້ພັດທະນາຂອງ %1$s ຈະສາມາດເຂົ້າໄປສູ່ຄາມເອີ່ຄອນໃນເວລາທີ່ແອັບນີ້ເປີດ.</string>
+    <string name="webview_request_camera_mic_permission">ອະນຸຍາດໃຫ້ %1$s ເຂົ້າໄປສູ່ຄາມເອີ່ຄອນແລະບັນທິດຊັບດິນ?\n\nຜູ້ພັດທະນາຂອງ %1$s ຈະສາມາດເຂົ້າໄປສູ່ຄາມເອີ່ຄອນແລະບັນທິດຊັບດິນໃນເວລາທີ່ແອັບນີ້ເປີດ.</string>
+</resources>

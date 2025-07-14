@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="ow3_dialog_background" format="color" />
+    <attr name="ow3_menu_background" format="color" />
+    <attr name="ow3_line_color" format="color" />
+
+    <attr name="ow3_content_primary" format="color" />
+    <attr name="ow3_content_secondary" format="color" />
+
+</resources>

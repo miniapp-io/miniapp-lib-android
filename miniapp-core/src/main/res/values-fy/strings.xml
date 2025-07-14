@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">Slútelje toch</string>
+    <string name="action_cancel">Annulearje</string>
+    <string name="action_allow">Ienstimme</string>
+    <string name="action_not_allow">Net ienstimme</string>
+    <string name="action_share_contact">Diel kontakt</string>
+    <string name="action_not_now">Net no</string>
+    <string name="action_block_all">Blokearje alles</string>
+
+    <string name="dialog_close_save_message">De feroarings dy\'t jo makke hawwe, kinne net opslein wurde.</string>
+    <string name="dialog_share_phone_title">Jo telefoannûmer diele?</string>
+    <string name="dialog_share_phone_message">De bot sil jo telefoannûmer witte. Dit kin nuttich wêze...</string>
+    <string name="dialog_write_access_title">Lit berjochten ta</string>
+    <string name="dialog_write_access_message">Lit dizze bot jo berjochten stjoere?</string>
+    <string name="dialog_allow_biometry_title">Lit biometrie ta</string>
+    <string name="dialog_allow_biometry_message">Wolle jo %s tastean om biometrie te brûken?</string>
+
+    <string name="button_ok">OK</string>
+
+    <string name="photo_holder">App-ikoan</string>
+
+    <string name="webview_permissions_resource_title">De ûntwikkelder hat de folgjende boarnen nedich:</string>
+    <string name="webview_request_geolocation_permission">Lit %1$s tagong ta jo lokaasje hawwe?\n\nDe ûntwikkelder fan %1$s sil tagong hawwe ta jo lokaasje as dizze webapp is iepen.</string>
+    <string name="webview_request_microphone_permission">Lit %1$s tagong ta jo mikrofoan hawwe?\n\nDe ûntwikkelder fan %1$s sil tagong hawwe ta jo mikrofoan as dizze webapp is iepen.</string>
+    <string name="webview_request_camera_permission">Lit %1$s tagong ta jo kamera hawwe?\n\nDe ûntwikkelder fan %1$s sil tagong hawwe ta jo kamera as dizze webapp is iepen.</string>
+    <string name="webview_request_camera_mic_permission">Lit %1$s tagong ta jo kamera en mikrofoan hawwe?\n\nDe ûntwikkelder fan %1$s sil tagong hawwe ta jo kamera en mikrofoan as dizze webapp is iepen.</string>
+</resources>

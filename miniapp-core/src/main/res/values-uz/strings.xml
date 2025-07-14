@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">Har holda yopish</string>
+    <string name="action_cancel">Bekor qilish</string>
+    <string name="action_allow">Ruxsat berish</string>
+    <string name="action_not_allow">Ruxsat bermang</string>
+    <string name="action_share_contact">Aloqani ulashish</string>
+    <string name="action_not_now">Hozir emas</string>
+    <string name="action_block_all">Hammasini bloklash</string>
+
+    <string name="dialog_close_save_message">O\'zgartirishlaringiz saqlanmasligi mumkin.</string>
+    <string name="dialog_share_phone_title">Telefon raqamingizni ulashasizmi?</string>
+    <string name="dialog_share_phone_message">Bot sizning telefon raqamingizni biladi. Bu foydali bo\'lishi mumkin...</string>
+    <string name="dialog_write_access_title">Xabar yuborishga ruxsat berish</string>
+    <string name="dialog_write_access_message">Ushbu botga sizga xabar yuborishiga ruxsat berasizmi?</string>
+    <string name="dialog_allow_biometry_title">Biometriyaga ruxsat berish</string>
+    <string name="dialog_allow_biometry_message">%s ga biometriyani ishlatishga ruxsat berasizmi?</string>
+
+    <string name="button_ok">OK</string>
+
+    <string name="photo_holder">Ilova belgisini</string>
+
+    <string name="webview_permissions_resource_title">Dasturchi quyidagi resurslarga ehtiyoj sezadi:</string>
+    <string name="webview_request_geolocation_permission">%1$s ga joylashuvingizga kirishga ruxsat berasizmi?\n\n%1$s dasturchisi ushbu veb-ilova ochilganda sizning joylashuvingizga kirishi mumkin.</string>
+    <string name="webview_request_microphone_permission">%1$s ga mikrofoningizga kirishga ruxsat berasizmi?\n\n%1$s dasturchisi ushbu veb-ilova ochilganda sizning mikrofoningizga kirishi mumkin.</string>
+    <string name="webview_request_camera_permission">%1$s ga kamerangizga kirishga ruxsat berasizmi?\n\n%1$s dasturchisi ushbu veb-ilova ochilganda sizning kamerangizga kirishi mumkin.</string>
+    <string name="webview_request_camera_mic_permission">%1$s ga kamerangiz va mikrofoningizga kirishga ruxsat berasizmi?\n\n%1$s dasturchisi ushbu veb-ilova ochilganda sizning kamerangiz va mikrofoningizga kirishi mumkin.</string>
+</resources>

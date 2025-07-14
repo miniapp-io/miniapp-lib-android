@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">Khay ṭṭeḍ ad yebɣa</string>
+    <string name="action_cancel">Iṛaḍ</string>
+    <string name="action_allow">Ssmim</string>
+    <string name="action_not_allow">Uḍḥeḍ</string>
+    <string name="action_share_contact">Ssefruḍ i tazmert</string>
+    <string name="action_not_now">Uḥu iḍi</string>
+    <string name="action_block_all">Ddu nniḍen</string>
+
+    <string name="dialog_close_save_message">Aḥburt ik i tura s yawnin.</string>
+    <string name="dialog_share_phone_title">Ssefruḍ a telfi i wul</string>
+    <string name="dialog_share_phone_message">Ayu yegga ur tazmert-ik. Yella d agur.</string>
+    <string name="dialog_write_access_title">Ssmim iḍi s yelḥa</string>
+    <string name="dialog_write_access_message">Dɣes ad yebɣa gḥaḍ tazmert-ik?</string>
+    <string name="dialog_allow_biometry_title">Ssmim iḍi s biometry</string>
+    <string name="dialog_allow_biometry_message">Tass agwram ad tsmim a %s s biometry?</string>
+
+    <string name="button_ok">Iḥaḍ</string>
+
+    <string name="photo_holder">Afu n tazmert</string>
+
+    <string name="webview_permissions_resource_title">Aḍṛab iḍa s tazmert-ineḍ:</string>
+    <string name="webview_request_geolocation_permission">Tass agwram ad ssmim a %1$s a iḥiḍ yelḥa?\n\nAḍṛab iḍa a %1$s ad yegga a ḥda iḥiḍ yelḥa.</string>
+    <string name="webview_request_microphone_permission">Tass agwram ad ssmim a %1$s a lḥafaḍ?\n\nAḍṛab iḍa a %1$s ad yegga a ḥda iḥiḍ yelḥa.</string>
+    <string name="webview_request_camera_permission">Tass agwram ad ssmim a %1$s a tajaḍ?\n\nAḍṛab iḍa a %1$s ad yegga a ḥda iḥiḍ yelḥa.</string>
+    <string name="webview_request_camera_mic_permission">Tass agwram ad ssmim a %1$s a lḥafaḍ d tajaḍ?\n\nAḍṛab iḍa a %1$s ad yegga a ḥda iḥiḍ yelḥa.</string>
+</resources>

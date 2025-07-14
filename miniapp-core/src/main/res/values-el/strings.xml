@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">Κλείσιμο ούτως ή άλλως</string>
+    <string name="action_cancel">Ακύρωση</string>
+    <string name="action_allow">Επιτρέψτε</string>
+    <string name="action_not_allow">Μη επιτρέψετε</string>
+    <string name="action_share_contact">Κοινή χρήση επαφής</string>
+    <string name="action_not_now">Όχι τώρα</string>
+    <string name="action_block_all">Αποκλεισμός όλων</string>
+
+    <string name="dialog_close_save_message">Οι αλλαγές που έχετε κάνει ενδέχεται να μην αποθηκευτούν.</string>
+    <string name="dialog_share_phone_title">Θέλετε να μοιραστείτε τον αριθμό τηλεφώνου σας;</string>
+    <string name="dialog_share_phone_message">Ο bot θα γνωρίζει τον αριθμό τηλεφώνου σας. Αυτό μπορεί να είναι χρήσιμο...</string>
+    <string name="dialog_write_access_title">Επιτρέψτε μηνύματα</string>
+    <string name="dialog_write_access_message">Θέλετε να επιτρέψετε σε αυτόν τον bot να σας στέλνει μηνύματα;</string>
+    <string name="dialog_allow_biometry_title">Επιτρέψτε τη βιομετρία</string>
+    <string name="dialog_allow_biometry_message">Θέλετε να επιτρέψετε στο %s να χρησιμοποιεί τη βιομετρία;</string>
+
+    <string name="button_ok">Εντάξει</string>
+
+    <string name="photo_holder">Εικονίδιο εφαρμογής</string>
+
+    <string name="webview_permissions_resource_title">Ο προγραμματιστής χρειάζεται τους εξής πόρους:</string>
+    <string name="webview_request_geolocation_permission">Θέλετε να επιτρέψετε στο %1$s να έχει πρόσβαση στην τοποθεσία σας;\n\nΟ προγραμματιστής του %1$s θα μπορεί να έχει πρόσβαση στην τοποθεσία σας όταν είναι ανοιχτή αυτή η διαδικτυακή εφαρμογή.</string>
+    <string name="webview_request_microphone_permission">Θέλετε να επιτρέψετε στο %1$s να έχει πρόσβαση στο μικρόφωνό σας;\n\nΟ προγραμματιστής του %1$s θα μπορεί να έχει πρόσβαση στο μικρόφωνό σας όταν είναι ανοιχτή αυτή η διαδικτυακή εφαρμογή.</string>
+    <string name="webview_request_camera_permission">Θέλετε να επιτρέψετε στο %1$s να έχει πρόσβαση στην κάμερά σας;\n\nΟ προγραμματιστής του %1$s θα μπορεί να έχει πρόσβαση στην κάμερά σας όταν είναι ανοιχτή αυτή η διαδικτυακή εφαρμογή.</string>
+    <string name="webview_request_camera_mic_permission">Θέλετε να επιτρέψετε στο %1$s να έχει πρόσβαση στην κάμερα και το μικρόφωνό σας;\n\nΟ προγραμματιστής του %1$s θα μπορεί να έχει πρόσβαση στην κάμερα και το μικρόφωνό σας όταν είναι ανοιχτή αυτή η διαδικτυακή εφαρμογή.</string>
+</resources>

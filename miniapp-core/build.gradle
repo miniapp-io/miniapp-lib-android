@@ -1,0 +1,142 @@
+import org.gradle.nativeplatform.platform.internal.DefaultNativePlatform
+
+plugins {
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.devtools.ksp)
+    id 'maven-publish'
+    id 'signing'
+}
+
+def isWindows = String.valueOf(DefaultNativePlatform.currentOperatingSystem.toFamilyName() == OperatingSystemFamily.WINDOWS)
+
+android {
+    namespace 'io.miniapp.core'
+    compileSdk rootProject.ext.compileSdk as int
+
+    defaultConfig {
+        minSdk rootProject.ext.minSdk as int
+
+        buildConfigField "String", "CORE_VERSION", "\"${rootProject.ext.versionName}\""
+
+        multiDexEnabled true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            buildConfigField "boolean", "BUILD_HOST_IS_WINDOWS", isWindows
+        }
+
+        debugOptimized {
+            minifyEnabled true
+            buildConfigField "boolean", "BUILD_HOST_IS_WINDOWS", isWindows
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "boolean", "BUILD_HOST_IS_WINDOWS", isWindows
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    buildFeatures {
+        buildConfig = true
+        viewBinding true
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    sourceSets {
+        def dirs = ['main', 'EasyWindow']
+        main {
+            manifest.srcFile 'src/main/AndroidManifest.xml'
+            dirs.each { dir ->
+                java.srcDir("src/${dir}/java")
+                res.srcDir("src/${dir}/res")
+            }
+        }
+    }
+}
+
+dependencies {
+    implementation project(':miniapp-bridge')
+    implementation libs.androidx.core.ktx
+    implementation libs.androidx.appcompat
+    implementation libs.material
+    implementation libs.androidx.serialization.ktx
+    implementation libs.androidx.activity.ktx
+    implementation libs.androidx.preference.ktx
+    implementation libs.retrofit
+    implementation libs.converter.moshi
+    implementation platform(libs.okhttp.bom)
+    implementation libs.androidx.constraintlayout
+    //noinspection UseTomlInstead
+    implementation "com.squareup.okhttp3:okhttp"
+    //noinspection UseTomlInstead
+    implementation "com.squareup.okhttp3:logging-interceptor"
+
+    compileOnly libs.glide
+
+    api libs.moshi.kotlin
+    api libs.moshi.kotlin.adapter
+    ksp libs.moshi.kotlin.codegen
+}
+
+group = "io.openweb3"
+version = rootProject.ext.versionName
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = 'io.openweb3'
+            artifactId = 'miniapp-core'
+            version = rootProject.ext.versionName
+            pom {
+                name.set("MiniAppX Core")
+                description.set("Core library for MiniAppX")
+                url.set("https://github.com/miniapp-io/miniapp-lib-android")
+                description = 'MiniappX Android Library Core'
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id.set("w3bili")
+                        name.set("w3bili")
+                        email.set("w3bili@proton.me")
+                    }
+                }
+                scm {
+                    connection = "scm:git:git://github.com/miniapp-io/miniapp-lib-android.git"
+                    developerConnection = "scm:git:ssh://github.com/miniapp-io/miniapp-lib-android.git"
+                    url = "https://github.com/miniapp-io/miniapp-lib-android"
+                }
+            }
+            afterEvaluate {
+                from components.release
+            }
+        }
+    }
+}
+
+signing {
+    useInMemoryPgpKeys(
+            findProperty("gpgPrivateKey") ?: System.getenv("GPG_PRIVATE_KEY"),
+            findProperty("gpgPassphrase") ?: System.getenv("GPG_PASSPHRASE")
+    )
+    sign publishing.publications    
+}

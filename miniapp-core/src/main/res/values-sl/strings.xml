@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">Zaprti kljub vsemu</string>
+    <string name="action_cancel">Prekliči</string>
+    <string name="action_allow">Dovoli</string>
+    <string name="action_not_allow">Ne dovoli</string>
+    <string name="action_share_contact">Deli kontakt</string>
+    <string name="action_not_now">Ne zdaj</string>
+    <string name="action_block_all">Blokiraj vse</string>
+
+    <string name="dialog_close_save_message">Spremembe, ki ste jih naredili, morda ne bodo shranjene.</string>
+    <string name="dialog_share_phone_title">Deliti svojo telefonsko številko?</string>
+    <string name="dialog_share_phone_message">Bot bo poznal vašo telefonsko številko. To je lahko koristno...</string>
+    <string name="dialog_write_access_title">Dovoli pošiljanje sporočil</string>
+    <string name="dialog_write_access_message">Dovoli temu botu, da ti pošilja sporočila?</string>
+    <string name="dialog_allow_biometry_title">Dovoli biometrijo</string>
+    <string name="dialog_allow_biometry_message">Želite dovoliti %s, da uporablja biometrijo?</string>
+
+    <string name="button_ok">OK</string>
+
+    <string name="photo_holder">Ikona aplikacije</string>
+
+    <string name="webview_permissions_resource_title">Razvijalec zahteva naslednje vire:</string>
+    <string name="webview_request_geolocation_permission">Dovoli %1$s dostop do vaše lokacije?\n\nRazvijalec %1$s bo imel dostop do vaše lokacije, ko je ta spletna aplikacija odprta.</string>
+    <string name="webview_request_microphone_permission">Dovoli %1$s dostop do vašega mikrofona?\n\nRazvijalec %1$s bo imel dostop do vašega mikrofona, ko je ta spletna aplikacija odprta.</string>
+    <string name="webview_request_camera_permission">Dovoli %1$s dostop do vaše kamere?\n\nRazvijalec %1$s bo imel dostop do vaše kamere, ko je ta spletna aplikacija odprta.</string>
+    <string name="webview_request_camera_mic_permission">Dovoli %1$s dostop do vaše kamere in mikrofona?\n\nRazvijalec %1$s bo imel dostop do vaše kamere in mikrofona, ko je ta spletna aplikacija odprta.</string>
+</resources>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">ਹਰ ਤਰ੍ਹਾਂ ਬੰਦ ਕਰੋ</string>
+    <string name="action_cancel">ਰੱਦ ਕਰੋ</string>
+    <string name="action_allow">ਅਨੁਮਤ ਕਰੋ</string>
+    <string name="action_not_allow">ਅਨੁਮਤ ਨਾ ਕਰੋ</string>
+    <string name="action_share_contact">ਸੰਪਰਕ ਸਾਂਝਾ ਕਰੋ</string>
+    <string name="action_not_now">ਹੁਣ ਨਹੀਂ</string>
+    <string name="action_block_all">ਸਾਰੇ ਰੋਕੋ</string>
+
+    <string name="dialog_close_save_message">ਤੁਸੀਂ ਜਿਨ੍ਹਾਂ ਵਿੱਚ ਬਦਲਾਵ ਕੀਤੇ ਹਨ, ਉਹ ਸੰਭਵਤ: ਸੇਵ ਨਹੀਂ ਕੀਤੇ ਜਾਣਗੇ।</string>
+    <string name="dialog_share_phone_title">ਕੀ ਤੁਸੀਂ ਆਪਣਾ ਫੋਨ ਨੰਬਰ ਸਾਂਝਾ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?</string>
+    <string name="dialog_share_phone_message">ਬੋਟ ਨੂੰ ਤੁਹਾਡੇ ਫੋਨ ਨੰਬਰ ਦੀ ਜਾਣਕਾਰੀ ਹੋਵੇਗੀ। ਇਹ ਲਾਭਦਾਇਕ ਹੋ ਸਕਦਾ ਹੈ...</string>
+    <string name="dialog_write_access_title">ਸੰਦੇਸ਼ ਭੇਜਣ ਦੀ ਆਗਿਆ ਦਿਓ</string>
+    <string name="dialog_write_access_message">ਕੀ ਤੁਸੀਂ ਇਸ ਬੋਟ ਨੂੰ ਤੁਹਾਨੂੰ ਸੰਦੇਸ਼ ਭੇਜਣ ਦੀ ਆਗਿਆ ਦਿਓਗੇ?</string>
+    <string name="dialog_allow_biometry_title">ਬਾਇਓਮੈਟ੍ਰਿਕਸ ਦੀ ਆਗਿਆ ਦਿਓ</string>
+    <string name="dialog_allow_biometry_message">ਕੀ ਤੁਸੀਂ %s ਨੂੰ ਬਾਇਓਮੈਟ੍ਰਿਕਸ ਵਰਤਣ ਦੀ ਆਗਿਆ ਦਿਓਗੇ?</string>
+
+    <string name="button_ok">ਠੀਕ ਹੈ</string>
+
+    <string name="photo_holder">ਐਪ ਆਈਕਨ</string>
+
+    <string name="webview_permissions_resource_title">ਵਿਕਾਸਕ ਨੂੰ ਹੇਠਾਂ ਦਿੱਤੀਆਂ ਸਰੋਤਾਂ ਦੀ ਲੋੜ ਹੈ:</string>
+    <string name="webview_request_geolocation_permission">ਕੀ %1$s ਨੂੰ ਤੁਹਾਡੀ ਪੋਜ਼ੀਸ਼ਨ ਤੱਕ ਪਹੁੰਚ ਦੀ ਆਗਿਆ ਦਿਓ?\n\n%1$s ਦੇ ਵਿਕਾਸਕ ਨੂੰ ਇਸ ਵੈਬ ਐਪ ਖੁੱਲ੍ਹੇ ਸਮੇਂ ਤੁਹਾਡੀ ਪੋਜ਼ੀਸ਼ਨ ਤੱਕ ਪਹੁੰਚ ਕਰਨ ਦੀ ਸਮਰਥਾ ਹੋਵੇਗੀ।</string>
+    <string name="webview_request_microphone_permission">ਕੀ %1$s ਨੂੰ ਤੁਹਾਡੇ ਮਾਈਕ੍ਰੋਫੋਨ ਤੱਕ ਪਹੁੰਚ ਦੀ ਆਗਿਆ ਦਿਓ?\n\n%1$s ਦੇ ਵਿਕਾਸਕ ਨੂੰ ਇਸ ਵੈਬ ਐਪ ਖੁੱਲ੍ਹੇ ਸਮੇਂ ਤੁਹਾਡੇ ਮਾਈਕ੍ਰੋਫੋਨ ਤੱਕ ਪਹੁੰਚ ਕਰਨ ਦੀ ਸਮਰਥਾ ਹੋਵੇਗੀ।</string>
+    <string name="webview_request_camera_permission">ਕੀ %1$s ਨੂੰ ਤੁਹਾਡੇ ਕੈਮਰੇ ਤੱਕ ਪਹੁੰਚ ਦੀ ਆਗਿਆ ਦਿਓ?\n\n%1$s ਦੇ ਵਿਕਾਸਕ ਨੂੰ ਇਸ ਵੈਬ ਐਪ ਖੁੱਲ੍ਹੇ ਸਮੇਂ ਤੁਹਾਡੇ ਕੈਮਰੇ ਤੱਕ ਪਹੁੰਚ ਕਰਨ ਦੀ ਸਮਰਥਾ ਹੋਵੇਗੀ।</string>
+    <string name="webview_request_camera_mic_permission">ਕੀ %1$s ਨੂੰ ਤੁਹਾਡੇ ਕੈਮਰੇ ਅਤੇ ਮਾਈਕ੍ਰੋਫੋਨ ਤੱਕ ਪਹੁੰਚ ਦੀ ਆਗਿਆ ਦਿਓ?\n\n%1$s ਦੇ ਵਿਕਾਸਕ ਨੂੰ ਇਸ ਵੈਬ ਐਪ ਖੁੱਲ੍ਹੇ ਸਮੇਂ ਤੁਹਾਡੇ ਕੈਮਰੇ ਅਤੇ ਮਾਈਕ੍ਰੋਫੋਨ ਤੱਕ ਪਹੁੰਚ ਕਰਨ ਦੀ ਸਮਰਥਾ ਹੋਵੇਗੀ।</string>
+</resources>

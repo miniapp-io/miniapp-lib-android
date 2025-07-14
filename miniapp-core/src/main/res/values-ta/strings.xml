@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">எவ்வளவுக்கும் மூடு</string>
+    <string name="action_cancel">ரத்து செய்</string>
+    <string name="action_allow">அனுமதி செய்</string>
+    <string name="action_not_allow">அனுமதிக்காதீர்கள்</string>
+    <string name="action_share_contact">தொடர்பு பகிர்க</string>
+    <string name="action_not_now">இப்போது அல்ல</string>
+    <string name="action_block_all">அனைத்தையும் மறுக்கவும்</string>
+
+    <string name="dialog_close_save_message">நீங்கள் செய்த மாற்றங்கள் சேமிக்கப்படாதிருக்கலாம்.</string>
+    <string name="dialog_share_phone_title">உங்கள் தொலைபேசி எண்ணை பகிர்வதா?</string>
+    <string name="dialog_share_phone_message">இந்த பாட்டுக்கு உங்கள் தொலைபேசி எண் தெரியும். இது பயனுள்ளதாக இருக்கலாம்...</string>
+    <string name="dialog_write_access_title">செய்திகள் அனுமதிக்கவும்</string>
+    <string name="dialog_write_access_message">இந்த பாட்டுக்கு உங்களுக்கு செய்திகள் அனுப்ப அனுமதி தர விரும்புகிறீர்களா?</string>
+    <string name="dialog_allow_biometry_title">உயிரியல் அனுமதிக்கவும்</string>
+    <string name="dialog_allow_biometry_message">உங்களுக்கு %s உயிரியல் தொழில்நுட்பங்களைப் பயன்படுத்த அனுமதிக்க விரும்புகிறீர்களா?</string>
+
+    <string name="button_ok">சரி</string>
+
+    <string name="photo_holder">செயலியின் ஐகான்</string>
+
+    <string name="webview_permissions_resource_title">உருவாக்குனர் கீழ்காணும் வளங்களைப் பயன்படுத்துகின்றனர்:</string>
+    <string name="webview_request_geolocation_permission">உங்கள் இடத்திற்குச் சென்று %1$s அனுமதிக்கவும்?\n\nஇந்த வலை பயன்பாடு திறக்கும்போது %1$s உங்கள் இடத்திற்கு அணுகல் பெறலாம்.</string>
+    <string name="webview_request_microphone_permission">உங்கள் மைக்ரோபோனை %1$s அணுக அனுமதிக்கவும்?\n\nஇந்த வலை பயன்பாடு திறக்கும்போது %1$s உங்கள் மைக்ரோபோனை அணுகலாம்.</string>
+    <string name="webview_request_camera_permission">உங்கள் கேமராவிற்கு %1$s அணுக அனுமதிக்கவும்?\n\nஇந்த வலை பயன்பாடு திறக்கும்போது %1$s உங்கள் கேமராவிற்கான அணுகலைப் பெறலாம்.</string>
+    <string name="webview_request_camera_mic_permission">உங்கள் கேமரா மற்றும் மைக்ரோபோனுக்கு %1$s அணுக அனுமதிக்கவும்?\n\nஇந்த வலை பயன்பாடு திறக்கும்போது %1$s உங்கள் கேமரா மற்றும் மைக்ரோபோனை அணுகலாம்.</string>
+</resources>

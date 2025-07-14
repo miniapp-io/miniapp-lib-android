@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">cha\'logh</string>
+    <string name="action_cancel">ghoS</string>
+    <string name="action_allow">yInoH</string>
+    <string name="action_not_allow">yInoHbe\'</string>
+    <string name="action_share_contact">mIp chaH</string>
+    <string name="action_not_now">pagh bIjatlh</string>
+    <string name="action_block_all">loDHa\'vam</string>
+
+    <string name="dialog_close_save_message">tlhoy\' tIgh tIvoqjaj.</string>
+    <string name="dialog_share_phone_title">bIH bIjatlh\'a\'?</string>
+    <string name="dialog_share_phone_message">bIH bIjatlh\'a\' chaH qepnIS. \'ach jIH vIje\'lu\'.</string>
+    <string name="dialog_write_access_title">ghoS DaloH</string>
+    <string name="dialog_write_access_message">naDev \'oH vIje\'be\'.</string>
+    <string name="dialog_allow_biometry_title">yInoH ghIq</string>
+    <string name="dialog_allow_biometry_message">%s yInoH\'a\' ghIq?</string>
+
+    <string name="button_ok">yIghoS</string>
+
+    <string name="photo_holder">mIghvam</string>
+
+    <string name="webview_permissions_resource_title">chaH \'oH mIghvam:</string>
+    <string name="webview_request_geolocation_permission">%1$s yInoH\'e\'?</string>
+    <string name="webview_request_microphone_permission">%1$s yInoH\'e\'?</string>
+    <string name="webview_request_camera_permission">%1$s yInoH\'e\'?</string>
+    <string name="webview_request_camera_mic_permission">%1$s yInoH\'e\'?</string>
+</resources>

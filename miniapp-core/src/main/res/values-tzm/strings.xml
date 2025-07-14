@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">Sxul isawal</string>
+    <string name="action_cancel">Sefras</string>
+    <string name="action_allow">Ssal</string>
+    <string name="action_not_allow">Ur ssel</string>
+    <string name="action_share_contact">Ssiw n contact</string>
+    <string name="action_not_now">Ur d akken</string>
+    <string name="action_block_all">Sbbad aɣbalu</string>
+
+    <string name="dialog_close_save_message">Ikkad n ddunit i s-wen yebda ur yettwasel.</string>
+    <string name="dialog_share_phone_title">Tura ad ssiw aɣbalu n yiman?</string>
+    <string name="dialog_share_phone_message">Itt-nni ssiw aɣbalu n yiman. Ihi yella d wayen i d-yeffren...</string>
+    <string name="dialog_write_access_title">Ssal ad yefka</string>
+    <string name="dialog_write_access_message">Tura ad yefka ag aɣbalu ik?</string>
+    <string name="dialog_allow_biometry_title">Ssal ad yefka biometry</string>
+    <string name="dialog_allow_biometry_message">Tura ad yefka %s ad yefka biometry?</string>
+
+    <string name="button_ok">OK</string>
+
+    <string name="photo_holder">Anekkay n Uǧil</string>
+
+    <string name="webview_permissions_resource_title">Azzay n wazzal yebda yuliḍ aɣbalu n umdan:</string>
+    <string name="webview_request_geolocation_permission">Ssal ad %1$s ad yefka tazmert-iw?\n\n%1$s ad yefka tazmert-iw mdu yebda tazmert.</string>
+    <string name="webview_request_microphone_permission">Ssal ad %1$s ad yefka ddaw n yiman?\n\n%1$s ad yefka ddaw n yiman mdu yebda tazmert.</string>
+    <string name="webview_request_camera_permission">Ssal ad %1$s ad yefka aḍiḍ n yiman?\n\n%1$s ad yefka aḍiḍ n yiman mdu yebda tazmert.</string>
+    <string name="webview_request_camera_mic_permission">Ssal ad %1$s ad yefka aḍiḍ akked ddaw n yiman?\n\n%1$s ad yefka aḍiḍ akked ddaw n yiman mdu yebda tazmert.</string>
+</resources>

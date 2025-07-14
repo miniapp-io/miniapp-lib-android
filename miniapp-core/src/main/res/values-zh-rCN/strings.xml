@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">关闭</string>
+    <string name="action_cancel">取消</string>
+    <string name="action_allow">允许</string>
+    <string name="action_not_allow">不允许</string>
+    <string name="action_share_contact">分享联系人</string>
+    <string name="action_not_now">暂不</string>
+    <string name="action_block_all">全部阻止</string>
+
+    <string name="action_share">分享</string>
+    <string name="action_feedback">反馈与报告</string>
+    <string name="action_settings">设置</string>
+    <string name="action_relaod">刷新</string>
+    <string name="action_terms">用户协议</string>
+    <string name="action_privacy">隐私协议</string>
+    <string name="action_shortcut">添加桌面快捷方式</string>
+
+    <string name="dialog_close_save_message">您所做的更改可能不会被保存。</string>
+    <string name="dialog_share_phone_title">分享您的电话号码？</string>
+    <string name="dialog_share_phone_message">机器人将知道您的电话号码。这可能很有用...</string>
+    <string name="dialog_write_access_title">允许发送消息</string>
+    <string name="dialog_write_access_message">允许此机器人向您发送消息？</string>
+
+    <string name="button_ok">确定</string>
+
+    <string name="webview_permissions_resource_title">开发者需要以下资源：</string>
+    <string name="webview_request_geolocation_permission">允许 %1$s 访问您的位置？\n\n当此网络应用程序打开时，%1$s 的开发者将能够访问您的位置。</string>
+    <string name="webview_request_microphone_permission">允许 %1$s 访问您的麦克风？\n\n当此网络应用程序打开时，%1$s 的开发者将能够访问您的麦克风。</string>
+    <string name="webview_request_camera_permission">允许 %1$s 访问您的摄像头？\n\n当此网络应用程序打开时，%1$s 的开发者将能够访问您的摄像头。</string>
+    <string name="webview_request_camera_mic_permission">允许 %1$s 访问您的摄像头和麦克风？\n\n当此网络应用程序打开时，%1$s 的开发者将能够访问您的摄像头和麦克风。</string>
+</resources>

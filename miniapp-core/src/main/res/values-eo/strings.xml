@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">Fermu ĉiuokaze</string>
+    <string name="action_cancel">Nuligi</string>
+    <string name="action_allow">Permesi</string>
+    <string name="action_not_allow">Ne permesi</string>
+    <string name="action_share_contact">Koni kontakton</string>
+    <string name="action_not_now">Ne nun</string>
+    <string name="action_block_all">Bloki Ĉion</string>
+
+    <string name="dialog_close_save_message">Ŝanĝoj, kiujn vi faris, eble ne estos konservitaj.</string>
+    <string name="dialog_share_phone_title">Ĉu kundividi vian telefonan numeron?</string>
+    <string name="dialog_share_phone_message">La bota scios vian telefonan numeron. Ĉi tio povas esti utila...</string>
+    <string name="dialog_write_access_title">Permesi mesaĝadon</string>
+    <string name="dialog_write_access_message">Ĉu permesi ĉi tiun boton sendi al vi mesaĝojn?</string>
+    <string name="dialog_allow_biometry_title">Permesi biometrian identigon</string>
+    <string name="dialog_allow_biometry_message">Ĉu vi volas permesi al %s uzi biometrian identigon?</string>
+
+    <string name="button_ok">OK</string>
+
+    <string name="photo_holder">Aplika Iknono</string>
+
+    <string name="webview_permissions_resource_title">La disvolvisto postulas la sekvajn rimedojn:</string>
+    <string name="webview_request_geolocation_permission">Ĉu permesi al %1$s aliri vian lokon?\n\nLa disvolvisto de %1$s povos aliri vian lokon kiam ĉi tiu retprogramo estas malfermita.</string>
+    <string name="webview_request_microphone_permission">Ĉu permesi al %1$s aliri vian mikrofonon?\n\nLa disvolvisto de %1$s povos aliri vian mikrofonon kiam ĉi tiu retprogramo estas malfermita.</string>
+    <string name="webview_request_camera_permission">Ĉu permesi al %1$s aliri vian kameron?\n\nLa disvolvisto de %1$s povos aliri vian kameron kiam ĉi tiu retprogramo estas malfermita.</string>
+    <string name="webview_request_camera_mic_permission">Ĉu permesi al %1$s aliri vian kameron kaj mikrofonon?\n\nLa disvolvisto de %1$s povos aliri vian kameron kaj mikrofonon kiam ĉi tiu retprogramo estas malfermita.</string>
+</resources>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">Dúnadh mar sin</string>
+    <string name="action_cancel">Cealaigh</string>
+    <string name="action_allow">Ceadaigh</string>
+    <string name="action_not_allow">Ná ceadaigh</string>
+    <string name="action_share_contact">Comhoibrigh teagmháil</string>
+    <string name="action_not_now">Ná anois</string>
+    <string name="action_block_all">Blocáil Gach Duine</string>
+
+    <string name="dialog_close_save_message">D\'fhéadfadh na hathruithe atá déanta agat a bheith neamhshábháilte.</string>
+    <string name="dialog_share_phone_title">An roinnfidh tú do uimhir gutháin?</string>
+    <string name="dialog_share_phone_message">Beidh a fhios ag an bbot do uimhir gutháin. D’fhéadfadh sé seo a bheith úsáideach...</string>
+    <string name="dialog_write_access_title">Ceadaigh teachtaireachtaí</string>
+    <string name="dialog_write_access_message">An gceadaigh tú don bbot seo teachtaireachtaí a sheoladh chugat?</string>
+    <string name="dialog_allow_biometry_title">Ceadaigh biometraice</string>
+    <string name="dialog_allow_biometry_message">An gceadaigh tú do %s a úsáid biometraice?</string>
+
+    <string name="button_ok">OK</string>
+
+    <string name="photo_holder">Comhartha na hAip</string>
+
+    <string name="webview_permissions_resource_title">Teastaíonn na hacmhainní seo a leanas ón forbróir:</string>
+    <string name="webview_request_geolocation_permission">An gceadaíonn tú do %1$s rochtain ar do shuíomh?\n\nBeidh rochtain ag forbróir %1$s ar do shuíomh nuair atá an feidhmchlár gréasáin seo oscailte.</string>
+    <string name="webview_request_microphone_permission">An gceadaíonn tú do %1$s rochtain ar do mhicreafón?\n\nBeidh rochtain ag forbróir %1$s ar do mhicreafón nuair atá an feidhmchlár gréasáin seo oscailte.</string>
+    <string name="webview_request_camera_permission">An gceadaíonn tú do %1$s rochtain ar do cheamara?\n\nBeidh rochtain ag forbróir %1$s ar do cheamara nuair atá an feidhmchlár gréasáin seo oscailte.</string>
+    <string name="webview_request_camera_mic_permission">An gceadaíonn tú do %1$s rochtain ar do cheamara agus do mhicreafón?\n\nBeidh rochtain ag forbróir %1$s ar do cheamara agus do mhicreafón nuair atá an feidhmchlár gréasáin seo oscailte.</string>
+</resources>

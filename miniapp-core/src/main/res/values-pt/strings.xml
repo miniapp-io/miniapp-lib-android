@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">Fechar mesmo assim</string>
+    <string name="action_cancel">Cancelar</string>
+    <string name="action_allow">Permitir</string>
+    <string name="action_not_allow">Não Permitir</string>
+    <string name="action_share_contact">Compartilhar contato</string>
+    <string name="action_not_now">Não agora</string>
+    <string name="action_block_all">Bloquear Tudo</string>
+
+    <string name="dialog_close_save_message">As alterações que você fez podem não ser salvas.</string>
+    <string name="dialog_share_phone_title">Compartilhar seu número de telefone?</string>
+    <string name="dialog_share_phone_message">O bot saberá seu número de telefone. Isso pode ser útil...</string>
+    <string name="dialog_write_access_title">Permitir mensagens</string>
+    <string name="dialog_write_access_message">Permitir que este bot envie mensagens para você?</string>
+    <string name="dialog_allow_biometry_title">Permitir biometria</string>
+    <string name="dialog_allow_biometry_message">Você quer permitir que %s use biometria?</string>
+
+    <string name="button_ok">OK</string>
+
+    <string name="photo_holder">Ícone do App</string>
+
+    <string name="webview_permissions_resource_title">O desenvolvedor requer os seguintes recursos:</string>
+    <string name="webview_request_geolocation_permission">Permitir que %1$s acesse sua localização?\n\nO desenvolvedor de %1$s poderá acessar sua localização quando este aplicativo web estiver aberto.</string>
+    <string name="webview_request_microphone_permission">Permitir que %1$s acesse seu microfone?\n\nO desenvolvedor de %1$s poderá acessar seu microfone quando este aplicativo web estiver aberto.</string>
+    <string name="webview_request_camera_permission">Permitir que %1$s acesse sua câmera?\n\nO desenvolvedor de %1$s poderá acessar sua câmera quando este aplicativo web estiver aberto.</string>
+    <string name="webview_request_camera_mic_permission">Permitir que %1$s acesse sua câmera e microfone?\n\nO desenvolvedor de %1$s poderá acessar sua câmera e microfone quando este aplicativo web estiver aberto.</string>
+</resources>

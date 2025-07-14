@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">എങ്ങനെയെങ്കിലും അടയ്ക്കുക</string>
+    <string name="action_cancel">റദ്ദാക്കുക</string>
+    <string name="action_allow">അനുവദിക്കുക</string>
+    <string name="action_not_allow">അനുവദിക്കരുത്</string>
+    <string name="action_share_contact">കോണക്ട് പങ്കിടുക</string>
+    <string name="action_not_now">ഇപ്പോൾ അല്ല</string>
+    <string name="action_block_all">എല്ലാം തടയുക</string>
+
+    <string name="dialog_close_save_message">നിങ്ങൾ നടത്തിയ മാറ്റങ്ങൾ സംരക്ഷിക്കപ്പെടmay.</string>
+    <string name="dialog_share_phone_title">നിങ്ങളുടെ ഫോൺ നമ്പർ പങ്കിടാമോ?</string>
+    <string name="dialog_share_phone_message">ബോട്ട് നിങ്ങളുടെ ഫോൺ നമ്പർ അറിയും. ഇത് ഉപയോഗപ്രദമായിരിക്കാം...</string>
+    <string name="dialog_write_access_title">സന്ദേശങ്ങൾ അനുമതിക്കുക</string>
+    <string name="dialog_write_access_message">ഈ ബോട്ട് നിങ്ങൾക്ക് സന്ദേശങ്ങൾ അയയ്ക്കാൻ അനുവദിക്കണോ?</string>
+    <string name="dialog_allow_biometry_title">ബയോമെട്രിക്ക് അനുമതിക്കുക</string>
+    <string name="dialog_allow_biometry_message">%s ബയോമെട്രിക്ക് ഉപയോഗിക്കാൻ അനുമതിക്കണമെന്ന് നിങ്ങൾ ആഗ്രഹിക്കുന്നുണ്ടോ?</string>
+
+    <string name="button_ok">ശരി</string>
+
+    <string name="photo_holder">ആപ്ലിക്കേഷൻ ഐക്കൺ</string>
+
+    <string name="webview_permissions_resource_title">വികസകൻ താഴെകാണുന്ന റിസോഴ്‌സുകൾ ആവശ്യപ്പെടുന്നു:</string>
+    <string name="webview_request_geolocation_permission">%1$s ന്റെ സ്ഥാനം ലഭിക്കാൻ അനുവദിക്കണമോ?\n\nഈ വെബ് ആപ്ലിക്കേഷൻ തുറന്നിരിക്കുമ്പോൾ %1$s നിങ്ങളുടെ സ്ഥാനം ലഭിക്കാം.</string>
+    <string name="webview_request_microphone_permission">%1$s ന്റെ മൈക്രോഫോൺ ലഭിക്കാൻ അനുവദിക്കണമോ?\n\nഈ വെബ് ആപ്ലിക്കേഷൻ തുറന്നിരിക്കുമ്പോൾ %1$s നിങ്ങളുടെ മൈക്രോഫോൺ ലഭിക്കാം.</string>
+    <string name="webview_request_camera_permission">%1$s ന്റെ ക്യാമറ ലഭിക്കാൻ അനുവദിക്കണമോ?\n\nഈ വെബ് ആപ്ലിക്കേഷൻ തുറന്നിരിക്കുമ്പോൾ %1$s നിങ്ങളുടെ ക്യാമറ ലഭിക്കാം.</string>
+    <string name="webview_request_camera_mic_permission">%1$s ന്റെ ക്യാമറയും മൈക്രോഫോണും ലഭിക്കാൻ അനുവദിക്കണമോ?\n\nഈ വെബ് ആപ്ലിക്കേഷൻ തുറന്നിരിക്കുമ്പോൾ %1$s നിങ്ങളുടെ ക്യാമറയും മൈക്രോഫോണും ലഭിക്കാം.</string>
+</resources>

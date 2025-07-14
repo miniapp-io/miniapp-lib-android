@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">סגור בכל מקרה</string>
+    <string name="action_cancel">ביטול</string>
+    <string name="action_allow">אשר</string>
+    <string name="action_not_allow">אל תאפשר</string>
+    <string name="action_share_contact">שתף קשר</string>
+    <string name="action_not_now">לא עכשיו</string>
+    <string name="action_block_all">חסום הכל</string>
+
+    <string name="dialog_close_save_message">שינויים שביצעת עשויים לא להתקבל.</string>
+    <string name="dialog_share_phone_title">האם לשתף את מספר הטלפון שלך?</string>
+    <string name="dialog_share_phone_message">הבוט ידע את מספר הטלפון שלך. זה יכול להיות מועיל...</string>
+    <string name="dialog_write_access_title">אשר הודעות</string>
+    <string name="dialog_write_access_message">האם לאפשר לבוט הזה לשלוח לך הודעות?</string>
+    <string name="dialog_allow_biometry_title">אשר ביומטריה</string>
+    <string name="dialog_allow_biometry_message">האם אתה רוצה לאפשר ל-%s להשתמש בביומטריה?</string>
+
+    <string name="button_ok">אוקי</string>
+
+    <string name="photo_holder">אייקון אפליקציה</string>
+
+    <string name="webview_permissions_resource_title">המפתח דורש את המשאבים הבאים:</string>
+    <string name="webview_request_geolocation_permission">אשר ל-%1$s גישה למיקום שלך?\n\nהמפתח של %1$s יוכל לגשת למיקום שלך כאשר האפליקציה הזו פתוחה.</string>
+    <string name="webview_request_microphone_permission">אשר ל-%1$s גישה למיקרופון שלך?\n\nהמפתח של %1$s יוכל לגשת למיקרופון שלך כאשר האפליקציה הזו פתוחה.</string>
+    <string name="webview_request_camera_permission">אשר ל-%1$s גישה למצלמה שלך?\n\nהמפתח של %1$s יוכל לגשת למצלמה שלך כאשר האפליקציה הזו פתוחה.</string>
+    <string name="webview_request_camera_mic_permission">אשר ל-%1$s גישה למצלמה ולמיקרופון שלך?\n\nהמפתח של %1$s יוכל לגשת למצלמה ולמיקרופון שלך כאשר האפליקציה הזו פתוחה.</string>
+</resources>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">Cerrar de todos modos</string>
+    <string name="action_cancel">Cancelar</string>
+    <string name="action_allow">Permitir</string>
+    <string name="action_not_allow">No permitir</string>
+    <string name="action_share_contact">Compartir contacto</string>
+    <string name="action_not_now">No ahora</string>
+    <string name="action_block_all">Bloquear todo</string>
+
+    <string name="dialog_close_save_message">Los cambios que has realizado pueden no ser guardados.</string>
+    <string name="dialog_share_phone_title">¿Compartir tu número de teléfono?</string>
+    <string name="dialog_share_phone_message">El bot conocerá tu número de teléfono. Esto puede ser útil...</string>
+    <string name="dialog_write_access_title">Permitir mensajería</string>
+    <string name="dialog_write_access_message">¿Permitir que este bot te envíe mensajes?</string>
+    <string name="dialog_allow_biometry_title">Permitir biometría</string>
+    <string name="dialog_allow_biometry_message">¿Quieres permitir que %s use biometría?</string>
+
+    <string name="button_ok">OK</string>
+
+    <string name="photo_holder">Ícono de la aplicación</string>
+
+    <string name="webview_permissions_resource_title">El desarrollador requiere los siguientes recursos:</string>
+    <string name="webview_request_geolocation_permission">¿Permitir que %1$s acceda a tu ubicación?\n\nEl desarrollador de %1$s podrá acceder a tu ubicación cuando esta aplicación web esté abierta.</string>
+    <string name="webview_request_microphone_permission">¿Permitir que %1$s acceda a tu micrófono?\n\nEl desarrollador de %1$s podrá acceder a tu micrófono cuando esta aplicación web esté abierta.</string>
+    <string name="webview_request_camera_permission">¿Permitir que %1$s acceda a tu cámara?\n\nEl desarrollador de %1$s podrá acceder a tu cámara cuando esta aplicación web esté abierta.</string>
+    <string name="webview_request_camera_mic_permission">¿Permitir que %1$s acceda a tu cámara y micrófono?\n\nEl desarrollador de %1$s podrá acceder a tu cámara y micrófono cuando esta aplicación web esté abierta.</string>
+</resources>

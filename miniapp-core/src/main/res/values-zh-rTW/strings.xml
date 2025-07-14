@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">關閉</string>
+    <string name="action_cancel">取消</string>
+    <string name="action_allow">允許</string>
+    <string name="action_not_allow">不允許</string>
+    <string name="action_share_contact">分享聯絡人</string>
+    <string name="action_not_now">暫不</string>
+    <string name="action_block_all">全部封鎖</string>
+
+    <string name="action_share">分享</string>
+    <string name="action_feedback">回饋與報告</string>
+    <string name="action_settings">設定</string>
+    <string name="action_relaod">更新</string>
+    <string name="action_terms">使用者協議</string>
+    <string name="action_privacy">隱私協議</string>
+    <string name="action_shortcut">添加首頁捷徑</string>
+
+    <string name="dialog_close_save_message">您所做的更改可能不會被保存。</string>
+    <string name="dialog_share_phone_title">要分享您的電話號碼嗎？</string>
+    <string name="dialog_share_phone_message">機器人將知道您的電話號碼。這可能會很有用...</string>
+    <string name="dialog_write_access_title">允許發送訊息</string>
+    <string name="dialog_write_access_message">允許這個機器人發送訊息給您嗎？</string>
+    <string name="dialog_allow_biometry_title">允許生物識別</string>
+    <string name="dialog_allow_biometry_message">您想允許 %s 使用生物識別嗎？</string>
+
+    <string name="button_ok">確定</string>
+
+    <string name="photo_holder">應用圖示</string>
+
+    <string name="webview_permissions_resource_title">開發者需要以下資源：</string>
+    <string name="webview_request_geolocation_permission">允許 %1$s 存取您的位置嗎？\n\n當該網頁應用程式打開時，%1$s 的開發者將能夠存取您的位置。</string>
+    <string name="webview_request_microphone_permission">允許 %1$s 存取您的麥克風嗎？\n\n當該網頁應用程式打開時，%1$s 的開發者將能夠存取您的麥克風。</string>
+    <string name="webview_request_camera_permission">允許 %1$s 存取您的相機嗎？\n\n當該網頁應用程式打開時，%1$s 的開發者將能夠存取您的相機。</string>
+    <string name="webview_request_camera_mic_permission">允許 %1$s 存取您的相機和麥克風嗎？\n\n當該網頁應用程式打開時，%1$s 的開發者將能夠存取您的相機和麥克風。</string>
+</resources>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">Itxi hala ere</string>
+    <string name="action_cancel">Ezeztatu</string>
+    <string name="action_allow">Baieztatu</string>
+    <string name="action_not_allow">Ez baieztatu</string>
+    <string name="action_share_contact">Parteka kontaktua</string>
+    <string name="action_not_now">Orain ez</string>
+    <string name="action_block_all">Blokeatu guztiak</string>
+
+    <string name="dialog_close_save_message">Egin dituzun aldaketak gorde ez daitezke.</string>
+    <string name="dialog_share_phone_title">Zure telefono zenbakia partekatu nahi al duzu?</string>
+    <string name="dialog_share_phone_message">Robota zure telefono zenbakia ezagutuko du. Hori erabilgarria izan daiteke...</string>
+    <string name="dialog_write_access_title">Mezuak bidaltzea baimentzea</string>
+    <string name="dialog_write_access_message">Baimentzen al diozu robotari mezuak bidaltzen?</string>
+    <string name="dialog_allow_biometry_title">Baieztatu biometria</string>
+    <string name="dialog_allow_biometry_message">Baieztatu nahi al duzu %s biometria erabiltzeko?</string>
+
+    <string name="button_ok">Ongi</string>
+
+    <string name="photo_holder">Aplikazioaren ikonoa</string>
+
+    <string name="webview_permissions_resource_title">Garatzaileak ondorengo baliabideak eskatzen ditu:</string>
+    <string name="webview_request_geolocation_permission">Baimentzen al diozu %1$s zure kokapenari sarbidea izatea?\n\n%1$s garatzaileak zure kokapenari sarbidea izango du aplikazio web hau irekitzen den bitartean.</string>
+    <string name="webview_request_microphone_permission">Baimentzen al diozu %1$s zure mikrofonora sarbidea izatea?\n\n%1$s garatzaileak zure mikrofonora sarbidea izango du aplikazio web hau irekitzen den bitartean.</string>
+    <string name="webview_request_camera_permission">Baimentzen al diozu %1$s zure kamerara sarbidea izatea?\n\n%1$s garatzaileak zure kamerara sarbidea izango du aplikazio web hau irekitzen den bitartean.</string>
+    <string name="webview_request_camera_mic_permission">Baimentzen al diozu %1$s zure kamerara eta mikrofonora sarbidea izatea?\n\n%1$s garatzaileak zure kamerara eta mikrofonora sarbidea izango du aplikazio web hau irekitzen den bitartean.</string>
+</resources>

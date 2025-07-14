@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">Aizvērt jebkurā gadījumā</string>
+    <string name="action_cancel">Atcelt</string>
+    <string name="action_allow">Atļaut</string>
+    <string name="action_not_allow">Neatļaut</string>
+    <string name="action_share_contact">Dalīties ar kontaktu</string>
+    <string name="action_not_now">Ne tagad</string>
+    <string name="action_block_all">Blokēt visus</string>
+
+    <string name="dialog_close_save_message">Izmaiņas, ko veicāt, var netikt saglabātas.</string>
+    <string name="dialog_share_phone_title">Dalīties ar savu tālruņa numuru?</string>
+    <string name="dialog_share_phone_message">Bots zinās jūsu tālruņa numuru. Tas var būt noderīgi...</string>
+    <string name="dialog_write_access_title">Atļaut ziņojumu sūtīšanu</string>
+    <string name="dialog_write_access_message">Atļaut šim botam sūtīt jums ziņojumus?</string>
+    <string name="dialog_allow_biometry_title">Atļaut biometriskos datus</string>
+    <string name="dialog_allow_biometry_message">Vai vēlaties atļaut %s izmantot biometriskos datus?</string>
+
+    <string name="button_ok">Labi</string>
+
+    <string name="photo_holder">Lietotnes ikona</string>
+
+    <string name="webview_permissions_resource_title">Izstrādātājam ir nepieciešami šādi resursi:</string>
+    <string name="webview_request_geolocation_permission">Atļaut %1$s piekļuvi jūsu atrašanās vietai?\n\n%1$s izstrādātājs varēs piekļūt jūsu atrašanās vietai, kad šī tīmekļa lietojumprogramma būs atvērta.</string>
+    <string name="webview_request_microphone_permission">Atļaut %1$s piekļuvi jūsu mikrofonam?\n\n%1$s izstrādātājs varēs piekļūt jūsu mikrofonam, kad šī tīmekļa lietojumprogramma būs atvērta.</string>
+    <string name="webview_request_camera_permission">Atļaut %1$s piekļuvi jūsu kamerai?\n\n%1$s izstrādātājs varēs piekļūt jūsu kamerai, kad šī tīmekļa lietojumprogramma būs atvērta.</string>
+    <string name="webview_request_camera_mic_permission">Atļaut %1$s piekļuvi jūsu kamerai un mikrofonam?\n\n%1$s izstrādātājs varēs piekļūt jūsu kamerai un mikrofonam, kad šī tīmekļa lietojumprogramma būs atvērta.</string>
+</resources>

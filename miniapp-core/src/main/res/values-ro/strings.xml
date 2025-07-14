@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">Închide oricum</string>
+    <string name="action_cancel">Anulează</string>
+    <string name="action_allow">Permite</string>
+    <string name="action_not_allow">Nu permite</string>
+    <string name="action_share_contact">Împărtășește contactul</string>
+    <string name="action_not_now">Nu acum</string>
+    <string name="action_block_all">Blochează tot</string>
+
+    <string name="dialog_close_save_message">Modificările pe care le-ai făcut s-ar putea să nu fie salvate.</string>
+    <string name="dialog_share_phone_title">Împărtășești numărul tău de telefon?</string>
+    <string name="dialog_share_phone_message">Botul va ști numărul tău de telefon. Acest lucru poate fi util...</string>
+    <string name="dialog_write_access_title">Permite mesaje</string>
+    <string name="dialog_write_access_message">Permiți acestui bot să îți trimită mesaje?</string>
+    <string name="dialog_allow_biometry_title">Permite biometria</string>
+    <string name="dialog_allow_biometry_message">Vrei să permiți lui %s să folosească biometria?</string>
+
+    <string name="button_ok">OK</string>
+
+    <string name="photo_holder">Pictograma aplicației</string>
+
+    <string name="webview_permissions_resource_title">Dezvoltatorul necesită următoarele resurse:</string>
+    <string name="webview_request_geolocation_permission">Permite %1$s să acceseze locația ta?\n\nDezvoltatorul %1$s va putea accesa locația ta când această aplicație web este deschisă.</string>
+    <string name="webview_request_microphone_permission">Permite %1$s să acceseze microfonul tău?\n\nDezvoltatorul %1$s va putea accesa microfonul tău când această aplicație web este deschisă.</string>
+    <string name="webview_request_camera_permission">Permite %1$s să acceseze camera ta?\n\nDezvoltatorul %1$s va putea accesa camera ta când această aplicație web este deschisă.</string>
+    <string name="webview_request_camera_mic_permission">Permite %1$s să acceseze camera și microfonul tău?\n\nDezvoltatorul %1$s va putea accesa camera și microfonul tău când această aplicație web este deschisă.</string>
+</resources>

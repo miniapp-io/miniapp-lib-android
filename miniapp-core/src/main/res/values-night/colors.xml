@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ow3_dialog_background">#1C1D22</color>
+    <color name="ow3_menu_background">#27272F</color>
+    <color name="ow3_line_color">#373A43</color>
+
+    <color name="ow3_content_primary">#FFFFFF</color>
+    <color name="ow3_content_secondary">#A9B2BC</color>
+</resources>

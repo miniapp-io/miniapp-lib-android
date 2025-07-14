@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">Lukk uansett</string>
+    <string name="action_cancel">Avbryt</string>
+    <string name="action_allow">Tillat</string>
+    <string name="action_not_allow">Ikke tillat</string>
+    <string name="action_share_contact">Del kontakt</string>
+    <string name="action_not_now">Ikke nå</string>
+    <string name="action_block_all">Blokker alt</string>
+
+    <string name="dialog_close_save_message">Endringene du har gjort, kan bli usikret.</string>
+    <string name="dialog_share_phone_title">Vil du dele telefonnummeret ditt?</string>
+    <string name="dialog_share_phone_message">Botten vil kjenne telefonnummeret ditt. Dette kan være nyttig...</string>
+    <string name="dialog_write_access_title">Tillat melding</string>
+    <string name="dialog_write_access_message">Vil du tillate denne botten å sende deg meldinger?</string>
+    <string name="dialog_allow_biometry_title">Tillat biometri</string>
+    <string name="dialog_allow_biometry_message">Vil du tillate %s å bruke biometri?</string>
+
+    <string name="button_ok">OK</string>
+
+    <string name="photo_holder">App-ikon</string>
+
+    <string name="webview_permissions_resource_title">Utvikleren trenger følgende ressurser:</string>
+    <string name="webview_request_geolocation_permission">Tillat %1$s å få tilgang til posisjonen din?\n\nUtvikleren av %1$s vil kunne få tilgang til posisjonen din når denne webappen er åpen.</string>
+    <string name="webview_request_microphone_permission">Tillat %1$s å få tilgang til mikrofonen din?\n\nUtvikleren av %1$s vil kunne få tilgang til mikrofonen din når denne webappen er åpen.</string>
+    <string name="webview_request_camera_permission">Tillat %1$s å få tilgang til kameraet ditt?\n\nUtvikleren av %1$s vil kunne få tilgang til kameraet ditt når denne webappen er åpen.</string>
+    <string name="webview_request_camera_mic_permission">Tillat %1$s å få tilgang til kameraet og mikrofonen din?\n\nUtvikleren av %1$s vil kunne få tilgang til kameraet og mikrofonen din når denne webappen er åpen.</string>
+</resources>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">Փակել որևէ դեպքում</string>
+    <string name="action_cancel">Չեղարկել</string>
+    <string name="action_allow">Թույլ տալ</string>
+    <string name="action_not_allow">Չէ թողնել</string>
+    <string name="action_share_contact">Կոնտակտը կիսել</string>
+    <string name="action_not_now">Այժմ չէ</string>
+    <string name="action_block_all">Բոլորը արգելափակել</string>
+
+    <string name="dialog_close_save_message">Արդյունքներ, որոնք դուք կատարեցինք, կարող են չխնայվել:</string>
+    <string name="dialog_share_phone_title">ԳWant եք կիսել ձեր հեռախոսահամարը:</string>
+    <string name="dialog_share_phone_message">Բոտը կհայտնի ձեր հեռախոսահամարը: Դա կարող է օգտակար լինել...</string>
+    <string name="dialog_write_access_title">Թույլ տալ հաղորդագրություններ</string>
+    <string name="dialog_write_access_message">Թույլ տալ այս բոտին ուղարկել ձեզ հաղորդագրություններ:</string>
+    <string name="dialog_allow_biometry_title">Թույլ տալ կենսաչափում</string>
+    <string name="dialog_allow_biometry_message">Ձեր միգուցե թույլ տալ %s-ը օգտագործել կենսաչափում:</string>
+
+    <string name="button_ok">Լավ է</string>
+
+    <string name="photo_holder">Կողմնորոշման պատկերակ</string>
+
+    <string name="webview_permissions_resource_title">Գործողը պահանջում է հետևյալ ռեսուրսները:</string>
+    <string name="webview_request_geolocation_permission">Թույլ տալ %1$s-ին մուտք գործել ձեր գտնվելու վայրը?\n\n%1$s-ի զարգացման թիմը կունենա մուտք ձեր գտնվելու վայրը, երբ այս վեբ ծրագիրը բաց է:</string>
+    <string name="webview_request_microphone_permission">Թույլ տալ %1$s-ին մուտք գործել ձեր միկրոֆոնը?\n\n%1$s-ի զարգացման թիմը կունենա մուտք ձեր միկրոֆոնը, երբ այս վեբ ծրագիրը բաց է:</string>
+    <string name="webview_request_camera_permission">Թույլ տալ %1$s-ին մուտք գործել ձեր տեսախցիկը?\n\n%1$s-ի զարգացման թիմը կունենա մուտք ձեր տեսախցիկը, երբ այս վեբ ծրագիրը բաց է:</string>
+    <string name="webview_request_camera_mic_permission">Թույլ տալ %1$s-ին մուտք գործել ձեր տեսախցիկն ու միկրոֆոնը?\n\n%1$s-ի զարգացման թիմը կունենա մուտք ձեր տեսախցիկին և միկրոֆոնին, երբ այս վեբ ծրագիրը բաց է:</string>
+</resources>

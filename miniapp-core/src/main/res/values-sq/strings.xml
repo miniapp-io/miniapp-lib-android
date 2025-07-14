@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">Mbylle çdo mënyrë</string>
+    <string name="action_cancel">Anulo</string>
+    <string name="action_allow">Lejo</string>
+    <string name="action_not_allow">Mos lejo</string>
+    <string name="action_share_contact">Shpërndaj kontaktin</string>
+    <string name="action_not_now">Jo tani</string>
+    <string name="action_block_all">Blloko të gjitha</string>
+
+    <string name="dialog_close_save_message">Ndryshimet që keni bërë mund të mos ruhen.</string>
+    <string name="dialog_share_phone_title">Të ndash numrin tënd të telefonit?</string>
+    <string name="dialog_share_phone_message">Boti do ta dijë numrin tënd të telefonit. Kjo mund të jetë e dobishme...</string>
+    <string name="dialog_write_access_title">Lejo dërgimin e mesazheve</string>
+    <string name="dialog_write_access_message">A do të lejoni këtë bot të ju dërgojë mesazhe?</string>
+    <string name="dialog_allow_biometry_title">Lejo biometrinë</string>
+    <string name="dialog_allow_biometry_message">A dëshironi të lejoni %s të përdorë biometrinë?</string>
+
+    <string name="button_ok">OK</string>
+
+    <string name="photo_holder">Ikona e aplikacionit</string>
+
+    <string name="webview_permissions_resource_title">Zhvilluesi kërkon burimet e mëposhtme:</string>
+    <string name="webview_request_geolocation_permission">Lejoni %1$s të aksesojë vendndodhjen tuaj?\n\nZhvilluesi i %1$s do të ketë akses në vendndodhjen tuaj kur kjo aplikacion web të jetë e hapur.</string>
+    <string name="webview_request_microphone_permission">Lejoni %1$s të aksesojë mikrofonin tuaj?\n\nZhvilluesi i %1$s do të ketë akses në mikrofonin tuaj kur kjo aplikacion web të jetë e hapur.</string>
+    <string name="webview_request_camera_permission">Lejoni %1$s të aksesojë kamerën tuaj?\n\nZhvilluesi i %1$s do të ketë akses në kamerën tuaj kur kjo aplikacion web të jetë e hapur.</string>
+    <string name="webview_request_camera_mic_permission">Lejoni %1$s të aksesojë kamerën dhe mikrofonin tuaj?\n\nZhvilluesi i %1$s do të ketë akses në kamerën dhe mikrofonin tuaj kur kjo aplikacion web të jetë e hapur.</string>
+</resources>

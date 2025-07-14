@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">ปิดไปเลย</string>
+    <string name="action_cancel">ยกเลิก</string>
+    <string name="action_allow">อนุญาต</string>
+    <string name="action_not_allow">ไม่อนุญาต</string>
+    <string name="action_share_contact">แบ่งปันข้อมูลติดต่อ</string>
+    <string name="action_not_now">ไม่ตอนนี้</string>
+    <string name="action_block_all">บล็อกทั้งหมด</string>
+
+    <string name="dialog_close_save_message">การเปลี่ยนแปลงที่คุณทำอาจจะไม่ได้รับการบันทึก</string>
+    <string name="dialog_share_phone_title">คุณต้องการแบ่งปันหมายเลขโทรศัพท์ของคุณไหม?</string>
+    <string name="dialog_share_phone_message">บอทนี้จะรู้หมายเลขโทรศัพท์ของคุณ ซึ่งอาจเป็นประโยชน์...</string>
+    <string name="dialog_write_access_title">อนุญาตให้ส่งข้อความ</string>
+    <string name="dialog_write_access_message">อนุญาตให้บอทนี้ส่งข้อความให้คุณไหม?</string>
+    <string name="dialog_allow_biometry_title">อนุญาตให้ใช้ไบโอเมตริก</string>
+    <string name="dialog_allow_biometry_message">คุณต้องการอนุญาตให้ %s ใช้ไบโอเมตริกไหม?</string>
+
+    <string name="button_ok">ตกลง</string>
+
+    <string name="photo_holder">ไอคอนแอป</string>
+
+    <string name="webview_permissions_resource_title">นักพัฒนาต้องการทรัพยากรต่อไปนี้:</string>
+    <string name="webview_request_geolocation_permission">อนุญาตให้ %1$s เข้าถึงตำแหน่งของคุณ?\n\nนักพัฒนาของ %1$s จะสามารถเข้าถึงตำแหน่งของคุณได้เมื่อแอปเว็บนี้เปิดอยู่</string>
+    <string name="webview_request_microphone_permission">อนุญาตให้ %1$s เข้าถึงไมโครโฟนของคุณ?\n\nนักพัฒนาของ %1$s จะสามารถเข้าถึงไมโครโฟนของคุณได้เมื่อแอปเว็บนี้เปิดอยู่</string>
+    <string name="webview_request_camera_permission">อนุญาตให้ %1$s เข้าถึงกล้องของคุณ?\n\nนักพัฒนาของ %1$s จะสามารถเข้าถึงกล้องของคุณได้เมื่อแอปเว็บนี้เปิดอยู่</string>
+    <string name="webview_request_camera_mic_permission">อนุญาตให้ %1$s เข้าถึงกล้องและไมโครโฟนของคุณ?\n\nนักพัฒนาของ %1$s จะสามารถเข้าถึงกล้องและไมโครโฟนของคุณได้เมื่อแอปเว็บนี้เปิดอยู่</string>
+</resources>

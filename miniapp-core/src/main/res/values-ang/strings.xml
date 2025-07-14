@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_close_anyway">Clýsan on eall swá hwæthwega</string>
+    <string name="action_cancel">Forwyrnan</string>
+    <string name="action_allow">Forlætan</string>
+    <string name="action_not_allow">Ne forlætan</string>
+    <string name="action_share_contact">Dælan cwidegást</string>
+    <string name="action_not_now">Nū ne</string>
+    <string name="action_block_all">Ealle forscytan</string>
+
+    <string name="dialog_close_save_message">Þā ongedwitan þīn ne beoþ nægode.</string>
+    <string name="dialog_share_phone_title">Dælan þīn hringinc?</string>
+    <string name="dialog_share_phone_message">Þes bōt wæt þīn hringinc. Þæt may geweorðan niedhweorne...</string>
+    <string name="dialog_write_access_title">Forlætan ærendracan</string>
+    <string name="dialog_write_access_message">Forlætest þū þysne bōt ærend gecnāwan?</string>
+    <string name="dialog_allow_biometry_title">Forlætan bīomæte</string>
+    <string name="dialog_allow_biometry_message">Wille þū þæt %s forlæt bīomæte beon?</string>
+
+    <string name="button_ok">Gōd</string>
+
+    <string name="photo_holder">Appec fācgesteald</string>
+
+    <string name="webview_permissions_resource_title">Se weorcend biddaþ þas fēoh:</string>
+    <string name="webview_request_geolocation_permission">Forlætest þū %1$s tōgangan þīn staðol?\n\nSe weorcend %1$s mæg þīn staðol ongietan þonne þes webbiþinge beoð open.</string>
+    <string name="webview_request_microphone_permission">Forlætest þū %1$s tōgangan þīn þūðhóf?\n\nSe weorcend %1$s mæg þīn þūðhóf ongietan þonne þes webbiþinge beoð open.</string>
+    <string name="webview_request_camera_permission">Forlætest þū %1$s tōgangan þīn sceawere?\n\nSe weorcend %1$s mæg þīn sceawere ongietan þonne þes webbiþinge beoð open.</string>
+    <string name="webview_request_camera_mic_permission">Forlætest þū %1$s tōgangan þīn sceawere ond þīn þūðhóf?\n\nSe weorcend %1$s mæg þīn sceawere ond þīn þūðhóf ongietan þonne þes webbiþinge beoð open.</string>
+</resources>
