@@ -942,7 +942,7 @@ internal data class WebAppParameters(
     }
 
     fun cacheData(): String {
-        return "${cacheKey()}_${startParam}_${DefaultResourcesProvider.getLanguageCode()}_${DefaultResourcesProvider.isDark()}"
+        return "${cacheKey()}_${startParam}_${params?.map { "${it.key}_${it.value}" }?.joinToString("_")}${DefaultResourcesProvider.getLanguageCode()}_${DefaultResourcesProvider.isDark()}"
     }
 
     class Builder {
