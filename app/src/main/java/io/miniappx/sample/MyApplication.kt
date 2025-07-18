@@ -102,8 +102,8 @@ class MyApplication : Application(), IAppDelegate {
                 TrustWalletProvider()
             }
             .floatWindowSize(90, 159)
-            .privacyUrl("your privacy url")
-            .termsOfServiceUrl("your terms of service url")
+            .privacyUrl("https://docs.openweb3.io/docs/standard-miniapp-privacy-policy")
+            .termsOfServiceUrl("https://docs.openweb3.io/docs/terms-of-service-for-mini-apps")
             .build()
 
         miniAppService.setup(config = appConfig)
@@ -114,8 +114,8 @@ class MyApplication : Application(), IAppDelegate {
         openPlatformPlugin.signIn(
             context = this,
             isDev = true,
-            verifier = "your-verifier",
-            apiHost = "https://your-openserver-api.com",
+            verifier = "123",
+            apiHost = "https://dev-mapi.mtsocialdao.com",
             idTokenProvider = { idTokenProvider() },
             onVerifierSuccess = {
                 currentActivity?.also { activity->
@@ -144,7 +144,7 @@ class MyApplication : Application(), IAppDelegate {
     }
 
     private suspend fun idTokenProvider(): String = suspendCoroutine { continuation -> run {
-        continuation.resume("Provider your JWT Token!")
+        continuation.resume("eyJhbGciOiJSUzI1NiIsImtpZCI6ImhrOTV2M3p6YjdjczltNHJlYXN3dXl6aHRoemFkZ3cxczh0eTRjbjYiLCJ0eXAiOiJKV1QifQ.eyJleHAiOjUzNTIzMjc0ODAsImlhdCI6MTc1MjMyNzQ4MCwic3ViIjoidGVzdCIsInVzZXJfaWQiOiJ0ZXN0IiwidXNlcm5hbWUiOiJ0ZXN0In0.Kv82MMZp-QvWnPxHwPFWy0RnJ36AepIYqqaX9S64ABYLnIHk51mXDypTEd5dMUc5kp_UT1H9NxTTArXxsJCRBl84zp2-vN4cswXixVcZj4f_moadTQQvBEnZ52VUh-xIbFMSPFrIjsbDxIsBMUYl5DAMvhr2swnCswdzm5x6qTHoxuqCEZMX0CwJvZZbbMU3w5uwZ2CmoAa27TURdxH0_7UqVGfojrQhTfEld5vfgZztWTQUHZY0t6WmZ1rwOXEJuqaePX3kyhfytECFlx6Nd2xwNw2DHOhDGFEM47AVv8J7riFF3etrkVkhHSz5JXyIhfG7PSldHgdvbRk1qtDGfA")
     }}
 
     override suspend fun scanQrCodeForResult(app: IMiniApp, subTitle: String?): String {
