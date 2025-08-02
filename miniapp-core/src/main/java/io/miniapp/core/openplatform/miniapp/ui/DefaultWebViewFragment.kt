@@ -586,7 +586,8 @@ internal class DefaultWebViewFragment(
             override fun onOverrideUrlLoading(url: String, isNewWindow: Boolean): Boolean {
                 try {
                     val uri = Uri.parse(url)
-                    if (uri.scheme?.lowercase() == "file") {
+                    if (uri.scheme?.lowercase() == "file" ||
+                        uri.scheme?.lowercase() == "blob") {
                         return false
                     }
 
