@@ -157,7 +157,8 @@ internal abstract class AbsWebViewContainer(
                     return true
                 }
 
-                return onOverrideUrlLoading(request.url.toString(), isNewWindow).apply {
+                return onOverrideUrlLoading(request.url.toString(), isNewWindow || !request.isRedirect
+                ).apply {
                     if (this) {
                         setKeyboardFocusable(false)
                     }

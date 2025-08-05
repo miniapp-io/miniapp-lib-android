@@ -78,7 +78,7 @@ internal class WebAppEventProxy(private val context: Context,
         }
 
         webApp?.subscribeMessage("web_app_biometry_request_access") { eventData ->
-            if (true==sp?.access_requested && sp.disabled) {
+            if (true== sp?.disabled) {
                 notifyBiometryReceived()
                 return@subscribeMessage true
             }

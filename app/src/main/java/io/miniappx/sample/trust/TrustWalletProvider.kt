@@ -124,6 +124,7 @@ class TrustWalletProvider : BridgeProvider {
                 window._tw_.postMessage(JSON.stringify(json));
             }
             window.ethereum = trustwallet.ethereum;
+            window.solana = trustwallet.solana;
         })();
         """
         return  source
