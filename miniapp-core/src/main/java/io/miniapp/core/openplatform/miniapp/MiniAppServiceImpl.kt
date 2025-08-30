@@ -760,17 +760,26 @@ internal class MiniAppServiceImpl : MiniAppService {
         isPreload: Boolean = false
     ): IMiniApp {
 
-        val cacheMiniApp = config.cacheKey()?.let {
+        val cacheKey = config.cacheKey()
+
+        val cacheMiniApp = cacheKey?.let {
                 WebAppLruCache.get(it)
             }?.let {
-                if (it.miniApp != null && it.isTopLevel() && FloatingWindowManager.isAppOnMinimization(it.webAppId) ) {
+                if (it.isExpired) {
+                    WebAppLruCache.remove(cacheKey)
+                    it.miniApp?.requestDismiss(force = true, immediately = true, isSilent = true)
+                    null
+                }
+                else if (it.miniApp != null && it.isTopLevel() && FloatingWindowManager.isAppOnMinimization(it.webAppId) ) {
                     it
                 } else {
+                    WebAppLruCache.remove(cacheKey)
                     it.miniApp?.requestDismiss(force = true, immediately = true, isSilent = true)
                     null
                 }
             }?.let{
                 if (config.owner != (it.miniApp as? DefaultWebViewFragment)?.owner) {
+                    WebAppLruCache.remove(cacheKey)
                     it.miniApp?.requestDismiss(force = true, immediately = true, isSilent = true)
                     null
                 } else {
