@@ -38,7 +38,7 @@ internal object WebAppLruCache {
         webViewCache.put(key, WeakReference(webView))
     }
 
-    fun remote(key: String): DefaultAppWebView? {
+    fun remove(key: String): DefaultAppWebView? {
         return webViewCache.remove(key)?.get()
     }
 

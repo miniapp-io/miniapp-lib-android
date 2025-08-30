@@ -1909,7 +1909,7 @@ internal class DefaultWebViewFragment(
         progressView.setAlpha(1f)
         progressView.visibility = VISIBLE
         pageLoadingView.showLoading()
-        if (webViewContainer.getLoadUrl().isNullOrBlank()) {
+        if (webViewContainer.shouldLoadNewUrl()) {
             requestLaunchUrl()
         } else {
             webViewContainer.reload()

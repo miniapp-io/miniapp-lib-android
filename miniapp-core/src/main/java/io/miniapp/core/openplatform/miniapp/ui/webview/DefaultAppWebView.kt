@@ -55,6 +55,11 @@ internal class DefaultAppWebView(context: Context) : WebView(context), IWebAppEv
     var isSettingVisible: Boolean? = null
     var showFullscreen: Boolean? = null
     var appSettings: AppSettings? = null
+    
+    // Expiration time property, used to control the expiration state of mini apps
+    var expirationTime: Long? = null
+    val isExpired: Boolean
+        get() = expirationTime?.let { System.currentTimeMillis() > it } ?: false
 
     var metadata: JSONObject? = null
 
@@ -110,6 +115,8 @@ internal class DefaultAppWebView(context: Context) : WebView(context), IWebAppEv
 
     init {
         WebViewResourceHelper.addChromeResourceIfNeeded(context)
+        // Set expiration time to 1 hour from now
+        expirationTime = System.currentTimeMillis() + (60 * 60 * 1000)
     }
 
     private data class SelectItem(

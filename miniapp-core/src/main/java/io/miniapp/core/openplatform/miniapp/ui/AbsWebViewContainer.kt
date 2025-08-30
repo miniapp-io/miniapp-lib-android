@@ -26,6 +26,7 @@ import androidx.core.util.Consumer
 import androidx.lifecycle.LifecycleOwner
 import io.miniapp.bridge.BridgeProvider
 import io.miniapp.core.R
+import io.miniapp.core.openplatform.common.network.utils.isValidUrl
 import io.miniapp.core.openplatform.miniapp.ActivityStack
 import io.miniapp.core.openplatform.miniapp.IMiniApp
 import io.miniapp.core.openplatform.miniapp.WebAppParameters
@@ -378,6 +379,10 @@ internal abstract class AbsWebViewContainer(
     }
 
     fun getLoadUrl() = mUrl
+
+    fun shouldLoadNewUrl() : Boolean {
+        return mUrl.isNullOrBlank() || (true == webView?.isExpired)
+    }
 
     fun destroyWebView(pause: Boolean) {
         webView?.apply {

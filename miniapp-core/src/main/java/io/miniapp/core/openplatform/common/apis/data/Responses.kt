@@ -29,6 +29,8 @@ internal data class DAppDto(
     val title: String?,
     val url: String?,
     val description: String?,
+    @Json(name = "short_description")
+    val shortDescription: String?,
     @Json(name = "icon_url")
     val iconUrl: String?,
     @Json(name = "banner_url")
@@ -82,6 +84,8 @@ internal data class MiniAppDto(
     val identifier: String?,
     val title: String?,
     val description: String?,
+    @Json(name = "short_description")
+    val shortDescription: String?,
     @Json(name = "icon_url")
     val iconUrl: String?,
     @Json(name = "banner_url")

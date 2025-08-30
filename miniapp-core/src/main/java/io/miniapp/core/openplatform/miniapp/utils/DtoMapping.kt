@@ -21,6 +21,7 @@ internal fun MiniAppDto.toInfo() : MiniAppInfo {
         identifier = this.identifier,
         title = this.title,
         description = this.description,
+        shortDescription = this.shortDescription,
         iconUrl = this.iconUrl,
         bannerUrl = this.bannerUrl,
         botId = this.botId,
@@ -35,6 +36,7 @@ internal fun DAppDto.toInfo() : DAppInfo {
         id = this.id,
         title = this.title,
         description = this.description,
+        shortDescription = this.shortDescription,
         iconUrl = this.iconUrl,
         bannerUrl = this.bannerUrl,
         url = this.url

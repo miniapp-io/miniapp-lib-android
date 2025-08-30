@@ -8,6 +8,7 @@ import android.widget.FrameLayout
 import androidx.annotation.IntDef
 import androidx.annotation.Keep
 import androidx.lifecycle.LifecycleOwner
+import com.squareup.moshi.Json
 import io.miniapp.bridge.BridgeProvider
 import io.miniapp.bridge.BridgeProviderFactory
 import io.miniapp.core.openplatform.ThrowsIllegalStateException
@@ -575,6 +576,7 @@ data class DAppInfo(
     val title: String?,
     val url: String?,
     val description: String?,
+    val shortDescription: String?,
     val iconUrl: String?,
     val bannerUrl: String?,
 )
@@ -584,6 +586,7 @@ data class MiniAppInfo(
     val identifier: String?,
     val title: String?,
     val description: String?,
+    val shortDescription: String?,
     val iconUrl: String?,
     val bannerUrl: String?,
     val botId: String?,
