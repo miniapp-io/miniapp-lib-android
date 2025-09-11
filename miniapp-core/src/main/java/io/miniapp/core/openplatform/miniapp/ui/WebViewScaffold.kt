@@ -124,14 +124,12 @@ internal fun WebView.setAgent(isApp: Boolean) {
             "(Linux; Android " + Build.VERSION.RELEASE + "; K)"
         )
         useragent = useragent.replace("Version/[\\d\\.]+ ".toRegex(), "")
-        if (isApp) {
-            val perf: Int = AndroidUtils.getDevicePerformanceClass()
-            val perfName =
-                if (perf == 0) "LOW" else if (perf == 1) "AVERAGE" else "HIGH"
-            useragent += (" MiniAppX-Android/" + BuildConfig.CORE_VERSION + " (" + AndroidUtils.capitalizeFirst(
-                Build.MANUFACTURER
-            )) + " " + Build.MODEL + "; Android " + Build.VERSION.RELEASE + "; SDK " + Build.VERSION.SDK_INT + "; " + perfName + ")"
-        }
+        val perf: Int = AndroidUtils.getDevicePerformanceClass()
+        val perfName =
+            if (perf == 0) "LOW" else if (perf == 1) "AVERAGE" else "HIGH"
+        useragent += (" MiniAppX Android/" + BuildConfig.CORE_VERSION + " (" + AndroidUtils.capitalizeFirst(
+            Build.MANUFACTURER
+        )) + " " + Build.MODEL + "; Android " + Build.VERSION.RELEASE + "; SDK " + Build.VERSION.SDK_INT + "; " + perfName + ")"
         settings.userAgentString = useragent
     } catch (e: Exception) {
         LogTimber.tag("MiniAppX").e(e)
