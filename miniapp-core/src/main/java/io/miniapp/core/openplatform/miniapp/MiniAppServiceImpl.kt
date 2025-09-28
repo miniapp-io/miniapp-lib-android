@@ -773,13 +773,11 @@ internal class MiniAppServiceImpl : MiniAppService {
                 else if (it.miniApp != null && it.isTopLevel() && FloatingWindowManager.isAppOnMinimization(it.webAppId) ) {
                     it
                 } else {
-                    WebAppLruCache.remove(cacheKey)
                     it.miniApp?.requestDismiss(force = true, immediately = true, isSilent = true)
                     null
                 }
             }?.let{
                 if (config.owner != (it.miniApp as? DefaultWebViewFragment)?.owner) {
-                    WebAppLruCache.remove(cacheKey)
                     it.miniApp?.requestDismiss(force = true, immediately = true, isSilent = true)
                     null
                 } else {
