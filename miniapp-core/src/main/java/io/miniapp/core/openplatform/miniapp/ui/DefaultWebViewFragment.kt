@@ -55,6 +55,7 @@ import io.miniapp.core.openplatform.miniapp.WebAppParameters
 import io.miniapp.core.openplatform.miniapp.ui.proxy.WebAppEventProxy
 import io.miniapp.core.openplatform.miniapp.ui.proxy.WebAppProxy
 import io.miniapp.core.openplatform.miniapp.ui.views.ActionBar
+import io.miniapp.core.openplatform.miniapp.ui.views.BackComponent
 import io.miniapp.core.openplatform.miniapp.ui.views.BackDrawable
 import io.miniapp.core.openplatform.miniapp.ui.views.CubicBezierInterpolator
 import io.miniapp.core.openplatform.miniapp.ui.views.PageLoadingView
@@ -119,6 +120,7 @@ internal class DefaultWebViewFragment(
     private var radialProgressAutoAnimator: VerticalPositionAutoAnimator? = null
     private var radialProgressView: RadialProgressView
     private var toolBarComponent: View? = null
+    private var backComponent: View? = null
 
     private var mainButtonWasVisible = false
     private var mainButtonProgressWasVisible = false
@@ -771,8 +773,11 @@ internal class DefaultWebViewFragment(
 
         mainButton = buildMainButton()
 
-        toolBarComponent = buildToolBarComponent(this)
+        toolBarComponent = buildToolBarComponent(this, true)
         toolBarComponent?.visibility = View.GONE
+
+        backComponent = buildBackComponent(this)
+        backComponent?.visibility = View.GONE
     }
 
     private fun hideLoadingView() {
@@ -917,7 +922,33 @@ internal class DefaultWebViewFragment(
         }
     }
 
-    private fun buildToolBarComponent(root: ViewGroup) : View {
+    private fun buildBackComponent(root: ViewGroup): View {
+        val backComponent = BackComponent(resourcesProvider, context)
+        backComponent.back = {
+            backPress()
+        }
+
+        val layoutParams = LayoutParams(
+            AndroidUtils.dp(30),
+            AndroidUtils.dp(30)
+        )
+
+        layoutParams.topMargin = AndroidUtils.statusBarHeight + (ActionBar.getCurrentActionBarHeight(context) - AndroidUtils.dp(32))/2
+
+        if (isRtl()) {
+            layoutParams.marginEnd = AndroidUtils.dp(15)
+            layoutParams.gravity = Gravity.TOP or Gravity.END
+        } else {
+            layoutParams.marginStart = AndroidUtils.dp(15)
+            layoutParams.gravity = Gravity.TOP or Gravity.START
+        }
+
+        root.addView(backComponent, layoutParams)
+
+        return backComponent
+    }
+
+    private fun buildToolBarComponent(root: ViewGroup, fullscreenMod: Boolean = false) : View {
 
         var toolBar = launchConfig?.actionBarBuilder?.let {
             it( {
@@ -936,7 +967,7 @@ internal class DefaultWebViewFragment(
             return toolBar
         }
 
-        toolBar = ToolBarComponent(resourcesProvider, context)
+        toolBar = ToolBarComponent(resourcesProvider, context, fullscreenMod)
         toolBar.dismiss = {
             hideAndDestroy()
         }
@@ -1649,17 +1680,23 @@ internal class DefaultWebViewFragment(
 
         toolBarComponent?.layoutParams = layoutParams
         toolBarComponent?.requestLayout()
+
+        val layoutBackParams = backComponent?.layoutParams as? LayoutParams
+        layoutBackParams?.topMargin = toolBarProgress.toInt()
+        backComponent?.requestLayout()
     }
 
     private fun resetActionBar() {
         if (isFullScreenMod() || useCustomNavigation()) {
-            actionBar.visibility = View.GONE
-            toolBarComponent?.visibility = if (showActionBar) View.VISIBLE else View.GONE
+            actionBar.isVisible = false
+            toolBarComponent?.isVisible = showActionBar
+            backComponent?.isVisible = showActionBar && isBackButtonVisible
             onSafaAreChange(true)
         } else {
             actionBar.setOccupyStatusBar(isStatusBarVisible())
-            toolBarComponent?.visibility = View.GONE
-            actionBar.visibility = if (showActionBar) View.VISIBLE else View.GONE
+            toolBarComponent?.isVisible = false
+            backComponent?.isVisible = false
+            actionBar.isVisible = showActionBar
             onSafaAreChange(false)
         }
     }
@@ -1734,6 +1771,7 @@ internal class DefaultWebViewFragment(
         if (useWeChatStyle) {
             actionBar.setBackMenuVisible(visible)
         }
+        backComponent?.isVisible = visible && (toolBarComponent?.isVisible == true)
     }
 
     private fun openInBrowser(context: Context, url: String) {

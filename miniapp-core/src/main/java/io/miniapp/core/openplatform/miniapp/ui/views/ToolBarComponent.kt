@@ -10,6 +10,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.graphics.toColorInt
 import androidx.core.widget.ImageViewCompat
 import io.miniapp.core.R
 import io.miniapp.core.openplatform.miniapp.IResourcesProvider
@@ -19,6 +20,7 @@ import io.miniapp.core.openplatform.miniapp.utils.AndroidUtils
 internal class ToolBarComponent @JvmOverloads constructor(
     val resourcesProvider: IResourcesProvider,
     context: Context,
+    val fullscreenMod: Boolean = false,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
@@ -42,6 +44,14 @@ internal class ToolBarComponent @JvmOverloads constructor(
             AppCompatResources.getDrawable(context, R.drawable.toolbar_component_background_night)
         } else {
             AppCompatResources.getDrawable(context, R.drawable.toolbar_component_background)
+        }
+        if (fullscreenMod) {
+            val colorBgBack = if (resourcesProvider.isDark()) {
+                "#4D000000".toColorInt()
+            } else {
+                "#80FFFFFF".toColorInt()
+            }
+            backgroundTintList = ColorStateList.valueOf(colorBgBack)
         }
 
         shareActionButton = ImageButton(context).apply {
