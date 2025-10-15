@@ -43,15 +43,11 @@ internal class BackComponent @JvmOverloads constructor(
 
             setBackgroundResource(R.drawable.bg_rounded_circle)
             // Set rounded corner background
-            val colorBgBack = if (resourcesProvider.isDark()) {
-                "#4D000000".toColorInt()
-            } else {
-                "#80FFFFFF".toColorInt()
-            }
+            val colorBgBack = "#4D000000".toColorInt()
             backgroundTintList = ColorStateList.valueOf(colorBgBack)
 
             setImageResource(R.drawable.ic_action_back)
-            val tintColor = resourcesProvider.getColor("text_color")
+            val tintColor = "#FFFFFF".toColorInt()
             ImageViewCompat.setImageTintList(this, ColorStateList.valueOf(tintColor))
             setPadding(bthMargin, bthMargin, bthMargin, bthMargin)
         }

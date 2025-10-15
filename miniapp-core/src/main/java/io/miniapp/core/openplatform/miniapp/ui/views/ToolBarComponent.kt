@@ -40,19 +40,17 @@ internal class ToolBarComponent @JvmOverloads constructor(
 
     init {
         // Set rounded corner background
-        background = if (resourcesProvider.isDark()) {
+        background = if (resourcesProvider.isDark() || fullscreenMod) {
             AppCompatResources.getDrawable(context, R.drawable.toolbar_component_background_night)
         } else {
             AppCompatResources.getDrawable(context, R.drawable.toolbar_component_background)
         }
         if (fullscreenMod) {
-            val colorBgBack = if (resourcesProvider.isDark()) {
-                "#4D000000".toColorInt()
-            } else {
-                "#80FFFFFF".toColorInt()
-            }
+            val colorBgBack =  "#4D000000".toColorInt()
             backgroundTintList = ColorStateList.valueOf(colorBgBack)
         }
+
+        val tintColor = if(fullscreenMod) "#FFFFFF".toColorInt() else resourcesProvider.getColor("text_color")
 
         shareActionButton = ImageButton(context).apply {
             id = R.id.actionShare
@@ -66,7 +64,6 @@ internal class ToolBarComponent @JvmOverloads constructor(
             scaleType = ImageView.ScaleType.FIT_CENTER
             setBackgroundColor(Color.TRANSPARENT)
             setImageResource(R.drawable.ic_action_share)
-            val tintColor = resourcesProvider.getColor("text_color")
             ImageViewCompat.setImageTintList(this, ColorStateList.valueOf(tintColor))
             setPadding(bthMargin, bthMargin, bthMargin, bthMargin)
         }
@@ -86,7 +83,6 @@ internal class ToolBarComponent @JvmOverloads constructor(
             scaleType = ImageView.ScaleType.FIT_CENTER
             setBackgroundColor(Color.TRANSPARENT)
             setImageResource(R.drawable.ic_action_minisize)
-            val tintColor = resourcesProvider.getColor("text_color")
             ImageViewCompat.setImageTintList(this, ColorStateList.valueOf(tintColor))
             setPadding(bthMargin, bthMargin, bthMargin, bthMargin)
         }
@@ -104,7 +100,6 @@ internal class ToolBarComponent @JvmOverloads constructor(
             scaleType = ImageView.ScaleType.FIT_CENTER
             setBackgroundColor(Color.TRANSPARENT)
             setImageResource(R.drawable.ic_action_close)
-            val tintColor = resourcesProvider.getColor("text_color")
             ImageViewCompat.setImageTintList(this, ColorStateList.valueOf(tintColor))
             setPadding(bthMargin, bthMargin, bthMargin, bthMargin)
         }
@@ -119,7 +114,7 @@ internal class ToolBarComponent @JvmOverloads constructor(
                 topToTop = LayoutParams.PARENT_ID
                 bottomToBottom = LayoutParams.PARENT_ID
             }
-            setBackgroundColor(resourcesProvider.getColor("text_color"))
+            setBackgroundColor(tintColor)
             alpha = 0.3f
         }
         addView(verticalLine1)
@@ -132,7 +127,7 @@ internal class ToolBarComponent @JvmOverloads constructor(
                 topToTop = LayoutParams.PARENT_ID
                 bottomToBottom = LayoutParams.PARENT_ID
             }
-            setBackgroundColor(resourcesProvider.getColor("text_color"))
+            setBackgroundColor(tintColor)
             alpha = 0.3f
         }
         addView(verticalLine2)
