@@ -357,6 +357,7 @@ internal class DefaultWebViewFragment(
     }
 
     override fun onDestroy(owner: LifecycleOwner) {
+        toolBarComponent?.removeOnLayoutChangeListener(onToolbarLayoutListener)
         owner.lifecycle.removeObserver(this)
         webAppEventProxy?.release()
         webAppEventProxy = null
@@ -378,6 +379,13 @@ internal class DefaultWebViewFragment(
         }
         return !useModalStyle() && useCustomNavigation()
     }
+
+    private val onToolbarLayoutListener =
+        OnLayoutChangeListener { v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom ->
+            if (isFullScreenMod() || useCustomNavigation()) {
+                onSafaAreChange(true)
+            }
+        }
 
     init {
 
@@ -778,6 +786,8 @@ internal class DefaultWebViewFragment(
 
         backComponent = buildBackComponent(this)
         backComponent?.visibility = View.GONE
+
+        toolBarComponent?.addOnLayoutChangeListener(onToolbarLayoutListener)
     }
 
     private fun hideLoadingView() {
@@ -1703,7 +1713,11 @@ internal class DefaultWebViewFragment(
 
     private fun onSafaAreChange(showFull: Boolean) {
         if (showFull) {
-            val topMargin = ((toolBarComponent?.layoutParams as? LayoutParams)?.topMargin ?: 0) + (toolBarComponent?.measuredHeight ?: 0)
+            val location = IntArray(2)
+            toolBarComponent?.getLocationOnScreen(location)
+            val viewTopOnScreen = location[1]
+            val viewBottomOnScreen = viewTopOnScreen + (toolBarComponent?.height ?: 0)
+            val topMargin = viewBottomOnScreen
             reportSafeInsets(Rect(insets.left, 0, insets.right,  insets.bottom),topMargin)
         } else {
             reportSafeInsets(Rect(0, 0, 0, 0), 0)
