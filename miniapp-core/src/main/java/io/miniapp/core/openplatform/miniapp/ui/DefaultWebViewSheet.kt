@@ -110,6 +110,7 @@ internal class DefaultWebViewSheet(context: Context,
                 webViewFragment.setPadding(0, 0, 0, imeHeight - navigationBarHeight)
                 insets
             }
+
         } else {
             @Suppress("DEPRECATION")
             window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)

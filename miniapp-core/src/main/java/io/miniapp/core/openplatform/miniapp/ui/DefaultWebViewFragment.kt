@@ -14,6 +14,8 @@ import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
+import android.os.Handler
+import android.os.Looper
 import android.provider.Browser
 import android.util.TypedValue
 import android.view.Gravity
@@ -38,6 +40,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.color.MaterialColors
 import io.miniapp.bridge.BridgeProvider
 import io.miniapp.core.R
 import io.miniapp.core.openplatform.common.apis.data.AppSettings
@@ -183,6 +186,48 @@ internal class DefaultWebViewFragment(
     }
 
     private var settingMenuButtonVisible: Boolean = false
+
+    private val handler = Handler(Looper.getMainLooper())
+    private val checkNavigationBar = object : Runnable {
+        override fun run() {
+            if (isNavigationBarVisible()) {
+                hideNavigationBar()
+            }
+            handler.postDelayed(this, 3000)
+        }
+    }
+
+    private fun isNavigationBarVisible(): Boolean {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            val insets = rootWindowInsets
+            return insets?.isVisible(WindowInsets.Type.navigationBars()) ?: true
+        } else {
+            val visibility = (systemUiVisibility and View.SYSTEM_UI_FLAG_HIDE_NAVIGATION) == 0
+            return visibility
+        }
+    }
+
+    private fun hideNavigationBar() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            windowInsetsController?.hide(WindowInsets.Type.navigationBars())
+        } else {
+            systemUiVisibility = (systemUiVisibility
+                    or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                    or View.SYSTEM_UI_FLAG_FULLSCREEN
+                    or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
+        }
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun checkNavigationState() {
+        webViewContainer.getWebView()?.setOnTouchListener { _, _ ->
+            if (isFullScreenMod()) {
+                handler.removeCallbacks(checkNavigationBar)
+                handler.postDelayed(checkNavigationBar, 3000)
+            }
+            false
+        }
+    }
 
     private val miniAppRepository by lazy {
         OpenServiceRepository.getInstance()
@@ -361,6 +406,7 @@ internal class DefaultWebViewFragment(
         owner.lifecycle.removeObserver(this)
         webAppEventProxy?.release()
         webAppEventProxy = null
+        handler.removeCallbacks(checkNavigationBar)
 
         FloatingWindowManager.closeFloatingWindow(force = true, immediately = true)
 
@@ -499,6 +545,8 @@ internal class DefaultWebViewFragment(
 
                 swipeContainer.setWebView(getWebView())
 
+                checkNavigationState()
+
                 getWebView()?.also { webView->
                     windowBackgroundColor = webView.bgColor ?: windowBackgroundColor
                     webView.setBackgroundColor(windowBackgroundColor)
@@ -621,6 +669,12 @@ internal class DefaultWebViewFragment(
                 }
 
                 return false
+            }
+
+            override fun dispatchWebviewNoResponse(view: WebView?) {
+                super.dispatchWebviewNoResponse(view)
+                requestDismiss(force = true, immediately = true)
+                WebAppLruCache.removeAll()
             }
 
             override fun doUpdateVisitedHistory(view: WebView?) {

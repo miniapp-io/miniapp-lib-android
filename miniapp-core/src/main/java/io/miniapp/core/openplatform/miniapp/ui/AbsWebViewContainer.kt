@@ -67,6 +67,8 @@ internal abstract class AbsWebViewContainer(
     private var shownDialogsCount = 0
     private var blockedDialogsUntil: Long = 0
 
+    private var isWebViewNoResponse = false
+
     init {
         parentActivity = UIContextUtil.findActivity(context)
         isFocusable = false
@@ -185,6 +187,12 @@ internal abstract class AbsWebViewContainer(
                 doUpdateVisitedHistory(view)
             }
 
+            override fun onWebviewNoResponse(view: WebView?) {
+                super.onWebviewNoResponse(view)
+                isWebViewNoResponse = true
+                dispatchWebviewNoResponse(view)
+            }
+
             override fun shouldInterceptRequest(
                 view: WebView?,
                 request: WebResourceRequest?
@@ -196,6 +204,10 @@ internal abstract class AbsWebViewContainer(
                 webViewProgressListener?.accept(process)
             }
         }
+    }
+
+    open fun dispatchWebviewNoResponse(view: WebView?) {
+
     }
 
     open fun doUpdateVisitedHistory(view: WebView?) {
@@ -388,7 +400,9 @@ internal abstract class AbsWebViewContainer(
         webView?.apply {
             removeHandler()
             getCacheKey()?.also {
-                WebAppLruCache.put(it, this)
+                if (!isWebViewNoResponse) {
+                    WebAppLruCache.put(it, this)
+                }
                 setDismissFlag()
                 releaseRef(pause)
                 setWebViewScrollListener(null)
@@ -522,7 +536,9 @@ internal abstract class AbsWebViewContainer(
 
         if(!isUseCache) {
             cacheKey?.apply {
-                WebAppLruCache.put(this, webView!!)
+                if (!isWebViewNoResponse) {
+                    WebAppLruCache.put(this, webView!!)
+                }
             }
         } else {
             if (!webView!!.isParentDismiss()) {

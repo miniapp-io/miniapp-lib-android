@@ -1,12 +1,16 @@
 package io.miniapp.core.openplatform.miniapp.ui.webview
 
 import android.graphics.Bitmap
+import android.os.Build
+import android.webkit.RenderProcessGoneDetail
 import android.webkit.WebResourceError
 import android.webkit.WebResourceRequest
 import android.webkit.WebResourceResponse
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import io.miniapp.core.R
 import io.miniapp.core.openplatform.miniapp.events.WebViewEventListener
+import io.miniapp.core.openplatform.miniapp.utils.AndroidUtils
 import io.miniapp.core.openplatform.miniapp.utils.LogTimber
 import java.lang.ref.WeakReference
 
@@ -107,5 +111,20 @@ internal class DefaultWebViewClient(eventListener: WebViewEventListener?) : WebV
             LogTimber.tag("DefaultWebViewClient#onReceivedError").d(error.description.toString())
             mInError = eventListener.get()?.onPageError(request.url.toString(), error.errorCode, error.description.toString()) ?: false
         }
+    }
+
+    override fun onRenderProcessGone(view: WebView?, detail: RenderProcessGoneDetail?): Boolean {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            LogTimber.tag("DefaultWebViewClient#onReceivedError").d("onRenderProcessGone priority=" + (if (detail == null) null else detail.rendererPriorityAtExit()) + " didCrash=" + (if (detail == null) null else detail.didCrash()))
+        } else {
+            LogTimber.tag("DefaultWebViewClient#onReceivedError").d("onRenderProcessGone")
+        }
+        if (!AndroidUtils.isSafeToShow(context = view?.context)) {
+            return true
+        }
+
+        eventListener.get()?.onWebviewNoResponse(view)
+
+        return true
     }
 }

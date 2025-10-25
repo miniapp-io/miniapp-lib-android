@@ -2,8 +2,10 @@ package io.miniapp.core.openplatform.miniapp.utils
 
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.ActivityManager
 import android.content.Context
+import android.content.ContextWrapper
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.content.res.TypedArray
@@ -631,5 +633,38 @@ object AndroidUtils {
 
     fun getApplicationIdUsingPackageName(): String {
         return mContext.packageName
+    }
+
+    fun findActivity(context: Context?): Activity? {
+        if (context is Activity) {
+            return context
+        }
+        if (context is ContextWrapper) {
+            return findActivity(context.baseContext)
+        }
+        return null
+    }
+
+    fun isActivityRunning(activity: Activity?): Boolean {
+        if (activity == null) {
+            return false
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            return !activity.isDestroyed && !activity.isFinishing
+        } else {
+            return !activity.isFinishing
+        }
+    }
+
+    fun isSafeToShow(context: Context?): Boolean {
+        val activity: Activity? = findActivity(context)
+        if (activity == null) return true
+        return isActivityRunning(activity)
+    }
+
+    fun setNavigationBarColor(window: Window, color: Int) {
+        @Suppress("DEPRECATION")
+        window.navigationBarColor = color
     }
 }

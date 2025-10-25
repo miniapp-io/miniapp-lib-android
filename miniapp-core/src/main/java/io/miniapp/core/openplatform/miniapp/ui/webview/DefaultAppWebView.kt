@@ -16,7 +16,6 @@ import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
 import io.miniapp.core.R
 import io.miniapp.core.openplatform.common.apis.data.AppSettings
@@ -33,7 +32,7 @@ import org.json.JSONArray
 import org.json.JSONObject
 
 
-@SuppressLint("ViewConstructor")
+@SuppressLint("ViewConstructor", "ClickableViewAccessibility")
 internal class DefaultAppWebView(context: Context) : WebView(context), IWebAppEventHandler {
     companion object {
         var _webAppId = 0

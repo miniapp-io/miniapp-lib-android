@@ -103,4 +103,11 @@ internal interface WebViewEventListener {
     fun doUpdateVisitedHistory(view: WebView?, url: String?, isReload: Boolean) {
 
     }
+
+    /**
+     * Triggered when a webview has no response
+     */
+    fun onWebviewNoResponse(view: WebView?) {
+
+    }
 }
