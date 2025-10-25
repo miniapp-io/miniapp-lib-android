@@ -188,12 +188,9 @@ internal class DefaultWebViewFragment(
     private var settingMenuButtonVisible: Boolean = false
 
     private val handler = Handler(Looper.getMainLooper())
-    private val checkNavigationBar = object : Runnable {
-        override fun run() {
-            if (isNavigationBarVisible()) {
-                hideNavigationBar()
-            }
-            handler.postDelayed(this, 3000)
+    private val checkNavigationBar = Runnable {
+        if (isNavigationBarVisible()) {
+            hideNavigationBar()
         }
     }
 
@@ -221,10 +218,8 @@ internal class DefaultWebViewFragment(
     @SuppressLint("ClickableViewAccessibility")
     private fun checkNavigationState() {
         webViewContainer.getWebView()?.setOnTouchListener { _, _ ->
-            if (isFullScreenMod()) {
-                handler.removeCallbacks(checkNavigationBar)
-                handler.postDelayed(checkNavigationBar, 3000)
-            }
+            handler.removeCallbacks(checkNavigationBar)
+            handler.postDelayed(checkNavigationBar, 3000)
             false
         }
     }
@@ -401,7 +396,9 @@ internal class DefaultWebViewFragment(
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onDestroy(owner: LifecycleOwner) {
+        webViewContainer.getWebView()?.setOnTouchListener(null)
         toolBarComponent?.removeOnLayoutChangeListener(onToolbarLayoutListener)
         owner.lifecycle.removeObserver(this)
         webAppEventProxy?.release()
