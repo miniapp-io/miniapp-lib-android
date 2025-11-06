@@ -25,6 +25,7 @@ import android.view.ViewGroup
 import android.view.WindowInsets
 import android.webkit.PermissionRequest
 import android.webkit.WebChromeClient
+import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -93,6 +94,8 @@ import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.resume
 import kotlin.math.min
+import androidx.core.net.toUri
+import retrofit2.http.Url
 
 
 internal class DefaultWebViewFragment(
@@ -109,6 +112,7 @@ internal class DefaultWebViewFragment(
     private var miniAppDto: MiniAppDto? = launchConfig?.miniAppDto
     private var appSettings: AppSettings? = launchConfig?.miniAppDto?.options
     private var appId: String? = launchConfig?.miniAppId ?: launchConfig?.miniAppDto?.id
+    private var isOpenDappOnMainFrame: Boolean = false
 
     private var springAnimation: SpringAnimation? = null
     private val swipeContainer: WebViewSwipeContainer
@@ -623,6 +627,8 @@ internal class DefaultWebViewFragment(
                     getWebView()?.getPageData {
                         updateActionBarTitle()
                     }
+                } else {
+                    isOpenDappOnMainFrame = !isMainHost(url.toUri())
                 }
             }
 
@@ -638,9 +644,9 @@ internal class DefaultWebViewFragment(
                 }
             }
 
-            override fun onOverrideUrlLoading(url: String, isNewWindow: Boolean): Boolean {
+            override fun onOverrideUrlLoading(url: String, request: WebResourceRequest?, isNewWindow: Boolean): Boolean {
                 try {
-                    val uri = Uri.parse(url)
+                    val uri = url.toUri()
                     if (uri.scheme?.lowercase() == "file" ||
                         uri.scheme?.lowercase() == "blob") {
                         return false
@@ -652,7 +658,7 @@ internal class DefaultWebViewFragment(
                         return true
                     }
 
-                    if (SchemeUtils.isInternalUri(Uri.parse(url), hosts = MiniAppServiceImpl.getInstance().miniAppHost)) {
+                    if (SchemeUtils.isInternalUri(url.toUri(), hosts = MiniAppServiceImpl.getInstance().miniAppHost)) {
                         openUrl(url, true)
                         return true
                     }
@@ -662,6 +668,9 @@ internal class DefaultWebViewFragment(
                         return true
                     }
 
+                    if (!isDApp() && true == request?.isForMainFrame) {
+                        isOpenDappOnMainFrame = !isMainHost(uri)
+                    }
                 } catch (_: Exception) {
                 }
 
@@ -675,6 +684,9 @@ internal class DefaultWebViewFragment(
             }
 
             override fun doUpdateVisitedHistory(view: WebView?) {
+                if (!isDApp()) {
+                    isOpenDappOnMainFrame = !isMainHost(view?.url?.toUri())
+                }
                 updateBackButtonState()
             }
 
@@ -846,7 +858,7 @@ internal class DefaultWebViewFragment(
     }
 
     private fun updateBackButtonState() {
-        if (true == launchConfig?.isDApp) {
+        if (true == launchConfig?.isDApp || isOpenDappOnMainFrame) {
             setupBackButton(true==webViewContainer.getWebView()?.canGoBack())
         }
     }
@@ -1839,9 +1851,18 @@ internal class DefaultWebViewFragment(
         backComponent?.isVisible = visible && (toolBarComponent?.isVisible == true)
     }
 
+    private fun isMainHost(url: Uri?): Boolean {
+        val mainUrl = webViewContainer.mUrl ?: return false
+        val urlMain = runCatching { mainUrl.toUri() }.getOrNull() ?: return false
+        val mainHost = urlMain.host ?: return false
+        val urlHost = url?.host ?: return false
+
+        return mainHost == urlHost
+    }
+
     private fun openInBrowser(context: Context, url: String) {
         try {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            val intent = Intent(Intent.ACTION_VIEW, url.toUri())
             intent.putExtra(Browser.EXTRA_CREATE_NEW_TAB, true)
             intent.putExtra(Browser.EXTRA_APPLICATION_ID, context.packageName)
             context.startActivity(intent)
@@ -1854,7 +1875,7 @@ internal class DefaultWebViewFragment(
         try {
             owner.lifecycleScope.launch(Dispatchers.Main + allJobs) {
 
-                val uri = Uri.parse(url)
+                val uri = url.toUri()
                 val isMeUrl = SchemeUtils.isInternalUri(uri, hosts = MiniAppServiceImpl.getInstance().miniAppHost)
 
                 if (isMeUrl) {
@@ -1909,7 +1930,7 @@ internal class DefaultWebViewFragment(
 
     private suspend fun interceptAction(link: String) : Boolean {
         try {
-            val uri = Uri.parse(link) ?: return false
+            val uri = link.toUri()
 
             val setAsAttachBot = uri.getQueryParameter("startattach")
             val attachMenuBotChoose = uri.getQueryParameter("choose")
@@ -2347,7 +2368,11 @@ internal class DefaultWebViewFragment(
     }
 
     private fun backPress(): Boolean {
-        if (true==launchConfig?.isDApp) {
+        if (true==launchConfig?.isDApp || isOpenDappOnMainFrame) {
+            if (isOpenDappOnMainFrame) {
+                isOpenDappOnMainFrame = false
+                setupBackButton(false)
+            }
             if (true == webViewContainer.getWebView()?.canGoBack()) {
                 webViewContainer.getWebView()?.goBack()
                 return false

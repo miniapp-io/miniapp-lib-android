@@ -41,7 +41,7 @@ internal class DefaultWebViewClient(eventListener: WebViewEventListener?) : WebV
     @Deprecated("Deprecated in Java")
     override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
         mInError = false
-        val shouldOverrideUrlLoading = eventListener.get()?.shouldOverrideUrlLoading(view, url) ?: false
+        val shouldOverrideUrlLoading = eventListener.get()?.shouldOverrideUrlLoading(view, url, null) ?: false
         if (!shouldOverrideUrlLoading) {
             eventListener.get()?.pageWillStart(url)
         }

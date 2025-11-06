@@ -133,7 +133,7 @@ internal class DefaultWebChromeClient(
                     if (isDialog) {
                         return false
                     }
-                    return eventListener.get()?.shouldOverrideUrlLoading(view, url, true) ?: false
+                    return eventListener.get()?.shouldOverrideUrlLoading(view, url, null, false) ?: false
                 }
 
                 override fun shouldOverrideUrlLoading(view: WebView, request: WebResourceRequest): Boolean {
@@ -142,7 +142,7 @@ internal class DefaultWebChromeClient(
                     if (isDialog) {
                         return false
                     }
-                    return (eventListener.get()?.shouldOverrideUrlLoading(view, request, true) ?: false)
+                    return (eventListener.get()?.shouldOverrideUrlLoading(view, request, false) ?: false)
                 }
 
                 override fun shouldInterceptRequest(

@@ -45,7 +45,7 @@ internal abstract class AbsWebViewContainer(
 ) : FrameLayout(context) {
 
     private var webView: DefaultAppWebView? = null
-    private var mUrl: String? = null
+    var mUrl: String? = null
     private var updateUrlOnly: Boolean = false
 
     private var webViewScrollListener: WebViewScrollListener? = null
@@ -160,14 +160,14 @@ internal abstract class AbsWebViewContainer(
                     return true
                 }
 
-                return onOverrideUrlLoading(request.url.toString(), isNewWindow).apply {
+                return onOverrideUrlLoading(request.url.toString(), request, isNewWindow).apply {
                     if (this) {
                         setKeyboardFocusable(false)
                     }
                 }
             }
 
-            override fun shouldOverrideUrlLoading(view: WebView, url: String, isNewWindow: Boolean): Boolean {
+            override fun shouldOverrideUrlLoading(view: WebView, url: String, request: WebResourceRequest?, isNewWindow: Boolean): Boolean {
                 if (url==mUrl) {
                     return false
                 }
@@ -176,7 +176,7 @@ internal abstract class AbsWebViewContainer(
                     return true
                 }
 
-                return onOverrideUrlLoading(url, isNewWindow).apply {
+                return onOverrideUrlLoading(url, request, isNewWindow).apply {
                     if (this) {
                         setKeyboardFocusable(false)
                     }
@@ -214,7 +214,7 @@ internal abstract class AbsWebViewContainer(
 
     }
 
-    open fun onOverrideUrlLoading(url: String, isNewWindow: Boolean): Boolean {
+    open fun onOverrideUrlLoading(url: String, request: WebResourceRequest?, isNewWindow: Boolean): Boolean {
         return false
     }
 
@@ -248,7 +248,6 @@ internal abstract class AbsWebViewContainer(
             set.start()
         }
 
-        mUrl = url
         isPageLoaded = true
         isFocusable = true
         updateKeyboardFocusable()

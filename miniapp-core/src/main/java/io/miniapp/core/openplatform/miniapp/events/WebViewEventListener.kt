@@ -77,7 +77,7 @@ internal interface WebViewEventListener {
      * @param url The url about to be rendered.
      * @return true if the method needs to manage some custom handling
      */
-    fun shouldOverrideUrlLoading(view: WebView, url: String, isNewWindow: Boolean = false): Boolean {
+    fun shouldOverrideUrlLoading(view: WebView, url: String, request: WebResourceRequest?, isNewWindow: Boolean = false): Boolean {
         return false
     }
 
