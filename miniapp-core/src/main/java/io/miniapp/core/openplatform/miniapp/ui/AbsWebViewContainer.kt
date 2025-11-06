@@ -378,7 +378,7 @@ internal abstract class AbsWebViewContainer(
                             webView?.loadUrl(url ?: "about:blank", h)
                         } ?: webView?.loadUrl(url ?: "about:blank")
                     } else {
-                        setPageFinished(url!!)
+                        setPageFinished(webView?.url.toString())
                     }
                 } catch (e: Exception) {
                     e.printStackTrace()
