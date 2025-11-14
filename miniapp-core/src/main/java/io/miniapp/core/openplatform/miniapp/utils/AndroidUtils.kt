@@ -6,6 +6,7 @@ import android.app.Activity
 import android.app.ActivityManager
 import android.content.Context
 import android.content.ContextWrapper
+import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.content.res.TypedArray
@@ -18,6 +19,7 @@ import android.util.DisplayMetrics
 import android.util.Log
 import android.util.TypedValue
 import android.view.Display
+import android.view.Surface
 import android.view.View
 import android.view.ViewConfiguration
 import android.view.Window
@@ -666,5 +668,79 @@ object AndroidUtils {
     fun setNavigationBarColor(window: Window, color: Int) {
         @Suppress("DEPRECATION")
         window.navigationBarColor = color
+    }
+
+    var prevOrientation: Int = -10
+
+    @SuppressLint("WrongConstant")
+    fun lockOrientation(activity: Activity?) {
+        if (activity == null || prevOrientation != -10) {
+            return
+        }
+        try {
+            prevOrientation = activity.getRequestedOrientation()
+            val manager = activity.getSystemService(Activity.WINDOW_SERVICE) as WindowManager?
+            if (manager != null && manager.getDefaultDisplay() != null) {
+                val rotation = manager.getDefaultDisplay().getRotation()
+                val orientation = activity.getResources().getConfiguration().orientation
+
+                if (rotation == Surface.ROTATION_270) {
+                    if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+                        activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+                    } else {
+                        activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE)
+                    }
+                } else if (rotation == Surface.ROTATION_90) {
+                    if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+                        activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT)
+                    } else {
+                        activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE)
+                    }
+                } else if (rotation == Surface.ROTATION_0) {
+                    if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                        activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE)
+                    } else {
+                        activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+                    }
+                } else {
+                    if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                        activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE)
+                    } else {
+                        activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT)
+                    }
+                }
+            }
+        } catch (e: Throwable) {
+            e.printStackTrace()
+        }
+    }
+
+
+    @SuppressLint("WrongConstant")
+    fun lockOrientation(activity: Activity?, orientation: Int) {
+        if (activity == null) {
+            return
+        }
+        try {
+            prevOrientation = activity.getRequestedOrientation()
+            activity.setRequestedOrientation(orientation)
+        } catch (e: Throwable) {
+            e.printStackTrace()
+        }
+    }
+
+    @SuppressLint("WrongConstant")
+    fun unlockOrientation(activity: Activity?) {
+        if (activity == null) {
+            return
+        }
+        try {
+             if (prevOrientation != -10) {
+                activity.setRequestedOrientation(prevOrientation)
+                prevOrientation = -10
+            }
+        } catch (e: Throwable) {
+            e.printStackTrace()
+        }
     }
 }

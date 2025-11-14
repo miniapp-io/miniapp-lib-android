@@ -1,6 +1,8 @@
 package io.miniapp.core.openplatform.miniapp.webapp
 import androidx.lifecycle.Lifecycle
 import io.miniapp.core.openplatform.miniapp.IMiniApp
+import io.miniapp.core.openplatform.miniapp.ui.proxy.WebAppProxy
+import io.miniapp.core.openplatform.miniapp.ui.proxy.WebAppSensors
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -36,6 +38,8 @@ interface WebEventPublisher<EVENT,DATA> {
 }
 
 internal interface IMiniAppDelegate {
+    fun getSensors(): WebAppSensors?
+    fun getProxy(): WebAppProxy?
     fun webApp() : IWebApp?
     fun app() : IMiniApp
     fun allowThisScroll(x: Boolean, y: Boolean)
@@ -67,6 +71,7 @@ internal interface IMiniAppDelegate {
     fun checkScreenShortcut()
     fun requestSafeArea()
     fun requestContentSafeArea()
+    fun requestOrientationLock(locked: Boolean)
     suspend fun invokeCustomMethod(method: String, params: String?): String?
 }
 

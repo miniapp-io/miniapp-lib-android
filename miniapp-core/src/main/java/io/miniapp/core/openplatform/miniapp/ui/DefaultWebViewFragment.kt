@@ -31,6 +31,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.ColorUtils
 import androidx.core.math.MathUtils
+import androidx.core.net.toUri
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.dynamicanimation.animation.FloatPropertyCompat
@@ -41,7 +42,6 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
-import com.google.android.material.color.MaterialColors
 import io.miniapp.bridge.BridgeProvider
 import io.miniapp.core.R
 import io.miniapp.core.openplatform.common.apis.data.AppSettings
@@ -58,6 +58,7 @@ import io.miniapp.core.openplatform.miniapp.ShareDto
 import io.miniapp.core.openplatform.miniapp.WebAppParameters
 import io.miniapp.core.openplatform.miniapp.ui.proxy.WebAppEventProxy
 import io.miniapp.core.openplatform.miniapp.ui.proxy.WebAppProxy
+import io.miniapp.core.openplatform.miniapp.ui.proxy.WebAppSensors
 import io.miniapp.core.openplatform.miniapp.ui.views.ActionBar
 import io.miniapp.core.openplatform.miniapp.ui.views.BackComponent
 import io.miniapp.core.openplatform.miniapp.ui.views.BackDrawable
@@ -86,6 +87,7 @@ import io.miniapp.core.openplatform.miniapp.utils.toParams
 import io.miniapp.core.openplatform.miniapp.webapp.IMiniAppDelegate
 import io.miniapp.core.openplatform.miniapp.webapp.IMiniAppListener
 import io.miniapp.core.openplatform.miniapp.webapp.IWebApp
+import io.miniapp.core.openplatform.miniapp.webapp.IWebAppEventHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.catch
@@ -94,8 +96,6 @@ import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.resume
 import kotlin.math.min
-import androidx.core.net.toUri
-import retrofit2.http.Url
 
 
 internal class DefaultWebViewFragment(
@@ -117,7 +117,11 @@ internal class DefaultWebViewFragment(
     private var springAnimation: SpringAnimation? = null
     private val swipeContainer: WebViewSwipeContainer
     private val webViewContainer: AbsWebViewContainer
+
     private var webAppProxy: WebAppProxy? = null
+    private var webAppSensors: WebAppSensors? = null
+    private var webEventHandler: IWebAppEventHandler? = null
+
     private var pageLoadingView: PageLoadingView
     private var progressView: WebProgressView
     private var actionBar: ActionBar
@@ -538,7 +542,8 @@ internal class DefaultWebViewFragment(
 
                 this@DefaultWebViewFragment.useCacheWebView = isUseCache
 
-                setDelegate(DefaultWebAppEventHandler(context, resourcesProvider, this@DefaultWebViewFragment))
+                webEventHandler = DefaultWebAppEventHandler(context, resourcesProvider, this@DefaultWebViewFragment)
+                setEventHandle(webEventHandler)
 
                 getWebApp()?.also {
                     webAppProxy = WebAppProxy(it, resourcesProvider)
@@ -619,7 +624,15 @@ internal class DefaultWebViewFragment(
             }
 
             override fun setPageFinished(url:String) {
+                if (!isPageLoaded) {
+                    webAppProxy?.notifyVisibleChange(true)
+                    getWebView()?.orientationLocked?.also {
+                        requestOrientationLock(it)
+                    }
+                }
+
                 super.setPageFinished(url)
+
                 invalidateViewPortHeight(true)
                 hideLoadingView()
                 updateActionBarTitle()
@@ -654,7 +667,7 @@ internal class DefaultWebViewFragment(
 
                     if (uri.scheme?.lowercase() != "http" &&
                         uri.scheme?.lowercase() != "https") {
-                        openInBrowser(context, url)
+                        MiniAppServiceImpl.getInstance().openInBrowser(context, url)
                         return true
                     }
 
@@ -664,7 +677,7 @@ internal class DefaultWebViewFragment(
                     }
 
                     if (isNewWindow) {
-                        openInBrowser(context, url)
+                        MiniAppServiceImpl.getInstance().openInBrowser(context, url)
                         return true
                     }
 
@@ -1366,6 +1379,17 @@ internal class DefaultWebViewFragment(
         swipeContainer.allowThisScroll(x, y)
     }
 
+    override fun getSensors(): WebAppSensors? {
+        if (webAppProxy == null) return null
+        return webAppSensors ?: WebAppSensors(context, webAppProxy!!).apply {
+            webAppSensors = this
+        }
+    }
+
+    override fun getProxy(): WebAppProxy? {
+        return webAppProxy
+    }
+
     override fun webApp(): IWebApp? {
         return webViewContainer.getWebApp()
     }
@@ -1860,17 +1884,6 @@ internal class DefaultWebViewFragment(
         return mainHost == urlHost
     }
 
-    private fun openInBrowser(context: Context, url: String) {
-        try {
-            val intent = Intent(Intent.ACTION_VIEW, url.toUri())
-            intent.putExtra(Browser.EXTRA_CREATE_NEW_TAB, true)
-            intent.putExtra(Browser.EXTRA_APPLICATION_ID, context.packageName)
-            context.startActivity(intent)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-    }
-
     override fun openUrl(url: String, isInternal: Boolean) {
         try {
             owner.lifecycleScope.launch(Dispatchers.Main + allJobs) {
@@ -1885,7 +1898,7 @@ internal class DefaultWebViewFragment(
 
                     val segments = ArrayList<String>(uri.pathSegments)
                     if (segments.size == 1) {
-                        openInBrowser(context, url)
+                        MiniAppServiceImpl.getInstance().openInBrowser(context, url)
                         return@launch
                     }
                 }
@@ -1988,6 +2001,9 @@ internal class DefaultWebViewFragment(
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
+
+        setViewAttached(true)
+
         if (defaultDelegate == null && springAnimation == null) {
             springAnimation = SpringAnimation(this, ACTION_BAR_TRANSITION_PROGRESS_VALUE)
                 .setSpring(
@@ -2000,6 +2016,9 @@ internal class DefaultWebViewFragment(
 
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
+
+        setViewAttached(false)
+
         springAnimation?.cancel()
         springAnimation = null
         actionBarTransitionProgress = 0f
@@ -2023,9 +2042,10 @@ internal class DefaultWebViewFragment(
     }
 
     private fun loadUrl(url: String) {
-        webViewContainer.loadUrl(url) {
-            pageLoadingView.showLoading()
-        }
+        webViewContainer.loadUrl(url) { isUseCache->
+            if (!isUseCache)
+                pageLoadingView.showLoading()
+            }
     }
 
     override fun reloadPage() {
@@ -2038,6 +2058,7 @@ internal class DefaultWebViewFragment(
         } else {
             webViewContainer.reload()
         }
+        webAppSensors?.stopAll()
     }
 
     private var isOnSpringAnimation: Boolean = true
@@ -2133,7 +2154,9 @@ internal class DefaultWebViewFragment(
         visibility = GONE
         needCloseConfirmation = false
         swipeContainer.setWebView(null)
+        webAppProxy?.notifyVisibleChange(false)
         webViewContainer.destroyWebView(!isPreload)
+        webAppSensors?.detach()
         parentView?.removeView(this)
     }
 
@@ -2359,6 +2382,45 @@ internal class DefaultWebViewFragment(
 
     override fun requestContentSafeArea() {
         reportSafeContentInsets(lastInsetsTopMargin, true)
+    }
+
+    private var orientationLocked = false
+
+    private fun setViewAttached(b: Boolean) {
+        if (attached == b) return
+        attached = b
+        if (b.also { attached = it }) {
+            if (orientationLocked) {
+                shownLockedBots++
+            }
+        } else {
+            if (orientationLocked) {
+                shownLockedBots--
+            }
+        }
+        if (shownLockedBots > 0) {
+            AndroidUtils.lockOrientation(UIContextUtil.findActivity(context))
+        } else {
+            AndroidUtils.unlockOrientation(UIContextUtil.findActivity(context))
+        }
+    }
+
+    override fun requestOrientationLock(locked: Boolean) {
+        webViewContainer.getWebView()?.orientationLocked = locked
+        if (orientationLocked == locked) return
+        orientationLocked = locked
+        if (attached) {
+            if (locked) {
+                shownLockedBots++
+            } else {
+                shownLockedBots--
+            }
+        }
+        if (shownLockedBots > 0) {
+            AndroidUtils.lockOrientation(UIContextUtil.findActivity(context))
+        } else {
+            AndroidUtils.unlockOrientation(UIContextUtil.findActivity(context))
+        }
     }
 
     fun hideOnly() {

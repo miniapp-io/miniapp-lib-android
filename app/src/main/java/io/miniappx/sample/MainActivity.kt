@@ -46,6 +46,7 @@ import io.miniapp.core.openplatform.OpenPlatformPlugin
 import io.miniapp.core.openplatform.miniapp.DAppLaunchWParameters
 import io.miniapp.core.openplatform.miniapp.IMiniApp
 import io.miniapp.core.openplatform.miniapp.WebAppLaunchWithDialogParameters
+import io.miniappx.sample.phantom.PhantomProvider
 import io.miniappx.sample.ui.theme.MiniappandroidTheme
 import kotlinx.coroutines.launch
 
@@ -55,6 +56,13 @@ val miniAppService = openPlatformPlugin.getMiniAppService()
 class MainActivity : AppCompatActivity() {
 
     private var miniApp: IMiniApp? = null
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        intent.data?.also {
+            PhantomProvider.onWalletIntent(it)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -174,7 +182,7 @@ fun LaunchTgButton(lifecycleOwner: LifecycleOwner, complete: (IMiniApp?) -> Unit
 
     //var textInput by remember { mutableStateOf("https://tv.cctv.com/live/cctv5plus/m/") }
     //var textInput by remember { mutableStateOf("https://game1.catizen.ai/game/tonkeeper/10215317") }
-    var textInput by remember { mutableStateOf("https://www.magiceden.io/me") }
+    var textInput by remember { mutableStateOf("https://www.magiceden.io") }
 
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         TextField(

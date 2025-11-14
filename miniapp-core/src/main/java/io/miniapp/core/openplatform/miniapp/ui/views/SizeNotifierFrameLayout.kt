@@ -17,6 +17,11 @@ import io.miniapp.core.openplatform.miniapp.utils.AndroidUtils
 import kotlin.math.max
 
 internal open class SizeNotifierFrameLayout(context: Context) : FrameLayout(context) {
+
+    companion object {
+        var shownLockedBots: Int = 0
+    }
+
     private val rect = Rect()
     private var backgroundImage: Drawable? = null
     private var backgroundMotion = false
@@ -38,6 +43,7 @@ internal open class SizeNotifierFrameLayout(context: Context) : FrameLayout(cont
     private var animationInProgress = false
     private var skipBackgroundDrawing = false
     protected var backgroundView: View? = null
+
     var attached = false
 
     //blur variables
@@ -300,7 +306,6 @@ internal open class SizeNotifierFrameLayout(context: Context) : FrameLayout(cont
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
-        attached = true
         if (needBlur && !blurIsRunning) {
             blurIsRunning = true
             invalidateBlur = true
@@ -309,7 +314,6 @@ internal open class SizeNotifierFrameLayout(context: Context) : FrameLayout(cont
 
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
-        attached = false
         blurPaintTop.setShader(null)
         blurPaintTop2.setShader(null)
         blurPaintBottom.setShader(null)

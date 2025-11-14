@@ -12,6 +12,7 @@ import io.miniapp.core.openplatform.miniapp.MiniAppServiceImpl
 import io.miniapp.core.openplatform.miniapp.ui.views.PopupButton
 import io.miniapp.core.openplatform.miniapp.utils.BotWebViewVibrationEffect
 import io.miniapp.core.openplatform.miniapp.utils.LogTimber
+import io.miniapp.core.openplatform.miniapp.utils.Utilities
 import io.miniapp.core.openplatform.miniapp.webapp.IMiniAppDelegate
 import io.miniapp.core.openplatform.miniapp.webapp.IWebAppEventHandler
 import org.json.JSONArray
@@ -184,6 +185,78 @@ internal class DefaultWebAppEventHandler(private val context: Context,
             "web_app_request_content_safe_area" -> {
                 miniAppDelegate.requestContentSafeArea()
             }
+            "web_app_toggle_orientation_lock" -> {
+                val locked = eventData?.optBoolean("locked") ?: false
+                miniAppDelegate.requestOrientationLock(locked)
+            }
+            "web_app_start_accelerometer" -> {
+                val sensors = miniAppDelegate.getSensors()
+                var refreshRate = 1000L
+                try {
+                    refreshRate = eventData!!.getLong("refresh_rate")
+                } catch (e: java.lang.Exception) {
+                }
+                refreshRate = Utilities.clamp(refreshRate, 1000, 20)
+                if (sensors != null && sensors.startAccelerometer(refreshRate)) {
+                    miniAppDelegate.getProxy()?.notifyEventData("accelerometer_started" , null)
+                } else {
+                    miniAppDelegate.getProxy()?.notifyEventData("accelerometer_failed" , obj("error", "UNSUPPORTED"))
+                }
+            }
+            "web_app_stop_accelerometer" -> {
+                val sensors = miniAppDelegate.getSensors()
+                if (sensors != null && sensors.stopAccelerometer()) {
+                    miniAppDelegate.getProxy()?.notifyEventData("accelerometer_stopped" , null)
+                } else {
+                    miniAppDelegate.getProxy()?.notifyEventData("accelerometer_failed" , obj("error", "UNSUPPORTED"))
+                }
+            }
+            "web_app_start_gyroscope" -> {
+                val sensors = miniAppDelegate.getSensors()
+                var refreshRate = 1000L
+                try {
+                    refreshRate = eventData!!.getLong("refresh_rate")
+                } catch (e: java.lang.Exception) {
+                }
+                refreshRate = Utilities.clamp(refreshRate, 1000, 20)
+                if (sensors != null && sensors.startGyroscope(refreshRate)) {
+                    miniAppDelegate.getProxy()?.notifyEventData("gyroscope_started" , null)
+                } else {
+                    miniAppDelegate.getProxy()?.notifyEventData("gyroscope_failed" , obj("error", "UNSUPPORTED"))
+                }
+            }
+            "web_app_stop_gyroscope" -> {
+                val sensors = miniAppDelegate.getSensors()
+                if (sensors != null && sensors.stopGyroscope()) {
+                    miniAppDelegate.getProxy()?.notifyEventData("gyroscope_stopped" , null)
+                } else {
+                    miniAppDelegate.getProxy()?.notifyEventData("gyroscope_failed" , obj("error", "UNSUPPORTED"))
+                }
+            }
+            "web_app_start_device_orientation" -> {
+                val sensors = miniAppDelegate.getSensors()
+                var refreshRate = 1000L
+                var absolute = false
+                try {
+                    refreshRate = eventData!!.getLong("refresh_rate")
+                    absolute = eventData.optBoolean("need_absolute", false)
+                } catch (e: java.lang.Exception) {
+                }
+                refreshRate = Utilities.clamp(refreshRate, 1000, 20)
+                if (sensors != null && sensors.startOrientation(absolute, refreshRate)) {
+                    miniAppDelegate.getProxy()?.notifyEventData("device_orientation_started" , null)
+                } else {
+                    miniAppDelegate.getProxy()?.notifyEventData("device_orientation_failed" , obj("error", "UNSUPPORTED"))
+                }
+            }
+            "web_app_stop_device_orientation" -> {
+                val sensors = miniAppDelegate.getSensors()
+                if (sensors != null && sensors.stopOrientation()) {
+                    miniAppDelegate.getProxy()?.notifyEventData("device_orientation_stopped" , null)
+                } else {
+                    miniAppDelegate.getProxy()?.notifyEventData("device_orientation_failed" , obj("error", "UNSUPPORTED"))
+                }
+            }
             else-> {
                 return false
             }
@@ -194,6 +267,16 @@ internal class DefaultWebAppEventHandler(private val context: Context,
     fun restoreButtonData() {
         buttonData?.also {
             onWebAppSetupMainButton(it)
+        }
+    }
+
+    fun obj(key: String, value: Any?): JSONObject? {
+        try {
+            val obj = JSONObject()
+            obj.put(key, value)
+            return obj
+        } catch (e: Throwable) {
+            return null;
         }
     }
 

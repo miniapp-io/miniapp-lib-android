@@ -54,16 +54,54 @@
     }
 
     function sayHello(){
-      window.MiniAppX.WebApp.sayHello()
+      window.MiniAppX.WebApp.sayHello();
       notify("MiniAppX MiniApp=> Hello, MiniAppX App!");
     }
 
+    function contentSafeAreaInset() {
+      let result = window.MiniAppX.WebApp.contentSafeAreaInset;
+      notify("top: " + result.top + " left: " + result.left + " bottom: " + result.bottom + " right: " + result.right);
+      
+      // 创建或更新蓝色矩形显示安全区域
+      let safeAreaRect = document.getElementById('safeAreaRect');
+      if (!safeAreaRect) {
+        safeAreaRect = document.createElement('div');
+        safeAreaRect.id = 'safeAreaRect';
+        document.body.appendChild(safeAreaRect);
+      }
+      
+      // 设置矩形的位置和大小
+      safeAreaRect.style.position = 'fixed';
+      safeAreaRect.style.top = result.top + 'px';
+      safeAreaRect.style.left = result.left + 'px';
+      safeAreaRect.style.right = result.right + 'px';
+      safeAreaRect.style.bottom = result.bottom + 'px';
+      safeAreaRect.style.border = '3px solid blue';
+      safeAreaRect.style.backgroundColor = 'rgba(0, 0, 255, 0.1)';
+      safeAreaRect.style.pointerEvents = 'none';
+      safeAreaRect.style.zIndex = '9999';
+      safeAreaRect.style.display = 'block';
+      
+      // 3秒后隐藏矩形
+      setTimeout(() => {
+        safeAreaRect.style.display = 'none';
+      }, 3000);
+    }
+
     function openWallet() {
-      window.MiniAppX.WebApp.openWebAppLink("https://MiniAppX.io/MatrixBot102/mt_wallet")
+      window.MiniAppX.WebApp.openMiniAppXLink("https://t.me/MatrixBot102/mt_wallet")
+    }
+
+    function orientationLock() {
+      if(window.MiniAppX.WebApp.isOrientationLocked) {
+        window.MiniAppX.WebApp.unlockOrientation()
+      } else {
+       window.MiniAppX.WebApp.lockOrientation()
+      }
     }
 
     function selectContact() {
-      window.MiniAppX.WebApp.openWebAppLink("https://MiniAppX.io/wallet?startattach=send-assetCurrency__&choose=users")
+      window.MiniAppX.WebApp.openMiniAppXLink("https://t.me/wallet?startattach=send-assetCurrency__&choose=users")
     }
 
     function getWalletAddress() {
@@ -81,6 +119,10 @@
       window.MiniAppX.WebApp.showAlert("Hello, MiniAppX!")
     }
 
+    function openWindow() {
+      window.open("https://www.baidu.com", "_blank")
+    }
+
     function showPopup() {
         window.MiniAppX.WebApp.showPopup({
         title: 'Popup title',
@@ -94,7 +136,7 @@
         if (button_id == 'delete') {
           window.MiniAppX.WebApp.showAlert("'Delete all' selected");
         } else if (button_id == 'faq') {
-          window.MiniAppX.WebApp.openLink('https://docs.MiniAppX.io/reference/initialization-1');
+          window.MiniAppX.WebApp.openLink('https://docs.openweb3.io/reference/initialization-1');
         }
       });
     }
@@ -265,6 +307,47 @@
        reader.readAsDataURL(file);
    }
 
+   function startAccelerometer() {
+      window.MiniAppX.WebApp.Accelerometer.start()
+   }
+
+   function stopAccelerometer() {
+      window.MiniAppX.WebApp.Accelerometer.stop()
+   }
+
+   function startGyroscope() {
+      window.MiniAppX.WebApp.Gyroscope.start()
+   }
+
+   function stopGyroscope() {
+    window.MiniAppX.WebApp.Gyroscope.stop()
+   }
+
+   function startDeviceOrientation() {
+      window.MiniAppX.WebApp.DeviceOrientation.start()
+   }
+
+   function stopDeviceOrientation() {
+      window.MiniAppX.WebApp.DeviceOrientation.stop()
+   }
+
+    window.MiniAppX.WebApp.onEvent("activated", (eventType, eventData)=> {
+      notify( "MiniApp is activated");
+    })
+
+    window.MiniAppX.WebApp.onEvent("deactivated", (eventType, eventData)=> {
+        notify( "MiniApp is deactivated");
+    })
+
+    window.MiniAppX.WebApp.onEvent("contentSafeAreaChanged", (eventType, eventData)=> {
+      let result = window.MiniAppX.WebApp.contentSafeAreaInset;
+      notify("contentSafeArea top: " + result.top + " left: " + result.left + " bottom: " + result.bottom + " right: " + result.right);
+    })
+
+    window.MiniAppX.WebApp.onEvent("deviceOrientationChanged", (eventType, eventData)=> {
+      document.getElementById("orientation").textContent = window.MiniAppX.WebApp.isOrientationLocked ? "UnLock Orientation" : "Lock Orientation"
+    })
+
     window.MiniAppX.WebApp.onEvent("notify", (eventType, eventData)=> {
       notify( "MiniAppX App=>" + eventData.msg);
     })
@@ -294,6 +377,8 @@
   <button onclick="expandMiniApp()">Expand MiniApp</button>
   <button id="expand" onclick="disableExpand()">Disable Vertical Swipes</button>
   <button onclick="dismissConfirm()">Enable Dismiss Confirm</button>
+  <button onclick="contentSafeAreaInset()">Safe Content Area</button>
+  <button id="orientation" onclick="orientationLock()">Orientation Lock</button>
 
   <p class="t">Actions</p>
   <button onclick="showAlert()">Show Alert</button>
@@ -303,10 +388,12 @@
   <button onclick="qrcodeScan()">Qrcode Scan</button>
   <button onclick="openWallet()">Launch New MiniApp</button>
   <button onclick="selectContact()">Select Contact</button>
+  <button onclick="openWindow()">Open Window</button>
 
   <p class="t">Open Link</p>
   <a href="https://t.me/apps/10?param=1">https://t.me/apps/10?param=1</a>
   <a href="https://www.google.com">https://www.google.com</a>
+  <a href="https://t.me/gameing?start=120aa1ba">https://t.me/gameing?start=120aa1ba</a>
 
   <p class="t">Buttons</p>
   <button onclick="showBackButton()">Show Back Button</button>
@@ -329,6 +416,14 @@
   <button onclick="requestFileChoose()">Request File Choose</button>
   <button onclick="copyToClipboard()">Copy To Clipboard</button>
   <img id="selectedImage" src="" style="display: none; max-width: 100%; max-height: 100%;">
+
+  <p class="t">Sensor</p>
+  <button onclick="startAccelerometer()">Start Accelerometer</button>
+  <button onclick="stopAccelerometer()">Stop Accelerometer</button>
+  <button onclick="startGyroscope()">Start Gyroscope</button>
+  <button onclick="stopGyroscope()">Stop Gyroscope</button>
+  <button onclick="startDeviceOrientation()">Start Device Orientation</button>
+  <button onclick="stopDeviceOrientation()">Stop Device Orientation</button>
 
   <select name="pets" id="pet-select">
     <option value="dog">Dog</option>

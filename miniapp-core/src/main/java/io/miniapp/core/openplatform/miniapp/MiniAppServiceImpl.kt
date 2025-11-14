@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.provider.Browser
 import android.util.ArrayMap
 import android.view.View
 import android.view.ViewGroup.LayoutParams
@@ -16,6 +17,7 @@ import android.widget.FrameLayout
 import androidx.activity.ComponentActivity
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.net.toUri
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import io.miniapp.bridge.BridgeProvider
@@ -384,6 +386,9 @@ internal class MiniAppServiceImpl : MiniAppService {
         }
 
         parameters ?: run {
+            config.url?.also {
+                openInBrowser(config.context, config.url)
+            }
             callback(null)
             return
         }
@@ -423,6 +428,11 @@ internal class MiniAppServiceImpl : MiniAppService {
             if (isWebAppShortLink(uri)) {
                 owner.lifecycleScope.launch {
                     if(schemeRouter(url =url, callback = { app, dApp, urlStartParams, urlParams ->
+
+                            if (app == null && dApp == null) {
+                                openInBrowser(context, url)
+                            }
+
                             dApp?.let { dapp->
                                 WebAppParameters.Builder()
                                     .context(context)
@@ -675,6 +685,11 @@ internal class MiniAppServiceImpl : MiniAppService {
         if (isInternal) {
             launchConfig.owner.lifecycleScope.launch {
                 if(schemeRouter(url =url, callback = { app, dapp, startParams, urlParams ->
+
+                        if (app == null && dapp == null) {
+                            openInBrowser(launchConfig.context, url)
+                        }
+
                         dapp?.let {
                             WebAppParameters.Builder()
                                 .context(launchConfig.context)
@@ -722,6 +737,17 @@ internal class MiniAppServiceImpl : MiniAppService {
             }
         } else {
             openWithDApp(launchConfig, url)
+        }
+    }
+
+    fun openInBrowser(context: Context, url: String) {
+        try {
+            val intent = Intent(Intent.ACTION_VIEW, url.toUri())
+            intent.putExtra(Browser.EXTRA_CREATE_NEW_TAB, true)
+            intent.putExtra(Browser.EXTRA_APPLICATION_ID, context.packageName)
+            context.startActivity(intent)
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 
@@ -933,6 +959,9 @@ internal data class WebAppParameters(
     ) {
 
     fun cacheKey() : String? {
+        if (true == miniAppDto?.options?.disableCache) {
+            return null
+        }
         if (isDApp) {
             return url
         }

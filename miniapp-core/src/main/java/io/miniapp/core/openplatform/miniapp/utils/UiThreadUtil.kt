@@ -22,4 +22,11 @@ internal object UiThreadUtil {
         }
         sMainHandler!!.postDelayed(runnable!!, delayInMs)
     }
+
+    fun cancelRunOnUIThread(runnable: Runnable?) {
+        if (sMainHandler== null || runnable == null) {
+            return
+        }
+        sMainHandler?.removeCallbacks(runnable)
+    }
 }

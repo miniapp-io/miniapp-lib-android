@@ -1,5 +1,7 @@
 [versions]
 
+bcprovJdk18on = "1.77"
+bitcoinjCoreVersion = "0.17"
 devtoolsKsp = "1.9.24-1.0.20"
 nexusSonatype = "2.0.0"
 bomGeneratorPlugin = "1.0.0.Final"
@@ -40,6 +42,8 @@ accompanist-insets-ui = { module = "com.google.accompanist:accompanist-insets-ui
 accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanistInsets" }
 androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "activityKtx" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+bcprov-jdk18on = { module = "org.bouncycastle:bcprov-jdk18on", version.ref = "bcprovJdk18on" }
+bitcoinj-bitcoinj-core = { module = "org.bitcoinj:bitcoinj-core", version.ref = "bitcoinjCoreVersion" }
 converter-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "converterMoshi" }
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 glideCompiler = { module = "com.github.bumptech.glide:ksp", version.ref = "glide" }

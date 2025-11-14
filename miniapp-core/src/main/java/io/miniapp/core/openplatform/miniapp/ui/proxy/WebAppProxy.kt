@@ -16,6 +16,49 @@ internal class WebAppProxy(val webApp: IWebApp, val resourcesProvider: IResource
         lastClickMs = 0
     }
 
+    fun notifyEventData(eventType: String, eventData: JSONObject?) {
+        webApp.postCommonEventToMiniApp(eventType, eventData)
+    }
+
+    fun notifyAccelerometerChanged(eventData: JSONObject) {
+        try {
+            val data = JSONObject()
+            data
+            webApp.postCommonEventToMiniApp("accelerometer_changed", eventData)
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+    }
+    fun notifyGyroscopeChanged(eventData: JSONObject) {
+        try {
+            val data = JSONObject()
+            data
+            webApp.postCommonEventToMiniApp("gyroscope_changed", eventData)
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+    }
+
+    fun notifyDeviceOrientationChanged(eventData: JSONObject) {
+        try {
+            val data = JSONObject()
+            data
+            webApp.postCommonEventToMiniApp("device_orientation_changed", eventData)
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+    }
+
+    fun notifyVisibleChange(isVisible: Boolean) {
+        try {
+            val data = JSONObject()
+            data.put("is_visible", isVisible)
+            webApp.postCommonEventToMiniApp("visibility_changed", data)
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+    }
+
     fun notifyViewportChange(viewPortHeight: Int, isStable: Boolean, lastExpanded:Boolean) {
         try {
             val data = JSONObject()

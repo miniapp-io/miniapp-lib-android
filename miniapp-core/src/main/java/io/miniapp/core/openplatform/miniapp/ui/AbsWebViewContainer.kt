@@ -26,7 +26,6 @@ import androidx.core.util.Consumer
 import androidx.lifecycle.LifecycleOwner
 import io.miniapp.bridge.BridgeProvider
 import io.miniapp.core.R
-import io.miniapp.core.openplatform.common.network.utils.isValidUrl
 import io.miniapp.core.openplatform.miniapp.ActivityStack
 import io.miniapp.core.openplatform.miniapp.IMiniApp
 import io.miniapp.core.openplatform.miniapp.WebAppParameters
@@ -250,6 +249,7 @@ internal abstract class AbsWebViewContainer(
 
         isPageLoaded = true
         isFocusable = true
+
         updateKeyboardFocusable()
     }
 
@@ -259,8 +259,6 @@ internal abstract class AbsWebViewContainer(
 
     open fun dismissSilent(complete: () -> Unit) {
 
-    }
-    open fun onComplete(isUseCache: Boolean) {
     }
 
     fun hasUserPermissions(): Boolean {
@@ -332,12 +330,11 @@ internal abstract class AbsWebViewContainer(
         checkCreateWebView { _ ->
             isPageLoaded = false
             hasUserPermissions = false
-            if (webView != null && mUrl != null) {
-                webView?.alpha = 0.0f
-                webView?.animate()?.cancel()
-                webView?.animate()?.alpha(0F)?.start()
-                webView?.reload()
-            }
+            webView?.alpha = 0.0f
+            webView?.animate()?.cancel()
+            webView?.animate()?.alpha(0F)?.start()
+            webView?.onResume()
+            webView?.reload()
         }
     }
 
@@ -346,14 +343,13 @@ internal abstract class AbsWebViewContainer(
         return history.size == 0
     }
 
-    fun loadUrl(url: String?, headers: Map<String,String>? = null, callback: ()-> Unit) {
+    fun loadUrl(url: String?, headers: Map<String,String>? = null, callback: (Boolean)-> Unit) {
         isPageLoaded = false
         hasUserPermissions = false
         mUrl = url
-        checkCreateWebView {
-            if (!it || false==webView?.isPageLoaded) {
+        checkCreateWebView { isUserCache->
+            if (!isUserCache || false==webView?.isPageLoaded) {
                 webView?.onResume()
-                callback.invoke()
                 if (updateUrlOnly) {
 
                 } else {
@@ -361,6 +357,7 @@ internal abstract class AbsWebViewContainer(
                         webView?.loadUrl(url ?: "about:blank", h)
                     } ?: webView?.loadUrl(url ?: "about:blank")
                 }
+                callback.invoke(isUserCache)
             } else {
                 try {
                     webView?.onResume()
@@ -373,18 +370,18 @@ internal abstract class AbsWebViewContainer(
                         webView?.alpha = 0.0f
                         webView?.isPageLoaded = false
                         webView?.goToHomePage()
-                        callback.invoke()
                         headers?.also { h->
                             webView?.loadUrl(url ?: "about:blank", h)
                         } ?: webView?.loadUrl(url ?: "about:blank")
                     } else {
                         setPageFinished(webView?.url.toString())
                     }
+                    callback.invoke(true)
                 } catch (e: Exception) {
                     e.printStackTrace()
+                    callback.invoke(false)
                 }
             }
-            onComplete(it)
             webView?.cacheData = getCacheData()
         }
     }
@@ -422,7 +419,7 @@ internal abstract class AbsWebViewContainer(
         this.webViewScrollListener = webViewScrollListener
     }
 
-    fun setDelegate(delegate: IWebAppEventHandler?) {
+    fun setEventHandle(delegate: IWebAppEventHandler?) {
         this.webView?.webEventHandler = delegate
     }
 
@@ -477,7 +474,6 @@ internal abstract class AbsWebViewContainer(
                 }
             }?.apply {
                 isUseCache = true
-                mUrl = url
                 onResume()
                 if (false == getConfig()?.useCache) {
                     goToHomePage()

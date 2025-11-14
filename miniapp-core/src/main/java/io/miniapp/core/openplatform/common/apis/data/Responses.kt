@@ -75,7 +75,11 @@ internal data class AppSettings(
      * Web SDK supports controlling vertical gestures, prefer settings in Web
      */
     @Json(name = "allow_vertical_swipe")
-    val allowVerticalSwipe: Boolean?
+    val allowVerticalSwipe: Boolean?,
+
+
+    @Json(name = "disable_cache")
+    val disableCache: Boolean?
 )
 
 @JsonClass(generateAdapter = true)

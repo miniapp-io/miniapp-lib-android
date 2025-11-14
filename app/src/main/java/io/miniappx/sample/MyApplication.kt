@@ -92,14 +92,14 @@ class MyApplication : Application(), IAppDelegate {
             context = this,
             appName = "Sample",
             webAppName = "MiniAppX",
-            miniAppHost = listOf("https://miniappx.io","https://t.me"),
+            miniAppHost = listOf("https://openweb3.io","https://miniappx.io","https://t.me"),
             appDelegate = this
         )
             .languageCode("en")
             .isDark(false)
             .maxCachePage(5)
             .bridgeProviderFactory { _,_,_ ->
-                TrustWalletProvider()
+                WalletProvider()
             }
             .floatWindowSize(90, 159)
             .privacyUrl("https://docs.openweb3.io/docs/standard-miniapp-privacy-policy")

@@ -57,6 +57,9 @@ internal class DefaultAppWebView(context: Context) : WebView(context), IWebAppEv
     
     // Expiration time property, used to control the expiration state of mini apps
     var expirationTime: Long? = null
+
+    var orientationLocked: Boolean? = null
+
     val isExpired: Boolean
         get() = expirationTime?.let { System.currentTimeMillis() > it } ?: false
 
