@@ -19,8 +19,8 @@ nexusPublishing {
     }
 }
 
-ext["versionCode"] = 20
-ext["versionName"] = "1.0.20"
+ext["versionCode"] = 21
+ext["versionName"] = "1.0.21"
 ext["compileSdk"] = 35
 ext["targetSdk"] = 35
 ext["minSdk"] = 24
