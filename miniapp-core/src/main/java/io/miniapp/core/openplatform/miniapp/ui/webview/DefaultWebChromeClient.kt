@@ -12,7 +12,6 @@ import android.webkit.PermissionRequest
 import android.webkit.ValueCallback
 import android.webkit.WebChromeClient
 import android.webkit.WebResourceRequest
-import android.webkit.WebResourceResponse
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -22,7 +21,9 @@ import io.miniapp.core.openplatform.miniapp.ui.setAgent
 import io.miniapp.core.openplatform.miniapp.utils.CheckWebViewPermissionsUseCase
 import io.miniapp.core.openplatform.miniapp.utils.LogTimber
 import io.miniapp.core.openplatform.miniapp.utils.PERMISSIONS_FOR_FOREGROUND_LOCATION_SHARING
+import io.miniapp.core.openplatform.miniapp.utils.SchemeUtils
 import java.lang.ref.WeakReference
+import androidx.core.graphics.createBitmap
 
 
 internal class DefaultWebChromeClient(
@@ -92,6 +93,10 @@ internal class DefaultWebChromeClient(
     override fun onGeolocationPermissionsHidePrompt() {
     }
 
+    override fun getDefaultVideoPoster(): Bitmap? {
+        return createBitmap(10, 10)
+    }
+
     override fun onCreateWindow(
         view: WebView,
         isDialog: Boolean,
@@ -122,35 +127,33 @@ internal class DefaultWebChromeClient(
             popupDialog?.show()
         }
 
-        newWebView?.webChromeClient = this
+        newWebView?.webChromeClient = DefaultWebChromeClient(parentActivity, null)
 
         eventListener.get()?.also {
             newWebView?.setWebViewClient(object : WebViewClient() {
                 @Deprecated("Deprecated in Java")
                 override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
                     Log.d("WebChromeClient shouldInterceptRequest", url)
-
                     if (isDialog) {
                         return false
                     }
-                    return eventListener.get()?.shouldOverrideUrlLoading(view, url, null, false) ?: false
+                    newWebView?.destroy()
+                    newWebView = null
+                    SchemeUtils.openInBrowser(parentActivity, url)
+                    return true
                 }
 
                 override fun shouldOverrideUrlLoading(view: WebView, request: WebResourceRequest): Boolean {
                     Log.d("WebChromeClient shouldInterceptRequest", request.url?.toString() ?: "ddd")
-
                     if (isDialog) {
                         return false
                     }
-                    return (eventListener.get()?.shouldOverrideUrlLoading(view, request, false) ?: false)
-                }
-
-                override fun shouldInterceptRequest(
-                    view: WebView?,
-                    request: WebResourceRequest?
-                ): WebResourceResponse? {
-                    Log.d("WebChromeClient shouldInterceptRequest", request?.url?.toString() ?: "ddd")
-                    return super.shouldInterceptRequest(view, request)
+                    newWebView?.destroy()
+                    newWebView = null
+                    request.url?.toString()?.also {
+                        SchemeUtils.openInBrowser(parentActivity, it)
+                    }
+                    return true
                 }
             })
         }

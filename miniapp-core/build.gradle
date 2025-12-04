@@ -85,6 +85,8 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp"
     //noinspection UseTomlInstead
     implementation "com.squareup.okhttp3:logging-interceptor"
+    // Custom Tab
+    implementation libs.androidx.browser
 
     compileOnly libs.glide
 

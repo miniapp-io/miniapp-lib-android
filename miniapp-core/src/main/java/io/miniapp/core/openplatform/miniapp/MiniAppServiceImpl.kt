@@ -3,8 +3,10 @@ package io.miniapp.core.openplatform.miniapp
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Application
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Browser
@@ -35,6 +37,7 @@ import io.miniapp.core.openplatform.miniapp.ui.webview.WebAppLruCache
 import io.miniapp.core.openplatform.miniapp.utils.AndroidUtils
 import io.miniapp.core.openplatform.miniapp.utils.HomeScreenShortcutUtils
 import io.miniapp.core.openplatform.miniapp.utils.LogTimber
+import io.miniapp.core.openplatform.miniapp.utils.SchemeUtils
 import io.miniapp.core.openplatform.miniapp.utils.WebViewPermissionUtils
 import io.miniapp.core.openplatform.miniapp.utils.toInfo
 import kotlinx.coroutines.CompletableDeferred
@@ -387,7 +390,7 @@ internal class MiniAppServiceImpl : MiniAppService {
 
         parameters ?: run {
             config.url?.also {
-                openInBrowser(config.context, config.url)
+                SchemeUtils.openInBrowser(config.context, config.url)
             }
             callback(null)
             return
@@ -430,7 +433,7 @@ internal class MiniAppServiceImpl : MiniAppService {
                     if(schemeRouter(url =url, callback = { app, dApp, urlStartParams, urlParams ->
 
                             if (app == null && dApp == null) {
-                                openInBrowser(context, url)
+                                SchemeUtils.openInBrowser(context, url)
                             }
 
                             dApp?.let { dapp->
@@ -687,7 +690,7 @@ internal class MiniAppServiceImpl : MiniAppService {
                 if(schemeRouter(url =url, callback = { app, dapp, startParams, urlParams ->
 
                         if (app == null && dapp == null) {
-                            openInBrowser(launchConfig.context, url)
+                            SchemeUtils.openInBrowser(launchConfig.context, url)
                         }
 
                         dapp?.let {
@@ -737,17 +740,6 @@ internal class MiniAppServiceImpl : MiniAppService {
             }
         } else {
             openWithDApp(launchConfig, url)
-        }
-    }
-
-    fun openInBrowser(context: Context, url: String) {
-        try {
-            val intent = Intent(Intent.ACTION_VIEW, url.toUri())
-            intent.putExtra(Browser.EXTRA_CREATE_NEW_TAB, true)
-            intent.putExtra(Browser.EXTRA_APPLICATION_ID, context.packageName)
-            context.startActivity(intent)
-        } catch (e: Exception) {
-            e.printStackTrace()
         }
     }
 

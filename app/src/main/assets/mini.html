@@ -120,7 +120,11 @@
     }
 
     function openWindow() {
-      window.open("https://www.baidu.com", "_blank")
+      window.open("https://www.baidu.com")
+    }
+
+    function shareLink() {
+        window.MiniAppX.WebApp.openMiniAppXLink('https://t.me/share/url?url=https://miniappx.io/luckydramas_bot/luckydramas?startapp=base64(data)');
     }
 
     function showPopup() {
@@ -389,6 +393,7 @@
   <button onclick="openWallet()">Launch New MiniApp</button>
   <button onclick="selectContact()">Select Contact</button>
   <button onclick="openWindow()">Open Window</button>
+  <button onclick="shareLink()">Share Link</button>
 
   <p class="t">Open Link</p>
   <a href="https://t.me/apps/10?param=1">https://t.me/apps/10?param=1</a>
@@ -425,6 +430,7 @@
   <button onclick="startDeviceOrientation()">Start Device Orientation</button>
   <button onclick="stopDeviceOrientation()">Stop Device Orientation</button>
 
+  <p class="t">System Compose</p>
   <select name="pets" id="pet-select">
     <option value="dog">Dog</option>
     <option value="cat">Cat</option>
@@ -444,6 +450,8 @@
       <option value="audi">Audi</option>
     </optgroup>
   </select>
+
+  <input type="file"/>
 
 </div>
 <ul class="info" id="logList"></ul>

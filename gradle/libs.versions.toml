@@ -2,6 +2,7 @@
 
 bcprovJdk18on = "1.77"
 bitcoinjCoreVersion = "0.17"
+browser = "1.8.0"
 devtoolsKsp = "1.9.24-1.0.20"
 nexusSonatype = "2.0.0"
 bomGeneratorPlugin = "1.0.0.Final"
@@ -41,6 +42,7 @@ accompanist-insets = { module = "com.google.accompanist:accompanist-insets", ver
 accompanist-insets-ui = { module = "com.google.accompanist:accompanist-insets-ui", version.ref = "accompanistInsets" }
 accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanistInsets" }
 androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "activityKtx" }
+androidx-browser = { module = "androidx.browser:browser", version.ref = "browser" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 bcprov-jdk18on = { module = "org.bouncycastle:bcprov-jdk18on", version.ref = "bcprovJdk18on" }
 bitcoinj-bitcoinj-core = { module = "org.bitcoinj:bitcoinj-core", version.ref = "bitcoinjCoreVersion" }

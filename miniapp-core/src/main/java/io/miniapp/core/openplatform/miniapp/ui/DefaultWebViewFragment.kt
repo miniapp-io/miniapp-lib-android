@@ -667,7 +667,7 @@ internal class DefaultWebViewFragment(
 
                     if (uri.scheme?.lowercase() != "http" &&
                         uri.scheme?.lowercase() != "https") {
-                        MiniAppServiceImpl.getInstance().openInBrowser(context, url)
+                        SchemeUtils.openInBrowser(context, url)
                         return true
                     }
 
@@ -677,7 +677,7 @@ internal class DefaultWebViewFragment(
                     }
 
                     if (isNewWindow) {
-                        MiniAppServiceImpl.getInstance().openInBrowser(context, url)
+                        SchemeUtils.openInBrowser(context, url)
                         return true
                     }
 
@@ -1898,7 +1898,7 @@ internal class DefaultWebViewFragment(
 
                     val segments = ArrayList<String>(uri.pathSegments)
                     if (segments.size == 1) {
-                        MiniAppServiceImpl.getInstance().openInBrowser(context, url)
+                        SchemeUtils.openInBrowser(context, url)
                         return@launch
                     }
                 }
