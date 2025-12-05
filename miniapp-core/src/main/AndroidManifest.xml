@@ -6,4 +6,21 @@
     <!-- TODO Is WRITE_EXTERNAL_STORAGE necessary? -->
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <!-- Since Android 11, see https://developer.android.com/training/package-visibility -->
+    <queries>
+        <!-- To open URL in CustomTab (prefetch, etc.). It makes CustomTabsClient.getPackageName() work
+         see https://developer.android.com/training/package-visibility/use-cases#open-urls-custom-tabs -->
+        <intent>
+            <action android:name="android.support.customtabs.action.CustomTabsService" />
+        </intent>
+
+        <!-- The app can open attachments of any mime type
+        see https://developer.android.com/training/package-visibility/use-cases#open-a-file -->
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:mimeType="*/*" />
+        </intent>
+
+    </queries>
 </manifest>
