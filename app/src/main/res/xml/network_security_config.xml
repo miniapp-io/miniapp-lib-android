@@ -30,6 +30,7 @@
         <domain includeSubdomains="true">172.10.40.117</domain>
         <domain includeSubdomains="true">172.10.40.2</domain>
         <domain includeSubdomains="true">192.168.3.2</domain>
+        <domain includeSubdomains="true">192.168.110.62</domain>
     </domain-config>
 
     <debug-overrides>

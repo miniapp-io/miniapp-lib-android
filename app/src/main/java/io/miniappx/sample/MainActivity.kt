@@ -284,6 +284,7 @@ fun AppMasterButton(context:Context,lifecycleOwner: LifecycleOwner) {
             .owner(lifecycleOwner)
             .context(context)
             .miniAppId("2lv8dp7JjF2AU0iEk2rMYUaySjU")
+            //.miniAppId("338uovSvAvMAluyhazoolcZ9RDJ")
             .onDismissListener {
             }
             .build()

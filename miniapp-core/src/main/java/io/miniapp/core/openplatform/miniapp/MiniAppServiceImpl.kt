@@ -951,6 +951,9 @@ internal data class WebAppParameters(
     ) {
 
     fun cacheKey() : String? {
+        if (!useCache) {
+            return null
+        }
         if (true == miniAppDto?.options?.disableCache) {
             return null
         }
