@@ -46,8 +46,10 @@ import io.miniapp.core.openplatform.OpenPlatformPlugin
 import io.miniapp.core.openplatform.miniapp.DAppLaunchWParameters
 import io.miniapp.core.openplatform.miniapp.IMiniApp
 import io.miniapp.core.openplatform.miniapp.WebAppLaunchWithDialogParameters
+import io.miniapp.core.openplatform.miniapp.WebAppPreloadParameters
 import io.miniappx.sample.phantom.PhantomProvider
 import io.miniappx.sample.ui.theme.MiniappandroidTheme
+import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
 val openPlatformPlugin = PluginsManager.getPlugin<OpenPlatformPlugin>(PLUGIN_OPEN_PLATFORM)!!
@@ -64,8 +66,24 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun preloadApps(owner: LifecycleOwner, context: Context) {
+        listOf("10").forEach {
+            val config = WebAppPreloadParameters.Builder()
+                .owner(owner)
+                .context(context)
+                .miniAppId(it)
+                .build()
+
+            MainScope().launch {
+                miniAppService.preload( config = config)
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        preloadApps(this, this)
 
         val callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
@@ -304,8 +322,8 @@ fun MarketPlaceButton(context:Context,lifecycleOwner: LifecycleOwner) {
         val config = WebAppLaunchWithDialogParameters.Builder()
             .owner(lifecycleOwner)
             .context(context)
-            //.miniAppId("10")
-            .url("https://miniappx.io/apps/10?startapp=xxxx&spaceId=12345&appId=10")
+            .miniAppId("10")
+            //.url("https://miniappx.io/apps/10?startapp=xxxx&spaceId=12345&appId=10")
             .params(mapOf("spaceId" to "11", "roomId" to "333"))
             //.id("48033")
             .onDismissListener {

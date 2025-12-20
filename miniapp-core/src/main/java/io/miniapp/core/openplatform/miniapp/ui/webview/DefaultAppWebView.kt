@@ -50,7 +50,7 @@ internal class DefaultAppWebView(context: Context) : WebView(context), IWebAppEv
     var isBackButtonVisible:Boolean? = null
     var isCloseConfirm: Boolean? = null
     var isExpanded: Boolean? = null
-    var allowExpand: Boolean? = null
+    var allowVerticalSwipe: Boolean? = null
     var isSettingVisible: Boolean? = null
     var showFullscreen: Boolean? = null
     var appSettings: AppSettings? = null

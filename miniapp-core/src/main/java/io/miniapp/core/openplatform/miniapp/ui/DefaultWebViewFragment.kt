@@ -6,7 +6,6 @@ import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
-import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Paint
@@ -16,7 +15,6 @@ import android.net.Uri
 import android.os.Build
 import android.os.Handler
 import android.os.Looper
-import android.provider.Browser
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.MotionEvent
@@ -163,7 +161,7 @@ internal class DefaultWebViewFragment(
 
     private var needCloseConfirmation = false
     private var isExpanded = false
-    private var canExpand:Boolean? = null
+    private var allowVerticalSwipe:Boolean? = null
     private var lastExpanded = false
     private var showFullScreenMod : Boolean? = null
 
@@ -1435,7 +1433,10 @@ internal class DefaultWebViewFragment(
             return
         }
         isExpanded = true
-        swipeContainer.stickTo(-swipeContainer.getOffsetY() + swipeContainer.getTopActionBarOffsetY())
+
+        if (!isPreload) {
+            swipeContainer.stickTo(-swipeContainer.getOffsetY() + swipeContainer.getTopActionBarOffsetY())
+        }
     }
 
     override fun setActionBarColor(color: Int, isOverrideColor: Boolean) {
@@ -1654,15 +1655,15 @@ internal class DefaultWebViewFragment(
     }
 
     override fun setupExpandBehavior(enable: Boolean) {
-        if (enable == canExpand) {
+        if (enable == allowVerticalSwipe) {
             return
         }
         if (!enable) {
             expandView()
         }
-        canExpand = enable
+        allowVerticalSwipe = enable
         swipeContainer.setGesture(enable)
-        webViewContainer.getWebView()?.allowExpand = canExpand
+        webViewContainer.getWebView()?.allowVerticalSwipe = allowVerticalSwipe
     }
 
     override fun isClipboardAvailable(): Boolean {
@@ -1738,7 +1739,7 @@ internal class DefaultWebViewFragment(
         if (true==showFullScreenMod) {
             return false
         }
-        return canExpand ?: appSettings?.allowVerticalSwipe ?: appSettings?.let { it.viewStyle == "modal"  } ?: false
+        return allowVerticalSwipe ?: appSettings?.allowVerticalSwipe ?: appSettings?.let { it.viewStyle == "modal"  } ?: false
     }
 
     private fun allowHorizontalSwipe() : Boolean {
@@ -2079,30 +2080,23 @@ internal class DefaultWebViewFragment(
                 oldBottom: Int
             ) {
                 v.removeOnLayoutChangeListener(this)
-                swipeContainer.setSwipeOffsetY(swipeContainer.height.toFloat())
+                val containerHeight = swipeContainer.height.toFloat()
+                swipeContainer.setSwipeOffsetY(containerHeight)
                 setAlpha(1f)
 
-                if(true == launchConfig?.isDApp || (useCacheWebView && ( true == showFullScreenMod || appSettings?.let { !useModalStyle() } == true))) {
-                    isOnSpringAnimation = false
+                val p: () -> Unit = {
                     setupWithOptions()
-                    autoExpandPage()
-                    return
+                    webViewContainer.getWebView()?.allowVerticalSwipe?.also {
+                        setupExpandBehavior(it)
+                    } ?: autoExpandPage()
                 }
 
-                SpringAnimation(swipeContainer, WebViewSwipeContainer.SWIPE_OFFSET_Y, 0f)
-                    .setSpring(SpringForce(0f).setDampingRatio(SpringForce.DAMPING_RATIO_LOW_BOUNCY).setStiffness(500.0f))
-                    .apply {
-                        start()
-                        addEndListener { _, _, _, _ ->
-                            isOnSpringAnimation = false
-                            setupWithOptions()
-                            webViewContainer.getWebView()?.allowExpand?.also {
-                                setupExpandBehavior(it)
-                                return@addEndListener
-                            }
-                            autoExpandPage()
-                    }
-                }
+                SpringAnimation(swipeContainer, WebViewSwipeContainer.SWIPE_OFFSET_Y, containerHeight)
+                    .setSpring(SpringForce(containerHeight).setDampingRatio(SpringForce.DAMPING_RATIO_LOW_BOUNCY).setStiffness(500.0f))
+                    .addEndListener { _, _, _, _ ->
+                        isOnSpringAnimation = false
+                        p()
+                    }.start()
             }
         })
     }
