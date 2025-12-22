@@ -402,7 +402,7 @@ internal class DefaultWebAppEventHandler(private val context: Context,
 
     private fun onWebAppSetupExpandBehavior(eventData: JSONObject) {
         try {
-            miniAppDelegate.setupExpandBehavior(eventData.optBoolean("allow_vertical_swipe"))
+            miniAppDelegate.setupExpandBehavior(eventData.optBoolean("allow_vertical_swipe"), true)
         } catch (e: JSONException) {
             e.printStackTrace()
         }

@@ -46,7 +46,7 @@ internal interface IMiniAppDelegate {
     fun setPageReady()
     fun hideAndDestroy(immediately: Boolean = false, isSilent: Boolean = false, complete: (() -> Unit)? = null): Boolean
     fun dismissImmediately(isSilent: Boolean = false, complete: (() -> Unit) ? = null)
-    fun expandView(isFromWeb: Boolean = false)
+    fun expandView(fromWebApp: Boolean = false)
     fun setActionBarColor(color: Int, isOverrideColor: Boolean)
     fun setSettingsButtonVisible(visible:Boolean)
     fun requestQrCodeScan(subTitle: String?)
@@ -59,7 +59,7 @@ internal interface IMiniAppDelegate {
     fun setupClosingBehavior(enable:Boolean)
     fun requestSendMessageAccess()
     fun requestPhone()
-    fun setupExpandBehavior(enable:Boolean)
+    fun setupExpandBehavior(enable:Boolean, fromWebApp: Boolean)
     fun isClipboardAvailable(): Boolean
     fun clipboardData(reqId:String, content:String)
     fun setupMainButton(isVisible: Boolean, isActive: Boolean, text: String?, color: Int, textColor: Int, isProgressVisible: Boolean)

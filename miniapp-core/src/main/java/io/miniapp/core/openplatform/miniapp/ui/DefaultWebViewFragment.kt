@@ -327,8 +327,8 @@ internal class DefaultWebViewFragment(
                 withContext(Dispatchers.Main) {
                     loadPageFail = false
                     loadUrl(it.redirectUrl)
-                    autoExpandPage()
-                    //runTestWebApp()
+                    // autoExpandPage()
+                    // runTestWebApp()
                 }
             }
         }
@@ -394,8 +394,8 @@ internal class DefaultWebViewFragment(
                         }
 
                         loadUrl(it.url+encodeParams)
-                        autoExpandPage()
-                        //runTestWebApp()
+                        // autoExpandPage()
+                        // runTestWebApp()
                     }
                 }
             }
@@ -1425,8 +1425,8 @@ internal class DefaultWebViewFragment(
         }
     }
 
-    override fun expandView(isFromWeb: Boolean) {
-        if (isFromWeb) {
+    override fun expandView(fromWebApp: Boolean) {
+        if (fromWebApp) {
             webViewContainer.getWebView()?.isExpanded = true
         }
         if (swipeContainer.isSwipeInProgress) {
@@ -1435,6 +1435,8 @@ internal class DefaultWebViewFragment(
         isExpanded = true
 
         if (!isPreload) {
+            scrollAnimator?.cancel()
+            scrollAnimator = null
             swipeContainer.stickTo(-swipeContainer.getOffsetY() + swipeContainer.getTopActionBarOffsetY())
         }
     }
@@ -1654,12 +1656,12 @@ internal class DefaultWebViewFragment(
         return true
     }
 
-    override fun setupExpandBehavior(enable: Boolean) {
+    override fun setupExpandBehavior(enable: Boolean, fromWebApp: Boolean) {
         if (enable == allowVerticalSwipe) {
             return
         }
-        if (!enable) {
-            expandView()
+        if (!enable && fromWebApp) {
+            expandView(fromWebApp)
         }
         allowVerticalSwipe = enable
         swipeContainer.setGesture(enable)
@@ -2064,6 +2066,8 @@ internal class DefaultWebViewFragment(
 
     private var isOnSpringAnimation: Boolean = true
 
+    private var scrollAnimator: SpringAnimation? = null
+
     fun show() {
         setAlpha(0f)
         isViewPortByMeasureSuppressed = true
@@ -2087,33 +2091,42 @@ internal class DefaultWebViewFragment(
                 val p: () -> Unit = {
                     setupWithOptions()
                     webViewContainer.getWebView()?.allowVerticalSwipe?.also {
-                        setupExpandBehavior(it)
-                    } ?: autoExpandPage()
+                        setupExpandBehavior(it, false)
+                    }
+                    if (checkAutoExpand()) {
+                        autoExpandPage()
+                    } else {
+                        scrollAnimator = SpringAnimation(swipeContainer, WebViewSwipeContainer.SWIPE_OFFSET_Y, 0f)
+                            .setSpring(SpringForce(0f).setDampingRatio(SpringForce.DAMPING_RATIO_LOW_BOUNCY).setStiffness(500.0f))
+                        scrollAnimator?.start()
+                    }
                 }
 
-                SpringAnimation(swipeContainer, WebViewSwipeContainer.SWIPE_OFFSET_Y, containerHeight)
+                scrollAnimator = SpringAnimation(swipeContainer, WebViewSwipeContainer.SWIPE_OFFSET_Y, containerHeight)
                     .setSpring(SpringForce(containerHeight).setDampingRatio(SpringForce.DAMPING_RATIO_LOW_BOUNCY).setStiffness(500.0f))
                     .addEndListener { _, _, _, _ ->
                         isOnSpringAnimation = false
                         p()
-                    }.start()
+                    }
+                scrollAnimator?.start()
             }
         })
     }
 
+    private fun checkAutoExpand() : Boolean {
+        return (true == launchConfig?.autoExpand
+                || true == webViewContainer.getWebView()?.isExpanded
+                || true == launchConfig?.isDApp
+                || !useModalStyle()
+                || isFullScreenMod()
+                || !allowVerticalSwipe())
+    }
+
     private fun autoExpandPage() {
-        if (isOnSpringAnimation) {
+        if (isOnSpringAnimation || !checkAutoExpand()) {
             return
         }
-
-        if (true == launchConfig?.autoExpand
-            || true == webViewContainer.getWebView()?.isExpanded
-            || true == launchConfig?.isDApp
-            || !useModalStyle()
-            || isFullScreenMod()
-            || !allowVerticalSwipe()) {
-            expandView()
-        }
+        expandView()
     }
 
     fun dismissWebView(silent: Boolean = false, complete: (() -> Unit) ? = null) {
