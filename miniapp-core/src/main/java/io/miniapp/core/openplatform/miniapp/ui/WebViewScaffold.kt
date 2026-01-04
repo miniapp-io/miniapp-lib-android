@@ -7,71 +7,27 @@ import android.webkit.CookieManager
 import android.webkit.WebSettings
 import android.webkit.WebView
 import io.miniapp.core.BuildConfig
+import io.miniapp.core.R
 import io.miniapp.core.openplatform.miniapp.MiniAppServiceImpl
 import io.miniapp.core.openplatform.miniapp.ui.webview.DefaultAppWebView
+import io.miniapp.core.openplatform.miniapp.ui.webview.WebViewJsBridge
 import io.miniapp.core.openplatform.miniapp.utils.AndroidUtils
 import io.miniapp.core.openplatform.miniapp.utils.LogTimber
 import io.miniapp.core.openplatform.miniapp.webapp.WebAppImpl
 import org.json.JSONObject
 
-val jsSelect = """
-(function() {
-    if (window.__selectInterceptorInjected) return;
-    window.__selectInterceptorInjected = true;
-
-    function getOptionsData(element) {
-        const options = [];
-        
-        for (let i = 0; i < element.children.length; i++) {
-            const child = element.children[i];
-            
-            if (child.tagName.toLowerCase() === 'optgroup') {
-                options.push({
-                    type: 'group',
-                    label: child.label,
-                    options: [...child.children].map(opt => ({
-                        type: 'option',
-                        text: opt.text,
-                        value: opt.value,
-                        disabled: opt.disabled
-                    }))
-                });
-            } else if (child.tagName.toLowerCase() === 'option') {
-                options.push({
-                    type: 'option',
-                    text: child.text,
-                    value: child.value,
-                    disabled: child.disabled
-                });
-            }
-        }
-        
-        return options;
-    }
-
-    document.addEventListener('click', function(e) {
-        var target = e.target;
-        if (target && target.tagName && target.tagName.toLowerCase() === 'select') {
-            if (!target.id) {
-                target.id = 'select_' + Math.random().toString(36).substr(2, 9);
-            }
-            e.preventDefault();
-            
-            const optionsData = getOptionsData(target);
-            
-            window.RunTimeWebviewProxy.showCustomSelect(
-                target.id,
-                target.value,
-                JSON.stringify(optionsData)
-            );
-            return false;
-        }
-    }, true);
-})();
-"""
-
+/**
+ * Inject custom select and datetime picker scripts into WebView
+ */
 internal fun WebView.injectSelect() {
-    evaluateJavascript(jsSelect, null)
+    // Inject custom select picker script
+    AndroidUtils.readRes(R.raw.webview_select)?.also {
+        evaluateJavascript(it, null)
+    }
+    // Inject datetime picker script
+    AndroidUtils.readRes(R.raw.webview_datetime)?.also {
+        evaluateJavascript(it, null)
+    }
 }
 
 @SuppressLint("SetJavaScriptEnabled")
@@ -152,7 +108,10 @@ internal fun DefaultAppWebView.removeHandler() {
 
 @SuppressLint("JavascriptInterface")
 internal fun DefaultAppWebView.registerWebTouchEvent() {
+    // Register WebView event handler
     addJavascriptInterface(this, "RunTimeWebviewProxy")
+    // Register JS Bridge for native UI components (select, date, time pickers)
+    addJavascriptInterface(WebViewJsBridge(this), "NativeUIBridge")
 }
 
 internal fun DefaultAppWebView.getPageData(complete: ()-> Unit) {
