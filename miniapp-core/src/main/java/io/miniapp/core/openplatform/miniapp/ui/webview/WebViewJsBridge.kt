@@ -29,6 +29,106 @@ internal class WebViewJsBridge(webView: WebView) {
 
     private val webViewRef = WeakReference(webView)
 
+    companion object {
+        /**
+         * JavaScript function to set input value with framework compatibility
+         * Supports React, Vue, Angular and vanilla JS
+         */
+        private fun getSetInputValueJs(inputId: String, value: String): String {
+            return """
+                (function() {
+                    var input = document.getElementById('$inputId');
+                    if (!input) return;
+                    
+                    // Focus the input first
+                    input.focus();
+                    
+                    // For React: use native value setter to bypass React's synthetic event system
+                    var nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
+                    if (nativeInputValueSetter) {
+                        nativeInputValueSetter.call(input, '$value');
+                    } else {
+                        input.value = '$value';
+                    }
+                    
+                    // Trigger input event (for React, Vue v-model, etc.)
+                    var inputEvent = new Event('input', { bubbles: true, cancelable: true });
+                    input.dispatchEvent(inputEvent);
+                    
+                    // Trigger change event
+                    var changeEvent = new Event('change', { bubbles: true, cancelable: true });
+                    input.dispatchEvent(changeEvent);
+                    
+                    // For some frameworks that listen to blur
+                    input.blur();
+                    
+                    // Additional: trigger events that some frameworks might need
+                    try {
+                        // For Angular
+                        var ngModelEvent = new Event('ngModelChange', { bubbles: true });
+                        input.dispatchEvent(ngModelEvent);
+                    } catch(e) {}
+                    
+                    try {
+                        // For older browsers or specific frameworks
+                        if (typeof input.onchange === 'function') {
+                            input.onchange();
+                        }
+                    } catch(e) {}
+                })();
+            """.trimIndent()
+        }
+
+        /**
+         * JavaScript function to set select value with framework compatibility
+         * Supports React, Vue, Angular and vanilla JS
+         */
+        private fun getSetSelectValueJs(selectId: String, value: String): String {
+            return """
+                (function() {
+                    var select = document.getElementById('$selectId');
+                    if (!select) return;
+                    
+                    // Focus the select first
+                    select.focus();
+                    
+                    // For React: use native value setter to bypass React's synthetic event system
+                    var nativeSelectValueSetter = Object.getOwnPropertyDescriptor(window.HTMLSelectElement.prototype, 'value').set;
+                    if (nativeSelectValueSetter) {
+                        nativeSelectValueSetter.call(select, '$value');
+                    } else {
+                        select.value = '$value';
+                    }
+                    
+                    // Trigger input event (for React, Vue v-model, etc.)
+                    var inputEvent = new Event('input', { bubbles: true, cancelable: true });
+                    select.dispatchEvent(inputEvent);
+                    
+                    // Trigger change event
+                    var changeEvent = new Event('change', { bubbles: true, cancelable: true });
+                    select.dispatchEvent(changeEvent);
+                    
+                    // For some frameworks that listen to blur
+                    select.blur();
+                    
+                    // Additional: trigger events that some frameworks might need
+                    try {
+                        // For Angular
+                        var ngModelEvent = new Event('ngModelChange', { bubbles: true });
+                        select.dispatchEvent(ngModelEvent);
+                    } catch(e) {}
+                    
+                    try {
+                        // For older browsers or specific frameworks
+                        if (typeof select.onchange === 'function') {
+                            select.onchange();
+                        }
+                    } catch(e) {}
+                })();
+            """.trimIndent()
+        }
+    }
+
     private data class SelectItem(
         val text: String,
         val value: String,
@@ -163,18 +263,8 @@ internal class WebViewJsBridge(webView: WebView) {
                         adapter.setSelectedPosition(position)
 
                         val selectedValue = item.value
-                        val updateJs = """
-                            (function() {
-                                var select = document.getElementById('$selectId');
-                                if(select) {
-                                    select.value = "$selectedValue";
-                                    var event = new Event('change', { bubbles: true });
-                                    select.dispatchEvent(event);
-                                }
-                            })();
-                        """.trimIndent()
-
-                        webView.evaluateJavascript(updateJs, null)
+                        // Update the select element's value with framework compatibility
+                        webView.evaluateJavascript(getSetSelectValueJs(selectId, selectedValue), null)
                         dialog.dismiss()
                     }
                 }
@@ -231,21 +321,8 @@ internal class WebViewJsBridge(webView: WebView) {
                             selectedDay
                         )
 
-                        // Update the input element's value
-                        val updateJs = """
-                            (function() {
-                                var input = document.getElementById('$inputId');
-                                if(input) {
-                                    input.value = "$formattedDate";
-                                    var event = new Event('change', { bubbles: true });
-                                    input.dispatchEvent(event);
-                                    var inputEvent = new Event('input', { bubbles: true });
-                                    input.dispatchEvent(inputEvent);
-                                }
-                            })();
-                        """.trimIndent()
-
-                        webView.evaluateJavascript(updateJs, null)
+                        // Update the input element's value with framework compatibility
+                        webView.evaluateJavascript(getSetInputValueJs(inputId, formattedDate), null)
                     },
                     year,
                     month,
@@ -321,21 +398,8 @@ internal class WebViewJsBridge(webView: WebView) {
                         // Format the time as HH:mm
                         val formattedTime = String.format("%02d:%02d", selectedHour, selectedMinute)
 
-                        // Update the input element's value
-                        val updateJs = """
-                            (function() {
-                                var input = document.getElementById('$inputId');
-                                if(input) {
-                                    input.value = "$formattedTime";
-                                    var event = new Event('change', { bubbles: true });
-                                    input.dispatchEvent(event);
-                                    var inputEvent = new Event('input', { bubbles: true });
-                                    input.dispatchEvent(inputEvent);
-                                }
-                            })();
-                        """.trimIndent()
-
-                        webView.evaluateJavascript(updateJs, null)
+                        // Update the input element's value with framework compatibility
+                        webView.evaluateJavascript(getSetInputValueJs(inputId, formattedTime), null)
                     },
                     hour,
                     minute,
@@ -413,21 +477,8 @@ internal class WebViewJsBridge(webView: WebView) {
                                     selectedMinute
                                 )
 
-                                // Update the input element's value
-                                val updateJs = """
-                                    (function() {
-                                        var input = document.getElementById('$inputId');
-                                        if(input) {
-                                            input.value = "$formattedDateTime";
-                                            var event = new Event('change', { bubbles: true });
-                                            input.dispatchEvent(event);
-                                            var inputEvent = new Event('input', { bubbles: true });
-                                            input.dispatchEvent(inputEvent);
-                                        }
-                                    })();
-                                """.trimIndent()
-
-                                webView.evaluateJavascript(updateJs, null)
+                                // Update the input element's value with framework compatibility
+                                webView.evaluateJavascript(getSetInputValueJs(inputId, formattedDateTime), null)
                             },
                             hour,
                             minute,
