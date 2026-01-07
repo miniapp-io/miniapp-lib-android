@@ -1964,7 +1964,7 @@ internal class DefaultWebViewFragment(
                 if (segments[0].lowercase() == "share" && segments[1].lowercase() == "url") {
                     val shareUrl = uri.getQueryParameter("url")
                     val shareText = uri.getQueryParameter("text")
-                    MiniAppServiceImpl.getInstance().appDelegate?.shareLinkOrText(app = this, linkOrText = shareUrl ?: shareText ?: "")
+                    MiniAppServiceImpl.getInstance().appDelegate?.shareLink(app = this, link = shareUrl, text = shareText)
                     return true
                 }
             }

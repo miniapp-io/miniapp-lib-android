@@ -688,7 +688,17 @@ interface IAppDelegate {
      * @param app the invoked app
      * @param linkOrText String
      */
+    @Deprecated("Use shareLink instead")
     fun shareLinkOrText(app: IMiniApp, linkOrText: String)
+
+
+    /**
+     * Share link
+     * @param app the invoked app
+     * @param link String
+     * * @param text String
+     */
+    fun shareLink(app: IMiniApp, link: String?, text: String?)
 
     /**
      * Execute custom method

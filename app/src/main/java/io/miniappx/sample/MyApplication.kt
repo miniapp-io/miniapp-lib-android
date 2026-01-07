@@ -182,7 +182,11 @@ class MyApplication : Application(), IAppDelegate {
         showToast()
     }
 
+    @Deprecated("Use shareLink instead")
     override fun shareLinkOrText(app: IMiniApp, linkOrText: String) {
+    }
+
+    override fun shareLink(app: IMiniApp, link: String?, text: String?) {
     }
 
     override suspend fun callCustomMethod(app: IMiniApp, method: String, params: String?, callback: (String?) -> Unit): Boolean {
