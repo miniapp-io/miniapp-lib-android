@@ -943,7 +943,7 @@ internal data class WebAppParameters(
     val isSystem: Boolean = false,
     val useCache: Boolean = true,
     val isDApp: Boolean = false,
-    val miniAppDto: MiniAppDto? = null,
+    var miniAppDto: MiniAppDto? = null,
     val dAppDto: DAppDto? = null,
     val bridgeProvider: BridgeProvider?= null,
     val onErrorCallback: ((Int,String?) -> Unit)? = null,

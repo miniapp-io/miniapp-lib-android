@@ -273,6 +273,7 @@ internal class DefaultWebViewFragment(
                     }.collect { app->
                         appId = app.id
                         miniAppDto = app
+                        launchConfig?.miniAppDto = app
                         launchConfig?.miniAppName = app.identifier
                         launchConfig?.miniAppId = app.id
                         launchConfig?.botName = app.botName
