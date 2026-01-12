@@ -1742,7 +1742,7 @@ internal class DefaultWebViewFragment(
         if (true==showFullScreenMod) {
             return false
         }
-        return allowVerticalSwipe ?: appSettings?.allowVerticalSwipe ?: appSettings?.let { it.viewStyle == "modal"  } ?: false
+        return allowVerticalSwipe ?: appSettings?.allowVerticalSwipe ?: useModalStyle()
     }
 
     private fun allowHorizontalSwipe() : Boolean {
@@ -1763,7 +1763,8 @@ internal class DefaultWebViewFragment(
     }
 
     private fun useModalStyle() : Boolean {
-        if (true==launchConfig?.useModalStyle) {
+        val isModal = launchConfig?.params?.any { it.key=="viewStyle" && it.value == "modal" } ?: false
+        if (isModal || true==launchConfig?.useModalStyle) {
             return true
         }
         return appSettings?.let {

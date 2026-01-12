@@ -167,7 +167,7 @@ fun DialogMiniAppButton(lifecycleOwner: LifecycleOwner, complete: (IMiniApp?) ->
             //.startParam("roomId=!EpPeSoGdAiLDqJSWfm:server.baidu.com")
             .botName("mini")
             .miniAppName("mini")
-            .useModalStyle(true)
+            .params(mapOf("viewStyle" to "modal"))
             .isLocal(true)
             .onDismissListener {
                 showDialog.value = false
