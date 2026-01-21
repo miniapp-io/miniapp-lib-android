@@ -1920,7 +1920,42 @@ internal class DefaultWebViewFragment(
     }
 
     override suspend fun invokeCustomMethod(method: String, params: String?): String?   =  suspendCancellableCoroutine { continuation ->
-        val process : (String) -> Unit =  { appId->
+        val processInterceptor : () -> Boolean = {
+            when(method) {
+                "share" -> {
+                    clickMenu("SHARE")
+                    true
+                }
+                "reloadPage" -> {
+                    clickMenu("RELOAD")
+                    true
+                }
+                "addToHomeScreen" -> {
+                    clickMenu("SHORTCUT")
+                    true
+                }
+                "openFeedback" -> {
+                    clickMenu("FEEDBACK")
+                    true
+                }
+                "openUserAgreement" -> {
+                    clickMenu("TERMS")
+                    true
+                }
+                "openPrivacyPolicy" -> {
+                    clickMenu("PRIVACY")
+                    true
+                }
+                else -> false
+            }
+        }
+
+        if (processInterceptor()) {
+            continuation.resume("success")
+            return@suspendCancellableCoroutine
+        }
+
+        val processRequest : (String) -> Unit =  { appId->
             owner.lifecycleScope.launch(Dispatchers.Main + allJobs) {
                 miniAppRepository.invokeCustomMethod(
                     CustomMethodsParams(
@@ -1938,11 +1973,11 @@ internal class DefaultWebViewFragment(
         if (appId.isNullOrBlank()) {
             requestMiniAppInfo {
                 if (!appId.isNullOrBlank()) {
-                    process(appId!!)
+                    processRequest(appId!!)
                 }
             }
         } else {
-            process(appId!!)
+            processRequest(appId!!)
         }
     }
 
