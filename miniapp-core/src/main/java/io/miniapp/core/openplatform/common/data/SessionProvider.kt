@@ -13,8 +13,6 @@ internal class SessionProvider(val context: Context) {
     private val provider: SharedPreferences =
         context.getSharedPreferences(GLOBAL, Activity.MODE_PRIVATE)
 
-    var refreshToken: (suspend ()-> String?)? = null
-
     var token: String? = null
         set(value) {
             synchronized(this) {

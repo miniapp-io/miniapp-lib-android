@@ -8,9 +8,9 @@ import io.miniapp.core.openplatform.common.apis.data.LaunchParams
 import io.miniapp.core.openplatform.common.network.OkHttpClientProvider
 import kotlinx.coroutines.flow.flow
 
-internal class OpenServiceRemoteDataSource(provider: ()-> SessionProvider?) : IOpenServiceDataSource {
+internal class OpenServiceRemoteDataSource() : IOpenServiceDataSource {
 
-    private val minAppApi = OkHttpClientProvider.retrofitFactory(provider).create(OpenServiceApi::class.java)
+    private val minAppApi = OkHttpClientProvider.retrofitFactory().create(OpenServiceApi::class.java)
     override suspend fun auth(verifier: String, idToken: String) = flow {
         val data = minAppApi.verifier(AuthParams(verifier = verifier, options = mapOf("id_token" to idToken)))
         emit(data)

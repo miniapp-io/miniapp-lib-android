@@ -115,7 +115,7 @@ class MyApplication : Application(), IAppDelegate {
             context = this,
             isDev = false,
             verifier = "3611ba4b-9a1a-4ac0-97eb-9a5fa5b60ec5",
-            apiHost = "https://api.m.openweb3.io",
+            apiHost = "https://dev-mapi.mtsocialdao.com",
             idTokenProvider = { idTokenProvider() },
             onVerifierSuccess = {
                 currentActivity?.also { activity->

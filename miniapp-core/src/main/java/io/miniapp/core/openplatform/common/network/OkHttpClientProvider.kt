@@ -1,6 +1,5 @@
 package io.miniapp.core.openplatform.common.network
 
-import io.miniapp.core.openplatform.common.data.SessionProvider
 import io.miniapp.core.openplatform.common.network.interceptors.CurlLoggingInterceptor
 import io.miniapp.core.openplatform.common.network.interceptors.FormattedJsonHttpLogger
 import io.miniapp.core.openplatform.common.network.interceptors.HeadInterceptor
@@ -25,9 +24,9 @@ internal object OkHttpClientProvider {
         return apiHost!!
     }
 
-    val retrofitFactory: (() -> SessionProvider?) -> Retrofit = {
+    val retrofitFactory: () -> Retrofit = {
         RetrofitFactory(providesMoshi()).create(
-            providesOkHttpClient(it),
+            providesOkHttpClient(),
             baseUrl = getBaseUrl()
         )
     }
@@ -50,7 +49,7 @@ internal object OkHttpClientProvider {
         return interceptor
     }
 
-   private fun providesOkHttpClient(provider: ()-> SessionProvider?) : OkHttpClient {
+   private fun providesOkHttpClient() : OkHttpClient {
         val spec = ConnectionSpec.Builder(ConnectionSpec.RESTRICTED_TLS).build()
         val dispatcher = Dispatcher().apply {
             maxRequestsPerHost = 20
@@ -61,7 +60,7 @@ internal object OkHttpClientProvider {
             .readTimeout(60, TimeUnit.SECONDS)
             .writeTimeout(60, TimeUnit.SECONDS)
             .addInterceptor(HeadInterceptor())
-            .addInterceptor(SessionInterceptor(provider))
+            .addInterceptor(SessionInterceptor())
             .addInterceptor(CurlLoggingInterceptor())
             .addNetworkInterceptor(providesHttpLoggingInterceptor())
             .addSocketFactory()

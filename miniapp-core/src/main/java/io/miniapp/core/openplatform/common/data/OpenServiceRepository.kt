@@ -1,5 +1,6 @@
 package io.miniapp.core.openplatform.common.data
 
+import io.miniapp.core.openplatform.AuthManager
 import io.miniapp.core.openplatform.OpenPlatformPluginImpl
 import io.miniapp.core.openplatform.common.apis.data.CustomMethodsParams
 import io.miniapp.core.openplatform.common.apis.data.DAppDto
@@ -21,7 +22,7 @@ internal class OpenServiceRepository private constructor(): IOpenServiceDataSour
     }
 
     private val remoteDataSource by lazy {
-        OpenServiceRemoteDataSource(OpenPlatformPluginImpl.getInstance().sessionProvider)
+        OpenServiceRemoteDataSource()
     }
 
     override suspend fun auth(verifier: String, idToken: String) =
