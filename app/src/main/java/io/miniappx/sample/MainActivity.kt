@@ -303,6 +303,7 @@ fun AppMasterButton(context:Context,lifecycleOwner: LifecycleOwner) {
             .context(context)
             .miniAppId("2lv8dp7JjF2AU0iEk2rMYUaySjU")
             //.miniAppId("338uovSvAvMAluyhazoolcZ9RDJ")
+            //.miniAppId("33rz2o14iQorVCMYfMzM3uMu0pR") ld test
             .onDismissListener {
             }
             .build()
@@ -318,7 +319,6 @@ fun AppMasterButton(context:Context,lifecycleOwner: LifecycleOwner) {
 @Composable
 fun MarketPlaceButton(context:Context,lifecycleOwner: LifecycleOwner) {
     Button(modifier = Modifier.width(250.dp), onClick = {
-
         val config = WebAppLaunchWithDialogParameters.Builder()
             .owner(lifecycleOwner)
             .context(context)

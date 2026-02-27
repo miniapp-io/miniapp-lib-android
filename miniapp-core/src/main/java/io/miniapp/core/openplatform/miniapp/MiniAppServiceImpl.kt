@@ -302,6 +302,22 @@ internal class MiniAppServiceImpl : MiniAppService {
         return DataResult.Failure((result as DataResult.Failure).throwable)
     }
 
+    override suspend fun getShareInfoByCode(code: String): DataResult<Map<String, String?>> =  suspendCancellableCoroutine { continuation ->
+        MainScope().launch {
+            repository.getAppInfoByShareCode(code)
+                .catch {
+                    it.printStackTrace()
+                    if (continuation.isActive) {
+                        continuation.resume(DataResult.Failure(it))
+                    }
+                }.collect {
+                    if (continuation.isActive) {
+                        continuation.resume(DataResult.Success(it.shareInfo))
+                    }
+                }
+        }
+    }
+
     override fun clearCache() {
         WebAppLruCache.removeAll()
     }

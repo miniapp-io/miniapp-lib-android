@@ -34,6 +34,12 @@ internal object ApiConstants {
     // get ai complete data
     const val URI_AI_COMPLETION = "/api/v1/ai/completion"
 
-    //inline button callback
+    // inline button callback
     const val URI_INLINE_CALLBACK = "/api/v1/callback/query"
+
+    // get share invite short url
+    const val URI_SHARE_INVITE = "/api/v1/miniapp/share/invite"
+
+    // get app info by share invite code
+    const val URI_APP_INFO_BY_INVITE_CODE = "/api/v1/miniapp/share/invite/{inviteCode}"
 }

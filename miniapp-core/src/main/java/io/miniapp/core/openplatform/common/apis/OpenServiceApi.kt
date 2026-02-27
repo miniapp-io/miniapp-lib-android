@@ -1,6 +1,8 @@
 package io.miniapp.core.openplatform.common.apis
 
 import io.miniapp.core.openplatform.common.apis.constants.ApiConstants
+import io.miniapp.core.openplatform.common.apis.data.AppInviteDto
+import io.miniapp.core.openplatform.common.apis.data.AppShareInfoResp
 import io.miniapp.core.openplatform.common.apis.data.AuthParams
 import io.miniapp.core.openplatform.common.apis.data.BotDto
 import io.miniapp.core.openplatform.common.apis.data.BotMenusResponse
@@ -87,5 +89,18 @@ internal interface OpenServiceApi {
      */
     @POST(ApiConstants.URI_INLINE_CALLBACK)
     suspend fun inlineButtonCallback(@Body params: InlineButtonCallbackParams)
+
+    /**
+     * Get app share short link
+     */
+    @POST(ApiConstants.URI_SHARE_INVITE)
+    suspend fun generateShareLink(@Body params: Map<String, String?>): AppInviteDto
+
+    /**
+     * Get app info by invite code
+     */
+    @GET(ApiConstants.URI_APP_INFO_BY_INVITE_CODE)
+    suspend fun getAppInfoByInviteCode(@Path("inviteCode") inviteCode: String): AppShareInfoResp
+
 
 }

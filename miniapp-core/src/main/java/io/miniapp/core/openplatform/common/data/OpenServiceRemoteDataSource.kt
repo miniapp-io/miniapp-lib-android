@@ -60,4 +60,14 @@ internal class OpenServiceRemoteDataSource() : IOpenServiceDataSource {
         val data = minAppApi.getDAppLaunchInfo(url, id)
         emit(data)
     }
+
+    override suspend fun generateShareLink(params: Map<String, String?>) = flow {
+        val data = minAppApi.generateShareLink(params)
+        emit(data)
+    }
+
+    override suspend fun getAppInfoByShareCode(code: String) = flow {
+        val data = minAppApi.getAppInfoByInviteCode(code)
+        emit(data)
+    }
 }

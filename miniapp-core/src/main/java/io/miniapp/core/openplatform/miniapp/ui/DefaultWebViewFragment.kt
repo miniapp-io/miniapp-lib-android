@@ -48,6 +48,7 @@ import io.miniapp.core.openplatform.common.apis.data.DAppDto
 import io.miniapp.core.openplatform.common.apis.data.LaunchParams
 import io.miniapp.core.openplatform.common.apis.data.MiniAppDto
 import io.miniapp.core.openplatform.common.data.OpenServiceRepository
+import io.miniapp.core.openplatform.common.network.MoshiProvider
 import io.miniapp.core.openplatform.miniapp.ActivityStack
 import io.miniapp.core.openplatform.miniapp.IMiniApp
 import io.miniapp.core.openplatform.miniapp.IResourcesProvider
@@ -92,6 +93,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
+import org.json.JSONObject
 import kotlin.coroutines.resume
 import kotlin.math.min
 
@@ -439,7 +441,7 @@ internal class DefaultWebViewFragment(
 
     init {
 
-      setOnApplyWindowInsetsListener { v, insets ->
+        setOnApplyWindowInsetsListener { v, insets ->
             val insetsCompat = WindowInsetsCompat.toWindowInsetsCompat(insets, v)
             val navInsets = insetsCompat.getInsets(WindowInsetsCompat.Type.navigationBars())
             this.navInsets.set(navInsets.left, navInsets.top, navInsets.right, navInsets.bottom)
@@ -480,10 +482,10 @@ internal class DefaultWebViewFragment(
                 var tempWidthMeasureSpec = widthMeasureSpec
                 val availableHeight = MeasureSpec.getSize(heightMeasureSpec)
                 var padding = if (!AndroidUtils.isTablet(context) && AndroidUtils.displaySize.x > AndroidUtils.displaySize.y) {
-                        (availableHeight / 3.5f).toInt()
-                    } else {
-                        availableHeight / 5 * 2
-                    }
+                    (availableHeight / 3.5f).toInt()
+                } else {
+                    availableHeight / 5 * 2
+                }
 
                 if (padding < 0) {
                     padding = 0
@@ -998,7 +1000,7 @@ internal class DefaultWebViewFragment(
                 )
             } else {
                 swipeContainer.setTopActionBarOffsetY(
-                            + (if(isStatusBarVisible()) AndroidUtils.statusBarHeight else 0)
+                    + (if(isStatusBarVisible()) AndroidUtils.statusBarHeight else 0)
                             -  AndroidUtils.dp(lineBarHeight)
                 )
             }
@@ -1957,16 +1959,44 @@ internal class DefaultWebViewFragment(
 
         val processRequest : (String) -> Unit =  { appId->
             owner.lifecycleScope.launch(Dispatchers.Main + allJobs) {
-                miniAppRepository.invokeCustomMethod(
-                    CustomMethodsParams(
-                        method,
-                        params,
-                        appId
-                    )
-                ).catch {
-                    it.printStackTrace()
-                }.collect {
-                    continuation.resume(it)
+                when(method) {
+                    "generateShareLink" -> {
+                        try {
+                            val jsonEvenData = JSONObject(params ?: "")
+
+                            val shareParams = mutableMapOf<String, String?>(
+                                "app_id" to appId
+                            )
+
+                            jsonEvenData.keys().forEach { key ->
+                                shareParams[key] = jsonEvenData.getString(key)
+                            }
+
+                            miniAppRepository.generateShareLink(shareParams)
+                                .catch {
+                                    it.printStackTrace()
+                                }
+                                .collect {
+                                    continuation.resume(MoshiProvider.toJson(it))
+                                }
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                        }
+                    }
+                    else -> {
+                        miniAppRepository.invokeCustomMethod(
+                            CustomMethodsParams(
+                                method,
+                                params,
+                                appId
+                            )
+                        ).catch {
+                            continuation.resume(null)
+                            it.printStackTrace()
+                        }.collect {
+                            continuation.resume(it)
+                        }
+                    }
                 }
             }
         }
@@ -1974,6 +2004,8 @@ internal class DefaultWebViewFragment(
             requestMiniAppInfo {
                 if (!appId.isNullOrBlank()) {
                     processRequest(appId!!)
+                } else {
+                    continuation.resume(null)
                 }
             }
         } else {
@@ -2085,7 +2117,7 @@ internal class DefaultWebViewFragment(
         webViewContainer.loadUrl(url) { isUseCache->
             if (!isUseCache)
                 pageLoadingView.showLoading()
-            }
+        }
     }
 
     override fun reloadPage() {
@@ -2204,7 +2236,7 @@ internal class DefaultWebViewFragment(
         parentView?.removeView(this)
     }
 
-   fun showAfterAttach() {
+    fun showAfterAttach() {
         show()
     }
 
@@ -2223,16 +2255,16 @@ internal class DefaultWebViewFragment(
     }
 
     private fun MiniAppDto.toShareUrl(): String {
-       if (!this.id.isNullOrBlank()) {
-          return "${MiniAppServiceImpl.getInstance().miniAppHost.firstOrNull()}/apps/${this.id}"
-       }
-       return "${MiniAppServiceImpl.getInstance().miniAppHost.firstOrNull()}/${this.botName ?: this.botId}/${this.identifier}"
+        if (!this.id.isNullOrBlank()) {
+            return "${MiniAppServiceImpl.getInstance().miniAppHost.firstOrNull()}/apps/${this.id}"
+        }
+        return "${MiniAppServiceImpl.getInstance().miniAppHost.firstOrNull()}/${this.botName ?: this.botId}/${this.identifier}"
     }
 
     private fun String?.resolve(): String? {
-       if (this.isNullOrBlank()) {
-           return null
-       }
+        if (this.isNullOrBlank()) {
+            return null
+        }
         if (this.lowercase().startsWith("http")) {
             return this
         }

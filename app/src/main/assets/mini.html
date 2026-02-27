@@ -339,6 +339,20 @@
           window.MiniAppX.WebApp.DeviceOrientation.stop()
        }
 
+       function getShareUrl() {
+          const data = {
+              start_param: 'your_custom_parameters_here' ,
+              space_id: 'space id' ,
+              title: '精彩内容分享',
+              description: '快来看看这个有趣的内容',
+              image_url: 'https://cdn.example.com/share-image.jpg'
+          };
+          window.MiniAppX.WebApp.invokeCustomMethod( "generateShareLink", data, (err,eventData)=> {
+            const jsonObj = JSON.parse(eventData);
+            notify(jsonObj.short_url);
+          })
+       }
+
         window.MiniAppX.WebApp.onEvent("activated", (eventType, eventData)=> {
           notify( "MiniApp is activated");
         })
@@ -406,6 +420,7 @@
     <button onclick="openShareByCustomMethod()">Share By Custom Method</button>
 
     <p class="t">Open Link</p>
+    <button onclick="getShareUrl()">Get Share Url</button>
     <a href="https://t.me/apps/10?param=1">https://t.me/apps/10?param=1</a>
     <a href="https://www.google.com">https://www.google.com</a>
     <a href="https://t.me/gameing?start=120aa1ba">https://t.me/gameing?start=120aa1ba</a>

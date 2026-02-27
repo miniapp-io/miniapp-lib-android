@@ -1,7 +1,5 @@
 package io.miniapp.core.openplatform.common.data
 
-import io.miniapp.core.openplatform.AuthManager
-import io.miniapp.core.openplatform.OpenPlatformPluginImpl
 import io.miniapp.core.openplatform.common.apis.data.CustomMethodsParams
 import io.miniapp.core.openplatform.common.apis.data.DAppDto
 import io.miniapp.core.openplatform.common.apis.data.InlineButtonCallbackParams
@@ -128,4 +126,10 @@ internal class OpenServiceRepository private constructor(): IOpenServiceDataSour
 
     override suspend fun requestDAppLaunchUrl(url: String, id: String?) =
         remoteDataSource.requestDAppLaunchUrl(url, id)
+
+    override suspend fun generateShareLink(params: Map<String, String?>) =
+        remoteDataSource.generateShareLink(params)
+
+    override suspend fun getAppInfoByShareCode(code: String) =
+        remoteDataSource.getAppInfoByShareCode(code)
 }

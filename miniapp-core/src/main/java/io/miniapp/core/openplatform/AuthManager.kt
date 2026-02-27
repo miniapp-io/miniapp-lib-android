@@ -75,7 +75,6 @@ internal object AuthManager {
                 }
             }
 
-            // 执行认证流程
             authenticate()
             Result.success(Unit)
         } catch (e: Exception) {

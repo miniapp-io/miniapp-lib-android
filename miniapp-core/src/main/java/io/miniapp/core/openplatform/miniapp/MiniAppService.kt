@@ -613,6 +613,8 @@ interface MiniAppService {
 
     suspend fun getDAppInfo(dAppId: String): DataResult<DAppInfo?>
 
+    suspend fun getShareInfoByCode(code: String): DataResult<Map<String, String?>>
+
     fun clearCache()
 }
 

@@ -1,5 +1,7 @@
 package io.miniapp.core.openplatform.common.data
 
+import io.miniapp.core.openplatform.common.apis.data.AppInviteDto
+import io.miniapp.core.openplatform.common.apis.data.AppShareInfoResp
 import io.miniapp.core.openplatform.common.apis.data.BotDto
 import io.miniapp.core.openplatform.common.apis.data.CustomMethodsParams
 import io.miniapp.core.openplatform.common.apis.data.DAppDto
@@ -23,4 +25,6 @@ internal interface IOpenServiceDataSource {
     suspend fun requestDApp(dAppId: String): Flow<DAppDto>
     suspend fun invokeCustomMethod(params: CustomMethodsParams): Flow<String?>
     suspend fun requestDAppLaunchUrl(url: String, id: String?): Flow<LaunchDAppDto>
+    suspend fun generateShareLink(params: Map<String, String?>): Flow<AppInviteDto>
+    suspend fun getAppInfoByShareCode(code: String): Flow<AppShareInfoResp>
 }

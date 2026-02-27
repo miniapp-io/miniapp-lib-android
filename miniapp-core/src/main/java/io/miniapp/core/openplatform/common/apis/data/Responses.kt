@@ -42,6 +42,7 @@ internal data class DAppDto(
     @Json(name = "is_share_enabled")
     val isShareEnabled: Boolean?
 )
+
 @JsonClass(generateAdapter = true)
 internal data class AppSettings(
     /**
@@ -174,4 +175,14 @@ internal data class BotMenuDto(
 @JsonClass(generateAdapter = true)
 internal data class BotMenusResponse(
     val items: List<BotMenuDto>?,
+)
+
+@JsonClass(generateAdapter = true)
+internal data class AppInviteDto(
+    @Json(name = "short_url") val shortUrl: String,
+)
+
+@JsonClass(generateAdapter = true)
+internal data class AppShareInfoResp(
+    @Json(name = "share_info") val shareInfo: Map<String, String?>
 )
