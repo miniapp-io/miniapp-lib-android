@@ -710,7 +710,7 @@ interface IAppDelegate {
      * @return Boolean True: application layer has consumed and processed, False: application layer has not consumed and processed
      */
     suspend
-    fun callCustomMethod(app: IMiniApp, method: String, params: String?, callback: (String?) -> Unit): Boolean
+    fun callCustomMethod(app: IMiniApp, method: String, params: String?): Pair<Boolean, String?>
 
     /**
      * Scan QR code and return QR code content

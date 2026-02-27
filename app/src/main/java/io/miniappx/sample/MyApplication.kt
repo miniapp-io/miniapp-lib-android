@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Application
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -187,20 +188,33 @@ class MyApplication : Application(), IAppDelegate {
     }
 
     override fun shareLink(app: IMiniApp, link: String?, text: String?) {
+        val shareContent = listOfNotNull(text, link)
+            .joinToString(separator = "\n")
+
+        if (shareContent.isEmpty()) return
+
+        val shareIntent = Intent(Intent.ACTION_SEND).apply {
+            type = "text/plain"
+            putExtra(Intent.EXTRA_TEXT, shareContent)
+        }
+
+        val chooserIntent = Intent.createChooser(shareIntent, "Share To")
+
+        chooserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+
+        applicationContext.startActivity(chooserIntent)
     }
 
-    override suspend fun callCustomMethod(app: IMiniApp, method: String, params: String?, callback: (String?) -> Unit): Boolean {
+    override suspend fun callCustomMethod(app: IMiniApp, method: String, params: String?): Pair<Boolean, String?> {
         return when(method) {
             "getRoomConfig" -> {
-                callback.invoke(null)
-                true
+                Pair(true, null)
             }
             "updateRoomConfig" -> {
-                callback.invoke(null)
-                true
+                Pair(true, null)
             }
             else -> {
-                false
+                 Pair(false, null)
             }
         }
     }

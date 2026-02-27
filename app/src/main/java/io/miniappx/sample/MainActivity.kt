@@ -200,7 +200,7 @@ fun LaunchTgButton(lifecycleOwner: LifecycleOwner, complete: (IMiniApp?) -> Unit
 
     //var textInput by remember { mutableStateOf("https://tv.cctv.com/live/cctv5plus/m/") }
     //var textInput by remember { mutableStateOf("https://game1.catizen.ai/game/tonkeeper/10215317") }
-    var textInput by remember { mutableStateOf("https://www.magiceden.io") }
+    var textInput by remember { mutableStateOf("https://miniappx.io/apps/33rz2o14iQorVCMYfMzM3uMu0pR?spaceId=!SmWtXvbi:mt.social&appId=33rz2o14iQorVCMYfMzM3uMu0pR") }
 
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         TextField(

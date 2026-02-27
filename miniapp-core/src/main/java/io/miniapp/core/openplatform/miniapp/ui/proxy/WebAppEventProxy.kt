@@ -39,24 +39,26 @@ internal class WebAppEventProxy(private val context: Context,
                         val method = eventData.getString("method")
                         val params = eventData.optJSONObject("params")?.toString()
 
-                        val isDeal = MiniAppServiceImpl.getInstance().appDelegate?.callCustomMethod(miniApp, method, params) {
+                        val resultData = MiniAppServiceImpl.getInstance().appDelegate?.callCustomMethod(miniApp, method, params)
+                        val isDeal = resultData?.first ?: false
+
+                        if (isDeal) {
                             val data = JSONObject()
                             data.put("req_id", reqId)
-                            data.put("result", it)
+                            data.put("result", resultData?.second)
                             webApp.postCustomEventToMiniApp(data)
-
-                            LogTimber.tag("=====>custom method").d("Done! time: ${System.currentTimeMillis()-beginTime} eventData=$eventData")
-                        } ?: false
-
-                        if (!isDeal) {
-                           val result = miniAppDelegate.invokeCustomMethod(method, params)
-                            val data = JSONObject()
-                            data.put("req_id", reqId)
-                            data.put("result", result)
-                            webApp.postCustomEventToMiniApp(data)
-
-                            LogTimber.tag("=====>custom method").d("Done! time: ${System.currentTimeMillis()-beginTime} eventData=$eventData")
+                            return@also
                         }
+
+                        LogTimber.tag("=====>custom method").d("Done! time: ${System.currentTimeMillis()-beginTime} eventData=$eventData")
+
+                        val result = miniAppDelegate.invokeCustomMethod(method, params)
+                        val data = JSONObject()
+                        data.put("req_id", reqId)
+                        data.put("result", result)
+                        webApp.postCustomEventToMiniApp(data)
+
+                        LogTimber.tag("=====>custom method").d("Done! time: ${System.currentTimeMillis()-beginTime} eventData=$eventData")
 
                     } catch (e: Exception) {
                         e.printStackTrace()
