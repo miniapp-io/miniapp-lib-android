@@ -16,6 +16,7 @@ import io.miniapp.core.openplatform.miniapp.MiniAppServiceImpl
 import io.miniapp.core.openplatform.miniapp.ui.webview.WebAppLruCache
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 @Target(AnnotationTarget.FUNCTION)
 @Retention(AnnotationRetention.SOURCE)
@@ -105,7 +106,9 @@ internal class OpenPlatformPluginImpl(private val  pluginName: @PluginName Strin
 
     @SuppressLint("CommitPrefEdits")
     override fun signOut(context: Context) {
-        AuthManager.signOut()
+        runBlocking {
+            AuthManager.signOut()
+        }
         WebAppLruCache.removeAll()
     }
 

@@ -18,7 +18,7 @@ internal class SessionInterceptor : Interceptor {
         return chain.proceed(request).let { resp->
             if (resp.code == 401 && !request.url.pathSegments.contains("auth")) {
                 AuthManager.clearToken()
-                val newToken = runBlocking { AuthManager._refreshToken?.let { it() } }
+                val newToken = AuthManager._refreshToken?.let { it() }
                 return if (!newToken.isNullOrEmpty()) {
                     val newRequest = request.newBuilder()
                         .header("Authorization", "Bearer $newToken")
