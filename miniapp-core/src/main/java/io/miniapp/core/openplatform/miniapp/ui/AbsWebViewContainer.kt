@@ -521,6 +521,8 @@ internal abstract class AbsWebViewContainer(
                 webView?.bgColor = null
             }
 
+            webView?.setTag(R.id.tag_miniappx_app, getMiniApp())
+
             removeWebView()
             addView(webView)
 

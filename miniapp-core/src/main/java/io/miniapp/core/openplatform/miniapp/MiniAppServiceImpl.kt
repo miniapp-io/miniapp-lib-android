@@ -3,26 +3,24 @@ package io.miniapp.core.openplatform.miniapp
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Application
-import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
-import android.provider.Browser
 import android.util.ArrayMap
 import android.view.View
 import android.view.ViewGroup.LayoutParams
 import android.webkit.ValueCallback
 import android.webkit.WebChromeClient
+import android.webkit.WebView
 import android.widget.FrameLayout
 import androidx.activity.ComponentActivity
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.net.toUri
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import io.miniapp.bridge.BridgeProvider
+import io.miniapp.core.R
 import io.miniapp.core.openplatform.common.apis.data.DAppDto
 import io.miniapp.core.openplatform.common.apis.data.MiniAppDto
 import io.miniapp.core.openplatform.common.data.LRUSharedPreferencesCache
@@ -316,6 +314,10 @@ internal class MiniAppServiceImpl : MiniAppService {
                     }
                 }
         }
+    }
+
+    override fun getMiniAppByWebView(webView: WebView): IMiniApp? {
+        return webView.getTag(R.id.tag_miniappx_app) as? IMiniApp
     }
 
     override fun clearCache() {

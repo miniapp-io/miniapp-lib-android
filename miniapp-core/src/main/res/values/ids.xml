@@ -8,4 +8,6 @@
     <item name="actionTerm" type="id" />
     <item name="actionPrivacy" type="id" />
     <item name="actionSetting" type="id" />
+
+    <item name="tag_miniappx_app" type="id" />
 </resources>

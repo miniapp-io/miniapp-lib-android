@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams
+import android.webkit.WebView
 import android.widget.FrameLayout
 import androidx.annotation.IntDef
 import androidx.annotation.Keep
@@ -614,6 +615,8 @@ interface MiniAppService {
     suspend fun getDAppInfo(dAppId: String): DataResult<DAppInfo?>
 
     suspend fun getShareInfoByCode(code: String): DataResult<Map<String, String?>>
+
+    fun getMiniAppByWebView(webView: WebView): IMiniApp?
 
     fun clearCache()
 }
