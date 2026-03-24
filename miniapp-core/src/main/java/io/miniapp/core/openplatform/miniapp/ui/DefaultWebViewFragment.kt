@@ -668,7 +668,7 @@ internal class DefaultWebViewFragment(
 
                     if (uri.scheme?.lowercase() != "http" &&
                         uri.scheme?.lowercase() != "https") {
-                        SchemeUtils.openInBrowser(context, url)
+                        SchemeUtils.openInDefaultBrowser(context, url)
                         return true
                     }
 
