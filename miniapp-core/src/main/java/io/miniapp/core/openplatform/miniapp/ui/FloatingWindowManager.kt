@@ -46,7 +46,11 @@ internal object FloatingWindowManager {
     }
 
     fun closeFloatingWindow(force: Boolean = false, immediately: Boolean = true) {
-       if(miniApp?.requestDismiss(force = force, immediately = immediately, isSilent = true) ?: force) {
+       if(miniApp?.requestDismiss(
+               force = force,
+               immediately = immediately,
+               isSilent = true,
+               complete = null) ?: force) {
            closeAfterConfirm()
        }
     }

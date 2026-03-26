@@ -48,7 +48,6 @@ internal abstract class AbsWebViewContainer(
     private var updateUrlOnly: Boolean = false
 
     private var webViewScrollListener: WebViewScrollListener? = null
-    private var webViewNotAvailable = false
     private var isFlickeringCenter = false
     private var webViewProgressListener: Consumer<Float>? = null
     private var mFilePathCallback: ValueCallback<Array<Uri>>? = null
@@ -343,11 +342,14 @@ internal abstract class AbsWebViewContainer(
         return history.size == 0
     }
 
-    fun loadUrl(url: String?, headers: Map<String,String>? = null, callback: (Boolean)-> Unit) {
+    fun loadUrl(url: String?,
+                force: Boolean = false,
+                headers: Map<String,String>? = null,
+                callback: (Boolean)-> Unit) {
         isPageLoaded = false
         hasUserPermissions = false
         mUrl = url
-        checkCreateWebView { isUserCache->
+        checkCreateWebView(force) { isUserCache->
             if (!isUserCache || false==webView?.isPageLoaded) {
                 webView?.onResume()
                 if (updateUrlOnly) {
@@ -362,7 +364,8 @@ internal abstract class AbsWebViewContainer(
                 try {
                     webView?.onResume()
                     val cacheData = webView?.cacheData
-                    if(cacheData != getCacheData()
+                    if(force
+                        || cacheData != getCacheData()
                         || false == getConfig()?.useCache
                         || webView?.url == null
                         || true==webView?.isWebViewStateDestroyed()) {
@@ -447,13 +450,17 @@ internal abstract class AbsWebViewContainer(
     }
 
     @SuppressLint("SetJavaScriptEnabled", "AddJavascriptInterface")
-    private fun setupWebView(handler: (Boolean) -> Unit) {
+    private fun setupWebView(force: Boolean, handler: (Boolean) -> Unit) {
         if (webView != null) {
-            webView!!.destroy()
+            webView?.destroy()
             removeWebView()
         }
         var isUseCache = false
         val cacheKey = getCacheKey()
+
+        if (cacheKey != null && force) {
+            WebAppLruCache.remove(cacheKey)
+        }
 
         updateUrlOnly = false
 
@@ -617,10 +624,10 @@ internal abstract class AbsWebViewContainer(
         isFlickeringCenter = center
     }
 
-    fun checkCreateWebView(handler: (Boolean) -> Unit) {
-        if (webView == null && !webViewNotAvailable) {
+    fun checkCreateWebView(force: Boolean = false, handler: (Boolean) -> Unit) {
+        if (webView == null || force) {
             try {
-                setupWebView(handler)
+                setupWebView(force, handler)
             } catch (t: Throwable) {
                 removeWebView()
             }

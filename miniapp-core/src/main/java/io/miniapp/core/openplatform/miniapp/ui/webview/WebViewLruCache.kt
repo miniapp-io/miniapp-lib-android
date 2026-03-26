@@ -1,6 +1,7 @@
 package io.miniapp.core.openplatform.miniapp.ui.webview
 
 import android.util.LruCache
+import android.webkit.WebView
 import java.lang.ref.WeakReference
 
 internal object WebAppLruCache {
@@ -39,6 +40,15 @@ internal object WebAppLruCache {
     }
 
     fun remove(key: String): DefaultAppWebView? {
+        return webViewCache.remove(key)?.get()
+    }
+
+    fun remove(webView: DefaultAppWebView): DefaultAppWebView? {
+        val key = webViewCache.snapshot()
+            .entries
+            .firstOrNull { it.value.get() === webView }
+            ?.key
+            ?: return null
         return webViewCache.remove(key)?.get()
     }
 

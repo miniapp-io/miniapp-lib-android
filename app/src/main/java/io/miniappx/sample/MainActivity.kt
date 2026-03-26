@@ -87,7 +87,11 @@ class MainActivity : AppCompatActivity() {
 
         val callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                if(miniApp==null || true==miniApp?.requestDismiss()) {
+                if(miniApp==null || true==miniApp?.requestDismiss(
+                        force = false,
+                        immediately = false,
+                        isSilent = false,
+                        complete = null)) {
                     finish()
                 }
             }
@@ -322,9 +326,9 @@ fun MarketPlaceButton(context:Context,lifecycleOwner: LifecycleOwner) {
         val config = WebAppLaunchWithDialogParameters.Builder()
             .owner(lifecycleOwner)
             .context(context)
-            .miniAppId("10")
+            .miniAppId("3AnDjjWRFdYGjWM0LIEMzJK1JCd")
             //.url("https://miniappx.io/apps/10?startapp=xxxx&spaceId=12345&appId=10")
-            .params(mapOf("spaceId" to "11", "roomId" to "333"))
+            //.params(mapOf("spaceId" to "11", "roomId" to "333"))
             //.id("48033")
             .onDismissListener {
             }

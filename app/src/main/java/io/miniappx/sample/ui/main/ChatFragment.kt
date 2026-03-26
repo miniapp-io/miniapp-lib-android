@@ -42,7 +42,11 @@ class ChatFragment : Fragment() {
 
     private val backCallback = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
-            if(miniApp==null || true==miniApp?.requestDismiss()) {
+            if(miniApp==null || true==miniApp?.requestDismiss(
+                    force = false,
+                    immediately = false,
+                    isSilent = false,
+                    complete = null)) {
                 requireActivity().finish()
             }
         }

@@ -337,7 +337,7 @@ internal class DefaultWebViewFragment(
         }
     }
 
-    private fun requestLaunchUrl() {
+    private fun requestLaunchUrl(force: Boolean = false) {
 
         if(null != launchConfig?.url) {
             loadPageFail = false
@@ -396,7 +396,7 @@ internal class DefaultWebViewFragment(
                             ""
                         }
 
-                        loadUrl(it.url+encodeParams)
+                        loadUrl(it.url+encodeParams, force)
                         // autoExpandPage()
                         // runTestWebApp()
                     }
@@ -597,7 +597,7 @@ internal class DefaultWebViewFragment(
             }
 
             override fun getMiniApp(): IMiniApp {
-                return this@DefaultWebViewFragment
+                return (this@DefaultWebViewFragment as IMiniApp)
             }
 
             override fun getBridgeProvider(): BridgeProvider? {
@@ -668,7 +668,9 @@ internal class DefaultWebViewFragment(
 
                     if (uri.scheme?.lowercase() != "http" &&
                         uri.scheme?.lowercase() != "https") {
-                        SchemeUtils.openInDefaultBrowser(context, url)
+                        deferOpenExternalUrl {
+                            SchemeUtils.openInDefaultBrowser(context, url)
+                        }
                         return true
                     }
 
@@ -678,7 +680,9 @@ internal class DefaultWebViewFragment(
                     }
 
                     if (isNewWindow) {
-                        SchemeUtils.openInBrowser(context, url)
+                        deferOpenExternalUrl {
+                            SchemeUtils.openInBrowser(context, url)
+                        }
                         return true
                     }
 
@@ -693,7 +697,12 @@ internal class DefaultWebViewFragment(
 
             override fun dispatchWebviewNoResponse(view: WebView?) {
                 super.dispatchWebviewNoResponse(view)
-                requestDismiss(force = true, immediately = true)
+                requestDismiss(
+                    force = true,
+                    immediately = true,
+                    isSilent = false,
+                    complete = null)
+
                 WebAppLruCache.removeAll()
             }
 
@@ -869,6 +878,10 @@ internal class DefaultWebViewFragment(
 
     private fun hideLoadingView() {
         pageLoadingView.hide()
+    }
+
+    private fun deferOpenExternalUrl(action: () -> Unit) {
+        webViewContainer.getWebView()?.post { action() } ?: action()
     }
 
     private fun updateBackButtonState() {
@@ -2113,20 +2126,20 @@ internal class DefaultWebViewFragment(
         requestLaunchUrl()
     }
 
-    private fun loadUrl(url: String) {
-        webViewContainer.loadUrl(url) { isUseCache->
+    private fun loadUrl(url: String, force: Boolean = false) {
+        webViewContainer.loadUrl(url = url, force = force) { isUseCache->
             if (!isUseCache)
                 pageLoadingView.showLoading()
         }
     }
 
-    override fun reloadPage() {
+    override fun reloadPage(force: Boolean) {
         progressView.setLoadProgress(0f)
         progressView.setAlpha(1f)
         progressView.visibility = VISIBLE
         pageLoadingView.showLoading()
-        if (webViewContainer.shouldLoadNewUrl()) {
-            requestLaunchUrl()
+        if (webViewContainer.shouldLoadNewUrl() || force) {
+            requestLaunchUrl(force)
         } else {
             webViewContainer.reload()
         }
@@ -2245,6 +2258,15 @@ internal class DefaultWebViewFragment(
             return hideAndDestroy(immediately, isSilent, complete)
         }
         return false
+    }
+
+    override fun dismissAndRemoveCache(isSilent: Boolean) {
+        requestDismiss(force = true, immediately = true, isSilent = isSilent) {
+            launchConfig?.cacheKey()?.also {
+                val webView = WebAppLruCache.remove(it)
+                webView?.clearAfterDismiss()
+            }
+        }
     }
 
     override suspend fun getShareUrl(): String?  =  suspendCancellableCoroutine { continuation ->
@@ -2381,7 +2403,7 @@ internal class DefaultWebViewFragment(
             }
 
             "RELOAD" -> {
-                reloadPage()
+                reloadPage(false)
             }
 
             "FEEDBACK",

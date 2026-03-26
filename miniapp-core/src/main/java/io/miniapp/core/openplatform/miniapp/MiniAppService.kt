@@ -9,7 +9,6 @@ import android.widget.FrameLayout
 import androidx.annotation.IntDef
 import androidx.annotation.Keep
 import androidx.lifecycle.LifecycleOwner
-import com.squareup.moshi.Json
 import io.miniapp.bridge.BridgeProvider
 import io.miniapp.bridge.BridgeProviderFactory
 import io.miniapp.core.openplatform.ThrowsIllegalStateException
@@ -218,6 +217,7 @@ class DAppLaunchWParameters private constructor(
     override val context: Context,
     val id: String?,
     val url: String?,
+    val useCache: Boolean,
     val bridgetProvider: BridgeProvider?,
     val actionBarBuilder: ((()->Unit, ()->Unit) -> Pair<FrameLayout.LayoutParams, View>)? = null,
     var onErrorCallback: ((Int,String?) -> Unit)? = null,
@@ -242,6 +242,7 @@ class DAppLaunchWParameters private constructor(
                 context = this.context!!,
                 id = this.id,
                 url = this.url,
+                useCache = this.useCache,
                 bridgetProvider = this.bridgetProvider,
                 actionBarBuilder = this.actionBarBuilder,
                 onDismissListener = this.onDismissListener,
@@ -618,6 +619,8 @@ interface MiniAppService {
 
     fun getMiniAppByWebView(webView: WebView): IMiniApp?
 
+    fun removeCache(webView: WebView)
+
     fun clearCache()
 }
 
@@ -636,8 +639,12 @@ data class ShareDto(
 
 @Keep
 interface IMiniApp {
-    fun reloadPage()
-    fun requestDismiss(force: Boolean = false, immediately: Boolean = false, isSilent: Boolean = false, complete: (() -> Unit)? = null): Boolean
+    fun reloadPage(force: Boolean)
+    fun requestDismiss(force: Boolean,
+                       immediately: Boolean,
+                       isSilent: Boolean,
+                       complete: (() -> Unit)?): Boolean
+    fun dismissAndRemoveCache(isSilent: Boolean)
     suspend fun getShareUrl(): String?
     suspend fun getShareInfo(): ShareDto?
     fun isSystem(): Boolean

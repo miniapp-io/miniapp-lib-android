@@ -129,7 +129,11 @@ internal class DefaultWebViewSheet(context: Context,
 
         if (Build.VERSION.SDK_INT >= 33) {
             onBackInvokedCallback = OnBackInvokedCallback {
-                if (!webViewFragment.requestDismiss(false)) {
+                if (!webViewFragment.requestDismiss(
+                        force = false,
+                        immediately = false,
+                        isSilent = false,
+                        complete = null)) {
                     return@OnBackInvokedCallback
                 }
                 if(webViewFragment.checkDismissByUser()){
@@ -206,7 +210,11 @@ internal class DefaultWebViewSheet(context: Context,
 
     @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
-        if (!webViewFragment.requestDismiss(force = false, immediately = false)) {
+        if (!webViewFragment.requestDismiss(
+                force = false,
+                immediately = false,
+                isSilent = false,
+                complete = null)) {
             return
         }
         if(webViewFragment.checkDismissByUser()){
@@ -224,12 +232,16 @@ internal class DefaultWebViewSheet(context: Context,
         show()
     }
 
-    override fun reloadPage() {
-        webViewFragment.reloadPage()
+    override fun reloadPage(force: Boolean) {
+        webViewFragment.reloadPage(force)
     }
 
     override fun requestDismiss(force: Boolean, immediately: Boolean, isSilent: Boolean, complete: (() -> Unit)?): Boolean {
         return webViewFragment.requestDismiss(force, immediately, isSilent, complete)
+    }
+
+    override fun dismissAndRemoveCache(isSilent: Boolean) {
+        webViewFragment.dismissAndRemoveCache(isSilent)
     }
 
     override suspend fun getShareUrl(): String? {

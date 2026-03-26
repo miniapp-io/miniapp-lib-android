@@ -31,6 +31,7 @@ import io.miniapp.core.openplatform.miniapp.ui.DefaultResourcesProvider
 import io.miniapp.core.openplatform.miniapp.ui.DefaultWebViewFragment
 import io.miniapp.core.openplatform.miniapp.ui.DefaultWebViewSheet
 import io.miniapp.core.openplatform.miniapp.ui.FloatingWindowManager
+import io.miniapp.core.openplatform.miniapp.ui.webview.DefaultAppWebView
 import io.miniapp.core.openplatform.miniapp.ui.webview.WebAppLruCache
 import io.miniapp.core.openplatform.miniapp.utils.AndroidUtils
 import io.miniapp.core.openplatform.miniapp.utils.HomeScreenShortcutUtils
@@ -234,6 +235,7 @@ internal class MiniAppServiceImpl : MiniAppService {
             .owner(config.owner)
             .url(dAppUrl)
             .dAppDto(dApp)
+            .useCache(config.useCache)
             .autoExpand(true)
             .isDApp(true)
             .onErrorCallback(config.onErrorCallback)
@@ -318,6 +320,13 @@ internal class MiniAppServiceImpl : MiniAppService {
 
     override fun getMiniAppByWebView(webView: WebView): IMiniApp? {
         return webView.getTag(R.id.tag_miniappx_app) as? IMiniApp
+    }
+
+    override fun removeCache(webView: WebView) {
+        if (webView is DefaultAppWebView) {
+            WebAppLruCache.remove(webView)
+            webView.clearAfterDismiss()
+        }
     }
 
     override fun clearCache() {
@@ -594,7 +603,11 @@ internal class MiniAppServiceImpl : MiniAppService {
 
             val container = FrameLayout(config.context)
             container.setOnClickListener {
-                if(!sheet.requestDismiss()) {
+                if(!sheet.requestDismiss(
+                        force = false,
+                        immediately = false,
+                        isSilent = false,
+                        complete = null)) {
                     return@setOnClickListener
                 }
 
@@ -803,18 +816,30 @@ internal class MiniAppServiceImpl : MiniAppService {
             }?.let {
                 if (it.isExpired) {
                     WebAppLruCache.remove(cacheKey)
-                    it.miniApp?.requestDismiss(force = true, immediately = true, isSilent = true)
+                    it.miniApp?.requestDismiss(
+                        force = true,
+                        immediately = true,
+                        isSilent = true,
+                        complete = null)
                     null
                 }
                 else if (it.miniApp != null && it.isTopLevel() && FloatingWindowManager.isAppOnMinimization(it.webAppId) ) {
                     it
                 } else {
-                    it.miniApp?.requestDismiss(force = true, immediately = true, isSilent = true)
+                    it.miniApp?.requestDismiss(
+                        force = true,
+                        immediately = true,
+                        isSilent = true,
+                        complete = null)
                     null
                 }
             }?.let{
                 if (config.owner != (it.miniApp as? DefaultWebViewFragment)?.owner) {
-                    it.miniApp?.requestDismiss(force = true, immediately = true, isSilent = true)
+                    it.miniApp?.requestDismiss(
+                        force = true,
+                        immediately = true,
+                        isSilent = true,
+                        complete = null)
                     null
                 } else {
                     FloatingWindowManager.maximize()
