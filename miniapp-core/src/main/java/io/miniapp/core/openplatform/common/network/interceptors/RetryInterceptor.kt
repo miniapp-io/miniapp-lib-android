@@ -21,7 +21,7 @@ internal class RetryInterceptor(
             try {
                 val response = chain.proceed(chain.request())
 
-                if (!response.isSuccessful && retryCount < maxRetries) {
+                if (!response.isSuccessful && retryCount < maxRetries && response.code != 401) {
                     response.close()
                     retryCount++
                     delay(retryDelayMs * retryCount)

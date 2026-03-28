@@ -8,13 +8,13 @@ import io.miniapp.core.openplatform.common.data.SessionProvider
 import io.miniapp.core.openplatform.common.network.OkHttpClientProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.TimeoutCancellationException
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.withTimeout
 import retrofit2.HttpException
-import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.locks.ReentrantLock
 import kotlin.concurrent.withLock
 
@@ -24,7 +24,7 @@ internal object AuthManager {
     private var _sessionProvider: SessionProvider? = null
     private val sessionLock = ReentrantLock()
 
-    private val isRefreshing = AtomicBoolean(false)
+    private val refreshState = MutableStateFlow(false)
 
     private val repository by lazy {
         OpenServiceRepository.getInstance()
@@ -34,8 +34,6 @@ internal object AuthManager {
     private var apiHost: String? = null
     private var isDev: Boolean = false
     private var idTokenProvider: (suspend () -> String)? = null
-
-    var _refreshToken: (()-> String?)? = null
 
     fun init(
         context: Context,
@@ -58,19 +56,16 @@ internal object AuthManager {
                 LRUSharedPreferencesCache.init(context)
             }
         }
+    }
 
-        this._refreshToken = {
-            runBlocking {
-                refreshToken().getOrNull()
-            }
-        }
+     fun refreshToken(): String? {
+        return runBlocking { fetchToken().getOrNull() }
     }
 
     @ThrowsIllegalStateException
     suspend fun signIn(): Result<String> = withContext(Dispatchers.IO) {
         try {
             waitForRequest()
-
             if (performAuth(true) is AuthResult.Success) {
                 Result.success("Authentication ok")
             } else {
@@ -82,24 +77,30 @@ internal object AuthManager {
         }
     }
 
-    private suspend fun waitForRequest() = withContext(Dispatchers.IO)  {
+    private suspend fun waitForRequest() = withContext(Dispatchers.IO) {
         try {
             withTimeout(60_000) {
-                while (isRefreshing.get()) {
-                    delay(300)
-                }
+                refreshState
+                    .filter { !it }
+                    .first()
             }
         } catch (e: TimeoutCancellationException) {
-            isRefreshing.set(false)
-            throw e
+            cleanupRefreshOperation()
+            e.printStackTrace()
         }
     }
 
-    private suspend fun cleanupRefreshOperation() {
-        isRefreshing.set(false)
+    private fun cleanupRefreshOperation() {
+        refreshState.value = false
+    }
+
+    private suspend fun setRefreshOperation() {
+        refreshState.value = true
     }
 
     private suspend fun performAuth(forceRefresh: Boolean): AuthResult {
+        setRefreshOperation()
+
         val verifier = this.verifier ?: throw IllegalStateException("AuthManager not initialized")
         val idTokenProvider = this.idTokenProvider ?: throw IllegalStateException("ID Token provider not configured")
 
@@ -114,31 +115,15 @@ internal object AuthManager {
             }
         }
 
-        isRefreshing.set(false)
-
         return try {
-            var authResult: AuthResult? = null
-            repository.auth(verifier, idToken)
-                .catch { e ->
-                    authResult = when (e) {
-                        is HttpException -> {
-                            if (e.code() == 401 && !forceRefresh) {
-                                LRUSharedPreferencesCache.saveValue(_cacheKey, null)
-                                performAuth(true)
-                            } else {
-                                AuthResult.Error(e)
-                            }
-                        }
-                        else -> {
-                            AuthResult.Error(e)
-                        }
-                    }
-                }
-                .collect { verifierDto ->
-                    authResult = AuthResult.Success(verifierDto.accessToken)
-                }
-
-            return authResult ?: AuthResult.Error(IllegalStateException("Authentication failed"))
+            val verifierDto = repository.auth(verifier, idToken).first()
+            AuthResult.Success(verifierDto.accessToken)
+        } catch (e: HttpException) {
+            if (e.code() == 401 && !forceRefresh) {
+                performAuth(true)
+            } else {
+                AuthResult.Error(e)
+            }
         } catch (e: Exception) {
             AuthResult.Error(e)
         } finally {
@@ -146,8 +131,7 @@ internal object AuthManager {
         }
     }
 
-    private suspend fun refreshToken(): Result<String?> = withContext(Dispatchers.IO) {
-
+    private suspend fun fetchToken(): Result<String?> = withContext(Dispatchers.IO) {
         waitForRequest()
 
         if (isAuth()) {
@@ -195,7 +179,7 @@ internal object AuthManager {
         sessionLock.withLock {
             _sessionProvider?.token = null
         }
-        isRefreshing.set(false)
+        cleanupRefreshOperation()
         LRUSharedPreferencesCache.saveValue(_cacheKey, null)
     }
 
