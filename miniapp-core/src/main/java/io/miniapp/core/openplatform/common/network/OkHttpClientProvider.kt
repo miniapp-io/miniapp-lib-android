@@ -3,7 +3,9 @@ package io.miniapp.core.openplatform.common.network
 import io.miniapp.core.openplatform.common.network.interceptors.CurlLoggingInterceptor
 import io.miniapp.core.openplatform.common.network.interceptors.FormattedJsonHttpLogger
 import io.miniapp.core.openplatform.common.network.interceptors.HeadInterceptor
+import io.miniapp.core.openplatform.common.network.interceptors.RetryInterceptor
 import io.miniapp.core.openplatform.common.network.interceptors.SessionInterceptor
+import io.miniapp.core.openplatform.common.network.interceptors.StatusCodeRetryInterceptor
 import io.miniapp.core.openplatform.common.network.ssl.CertUtil
 import io.miniapp.core.openplatform.miniapp.utils.LogTimber
 import okhttp3.ConnectionSpec
@@ -61,6 +63,8 @@ internal object OkHttpClientProvider {
             .writeTimeout(60, TimeUnit.SECONDS)
             .addInterceptor(HeadInterceptor())
             .addInterceptor(SessionInterceptor())
+            .addInterceptor(RetryInterceptor())
+            .addInterceptor(StatusCodeRetryInterceptor())
             .addInterceptor(CurlLoggingInterceptor())
             .addNetworkInterceptor(providesHttpLoggingInterceptor())
             .addSocketFactory()
