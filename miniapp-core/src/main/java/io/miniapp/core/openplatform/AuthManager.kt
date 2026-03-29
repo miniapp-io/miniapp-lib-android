@@ -11,7 +11,6 @@ import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.withTimeout
 import retrofit2.HttpException
@@ -58,22 +57,16 @@ internal object AuthManager {
         }
     }
 
-     fun refreshToken(): String? {
-        return runBlocking { fetchToken().getOrNull() }
+    suspend fun refreshToken(): String? {
+        return withTimeout(60_000) {
+            fetchToken().getOrNull()
+        }
     }
 
     @ThrowsIllegalStateException
-    suspend fun signIn(): Result<String> = withContext(Dispatchers.IO) {
-        try {
-            waitForRequest()
-            if (performAuth(true) is AuthResult.Success) {
-                Result.success("Authentication ok")
-            } else {
-                Result.failure(IllegalStateException("Authentication failed"))
-            }
-        } catch (e: Exception) {
-            cleanupRefreshOperation()
-            Result.failure(e)
+    suspend fun signIn(): Result<String?> = withContext(Dispatchers.IO) {
+        withTimeout(60_000) {
+            fetchToken()
         }
     }
 
@@ -98,13 +91,9 @@ internal object AuthManager {
         refreshState.value = true
     }
 
-    private suspend fun performAuth(forceRefresh: Boolean): AuthResult {
-        setRefreshOperation()
-
-        val verifier = this.verifier ?: throw IllegalStateException("AuthManager not initialized")
+    private suspend fun getIdToken(forceRefresh: Boolean): String {
         val idTokenProvider = this.idTokenProvider ?: throw IllegalStateException("ID Token provider not configured")
-
-        val idToken = if (forceRefresh) {
+        return if (forceRefresh) {
             LRUSharedPreferencesCache.saveValue(_cacheKey, null)
             idTokenProvider.invoke().also {
                 LRUSharedPreferencesCache.saveValue(_cacheKey, it)
@@ -114,30 +103,48 @@ internal object AuthManager {
                 LRUSharedPreferencesCache.saveValue(_cacheKey, it)
             }
         }
+    }
 
-        return try {
-            val verifierDto = repository.auth(verifier, idToken).first()
-            AuthResult.Success(verifierDto.accessToken)
-        } catch (e: HttpException) {
-            if (e.code() == 401 && !forceRefresh) {
-                performAuth(true)
-            } else {
-                AuthResult.Error(e)
+    private suspend fun performAuth(forceRefresh: Boolean): AuthResult {
+
+        var currentForceRefresh = forceRefresh
+        var retryCount = 3
+
+        while (retryCount > 0) {
+            try {
+                val verifier = this.verifier ?: return AuthResult.Error(IllegalStateException("AuthManager not initialized"))
+                val idToken = getIdToken(currentForceRefresh)
+                val verifierDto = repository.auth(verifier, idToken).first()
+                return AuthResult.Success(verifierDto.accessToken)
+            } catch (e: HttpException) {
+                when {
+                    e.code() == 401 && !currentForceRefresh -> {
+                        currentForceRefresh = true
+                        retryCount--
+                        continue
+                    }
+                    else -> return AuthResult.Error(e)
+                }
+            } catch (e: Exception) {
+                return AuthResult.Error(e)
             }
-        } catch (e: Exception) {
-            AuthResult.Error(e)
-        } finally {
-            cleanupRefreshOperation()
         }
+
+        return AuthResult.Error(IllegalStateException("Authentication failed"))
     }
 
     private suspend fun fetchToken(): Result<String?> = withContext(Dispatchers.IO) {
         waitForRequest()
 
-        if (isAuth()) {
-            Result.success(_sessionProvider?.token)
-        } else {
-            try {
+        val isAuthenticated = sessionLock.withLock { isAuth() }
+
+        setRefreshOperation()
+
+        try {
+            if (isAuthenticated) {
+                val token = sessionLock.withLock { _sessionProvider?.token }
+                Result.success(token)
+            } else {
                 when (val tokenResult = performAuth(true)) {
                     is AuthResult.Success -> {
                         sessionLock.withLock {
@@ -145,15 +152,11 @@ internal object AuthManager {
                         }
                         Result.success(tokenResult.token)
                     }
-                    is AuthResult.Error -> {
-                        Result.failure(tokenResult.exception)
-                    }
+                    is AuthResult.Error -> Result.failure(tokenResult.exception)
                 }
-            } catch (e: Exception) {
-                Result.failure(e)
-            } finally {
-                cleanupRefreshOperation()
             }
+        } finally {
+            cleanupRefreshOperation()
         }
     }
 
