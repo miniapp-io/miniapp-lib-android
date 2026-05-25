@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.0.41
+
+- OAuth popup: auto-close on login complete; centered dialog (80% width, 50–80% height)
+
+## 1.0.40
+
+- Fixed WebView crash when opening deeplinks / external URLs
+- Fixed WebView LRU cache removal (`removeCache` / `remove` by instance)
+
 ## 1.0.39
 
 - Fixed some bugs

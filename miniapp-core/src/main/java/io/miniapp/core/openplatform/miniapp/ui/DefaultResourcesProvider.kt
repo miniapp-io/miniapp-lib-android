@@ -77,6 +77,7 @@ internal object DefaultResourcesProvider : IResourcesProvider {
     override fun getThemes() = if (isDark()) ThemeColors.values()
         .associate { it.colorKey to it.darkColor } else ThemeColors.values()
         .associate { it.colorKey to it.lightColor }
+
     override fun getColor(key: String): Int {
         return ThemeColors.values().firstOrNull{ it.colorKey == key }?.let {
             if (isDark()){

@@ -4,9 +4,14 @@ import android.app.Activity
 import android.app.Dialog
 import android.graphics.Bitmap
 import android.net.Uri
+import android.os.Handler
+import android.os.Looper
 import android.os.Message
 import android.util.Log
+import android.view.Gravity
 import android.view.View
+import android.view.ViewGroup
+import androidx.core.net.toUri
 import android.webkit.GeolocationPermissions
 import android.webkit.PermissionRequest
 import android.webkit.ValueCallback
@@ -31,12 +36,19 @@ internal class DefaultWebChromeClient(
     listener: WebEventListener?
 ) : WebChromeClient() {
 
+    companion object {
+        private const val POPUP_WIDTH_RATIO = 0.8f
+        private const val POPUP_MIN_HEIGHT_RATIO = 0.5f
+        private const val POPUP_MAX_HEIGHT_RATIO = 0.8f
+    }
+
     var popupDialog: Dialog? = null
     var newWebView: WebView? = null
 
     private var eventListener: WeakReference<WebEventListener> = WeakReference(listener)
 
     override fun onReceivedIcon(view: WebView?, icon: Bitmap?) {
+        if (view == newWebView) return
         LogTimber.tag("WebChromeClient").d(
             "onReceivedIcon favicon=" + if (icon == null) "null" else icon.getWidth()
                 .toString() + "x" + icon.getHeight()
@@ -46,6 +58,7 @@ internal class DefaultWebChromeClient(
     }
 
     override fun onReceivedTitle(view: WebView?, title: String) {
+        if (view == newWebView) return
         LogTimber.tag("WebChromeClient").d("onReceivedTitle title=$title")
         eventListener.get()?.onTitleChanged(title)
         super.onReceivedTitle(view, title)
@@ -119,44 +132,24 @@ internal class DefaultWebChromeClient(
             popupDialog?.dismiss()
             popupDialog = Dialog(parentActivity, R.style.TransparentDialog).apply {
                 setOnDismissListener {
-                    newWebView?.destroy()
-                    newWebView = null
+                    destroyPopupWebView()
                 }
             }
-            popupDialog?.setContentView(newWebView!!)
+            popupDialog?.setContentView(
+                newWebView!!,
+                ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT
+                )
+            )
             popupDialog?.show()
+            popupDialog?.let { applyPopupDialogWindowSize(it) }
         }
 
-        newWebView?.webChromeClient = DefaultWebChromeClient(parentActivity, null)
-
-        eventListener.get()?.also {
-            newWebView?.setWebViewClient(object : WebViewClient() {
-                @Deprecated("Deprecated in Java")
-                override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
-                    Log.d("WebChromeClient shouldInterceptRequest", url)
-                    if (isDialog) {
-                        return false
-                    }
-                    newWebView?.destroy()
-                    newWebView = null
-                    SchemeUtils.openInBrowser(parentActivity, url)
-                    return true
-                }
-
-                override fun shouldOverrideUrlLoading(view: WebView, request: WebResourceRequest): Boolean {
-                    Log.d("WebChromeClient shouldInterceptRequest", request.url?.toString() ?: "ddd")
-                    if (isDialog) {
-                        return false
-                    }
-                    newWebView?.destroy()
-                    newWebView = null
-                    request.url?.toString()?.also {
-                        SchemeUtils.openInBrowser(parentActivity, it)
-                    }
-                    return true
-                }
-            })
-        }
+        // Popup WebView must share this WebChromeClient; otherwise window.close() in the popup
+        // invokes onCloseWindow on another instance and cannot dismiss popupDialog.
+        newWebView?.webChromeClient = this
+        newWebView?.webViewClient = createPopupWebViewClient(isDialog)
 
         val transport = resultMsg.obj as WebView.WebViewTransport
         transport.webView = newWebView
@@ -165,14 +158,91 @@ internal class DefaultWebChromeClient(
         return true
     }
 
-    private fun closePopUpWebView() {
-        popupDialog?.dismiss()
+    private fun applyPopupDialogWindowSize(dialog: Dialog) {
+        val window = dialog.window ?: return
+        val metrics = parentActivity.resources.displayMetrics
+        val width = (metrics.widthPixels * POPUP_WIDTH_RATIO).toInt()
+        val minHeight = (metrics.heightPixels * POPUP_MIN_HEIGHT_RATIO).toInt()
+        val maxHeight = (metrics.heightPixels * POPUP_MAX_HEIGHT_RATIO).toInt()
+        val height = maxHeight.coerceIn(minHeight, maxHeight)
+        window.setLayout(width, height)
+        window.setGravity(Gravity.CENTER)
+    }
+
+    private fun createPopupWebViewClient(isDialog: Boolean): WebViewClient {
+        return object : WebViewClient() {
+            @Deprecated("Deprecated in Java")
+            override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
+                return handlePopupUrlLoading(view, url, isDialog)
+            }
+
+            override fun shouldOverrideUrlLoading(
+                view: WebView,
+                request: WebResourceRequest
+            ): Boolean {
+                val url = request.url?.toString() ?: return false
+                return handlePopupUrlLoading(view, url, isDialog)
+            }
+
+        }
+    }
+
+    private fun handlePopupUrlLoading(view: WebView, url: String, isDialog: Boolean): Boolean {
+        Log.d("WebChromeClient", "popup shouldOverrideUrlLoading isDialog=$isDialog url=$url")
+        if (isDialog) {
+            if (shouldClosePopupOnRedirect(url)) {
+                view.stopLoading()
+                closePopUpWebView()
+                return true
+            }
+            return false
+        }
+        deferDestroyPopupAndOpenExternal(view, url)
+        return true
+    }
+
+    /** Common OAuth completion signals: window.close(), about:blank, or a non-http(s) callback scheme. */
+    private fun shouldClosePopupOnRedirect(url: String): Boolean {
+        if (url.isBlank() || url == "about:blank") return true
+        val scheme = url.toUri().scheme?.lowercase() ?: return false
+        return scheme != "http" && scheme != "https"
+    }
+
+    private fun destroyPopupWebView() {
+        newWebView?.stopLoading()
+        newWebView?.destroy()
+        newWebView = null
+    }
+
+    fun closePopUpWebView() {
+        val dialog = popupDialog ?: run {
+            destroyPopupWebView()
+            return
+        }
         popupDialog = null
+        newWebView?.stopLoading()
+        if (dialog.isShowing) {
+            dialog.dismiss()
+        } else {
+            destroyPopupWebView()
+        }
+    }
+
+    private fun deferDestroyPopupAndOpenExternal(view: WebView, url: String) {
+        view.stopLoading()
+        Handler(Looper.getMainLooper()).post {
+            if (parentActivity.isFinishing) return@post
+            closePopUpWebView()
+            SchemeUtils.openInBrowser(parentActivity, url)
+        }
     }
 
     override fun onCloseWindow(window: WebView?) {
         super.onCloseWindow(window)
-        closePopUpWebView()
+        // Chromium invokes this when the login page calls window.close().
+        if (window == null || window == newWebView) {
+            closePopUpWebView()
+        }
     }
 
     override fun onShowFileChooser(
@@ -184,6 +254,7 @@ internal class DefaultWebChromeClient(
     }
 
     override fun onProgressChanged(view: WebView, newProgress: Int) {
+        if (view == newWebView) return
         eventListener.get()?.onProgressChanged(newProgress / 100f)
     }
 

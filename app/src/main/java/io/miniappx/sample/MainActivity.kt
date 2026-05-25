@@ -326,8 +326,8 @@ fun MarketPlaceButton(context:Context,lifecycleOwner: LifecycleOwner) {
         val config = WebAppLaunchWithDialogParameters.Builder()
             .owner(lifecycleOwner)
             .context(context)
-            .miniAppId("3AnDjjWRFdYGjWM0LIEMzJK1JCd")
-            //.url("https://miniappx.io/apps/10?startapp=xxxx&spaceId=12345&appId=10")
+            //.miniAppId("3AnDjjWRFdYGjWM0LIEMzJK1JCd")
+            .url("https://miniappx.io/apps/10?startapp=xxxx&spaceId=12345&appId=10")
             //.params(mapOf("spaceId" to "11", "roomId" to "333"))
             //.id("48033")
             .onDismissListener {
