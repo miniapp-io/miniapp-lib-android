@@ -327,6 +327,7 @@ fun MarketPlaceButton(context:Context,lifecycleOwner: LifecycleOwner) {
             .owner(lifecycleOwner)
             .context(context)
             //.miniAppId("3AnDjjWRFdYGjWM0LIEMzJK1JCd")
+            //.miniAppId("33rz2o14iQorVCMYfMzM3uMu0pR") LD
             .url("https://miniappx.io/apps/10?startapp=xxxx&spaceId=12345&appId=10")
             //.params(mapOf("spaceId" to "11", "roomId" to "333"))
             //.id("48033")

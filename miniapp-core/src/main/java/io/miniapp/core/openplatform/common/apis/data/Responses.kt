@@ -6,7 +6,11 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 internal data class VerifierDto(
     @Json(name = "access_token")
-    val accessToken: String
+    val accessToken: String,
+    @Json(name = "expires_at")
+    val expiresAt: Long,            // 1780044486
+    @Json(name = "user_id")
+    val userId: String
 )
 @JsonClass(generateAdapter = true)
 internal data class LaunchMiniAppDto(

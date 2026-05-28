@@ -115,7 +115,7 @@ internal object AuthManager {
                 val verifier = this.verifier ?: return AuthResult.Error(IllegalStateException("AuthManager not initialized"))
                 val idToken = getIdToken(currentForceRefresh)
                 val verifierDto = repository.auth(verifier, idToken).first()
-                return AuthResult.Success(verifierDto.accessToken)
+                return AuthResult.Success(verifierDto.accessToken, verifierDto.expiresAt)
             } catch (e: HttpException) {
                 when {
                     e.code() == 401 && !currentForceRefresh -> {
@@ -149,6 +149,7 @@ internal object AuthManager {
                     is AuthResult.Success -> {
                         sessionLock.withLock {
                             _sessionProvider?.token = tokenResult.token
+                            _sessionProvider?.expires = tokenResult.expiresAt
                         }
                         Result.success(tokenResult.token)
                     }
@@ -175,19 +176,24 @@ internal object AuthManager {
     fun clearToken() {
         sessionLock.withLock {
             _sessionProvider?.token = null
+            _sessionProvider?.expires = null
         }
     }
 
     suspend fun signOut() {
         sessionLock.withLock {
             _sessionProvider?.token = null
+            _sessionProvider?.expires = null
         }
         cleanupRefreshOperation()
         LRUSharedPreferencesCache.saveValue(_cacheKey, null)
     }
 
     private sealed class AuthResult {
-        data class Success(val token: String) : AuthResult()
+        data class Success(
+            val token: String,
+            val expiresAt: Long?
+        ) : AuthResult()
         data class Error(val exception: Throwable) : AuthResult()
     }
 }
