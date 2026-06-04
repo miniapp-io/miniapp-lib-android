@@ -174,7 +174,6 @@ internal class DefaultWebViewFragment(
     private var isContainerLightStatusBar: Boolean? = null
     private var actionBarTransitionProgress = 0f
     private var dismissed = false
-    private var isBackButtonVisible = false
     private var lineBarHeight = 24
 
     private var fullScreenView: View? = null
@@ -885,7 +884,7 @@ internal class DefaultWebViewFragment(
     }
 
     private fun updateBackButtonState() {
-        if (true == launchConfig?.isDApp || isOpenDappOnMainFrame) {
+        if (!isWebAppReady() || isOpenDappOnMainFrame) {
             setupBackButton(true==webViewContainer.getWebView()?.canGoBack())
         }
     }
@@ -1807,7 +1806,7 @@ internal class DefaultWebViewFragment(
         if (isFullScreenMod() || useCustomNavigation()) {
             actionBar.isVisible = false
             toolBarComponent?.isVisible = showActionBar
-            backComponent?.isVisible = showActionBar && isBackButtonVisible
+            backComponent?.isVisible = showActionBar && isBackButtonVisible()
             onSafaAreChange(true)
         } else {
             actionBar.setOccupyStatusBar(isStatusBarVisible())
@@ -1882,12 +1881,13 @@ internal class DefaultWebViewFragment(
         }
     }
 
-    override fun setupBackButton(visible: Boolean) {
-        webViewContainer.getWebView()?.isBackButtonVisible = visible
-        if(visible == isBackButtonVisible) {
-            return
+    override fun setupBackButton(visible: Boolean, fromWebApp: Boolean) {
+        webViewContainer.getWebView()?.also {
+            it.isBackButtonVisible = visible
+            if (fromWebApp) {
+                it.isWebAppReady = true
+            }
         }
-        isBackButtonVisible = visible
         actionBar.setBackButtonDrawable(BackDrawable(close = !visible))
         if (useWeChatStyle) {
             actionBar.setBackMenuVisible(visible)
@@ -2364,7 +2364,9 @@ internal class DefaultWebViewFragment(
         MiniAppServiceImpl.getInstance().appDelegate?.onMinimization(this)
     }
 
-    private fun isBackButtonVisible() = isBackButtonVisible
+    private fun isWebAppReady() = (true == webViewContainer.getWebView()?.isWebAppReady)
+
+    private fun isBackButtonVisible() = (true == webViewContainer.getWebView()?.isBackButtonVisible)
 
     private fun getPrivacyUrl() : String? {
         return MiniAppServiceImpl.getInstance().appConfig?.privacyUrl
@@ -2528,7 +2530,7 @@ internal class DefaultWebViewFragment(
     }
 
     private fun backPress(): Boolean {
-        if (true==launchConfig?.isDApp || isOpenDappOnMainFrame) {
+        if (!isWebAppReady() || isOpenDappOnMainFrame) {
             if (isOpenDappOnMainFrame) {
                 isOpenDappOnMainFrame = false
                 setupBackButton(false)
@@ -2540,7 +2542,7 @@ internal class DefaultWebViewFragment(
             return true
         }
 
-        if (isBackButtonVisible) {
+        if (isBackButtonVisible()) {
             webAppProxy?.responseBackPress()
             return false
         }

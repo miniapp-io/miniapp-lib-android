@@ -65,7 +65,7 @@ internal interface IMiniAppDelegate {
     fun setupMainButton(isVisible: Boolean, isActive: Boolean, text: String?, color: Int, textColor: Int, isProgressVisible: Boolean)
     fun setupFullScreen(enable: Boolean)
     fun setupShowHead(visible: Boolean, isUserAction: Boolean=true)
-    fun setupBackButton(visible: Boolean)
+    fun setupBackButton(visible: Boolean, fromWebApp: Boolean = false)
     fun openUrl(url: String, isInternal: Boolean)
     fun addHomeScreenShortcut()
     fun checkScreenShortcut()

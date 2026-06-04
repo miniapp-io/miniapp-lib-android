@@ -28,6 +28,7 @@ internal class DefaultAppWebView(context: Context) : WebView(context), IWebAppEv
 
     var webAppId = ++_webAppId
     var isPageLoaded: Boolean = false
+    var isWebAppReady: Boolean = false
     var cacheData: String? = null
     var miniApp: IMiniApp? = null
     var owner: LifecycleOwner? = null

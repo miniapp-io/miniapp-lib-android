@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.43
+- Mini programs that have not integrated the web SDK (including those without the BackButton component) support the page gesture to go back to the previous page.
+
 ## 1.0.42
 
 - Added token expiration persistence and expiration check in session management
