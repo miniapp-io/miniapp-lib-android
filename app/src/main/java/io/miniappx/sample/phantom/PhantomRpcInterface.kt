@@ -12,6 +12,8 @@ import java.net.URLEncoder
 import java.security.MessageDigest
 import java.security.SecureRandom
 import com.iwebpp.crypto.TweetNacl
+import io.miniapp.core.openplatform.miniapp.utils.SchemeUtils
+import androidx.core.net.toUri
 
 /**
  * Phantom RPC 接口，用于处理 Web 层和原生层的通信
@@ -26,22 +28,24 @@ class PhantomRpcInterface(private val context: Context, private val webView: Web
     fun onDeepLinkMessage(message: String) {
         Log.d("PhantomRPC", "收到 Web 消息: $message")
 
-        try {
-            val jsonObject = JSONObject(message)
-            val uri = jsonObject.getString("uri")
-            val id = jsonObject.getString("id")
+        webView.post {
+            try {
+                val jsonObject = JSONObject(message)
+                val uri = jsonObject.getString("uri")
+                val id = jsonObject.getString("id")
 
-            PhantomProvider.providerMap[id] = this
+                PhantomProvider.providerMap[id] = this
 
-            // 在主线程中执行 WebView 操作
-            webView.post {
-                val intent = Intent(Intent.ACTION_VIEW,
-                    Uri.parse(uri))
+                // 在主线程中执行 WebView 操作
+                val intent = Intent(
+                    Intent.ACTION_VIEW,
+                    uri.toUri()
+                )
+                intent.setPackage("app.phantom")
                 context.startActivity(intent)
+            } catch (e: Throwable) {
+                e.printStackTrace()
             }
-
-        } catch (e: Throwable) {
-            e.printStackTrace()
         }
     }
 

@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.44
+- Fixed: throw clear error when OkHttpClientProvider is used before signIn()
+
 ## 1.0.43
 - Mini programs that have not integrated the web SDK (including those without the BackButton component) support the page gesture to go back to the previous page.
 

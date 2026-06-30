@@ -22,7 +22,9 @@ internal object OkHttpClientProvider {
     var apiHost: String? = null
 
     private fun getBaseUrl(): String {
-        return apiHost!!
+        return apiHost ?: throw IllegalStateException(
+         "OkHttpClientProvider not initialized. Call OpenPlatformPlugin.signIn() first."
+        )
     }
 
     val retrofitFactory: () -> Retrofit = {
