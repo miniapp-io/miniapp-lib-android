@@ -1,7 +1,8 @@
 # Changelog
 
 ## 1.0.44
-- Fixed: throw clear error when OkHttpClientProvider is used before signIn()
+
+- Fixed: `OkHttpClientProvider.getBaseUrl()` now throws `IllegalStateException` with a clear message when `signIn()` has not been called, instead of crashing with an obscure `NullPointerException`
 
 ## 1.0.43
 - Mini programs that have not integrated the web SDK (including those without the BackButton component) support the page gesture to go back to the previous page.
