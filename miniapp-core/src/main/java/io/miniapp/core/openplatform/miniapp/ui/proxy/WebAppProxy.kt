@@ -12,6 +12,8 @@ internal class WebAppProxy(val webApp: IWebApp, val resourcesProvider: IResource
     private var currentPaymentSlug: String? = null
     private var lastClickMs: Long = 0
 
+    private var isPageVisible: Boolean = false
+
     fun reload() {
         lastClickMs = 0
     }
@@ -50,6 +52,10 @@ internal class WebAppProxy(val webApp: IWebApp, val resourcesProvider: IResource
     }
 
     fun notifyVisibleChange(isVisible: Boolean) {
+        if (isPageVisible == isVisible) {
+            return
+        }
+        isPageVisible = isVisible
         try {
             val data = JSONObject()
             data.put("is_visible", isVisible)

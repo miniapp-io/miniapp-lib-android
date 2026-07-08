@@ -624,7 +624,7 @@ internal class DefaultWebViewFragment(
             }
 
             override fun setPageFinished(url:String) {
-                if (!isPageLoaded) {
+                if (!isPageLoaded && !dismissed) {
                     webAppProxy?.notifyVisibleChange(true)
                     getWebView()?.orientationLocked?.also {
                         requestOrientationLock(it)

@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.45
+- Fixed the visibility_changed event is sent multiple times.
+
 ## 1.0.44
 
 - Fixed: `OkHttpClientProvider.getBaseUrl()` now throws `IllegalStateException` with a clear message when `signIn()` has not been called, instead of crashing with an obscure `NullPointerException`
