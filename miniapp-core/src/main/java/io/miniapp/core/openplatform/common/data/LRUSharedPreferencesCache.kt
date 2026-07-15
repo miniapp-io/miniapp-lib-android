@@ -3,12 +3,13 @@ package io.miniapp.core.openplatform.common.data
 import android.content.Context
 import android.content.SharedPreferences
 import android.util.LruCache
+import androidx.core.content.edit
 
 internal object LRUSharedPreferencesCache {
     private const val GLOBAL = "__open_platform_local_"
     private const val MAX_SIZE = 100 // Maximum storage count
 
-    private lateinit var sharedPreferences: SharedPreferences
+    private var sharedPreferences: SharedPreferences? = null
     private val cache = LruCache<String, Unit>(MAX_SIZE) // Only store keys, not data
 
     // Initialization method
@@ -17,7 +18,7 @@ internal object LRUSharedPreferencesCache {
     }
 
     fun getValue(key: String): String? {
-        return sharedPreferences.getString(key, null)
+        return sharedPreferences?.getString(key, null)
     }
 
     fun saveValue(key: String, value: String?) {
@@ -34,17 +35,15 @@ internal object LRUSharedPreferencesCache {
         cache.put(key, Unit)
 
         // Save new value to SharedPreferences
-        with(sharedPreferences.edit()) {
+        sharedPreferences?.edit {
             putString(key, value)
-            apply()
         }
     }
 
     private fun removeValue(key: String) {
         cache.remove(key) // Remove key from cache
-        with(sharedPreferences.edit()) {
+        sharedPreferences?.edit {
             remove(key)
-            apply()
         }
     }
 }

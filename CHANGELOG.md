@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.46
+- Fixed sharedPreferences uninitialized crash
+
 ## 1.0.45
 - Fixed the visibility_changed event is sent multiple times.
 
